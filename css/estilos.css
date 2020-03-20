@@ -1,0 +1,514 @@
+body {
+	position: relative;
+	font-family: Tahoma, Geneva, sans-serif	;
+	background-color: #d9d6d6;
+	min-width: 1600px;
+}
+.button {
+	background-color: #1187e7;
+	border: none;
+	color: white;
+	padding: 5px 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+.tab1,
+.tab2,
+.tab3 {
+  margin: 15px ;
+  background:#d9d6d6;
+}
+.cinta{
+	background: #055ec4;
+	height: 112px;
+	width: auto;
+	border-top: solid 0px;
+	position: relative;
+	z-index: 20000;
+}
+.logo-unam{
+	width: 80px;
+	padding: 6px;
+	margin-top: 7px;
+	margin-left: 50px;
+	float:left;
+}
+.logo-cuaed{
+	width: 100%;
+	margin: auto;
+	margin-right: 50px;
+	padding-top: 5px;
+	text-align: center;
+	height: 100px;
+	max-width: 300px;
+	float:right;
+}
+#CRM {
+	color:#fff;
+	font-size: 3.0em;
+	text-align: center;
+	margin-top: 30px;
+  }
+.nombre-recurso{
+	background: #588cbd;
+	padding: 10px;
+	border-radius: 10px;
+	color: #fff!important;
+	margin-bottom: 15px !important;
+}
+.RA1.nombre-recurso{
+	border-radius:0px 10px 10px 10px;
+}
+
+.div-img{
+	text-align: center;
+	column-count: 5;
+}
+.img{
+	display: block;
+	padding: 15px 0px 15px 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;   
+}     
+
+.imgdisp{
+	margin-left: auto;
+	margin-right: auto;
+}
+div > i {
+	opacity: 0.3;
+	filter: alpha(opacity=30); /* For IE8 and earlier */
+	color:#2196F3;
+}
+div > i:hover {
+	cursor:pointer;
+	opacity: 1.0;
+	filter: alpha(opacity=100); /* For IE8 and earlier */
+	color:#2196F3;
+}
+
+#creditos {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#creditos td, #creditos th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#creditos tr:nth-child(odd){background-color: #f2f2f2;}
+
+#creditos th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+footer { 
+	width: 100%;
+	font-size: 12px;
+	background-color:#055ec4; 
+	min-height:260px; 
+	font-family: 'Open Sans', sans-serif;
+}
+.footerleft { margin-top:50px; padding:0 36px 0px 0px;  }
+.logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
+
+.footerleft p { 
+	font-size:10px !important;
+	font-family: 'Open Sans', sans-serif;
+	margin-bottom:15px;
+}
+.post p { font-size:12px; color:#FFF; line-height:20px;}
+.footer-ul { list-style-type:none;  padding-left:0px; margin-left:2px;}
+.footer-ul li { line-height:29px; font-size:12px;}
+.footer-ul li a { color:#a0a3a4; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
+.footer-ul i { margin-right:10px;}
+.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color:#ff670f; }
+
+.master{
+	margin-left:auto;
+	margin-right: auto;
+}
+
+/* **********************************************************  */
+
+/* The screen (or content) of the device */
+.smartphoneV {
+	position: relative;
+	width: 260px;
+	height: 552px;
+	margin: auto;
+	border: 12px black solid;
+	border-top-width: 60px;
+	border-bottom-width: 60px;
+	border-radius: 36px;
+  }
+  
+  /* The horizontal line on the top of the device */
+  .smartphoneV:before {
+	content: '';
+	display: block;
+	width: 60px;
+	height: 5px;
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 10px;
+  }
+  
+  /* The circle on the bottom of the device */
+  .smartphoneV:after {
+	content: '';
+	display: block;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	left: 50%;
+	bottom: -65px;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 50%;
+  }
+  
+  /* The screen (or content) of the device */
+  .smartphoneV .content {
+	width: 236px;
+	height: 432px;
+	background: white;
+  }  
+/* **********************************************************  */
+.smartphoneH {
+	position: relative;
+	width: 552px;
+	height: 260px;
+	margin: auto;
+	border: 12px black solid;
+	border-right-width: 60px;
+	border-left-width: 60px;
+	border-radius: 36px;
+  }
+  
+  /* The horizontal line on the top of the device */
+  .smartphoneH:before {
+	content: '';
+	display: block;
+	width: 5px;
+	height: 60px;
+	position: absolute;
+	top: 110px;
+	left: 106%;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 10px;
+  }
+  
+  /* The circle on the bottom of the device */
+  .smartphoneH:after {
+	content: '';
+	display: block;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	left: -6%;
+	bottom: 85px;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 50%;
+  }
+  
+  /* The screen (or content) of the device */
+  .smartphoneH .content {
+	width: 432px;
+	height: 236px;
+	background: white;
+  }  
+
+/* **********************************************************  */
+  /* The device with borders */
+.tabletV {
+	position: relative;
+	width: 492px;
+	height: 736px;
+	margin: auto;
+	border: 16px black solid;
+	border-top-width: 60px;
+	border-bottom-width: 60px;
+	border-radius: 36px;
+  }
+  
+  /* The horizontal line on the top of the device */
+  .tabletV:before {
+	content: '';
+	display: block;
+	width: 60px;
+	height: 5px;
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 10px;
+  }
+  
+  /* The circle on the bottom of the device */
+  .tabletV:after {
+	content: '';
+	display: block;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	left: 50%;
+	bottom: -65px;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 50%;
+  }
+  
+  /* The screen (or content) of the device */
+  .tabletV .content {
+	width: 461px;
+	height: 617px;
+	background: white;
+	margin: -1px;
+  }
+/* **********************************************************  */
+    /* The device with borders */
+.tabletH {
+	position: relative;
+	width: 736px;
+	height: 492px;
+	margin: auto;
+	border: 16px black solid;
+	border-right-width: 60px;
+	border-left-width: 60px;
+	border-radius: 36px;
+  }
+  
+  /* The horizontal line on the top of the device */
+  .tabletH:before {
+	content: '';
+	display: block;
+	width: 5px;
+	height: 60px;
+	position: absolute;
+	top: 226px;
+	left: 105%;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 10px;
+  }
+  
+  /* The circle on the bottom of the device */
+  .tabletH:after {
+	content: '';
+	display: block;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	left: -4%;
+	bottom: 196px;
+	transform: translate(-50%, -50%);
+	background: #333;
+	border-radius: 50%;
+  }
+  
+  /* The screen (or content) of the device */
+  .tabletH .content {
+	width: 617px;
+	height: 461px;
+	background: white;
+	margin: -1px;
+  }
+
+  /* **********************************************************  */
+.monitorPC{
+	margin-left: auto;
+	margin-right: auto;
+
+	position: relative;
+	width: 1120px;
+	height: 582px;
+	margin: auto;
+	border: 16px black solid;
+	border-radius: 12px;
+}
+.monitorPC .content{
+	height: 100%;
+	width:100%
+}
+
+/* The keyboard of the laptop */
+.monitorPC:after {
+	content: '';
+	display: block;
+	width: 160px;
+	height: 28px;
+	position: absolute;
+	top: 580px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: black;
+}
+
+/* The top of the keyboard */
+.monitorPC:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 450px;
+  height: 20px;
+  bottom: -56px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
+  background: black;
+  z-index: 1;
+}
+
+.xs-text {
+	font-size: 60%;
+	text-align: center;
+}
+
+.btn {
+	background-color: #f5F5f5;
+	border-color: #DDD;
+	color: #000;
+	padding: 10px;
+	border-style: none;
+	display: block;
+	text-align: left;
+	white-space: unset;
+}
+
+.btn:hover {
+	background-color: #e0e0e0;
+}
+
+.btn:after {
+	font-family: "Glyphicons Halflings";
+	content: "\e113";
+	float: right;
+	margin-left: 15px;
+	transition: .3s all;
+	transform: rotate(0deg);
+}
+
+/* Icon when the collapsible content is hidden */
+.btn.collapsed:after {
+	transform: rotate(-180deg);
+}
+
+@media (max-width: 480px) {
+	.body {
+		font-size: 100%;
+	}
+
+	h4 {
+		font-size: 175%;
+	}
+
+	#accordion {
+		font-size: 85%;
+	}
+
+	a {
+		font-size: 85%;
+	}
+
+	.panel-heading {
+		padding: 10px 10px;
+	}
+}
+
+@keyframes example {
+	0% {
+		opacity: 0
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+
+/* The element to apply the animation to */
+.panel-body {
+	animation-name: example;
+	animation-duration: 1.5s;
+}
+
+.amarillo {
+	background-color: yellow;
+	color: black;
+}
+
+.verde {
+	background-color: lightgreen;
+	color: black;
+}
+
+.azul {
+	background-color: aqua;
+	color: black;
+}
+
+.tooltip-inner {
+	text-align: left;
+	max-width: 600px;
+}
+
+.tooltip.info .tooltip-inner {
+	background-color: #31b0d5;
+}
+
+.tooltip.info.top>.tooltip-arrow {
+	border-top-color: #31b0d5;
+}
+
+.tooltip.info.right>.tooltip-arrow {
+	border-right-color: #31b0d5;
+}
+
+.tooltip.info.bottom>.tooltip-arrow {
+	border-bottom-color: #31b0d5;
+}
+
+.tooltip.info.left>.tooltip-arrow {
+	border-left-color: #31b0d5;
+}
+
+.tooltip.in {
+	opacity: 1 !important;
+}
+
+.blink {
+	animation: blink 2s linear infinite;
+	-webkit-animation: blink 2s linear infinite;
+}
+
+@keyframes blink {
+	50% {
+		opacity: 0.0;
+	}
+}
+
+@-webkit-keyframes blink {
+	50% {
+		opacity: 0.0;
+	}
+}
+.marco{
+	display: flex;
+}

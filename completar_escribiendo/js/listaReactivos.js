@@ -1,6 +1,20 @@
-﻿var reactivos = [{
-		Q: 'Se conoce como @ a la persona que @ la cobertura del seguro y cumple con los requisitos establecidos por la compañía @.',
-		A: ["asegurado", "contrata", "aseguradora"],
+﻿/* 
+___________________Ayuda___________________
+Permitir más de una respuesta correcta por casilla, indicarlo con barra vertical (pipe) |
+Cada arroba @ indica la casilla de la respuesta
+	Q: 'Se conoce como @ a la persona que @ ',
+		A: ["respuesta1A|respuesta2A", "respuesta2B|respuesta2B"],
+
+NOTA: Las respuestas serán tomadas de forma correcta o incorrecta DEPENDIENDO DE COMO SE ESCRIBA en la listaReactivos
+Q: 'Se conoce como @ a la persona que @ ',
+		A: ["Asegurado", "contratacion"],
+Es decir la palabra "Asegurado" para que se tome de forma CORRECTA 
+deberá ser escrita la primera letra en mayúscula y las demás en minúsculas.
+La palabra "contratacion" será correcta SIN acento, si se llega a escribir con acento será incorrecta.
+*/
+var reactivos = [{
+	Q: 'Se conoce como @ a la persona que @ la cobertura del seguro y cumple con los requisitos establecidos por la compañía @.',
+		A: ["asegurado", "contratación", "aseguradora"],
 		FA: [{
 				correcta: "respuesta correcta 1A",
 				incorrecta: "respuesta incorrecta 1A"

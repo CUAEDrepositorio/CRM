@@ -19,8 +19,11 @@ ga("send", "pageview");
 </script>
     <!--
         2.2 JLBG Sep 13, 2019: se agregó paginación paramétrica
+        2.3 March 11, 2020: se agregó código de analitycs
+            March 11, 2020: Comparación estricta entre acentos y mayúsculas
+            
     -->
-	<title>Completar Escribiendo V2.2</title>
+	<title>Completar escribiendo V2.3</title>
 
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -49,12 +52,14 @@ ga("send", "pageview");
 	</script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <!-- <link href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css"/> -->
-
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-    <script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+    
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script> -->
 
     <!-- <link rel="stylesheet" href="css/general.css" /> -->
     <link rel="stylesheet" href="css/estilos.css" />
+    
+    
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
     <!-- <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script> -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
@@ -67,7 +72,7 @@ ga("send", "pageview");
     <!-- Librerias jquery//-->
     <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
     <!-- SCORM // -->
-    <script type="text/javascript" src="SCORM/conectividadSCORM.js"></script>
+    <script src="./SCORM/conectividadSCORM.js"></script>
     <!-- Librerias de los recursos //-->
     <script src="js/general.js"></script>
 
@@ -87,7 +92,6 @@ ga("send", "pageview");
 
     <script>
 		jq321(document).ready(function(){
-			iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo);
 			jq321('[data-toggle="tooltip"]').each(function () {
 			var options = {
 				html: true };
@@ -137,7 +141,7 @@ ga("send", "pageview");
                     <button id="btnPaginador" class="btn ocultar"></button> <!--  para poner paginado -->
                     <button id="btnProximo" class="btn btn-primary invisible cProximo cPaginador" onClick=""><i class="fas fa-chevron-right"></i></button><br>
                     <button id="btnRevisar" name="calificar" class="btn btn-primary">Revisar</button>
-                    <button id="btnReiniciar" name="resetear" class="btn btn-primary">Próximo intento</button>
+                    <button id="btnReiniciar" name="resetear" class="btn btn-primary">Siguente intento</button>
                 </div>
             </div>
         </div>

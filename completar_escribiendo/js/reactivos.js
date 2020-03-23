@@ -237,24 +237,6 @@ function creaOrdenar() {
 }
 
 //  ============================================================================================================
-function creaTablaVF(numReactivos) {
-	jq321('div#contenedor').append('<table class="tabla-reactivos">');
-	jq321('.tabla-reactivos').append('<tbody>');
-	jq321('tbody').append('<tr>');
-	jq321('tr').append('<th>&nbsp;');
-	jq321('tr').append('<th id="tV">Verdadero');
-	jq321('tr').append('<th id="tF">Falso');
-	jq321('tr').append('<th>&nbsp;');
-	for (i = 0; i < numReactivos; i++) {
-		jq321('tbody').append('<tr class="reactivo">');
-		jq321('tr:last').append('<td class="preguntaTexto" id="' + i + '">' + tam(reactivos[i].Q, 1) + '<br/><div class="retroBien ocultarRetro">' + tam(reactivos[i].F[0], 1) + '</div><div class="retroMal ocultarRetro">' + tam(reactivos[i].F[1], 1) + '</div></td>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="true">' + espacios + '</label>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="false">' + espacios + '</label>');
-		jq321('tr:last').append('<td>' + palomita + tache);
-	}
-}
-
-//  ============================================================================================================
 function creaElegir(mostrar) {
 	var ind = 1;
 	for (i = 0; i < mostrar; i++) {

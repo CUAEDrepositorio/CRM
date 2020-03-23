@@ -5,12 +5,13 @@
  */
 
 jq321(function () {
-	var eScormActividad = false; // true si se toma en cuenta como objetivo del scorm, false si no
-	var totalEs = 0;
+	//var eScormActividad = false; // true si se toma en cuenta como objetivo del scorm, false si no
+	//var totalEs = 0;
 	var intentosEs = 2; // 0 = ilimitados
 	var intentosRealizadosEs = 0;
-	var indiceActividad = 3; //
+	//var indiceActividad = 3; //
 	iniciarEscribiendo();
+
 
 	function iniciarEscribiendo() {
 		var caja;
@@ -35,45 +36,10 @@ jq321(function () {
 				break;
 			default:
 				jq321("#btnRevisar").text(ic("rasiveR"));
-				jq321("#btnReiniciar").text(ic("otnetni omixórP"));
+				jq321("#btnReiniciar").text(ic("otnetni etneiugiS"));
 		}
 		jq321("button#btnRevisar").show();
 		jq321("button#btnReiniciar").hide();
-		/*	if (ambSCORM) {
-			if (parent.conectividadSCORM === undefined) { //Inicio carga SCORM
-				console.log("Actividad en documento, es con try");
-				try {
-					var conexion = conectividadSCORM.conectarYComenzar();
-					console.log("actividad:: -> ", conexion);
-					conectividadSCORM.iniciarObjetivo(idObjetivo);           // inicializa la actividad
-					if (barraSCORM) {conectividadSCORM.actualizarBarra()}    // actualiza la barra de avance
-					conectividadSCORM.salvar();                              // guarda el status
-				} catch(e){
-				console.warn("Error con conectividad SCORM");
-				}
-			}
-			else {
-				console.log("Actividad en frame, es con parent");
-				if (parent.document.readyState === "complete"){
-					iniciarSCORM();
-					console.log("ya había cargado");
-				}
-				else {
-					console.log("agregó listener");
-					parent.addEventListener("load", function(){
-						iniciarSCORM();
-					});
-				}
-				function iniciarSCORM(){
-					var conexion = parent.conectividadSCORM.conectarYComenzar();
-					console.log("actividad:: -> ", conexion);
-					parent.conectividadSCORM.iniciarObjetivo(idObjetivo);          // inicializa la actividad
-					if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}   // actualiza la barra de avance
-					parent.conectividadSCORM.salvar();                             // guarda el status
-				}
-			} // if (parent.conectividadSCORM Fin carga SCORM
-		} //if (ambSCORM)
-    */
 		if (elementosPorSegmento < reactivosMostrar) { // los botones de paginas...
 			if (carruselContinuo) {
 				jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
@@ -86,7 +52,7 @@ jq321(function () {
 		}
 
 	} //fin iniciarEscribiendo
-
+	
 	jq321("button#btnRevisar").click(revisar);
 	jq321("button#btnReiniciar").click(reiniciar);
 
@@ -119,8 +85,10 @@ jq321(function () {
 				}
 			}
 		}
+		
 		jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
+		iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo);
 	});
 
 
@@ -208,82 +176,17 @@ jq321(function () {
 					var msg2 = (porEspacios) ? ("<strong>" + correctas + "</strong> " + txtResp1 + " de <strong>" + cajas.length + "</strong> posibles<br/>") : "";
 					var msg3 = (porEnunciados) ? ("<strong>" + correctasTotal + "</strong> " + txtResp2 + " de <strong>" + total + "</strong><br/><br/>") : "";
 					var tit = ic("odatluseR");
+					
 			}
-			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctasTotal, total);
+			
 			if (porEspacios || porEnunciados) {
 				var res = (porEspacios) ? (correctas / cajas.length) : (correctasTotal / total);
 				console.log("Evaluacion con " + Math.floor(res));
 				mostrarEval("", "", msg1 + msg2 + msg3 + asignarEvaluacion(Math.floor(10 * res)));
 			}
+			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctasTotal, total);
 			var totalPreguntas = total;
-			var correctasRedondeadas = (porEspacios) ? correctas : correctasTotal; //uuuy no se excluye cuando tambien prenden porEnunciado
-			/*if (ambSCORM) {
-				if (barraSCORM){ //RAAR Mar 31,18: si la barra esta prendinda entonces la califiacion se gurda en objetives por que se va a generar una calificación compesta que se guarda en cmi.core
-					console.log("Inicia scorm objetives");
-					//califica SCORM
-					if (parent.conectividadSCORM === undefined) {
-						console.log("Actividad en documento, es con try");
-						try {
-							conectividadSCORM.calificarObjetivo(idObjetivo, correctasRedondeadas, totalPreguntas, 0);   // envia los datos a la base de datos
-							conectividadSCORM.finalizarObjetivo(idObjetivo); //para ponerle passed..
-						//	conectividadSCORM.desconectarConCalificacion(buenas, total); //esta se usa en el recurso viejo, no uso esta por que hay rutinas de salvado abajo...
-							conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-							if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-							conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-							conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-						} catch(e){
-						console.warn("Error al calificar en conectividadSCORM");
-						}
-					}
-					else {
-						console.log("Actividad en frame, es con parent");
-						parent.conectividadSCORM.calificarObjetivo(idObjetivo, correctasRedondeadas, totalPreguntas, 0); // envia los datos a la base de datos
-						parent.conectividadSCORM.finalizarObjetivo(idObjetivo); //para ponerle passed..
-						//parent.conectividadSCORM.desconectarConCalificacion(buenas, total); //esta se usa en el recurso viejo, no uso esta por que hay rutinas de salvado abajo...
-						//parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	                              // finaliza la actividad en estatus passed
-						parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-						if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-						parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-						parent.conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-					}
-					//fin califica SCORM
-					console.log("Fin scorm objetives");
-				} else { //si el recurso es autocalificable
-					console.log("Inicia scorm cmi.core");
-					//califica SCORM
-					if (parent.conectividadSCORM === undefined) {
-						console.log("Actividad en documento, es con try");
-						try {
-							conectividadSCORM.calificar(correctasRedondeadas,totalPreguntas); //RAAR Oct 10,18: Esta y la linea anterior salvan a diferentes rutas...debe ser uno u otra..
-							//conectividadSCORM.finalizarObjetivo(idObjetivo); // esto no creo que vaya
-							//conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-							//if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-							//conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-							conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-						} catch(e){
-						console.warn("Error al calificar en conectividadSCORM");
-						}
-					}
-					else {
-						console.log("Actividad en frame, es con parent");
-						parent.conectividadSCORM.calificarObjetivo(idObjetivo, correctasRedondeadas, totalPreguntas, 0); // envia los datos a la base de datos
-						//parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	  // esto no creo que vaya
-						//parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-						//if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-						//parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-						parent.conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-					}
-					//fin califica SCORM
-					console.log("Fin scorm cmi.core");
-				}
-			} //if (ambSCORM)*/
-			/*		// save scorm
-					if (eScormActividad) {
-						almacenarDatosSCORM(indiceActividad, correctasTotal, total);
-						enviarDatosSCORM();//
-					}// fin eScorm
-					*/
-			intentosRealizadosEs++;
+			var correctasRedondeadas = (porEspacios) ? correctas : correctasTotal; //uuuy no se excluye cuando tambien prenden porEnunciado			intentosRealizadosEs++;
 			jq321("button#btnRevisar").hide();
 			jq321("button#btnReiniciar").show();
 		}

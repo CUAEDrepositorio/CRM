@@ -80,3 +80,4 @@ var idioma = "ESP";
 var debug = false;
 var verLongitud = false;
 var flechaArriba = false;
+var revisionEstricta = false; 

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i["GoogleAnalyticsObject"] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+    ga("create", "UA-158134453-1", {
+      "cookieDomain": "auto"
+    });
+    ga("set", "anonymizeIp", true);
+    ga('set', 'dimension1', "CUAED");
+    ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
+    ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
+    ga('set', 'dimension4', "2019");
+    ga('set', 'dimension5', "LÚDICO");
+    ga('set', 'dimension6', "RL02-19");
+    ga('set', 'dimension7', "MEMORAMA");
+    ga('set', 'dimension8', "VERSIÓN 1");
+    ga("set", "metric1", 1);
+    ga("set", "metric2", 2);
+    ga("set", "metric3", 3);
+    ga("set", "metric4", 4);
+    ga("set", "metric5", 5);
+    ga("set", "metric6", 6);
+    ga("set", "metric7", 7);
+    ga("set", "metric8", 8);
+    ga("send", "pageview");
+  </script>
+
+  <meta charset="UTF-8">
+  <title>Crucigrama</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://lib.cuaed.unam.mx/R019/js/jquery-v2.1.3.min.js"></script>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="SCORM/estilosBarra.css">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/sweetalert.min.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/listaReactivos.js"></script>
+  <script src="js/configRecurso.js"></script>
+  <script src="js/tempo.js"></script>
+  <link rel="stylesheet" href="css/sweetalert.css" />
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="SCORM/conectividadSCORM.js"></script>
+  <script src="SCORM/barraDeInfo.js"></script>
+
+</head>
+
+<body>
+  <noscript><br />Necesitas tener habilitado Javascript para <br />poder hacer uso de la funcionalidad
+    completa</noscript>
+  <div id="prohibido">
+    <div id="NoMovil" class="ocultar">
+      <i class="fas fa-ban fa-10x"></i>
+      <br />NO DISPONIBLE EN MOVIL
+    </div>
+  </div>
+  <div class="container">
+    <br>
+    <h2 class="headings-int ">Título de la actividad</h2>
+    <p>Instrucciones (pedagógica y técnica) de la actividad</p>
+
+    <br>
+
+    <button class="btn blue" id="btnCreate">Ver respuestas</button>
+    <button class="btn blue" id="btnPlay">Limpiar</button>
+    <button class="btn blue" id="btnRevisar">Revisar</button>
+    <button class="btn blue" style="display:none" id="btnReinicio">Reiniciar</button>
+    <button class="btn blue" id="btnIniciar"> Iniciar </button>
+    <br /><br />
+    <span id="countdown"> </span>
+    <span id="mododebug"> -MODO DEBUG ACTIVADO -</span>
+    <br /><br />
+    <div class="misterpro" id="supermister">
+      <div class="center crossword" id="crossword"></div><br />
+      <div class="center" id="supercenter">
+        <div class="contrespuestas" id="respuestaspro">
+          <div id="resp" class="respuestas">
+            <h3>Horizontales</h3>
+            <div id="primeroh"></div>
+          </div>
+          <div id="resp1" class="respuestas">
+            <h3>Verticales</h3>
+            <div id="primerov"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br></br>
+  </div>
+
+  <script src="js/index.js"></script>
+</body>
+
+</html>

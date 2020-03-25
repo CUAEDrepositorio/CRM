@@ -25,7 +25,7 @@ var audioBien;
 var audioMal;
 $(document).ready(function () {
     iniciar();
-    iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
+
 })
 
 //window.addEventListener("load", iniciar, false);
@@ -39,7 +39,7 @@ function getRandomColor() {
 }
 
 function iniciar() {
-
+    
     if (window.parent.data_crm) {
         debug = true;
         activarson = true;
@@ -134,13 +134,13 @@ function conteo() {
         if (idioma == "ESP") {
 
             for (var j = 0; j < retroCal.length; j++) {
-                console.log(aciertos);
+                // console.log(aciertos);
                 if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
                     mensaje = retroCal[j].Mensaje;
                 }
             } //for
         }
-        console.log(mensaje);
+        // console.log(mensaje);
         //SWAL ME RINDO
         if (idioma == "ENG") {
             swal({
@@ -158,35 +158,11 @@ function conteo() {
                 type: "info",
                 button: "Aceptar",
             });
+            guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
         } //ESP
-
-        // if (ambSCORM) {
-        //    //califica SCORM
-        //    if (parent.conectividadSCORM === undefined) {
-        //      console.log("Actividad en documento, es con try");
-        //      try {
-        //        conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0);   // envia los datos a la base de datos
-        //        conectividadSCORM.finalizarObjetivo(idObjetivo);	                             // finaliza la actividad en estatus passed
-        //        conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-        //        if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-        //        conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-        //      } catch(e){
-        //      console.warn("Error al calificar en conectividadSCORM");
-        //      }
-        //    }
-        //    else {
-        //      console.log("Actividad en frame, es con parent");
-        //      parent.conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0); // envia los datos a la base de datos
-        //      parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	                              // finaliza la actividad en estatus passed
-        //      parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-        //      if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-        //      parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-        //    }
-        //    //fin califica SCORM
-        //  }
-        guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
+        
         aciertos = 0; //tempo lee aciertos
-        console.log(testDivs);
+        // console.log(testDivs);
     });
 
 
@@ -256,9 +232,8 @@ function crearcartas() {
         imgpng = rutas[i - 1][0].indexOf("png");
         vidmpeg = rutas[i - 1][0].indexOf("mp4");
         soundmp3 = rutas[i - 1][0].indexOf("mp3");
-
-        console.log(i - 1);
-        console.log(imgjpg);
+        // console.log(i - 1);
+        // console.log(imgjpg);
 
         colorArray.push(getRandomColor());
         elemento = document.createElement('div');
@@ -469,19 +444,13 @@ function crearcartas() {
         }
 
         elemento5 = document.createElement('div');
-
         if (separador == true) {
             elemento5.className = "caraTapa cubridor parte2";
         } else {
             elemento5.className = "caraTapa cubridor parte1";
         }
-
         elemento2.appendChild(elemento5);
-
     }
-
-
-
 }
 
 function deactivarCartas() {
@@ -511,17 +480,17 @@ function invertirCarta(carta) {
 
 function alClicCarta(e) {
 
-    console.log("click: ", e.currentTarget.parentNode.getAttribute("data-respuesta"));
+    // console.log("click: ", e.currentTarget.parentNode.getAttribute("data-respuesta"));
     invertirCarta(e.currentTarget);
     if (cartaActiva === null) {
         cartaActiva = e.currentTarget;
         cartaActiva.removeEventListener("click", alClicCarta);
     } else {
         if (e.currentTarget.parentNode.getAttribute("data-respuesta") === cartaActiva.parentNode.getAttribute("data-respuesta")) {
-            console.log("son correctas");
+            // console.log("son correctas");
             current2 = e.currentTarget;
             aciertos++;
-            console.log("Aciertos al clik" + aciertos);
+            // console.log("Aciertos al clik" + aciertos);
             cartaActiva.removeEventListener("click", alClicCarta);
             cartaActiva.className = e.currentTarget.className = "cuadritoHecho abierto";
 
@@ -550,12 +519,12 @@ function alClicCarta(e) {
                 try {
                     tiempo = ((minutes * 60) + seg) - (seconds % 60)
                     clearInterval(countdownTimer);
-                    console.log("TIEMPO FINAL: " + tiempo);
+                    
                 } catch (e) {
 
                 }
                 for (var j = 0; j < retroCal.length; j++) {
-                    console.log(aciertos);
+                    // console.log(aciertos);
                     if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
                         mensaje = retroCal[j].Mensaje;
                     }
@@ -582,7 +551,6 @@ function alClicCarta(e) {
                 if (tempo) {
 
                     if ((tiempo) >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
-                        console.log("Mas de 60");
                         d = Number(tiempo);
                         var m = Math.floor(d % 3600 / 60);
                         var s = Math.floor(d % 3600 % 60);
@@ -607,32 +575,6 @@ function alClicCarta(e) {
                     } //else tiempo
 
                 } //tempo
-
-                // if (ambSCORM) {
-                //   //califica SCORM
-                //   if (parent.conectividadSCORM === undefined) {
-                //     console.log("Actividad en documento, es con try");
-                //     try {
-                //       conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0);   // envia los datos a la base de datos
-                //       conectividadSCORM.finalizarObjetivo(idObjetivo);	                             // finaliza la actividad en estatus passed
-                //       conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-                //       if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-                //       conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-                //     } catch(e){
-                //     console.warn("Error al calificar en conectividadSCORM");
-                //     }
-                //   }
-                //   else {
-                //     console.log("Actividad en frame, es con parent");
-                //     parent.conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0); // envia los datos a la base de datos
-                //     parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	                              // finaliza la actividad en estatus passed
-                //     parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-                //     if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-                //     parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-                //   }
-                //   //fin califica SCORM
-                // }
-
                 aciertos = 0;
                 elemnto.pop();
                 elemnto.pop();
@@ -656,43 +598,7 @@ function alClicCarta(e) {
 
 
 function crearMemorama() {
-
-    // if (ambSCORM) {
-    //     //Inicio carga SCORM
-    //     if (parent.conectividadSCORM === undefined) {
-    //       console.log("Actividad en documento, es con try");
-    //       try {
-    //         var conexion = conectividadSCORM.conectarYComenzar();
-    //         console.log("actividad:: -> ", conexion);
-    //         conectividadSCORM.iniciarObjetivo(idObjetivo);           // inicializa la actividad
-    //         if (barraSCORM) {conectividadSCORM.actualizarBarra()}    // actualiza la barra de avance
-    //         conectividadSCORM.salvar();                              // guarda el status
-    //       } catch(e){
-    //       console.warn("Error con conectividad SCORM");
-    //       }
-    //     }
-    //     else {
-    //       console.log("Actividad en frame, es con parent");
-    //       if (parent.document.readyState === "complete"){
-    //         iniciarSCORM();
-    //         console.log("ya había cargado");
-    //       }
-    //       else {
-    //         console.log("agregó listener");
-    //         parent.addEventListener("load", function(){
-    //           iniciarSCORM();
-    //         });
-    //       }
-    //       function iniciarSCORM(){
-    //         var conexion = parent.conectividadSCORM.conectarYComenzar();
-    //         console.log("actividad:: -> ", conexion);
-    //         parent.conectividadSCORM.iniciarObjetivo(idObjetivo);          // inicializa la actividad
-    //         if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}   // actualiza la barra de avance
-    //         parent.conectividadSCORM.salvar();                             // guarda el status
-    //       }
-    //     }
-    //
-    //   }//Fin Scorm
+    iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
     audioBien = document.getElementById('audioRetroBien');
     audioMal = document.getElementById('audioRetroMal');
 
@@ -718,9 +624,6 @@ function crearMemorama() {
 
     } //fin revolver cartas
 
-
-
-
     //función revisar: elimina las cartas levantadas
     document.getElementById("revisar").addEventListener("click", function (e) {
         if (condicion == 1) {
@@ -742,7 +645,7 @@ function crearMemorama() {
         global = 0;
         audioBien.pause();
         audioBien.currentTime = 0;
-        console.log("hola locotito");
+        // console.log("hola locotito");
         if (vidmaster == true) {
             auxmaster2 = window.domino[1];
             auxmaster2.pause();
@@ -773,26 +676,15 @@ function crearMemorama() {
 
         document.getElementById("revisar").removeEventListener("click", function (e) {
             if (condicion == 1) {
-
                 document.getElementById("retroincorrecta").style.display = "none";
-
-
                 deactivarCartas();
                 resetear2cartas(cartaActiva, current);
-
                 cartaActiva = null;
-
-            } else {
-
-            }
+            } else {}
 
         });
     }
-
-
-
 }
-
 
 function isMobile() {
 

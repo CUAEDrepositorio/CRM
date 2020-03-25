@@ -6,7 +6,7 @@ var MiSCORM = document.getElementById('scorm_object').contentWindow; //donde MiS
 //Objeto con funciones de comunicación con el API de SCORM
 
 
-var conectividadSCORM = function() {
+var conectividadSCORM = function() { 
     /*
     *v2.3: RAAR oct 5,19: Agrego funciones iniciaAmbienteScorm, guardaCalificacionScorm, fuera de objeto conectividadSCORM, y una validación de calosh en verficarEstado "if ( (API.LMSGetValue("cmi.objectives_" + i + ".status") == "passed") || "
     *v2.2: RAAR sep 9,19: Agrego validaciones desarrolladas en zotero y exposicion oral, facilitan el debug y validaciones en findAPI()
@@ -14,7 +14,7 @@ var conectividadSCORM = function() {
     *v2.0: ADIB ABUD JASO antes de 2019: conectividadSCORM 2.0.; version del completar arrastrando (por nombrar y diferenciarla)
     */
  //  alert ("conectividad SCORM");
-
+   
             var API = null;
             var numObjetivos = 0;
             function findAPI(win) {
@@ -25,7 +25,7 @@ var conectividadSCORM = function() {
                 if (API == null) {
                     API = parent.API;
                     if (API == null) {
-                       API = top.API;
+                       API = top.API; 
                        console.log("findAPI: Parent not found");
                     }
                     else {
@@ -33,20 +33,20 @@ var conectividadSCORM = function() {
                        console.log("findAPI: La API esta en el padre");
                     }
                     //console.log("findAPI: Win not found");
-
+                    
                 }  else {
-                    console.log("findAPI: Win ok, API encontrado en window");
+                    console.log("findAPI: Win ok, API encontrado en window");  
                     return true;
                 }
             }
-
+        
             function initAPI() {
                 var win = window;
                 findAPI(win);//Función de arriba
                 if ((API == null) && (win.opener != null) && (typeof(win.opener) != "undefined")) {//if we still have not found the API, look at the opener and it's frameset
                     findAPI(win.opener);
                 }
-                else if ((API == null) && (win.opener == null) && (typeof(win.opener) == "undefined")) { //if we still have not found the API, look at the opener and it's frameset
+                else if ((API == null) && (win.opener == null) && (typeof(win.opener) == "undefined")) { //if we still have not found the API, look at the opener and it's frameset 
                     findAPI(win.top);
                 }else if ((API == null)) {
                     console.log("initAPI: None win and top");  //
@@ -57,18 +57,18 @@ var conectividadSCORM = function() {
                 API: API,
                 initAPI: initAPI,
                 iniciarScorm: function() {
-                    console.log("iniciarScorm window, window.name " + window +" , " +window.name);
-                    console.log("iniciarScorm window, window.defaultStatus " + window +" , " +window.defaultStatus);
-                    console.log("iniciarScorm API " + window, API);
+                    console.log("iniciarScorm window, window.name " + window +" , " +window.name); 
+                    console.log("iniciarScorm window, window.defaultStatus " + window +" , " +window.defaultStatus); 
+                    console.log("iniciarScorm API " + window, API); 
                     var inicio = null;
                     inicio = API.LMSInitialize("");
                     if (inicio == 'false') {
-                        console.log("iniciarScorm: Error al iniciar: " + API.LMSGetLastError() + " Diagnostico: " + API.LMSGetDiagnostic());
+                        console.log("iniciarScorm: Error al iniciar: " + API.LMSGetLastError() + " Diagnostico: " + API.LMSGetDiagnostic()); 
                         return false;
                     }
                     else {
                         console.log("iniciarScorm: LMSInitialize " + inicio);
-                        console.log("iniciarScorm: Usuario " + this.getUsuario());
+                        console.log("iniciarScorm: Usuario " + this.getUsuario()); 
                         return true; //RAAR mar 28,19: En la logica del false del iF, hay que refinar la libreria para que se vuelva la standard
                     }
                 },
@@ -127,8 +127,8 @@ var conectividadSCORM = function() {
                 crearObjetivos: function(numero) { //Se usa en aprendo+, donde hay varios recursos que califican por curso, cada uno es un objetive
                     numObjetivos = numero;
                     if (API.LMSGetValue("cmi.objectives._count") < "" + numero) {
-                        for (var i = 0; i < numero; i++) {  // not attempted -> incomplete -> passed,
-                            if ((API.LMSGetValue("cmi.objectives." + i + ".status") == "incomplete") ||
+                        for (var i = 0; i < numero; i++) {  // not attempted -> incomplete -> passed, 
+                            if ((API.LMSGetValue("cmi.objectives." + i + ".status") == "incomplete") ||  
                                     (API.LMSGetValue("cmi.objectives." + i + ".status") == "passed") ) {
                                 console.log("crearObjetivos: status [] = " + API.LMSGetValue("cmi.objectives." + i + ".status"));
                             }
@@ -178,7 +178,7 @@ var conectividadSCORM = function() {
                 },
                 finalizarObjetivo: function(numero) {
                     console.log("finalizarObjetivo: cmi.objectives." + numero + ".status, " + API.LMSGetValue("cmi.objectives." + numero + ".status"));
-                    return API.LMSSetValue("cmi.objectives." + numero + ".status", "passed");
+                    return API.LMSSetValue("cmi.objectives." + numero + ".status", "passed");                        
                 },
                 verificarEstado: function() {
                     var totalObjetivos = API.LMSGetValue("cmi.objectives._count");
@@ -193,7 +193,7 @@ var conectividadSCORM = function() {
                         }//fin if //RAAR Oct 10,18: estos console.log son para leer la calificación de la base, si jala valores, se guardo ok.
                         console.log('STATUS: API.LMSGetValue("cmi.objectives." + i + ".status") i: '+ i +' ' + API.LMSGetValue("cmi.objectives." + i + ".status"));
                         console.log("LMSGetValue correctas-raw "+API.LMSGetValue("cmi.objectives." + i + ".score.raw"));
-                        console.log("LMSGetValue totalPreguntas-maxima "+API.LMSGetValue("cmi.objectives." + i + ".score.max"));
+                        console.log("LMSGetValue totalPreguntas-maxima "+API.LMSGetValue("cmi.objectives." + i + ".score.max"));                
                     }//fin for
                     if ((avance == totalObjetivos) && (avance > 0)) {
                         API.LMSSetValue("cmi.core.lesson_status", "completed"); // coloca el status en completed
@@ -201,8 +201,8 @@ var conectividadSCORM = function() {
                     }
                     else {//fin if
                         API.LMSSetValue("cmi.core.lesson_status", "incomplete");
-                    }
-                    console.log("LMSGetValue cmi.core.lesson_status "+API.LMSGetValue("cmi.core.lesson_status"));
+                    } 
+                    console.log("LMSGetValue cmi.core.lesson_status "+API.LMSGetValue("cmi.core.lesson_status"));            
                 },
                 numDefinidos: function() {
                     var totalObjetivos = API.LMSGetValue("cmi.objectives._count");
@@ -211,11 +211,11 @@ var conectividadSCORM = function() {
                     //var porcentaje = 0;
                     var avance = 0;
                     for (var i = 0; i < totalObjetivos; i++) {
-                        if (API.LMSGetValue("cmi.objectives." + i + ".status") == "passed" ||
+                        if (API.LMSGetValue("cmi.objectives." + i + ".status") == "passed" || 
                             API.LMSGetValue("cmi.objectives." + i + ".status") == "incomplete") {
                             avance++;
                         }//fin if
-                        console.log('STATUS: API.LMSGetValue("cmi.objectives." + i + ".status") i: '+ i +' ' + API.LMSGetValue("cmi.objectives." + i + ".status"));
+                        console.log('STATUS: API.LMSGetValue("cmi.objectives." + i + ".status") i: '+ i +' ' + API.LMSGetValue("cmi.objectives." + i + ".status"));                  
                     }//fin for
                     return avance;
                 },
@@ -243,7 +243,7 @@ var conectividadSCORM = function() {
         } // return
 
 
-}(); // fin conectividadSCORM = function() {
+}(); // fin conectividadSCORM = function() { 
 
 
 // ALERTA: Si bien conectividadSCORM se almacena en la ventana y es accesible a todo el portal
@@ -251,7 +251,7 @@ var conectividadSCORM = function() {
     function testAlert (){
         alert("testAlert pathname: "+location.pathname);
     }
-
+    
     // no encuentra las funciones, por que???? oct 4,19
     function iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo) { //aunque son globales y es el standard actual, en versiones viejas no se llaman asi, por eso las declaro locales..
         // iniciaAmbienteScorm (ambSCORM,barraSCORM,idObjetivo); // En conectividadSCORM.js. El nombre puede cambiar en recursos viejos...
@@ -289,10 +289,10 @@ var conectividadSCORM = function() {
                     if (barraSCORM) { parent.conectividadSCORM.actualizarBarra() }   // actualiza la barra de avance
                     parent.conectividadSCORM.salvar();                             // guarda el status
                 }
-            } // if (parent.conectividadSCORM Fin carga SCORM
-        } //if (ambSCORM)
+            } // if (parent.conectividadSCORM Fin carga SCORM		
+        } //if (ambSCORM) 
     } // iniciaAmbienteScorm()
-
+    
     function guardaCalificacionScorm (ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas) { //aunque son globales y es el standard actual, en versiones viejas no se llaman asi, por eso las declaro locales..
         // recurso autocalificable: guardaCalificacionScorm (ambSCORM,barraSCORM,idObjetivo,correctas, totalPreguntas); //IdOjbetivo en 0
         // recurso en aprendo+: guardaCalificacionScorm (ambSCORM,barraSCORM,idObjetivo,correctas, totalPreguntas); // IdObjetivo en secuensia incremental
@@ -303,7 +303,7 @@ var conectividadSCORM = function() {
                 if (parent.conectividadSCORM === undefined) {
                     console.log("Actividad en documento, es con try");
                     try {
-                        conectividadSCORM.calificarObjetivo(idObjetivo, correctas, totalPreguntas, 0);   // envia los datos a la base de datos
+                        conectividadSCORM.calificarObjetivo(idObjetivo, correctas, totalPreguntas, 0);   // envia los datos a la base de datos			
                         conectividadSCORM.finalizarObjetivo(idObjetivo); //para ponerle passed..
                         //	conectividadSCORM.desconectarConCalificacion(buenas, total); //esta se usa en el recurso viejo, no uso esta por que hay rutinas de salvado abajo...
                         conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
@@ -355,5 +355,5 @@ var conectividadSCORM = function() {
                 //fin califica SCORM
                 console.log("Fin scorm cmi.core");
             }
-        } //if (ambSCORM)
+        } //if (ambSCORM) 
     } //fin guardaCalificacionScorm();

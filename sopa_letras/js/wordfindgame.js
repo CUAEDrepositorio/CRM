@@ -45,7 +45,6 @@ var patrono = creaColores(50);
 (function (document, $, wordfind) {
 
 
-
   'use strict';
 
   /**
@@ -368,36 +367,9 @@ var patrono = creaColores(50);
           }
         }
         // location.reload();
-        guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
-        // if (ambSCORM) {
-        //   //califica SCORM
-        //   if (parent.conectividadSCORM === undefined) {
-        //     console.log("Actividad en documento, es con try");
-        //     try {
-        //       conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0);   // envia los datos a la base de datos
-        //       conectividadSCORM.finalizarObjetivo(idObjetivo);	                             // finaliza la actividad en estatus passed
-        //       conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-        //       if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-        //       conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-        //     } catch(e){
-        //     console.warn("Error al calificar en conectividadSCORM");
-        //     }
-        //   }
-        //   else {
-        //     console.log("Actividad en frame, es con parent");
-        //     parent.conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0); // envia los datos a la base de datos
-        //     parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	                              // finaliza la actividad en estatus passed
-        //     parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-        //     if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-        //     parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-        //   }
-        //   //fin califica SCORM
-        // }
-
-
-
+        
       }
-
+      guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
       // reset the turn
       $('.selected').removeClass('selected');
       startSquare = null;
@@ -443,46 +415,6 @@ var patrono = creaColores(50);
        */
       create: function (words, puzzleEl, wordsEl, options) {
 
-        // if (ambSCORM) {
-        //   //Inicio carga SCORM
-        //   if (parent.conectividadSCORM === undefined) {
-        //     console.log("Actividad en documento, es con try");
-        //     try {
-        //       var conexion = conectividadSCORM.conectarYComenzar();
-        //       console.log("actividad:: -> ", conexion);
-        //       conectividadSCORM.iniciarObjetivo(idObjetivo); // inicializa la actividad
-        //       if (barraSCORM) {
-        //         conectividadSCORM.actualizarBarra()
-        //       } // actualiza la barra de avance
-        //       conectividadSCORM.salvar(); // guarda el status
-        //     } catch (e) {
-        //       console.warn("Error con conectividad SCORM");
-        //     }
-        //   } else {
-        //     console.log("Actividad en frame, es con parent");
-        //     if (parent.document.readyState === "complete") {
-        //       iniciarSCORM();
-        //       console.log("ya había cargado");
-        //     } else {
-        //       console.log("agregó listener");
-        //       parent.addEventListener("load", function () {
-        //         iniciarSCORM();
-        //       });
-        //     }
-
-        //     function iniciarSCORM() {
-        //       var conexion = parent.conectividadSCORM.conectarYComenzar();
-        //       console.log("actividad:: -> ", conexion);
-        //       parent.conectividadSCORM.iniciarObjetivo(idObjetivo); // inicializa la actividad
-        //       if (barraSCORM) {
-        //         parent.conectividadSCORM.actualizarBarra()
-        //       } // actualiza la barra de avance
-        //       parent.conectividadSCORM.salvar(); // guarda el status
-        //     }
-        //   }
-        //   //Fin carga SCORM
-        // }
-        iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo);
         if (words.length >= 41) {
           words.splice(40, 1);
         }
@@ -492,7 +424,7 @@ var patrono = creaColores(50);
             words[p][1] = words[p][1].substring(0, 18);
           }
           // se chequea el regex de que el string no tenga espacio
-          words[p][1] = words[p][1].replace(" ", "\u00a0");
+          words[p][1] = words[p][1].replace(/\s/g, "\u00a0");
         }
 
         for (var i = 0; i < words.length; i++) {
@@ -535,6 +467,7 @@ var patrono = creaColores(50);
        * @param {[String]} words: The words to solve for
        */
       solve: function (puzzle, words) {
+        //iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo);
 
         var solution = wordfind.solve(puzzle, words).found;
 
@@ -564,33 +497,6 @@ var patrono = creaColores(50);
         }
 
         var final = words.length;
-        // if (ambSCORM) {
-        //   //califica SCORM
-        //   if (parent.conectividadSCORM === undefined) {
-        //     console.log("Actividad en documento, es con try");
-        //     try {
-        //       conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0); // envia los datos a la base de datos
-        //       conectividadSCORM.finalizarObjetivo(idObjetivo); // finaliza la actividad en estatus passed
-        //       conectividadSCORM.salvar(); // confirma que lo anteriormente realizado es válido
-        //       if (barraSCORM) {
-        //         conectividadSCORM.actualizarBarra()
-        //       } // actualiza al nuevo estatus la barra de avance
-        //       conectividadSCORM.verificarEstado(); // coloca status de la leccion en completed si cumple los requisitos}
-        //     } catch (e) {
-        //       console.warn("Error al calificar en conectividadSCORM");
-        //     }
-        //   } else {
-        //     console.log("Actividad en frame, es con parent");
-        //     parent.conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0); // envia los datos a la base de datos
-        //     parent.conectividadSCORM.finalizarObjetivo(idObjetivo); // finaliza la actividad en estatus passed
-        //     parent.conectividadSCORM.salvar(); // confirma que lo anteriormente realizado es válido
-        //     if (barraSCORM) {
-        //       parent.conectividadSCORM.actualizarBarra()
-        //     } // actualiza al nuevo estatus la barra de avance
-        //     parent.conectividadSCORM.verificarEstado(); // coloca status de la leccion en completed si cumple los requisitos
-        //   }
-        //   //fin califica SCORM
-        // }
         var mensaje = "";
         for (var j = 0; j < retroCal.length; j++) {
           console.log(aciertos);

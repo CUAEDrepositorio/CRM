@@ -46,7 +46,6 @@ function iniciarTempo() {
     $("#solve").hide();
     $("#countdown").remove();
     clearInterval(countdownTimer);
-    //document.getElementById('countdown').innerHTML = ""
     $("#countdown").empty();
   });
 

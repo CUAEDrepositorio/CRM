@@ -32,7 +32,7 @@ conectividadSCORM.actualizarBarra = function(){
 	else {
         barraDeInformacion = window.document.getElementById("barraNavegacion");
     }//fin else
-
+    
     var datos = conectividadSCORM.obtenerDatosAvance();
     var innerBarra = "<table class='tablaInfo'>";
     console.log("actualizarBarra: % -> " + datos.porcentaje);
@@ -57,5 +57,5 @@ conectividadSCORM.actualizarBarra = function(){
     innerBarra += "<tr class='lineaProgreso'>" + actCompletas + actIncompletas + actNoHechas + "</tr>";
     innerBarra += "<tr><td class='celdaTextoBarra' colspan='" + datos.estados.length + "'>Barra de Avance</td></tr></table>";
     barraDeInformacion.innerHTML = innerBarra;
-
+    
 };

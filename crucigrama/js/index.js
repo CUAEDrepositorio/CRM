@@ -98,12 +98,10 @@ function activate(D) {
   var pos4 = chango1.indexOf("_");
   var hori1 = cadenapro1.substring(1, pos3);
   var verti1 = chango1.substring(1, pos4);
-  if (hori1 == "0") {
-  } else {
+  if (hori1 == "0") {} else {
     decideH1 = 1;
   }
-  if (verti1 == "0") {
-  } else {
+  if (verti1 == "0") {} else {
     decideV1 = 1;
   }
   if (decideH1 == 1 && decideV1 == 1) {
@@ -193,7 +191,7 @@ function myarchivo(D, e) {
       break;
   }
 
-  console.log(valorinput);
+  // console.log(valorinput);
   key = e.keyCode || e.which;
   tecla = String.fromCharCode(key).toString();
   letras = " áéíóúüabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚÜABCDEFGHIJKLMNÑOPQRSTUVWXYZ"; //Se define todo el abecedario que se quiere que se muestre.
@@ -379,7 +377,6 @@ function myarchivo(D, e) {
             var elegih = document.getElementsByClassName("H" + hori + "_" + q);
             elegih[0].style.backgroundColor = "#acdff3";
           }
-          console.log("Hola");
         } else {
           if (direccion == "derecha") {
             alucinante = 0;
@@ -388,7 +385,6 @@ function myarchivo(D, e) {
               var elegih = document.getElementsByClassName("H" + hori + "_" + z);
               elegih[0].style.backgroundColor = "#acdff3";
             }
-            console.log("hola");
           }
           if (direccion == "izquierda") {
             alucinante = 0;
@@ -397,7 +393,6 @@ function myarchivo(D, e) {
               elegih[0].style.backgroundColor = "#acdff3";
             }
             numerobase--;
-            console.log("pato");
           }
         }
 
@@ -438,7 +433,7 @@ function myarchivo(D, e) {
               elegiv[0].style.backgroundColor = "#acdff3";
             }
             numerobase++;
-            console.log("pato");
+            // console.log("pato");
           }
         }
 
@@ -485,7 +480,7 @@ function myarchivo(D, e) {
 //   MAIN                          //
 //---------------------------------//
 function cadenaepicaX(d) {
-  console.log(d);
+  // console.log(d);
   var comico = d + "";
   var pis1 = comico.indexOf("L");
   comico = comico.substring(0, pis1);
@@ -496,7 +491,7 @@ function cadenaepicaX(d) {
 }
 
 function cadenaepicaY(d) {
-  console.log(d);
+  // console.log(d);
   var comico2 = d + "";
   var pis2 = comico2.indexOf("L");
   comico2 = comico2.substring(0, pis2);
@@ -526,10 +521,8 @@ function soloLetras(e) {
 }
 
 function quitarextra(d) {
-  console.log(d);
+  // console.log(d);
   var comico3 = d + "";
-
-
   comico3 = comico3.substring(0, comico.length - 2);
   return comico3;
 }
@@ -630,45 +623,6 @@ function creanodos() {
 function Create() {
   creanodos();
 
-  // if (ambSCORM) {
-  //   //Inicio carga SCORM
-  //   if (parent.conectividadSCORM === undefined) {
-  //     console.log("Actividad en documento, es con try");
-  //     try {
-  //       var conexion = conectividadSCORM.conectarYComenzar();
-  //       console.log("actividad:: -> ", conexion);
-  //       conectividadSCORM.iniciarObjetivo(idObjetivo); // inicializa la actividad
-  //       if (barraSCORM) {
-  //         conectividadSCORM.actualizarBarra()
-  //       } // actualiza la barra de avance
-  //       conectividadSCORM.salvar(); // guarda el status
-  //     } catch (e) {
-  //       console.warn("Error con conectividad SCORM");
-  //     }
-  //   } else {
-  //     console.log("Actividad en frame, es con parent");
-  //     if (parent.document.readyState === "complete") {
-  //       iniciarSCORM();
-  //       console.log("ya había cargado");
-  //     } else {
-  //       console.log("agregó listener");
-  //       parent.addEventListener("load", function () {
-  //         iniciarSCORM();
-  //       });
-  //     }
-
-  //     function iniciarSCORM() {
-  //       var conexion = parent.conectividadSCORM.conectarYComenzar();
-  //       console.log("actividad:: -> ", conexion);
-  //       parent.conectividadSCORM.iniciarObjetivo(idObjetivo); // inicializa la actividad
-  //       if (barraSCORM) {
-  //         parent.conectividadSCORM.actualizarBarra()
-  //       } // actualiza la barra de avance
-  //       parent.conectividadSCORM.salvar(); // guarda el status
-  //     }
-  //   }
-  //   //Fin carga SCORM
-  // }
 
   iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
   if (mode === 0) {
@@ -686,7 +640,6 @@ function Create() {
       isSuccess = PopulateBoard();
     }
     var loco = document.getElementsByClassName("conteni");
-    console.log("hola");
     console.log(loco[0]);
 
     document.getElementById("crossword").innerHTML =
@@ -811,14 +764,10 @@ function obtenerlongitus(d) {
   var posnumeral = pato.indexOf("D");
   if (posnumeral == 0) {
     pronumeral = pato.substring(posnumeral + 1, pato.length);
-
   } else {
     pronumeral = pato.substring(0, posnumeral);
-
   }
-
   var dato = parseInt(pronumeral);
-
   console.log(dato);
   return dato;
 }
@@ -830,8 +779,6 @@ function Reinicio() {
 
 
 function Revisar() {
-
-
   arregloincisosh = document.getElementsByClassName("proh");
   arregloincisosv = document.getElementsByClassName("prov");
   posh = arregloincisosh.length;
@@ -849,14 +796,10 @@ function Revisar() {
   var arrh = [];
   if (pato == 0) {
     for (var i = 0; i < posh; i++) {
-
       var id = arregloincisosh[i].id + "";
-
       var posid = id.indexOf("L");
       var idpro = id.substring(posid + 1, id.length);
-      console.log("huhu " + idpro);
       var numeralpro = parseInt(idpro);
-
       var posx = id.indexOf("_");
       var cadenax = id.substring(1, posx);
       console.log(cadenax);
@@ -883,16 +826,11 @@ function Revisar() {
         }
 
       }
-
-
       arrh.push(castidad);
       console.log(arrh);
     }
-
     for (var k = 0; k < posv; k++) {
-
       var idv = arregloincisosv[k].id + "";
-
       var posidv = idv.indexOf("L");
       var idprov = idv.substring(posidv + 1, idv.length);
       console.log("huhu " + idprov);
@@ -919,17 +857,10 @@ function Revisar() {
           for (var r = 1; r <= numeralprov; r++) {
             var clasessv = "V" + numeralpro1v + "_" + r;
             var superidbv = document.getElementsByClassName(clasessv);
-
             superidbv[0].style.backgroundColor = "#c0fda7";
-
           }
-
         }
-
       }
-
-
-
       arrh.push(castidadv);
       conteo = arregloincisosh.length;
       conteo2 = arregloincisosv.length;
@@ -990,44 +921,17 @@ function Revisar() {
           button: "Aceptar",
         });
       }
-
       document.getElementById("btnPlay").style.display = "none";
       document.getElementById("btnCreate").style.display = "none";
       document.getElementById("btnRevisar").style.display = "none";
       document.getElementById("btnReinicio").style.display = "";
-
       var totalpalabras = document.getElementsByClassName("respuestacorr");
       for (var pl = 0; pl < totalpalabras.length; pl++) {
         totalpalabras[pl].style.display = "";
       }
-      guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
-      //  if (ambSCORM) {
-      //   //califica SCORM
-      //   if (parent.conectividadSCORM === undefined) {
-      //     console.log("Actividad en documento, es con try");
-      //     try {
-      //       conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0);   // envia los datos a la base de datos
-      //       conectividadSCORM.finalizarObjetivo(idObjetivo);	                             // finaliza la actividad en estatus passed
-      //       conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-      //       if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-      //       conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-      //     } catch(e){
-      //     console.warn("Error al calificar en conectividadSCORM");
-      //     }
-      //   }
-      //   else {
-      //     console.log("Actividad en frame, es con parent");
-      //     parent.conectividadSCORM.calificarObjetivo(idObjetivo, aciertos, final, 0); // envia los datos a la base de datos
-      //     parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	                              // finaliza la actividad en estatus passed
-      //     parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-      //     if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-      //     parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-      //   }
-      //   //fin califica SCORM
-      // }
+      
 
-
-      console.log(arrh);
+      // console.log(arrh);
     }
 
   } else {
@@ -1041,13 +945,7 @@ function Revisar() {
     });
 
   }
-
-
-
-
-
-
-
+  guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
 }
 
 // TODO: Clean this guy up
@@ -1155,9 +1053,7 @@ function AddWordToBoard() {
           }
         }
       }
-
       curMatchDiff = curWord.totalMatches - curWord.effectiveMatches;
-
       if (curMatchDiff < minMatchDiff && curWord.successfulMatches.length > 0) {
         curMatchDiff = minMatchDiff;
         curIndex = i;
@@ -1187,10 +1083,8 @@ function AddWordToBoard() {
   for (i = 0, len = wordsActive[pushIndex].char.length; i < len; i++) {
     var xIndex = matchData.x,
       yIndex = matchData.y;
-
     if (matchData.dir === 0) {
       xIndex += i;
-
       elem = wordsActive[pushIndex].char.length;
       if (inicio == 0) {
         cont[xIndex][yIndex] = 1;
@@ -1206,28 +1100,14 @@ function AddWordToBoard() {
           inicio = 0;
           contpalabra++;
         }
-
       }
-
       arreglolongitudes.push(xIndex);
-
       longitud[xIndex][yIndex] = wordsActive[pushIndex].char.length;
-      console.log(wordsActive[pushIndex]);
+      // console.log(wordsActive[pushIndex]);
       board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
       ori[xIndex][yIndex] = "H";
-
-
-
-
-
-
-
-
-
     } else {
       yIndex += i;
-
-
       elem2 = wordsActive[pushIndex].char.length;
       if (inicio2 == 0) {
         cont2[xIndex][yIndex] = 1;
@@ -1243,24 +1123,17 @@ function AddWordToBoard() {
           inicio2 = 0;
           contpalabra2++;
         }
-
       }
       longitud1[xIndex][yIndex] = wordsActive[pushIndex].char.length;
-      console.log(longitud1[xIndex][yIndex] + "");
-      console.log(wordsActive[pushIndex]);
+      // console.log(longitud1[xIndex][yIndex] + "");
+      // console.log(wordsActive[pushIndex]);
       board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
       ori2[xIndex][yIndex] = "V";
       console.log(ori2[xIndex][yIndex] + "_" + palabra2[xIndex][yIndex] + "_" + cont2[xIndex][yIndex]);
       arreglolongitudes.push(xIndex);
-
-
-
-
     }
-
     Bounds.Update(xIndex, yIndex);
   }
-
   return true;
 }
 
@@ -1270,13 +1143,11 @@ function BoardToHtml(blank) {
     str += "<div class='row'>";
     for (var j = Bounds.left - 1; j < Bounds.right + 2; j++) {
       str += BoardCharToElement(board[j][i], ori[j][i], palabra[j][i], cont[j][i], ori2[j][i], palabra2[j][i], cont2[j][i], letra[j][i], longitud[j][i], longitud1[j][i], stringpalabra[j][i], stringpalabra2[j][i]);
-
     }
     str += "</div>";
   }
   var maximo = Math.max.apply(null, arreglolongitudes);
   console.log(arreglolongitudes);
-  console.log("maximo" + maximo);
   var maximo2 = 64.8 + (maximo * 32.4);
   posi = 1;
   posi1 = 1;
@@ -1285,7 +1156,6 @@ function BoardToHtml(blank) {
   arreglocoincidencias = [];
   indicecoincidencias = 0;
   document.getElementById("crossword").style.minWidth = "" + maximo2 + "px";
-  console.log("long" + maximo2);
   if (maximo2 > 1440) {
     document.getElementById("crossword").style.width = "" + maximo2 + "px";
 
@@ -1303,8 +1173,7 @@ function BoardToHtml(blank) {
 
 function BoardCharToElement(c, h, p, i, h1, p1, i1, l, k1, k2, cad1, cad2) {
   var arr = (c) ? ['square', 'letter'] : ['square'];
-  console.log(c + "" + p + "" + i);
-
+  // console.log(c + "" + p + "" + i);
   return EleStr('div', [{
     a: 'class',
     v: arr
@@ -1352,7 +1221,7 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
   for (var i = 0, s = "<" + e + " "; i < c.length; i++) {
     s += c[i].a + "='" + ArrayToString(c[i].v, " ") + "' ";
     arrmas = c[i].v;
-    console.log(c);
+    // console.log(c);
     for (var j = 0; j <= arrmas.length; j++) {
       if (arrmas[j] == 'letter') {
 
@@ -1466,8 +1335,8 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
           }
 
           var cadenapro3 = "./img/" + posi + ".gif";
-          console.log("pato " + posi);
-          console.log(l);
+          // console.log("pato " + posi);
+          // console.log(l);
           s += "style= 'background-image: url(\"" + cadenapro3 + "\")'";
           posi++;
         }
@@ -1536,17 +1405,8 @@ function crearespuesta(a, b, c, k, g) {
   respuestaspalabra.innerHTML = "" + a;
   contenidoprimario.appendChild(respuestaspalabra);
 
-
-
-
-
-
-
   var patino = a.toUpperCase();
   palabrasmagicas.push(patino);
-  console.log(a);
-  console.log(b);
-  console.log(c);
 }
 
 function crearespuesta2(a, b, c, k, g) {
@@ -1572,9 +1432,6 @@ function crearespuesta2(a, b, c, k, g) {
   respuestaspalabra.setAttribute('style', 'display:none');
   respuestaspalabra.innerHTML = "" + a;
   contenidoprimario.appendChild(respuestaspalabra);
-  console.log(a);
-  console.log(b);
-  console.log(c);
 }
 
 function AddClass(ele, classStr) {

@@ -50,6 +50,7 @@ function paginar(boton) {
 			}
 		}
 	}
+	iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
 	jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
 	jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
 };
@@ -155,65 +156,5 @@ function revisar() {
 			mostrarEval("", "", msg1 + msg2 + msg3 + asignarEvaluacion(Math.floor(10 * res)));
 		}
 		guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas);
-		// if (ambSCORM) {
-		// 		if (barraSCORM){ //RAAR Mar 31,18: si la barra esta prendinda entonces la califiacion se gurda en objetives por que se va a generar una calificación compesta que se guarda en cmi.core
-		// 			console.log("Inicia scorm objetives");
-		// 			//califica SCORM
-		// 			if (parent.conectividadSCORM === undefined) {
-		// 				console.log("Actividad en documento, es con try");
-		// 				try {
-		// 					conectividadSCORM.calificarObjetivo(idObjetivo, correctas, totalPreguntas, 0);   // envia los datos a la base de datos
-		// 					conectividadSCORM.finalizarObjetivo(idObjetivo); //para ponerle passed..
-		// 				//	conectividadSCORM.desconectarConCalificacion(buenas, total); //esta se usa en el recurso viejo, no uso esta por que hay rutinas de salvado abajo...
-		// 					conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-		// 					if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-		// 					conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-		// 					conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-		// 				} catch(e){
-		// 				console.warn("Error al calificar en conectividadSCORM");
-		// 				}
-		// 			}
-		// 			else {
-		// 				console.log("Actividad en frame, es con parent");
-		// 				parent.conectividadSCORM.calificarObjetivo(idObjetivo, correctas, totalPreguntas, 0); // envia los datos a la base de datos
-		// 				parent.conectividadSCORM.finalizarObjetivo(idObjetivo); //para ponerle passed..
-		// 				//parent.conectividadSCORM.desconectarConCalificacion(buenas, total); //esta se usa en el recurso viejo, no uso esta por que hay rutinas de salvado abajo...
-		// 				//parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	                              // finaliza la actividad en estatus passed
-		// 				parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-		// 				if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-		// 				parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-		// 				parent.conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-		// 			}
-		// 			//fin califica SCORM
-		// 			console.log("Fin scorm objetives");
-		// 		} else { //si el recurso es autocalificable
-		// 			console.log("Inicia scorm cmi.core");
-		// 			//califica SCORM
-		// 			if (parent.conectividadSCORM === undefined) {
-		// 				console.log("Actividad en documento, es con try");
-		// 				try {
-		// 					conectividadSCORM.calificar(correctas,totalPreguntas); //RAAR Oct 10,18: Esta y la linea anterior salvan a diferentes rutas...debe ser uno u otra..
-		// 					conectividadSCORM.finalizarObjetivo(idObjetivo); // esto no creo que vaya
-		// 					conectividadSCORM.salvar();                                                      // confirma que lo anteriormente realizado es válido
-		// 					//if (barraSCORM) {conectividadSCORM.actualizarBarra()}	                         // actualiza al nuevo estatus la barra de avance
-		// 					conectividadSCORM.verificarEstado();                                             // coloca status de la leccion en completed si cumple los requisitos}
-		// 					conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-		// 				} catch(e){
-		// 				console.warn("Error al calificar en conectividadSCORM");
-		// 				}
-		// 			}
-		// 			else {
-		// 				console.log("Actividad en frame, es con parent");
-		// 				parent.conectividadSCORM.calificarObjetivo(idObjetivo, correctas, totalPreguntas, 0); // envia los datos a la base de datos
-		// 				parent.conectividadSCORM.finalizarObjetivo(idObjetivo);	  // esto no creo que vaya
-		// 				parent.conectividadSCORM.salvar();                                                    // confirma que lo anteriormente realizado es válido
-		// 				//if (barraSCORM) {parent.conectividadSCORM.actualizarBarra()}	                      // actualiza al nuevo estatus la barra de avance
-		// 				parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
-		// 				parent.conectividadSCORM.salvar(); //RAAR Oct 10,18: MCaloch recomienda agregar
-		// 			}
-		// 			//fin califica SCORM
-		// 			console.log("Fin scorm cmi.core");
-		// 		}
-		// 	} //if (ambSCORM)
 	}
 }

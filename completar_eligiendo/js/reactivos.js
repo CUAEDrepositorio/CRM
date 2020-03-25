@@ -143,60 +143,6 @@ function reordenaArreglo(arreglo) {
 	});
 }
 
-function creaEscribir(reactivosMostrar) {
-	for (i = 0; i < reactivosMostrar; i++) {
-		var preg = reactivos[i].Q.split("@");
-		var texto = "";
-		for (j = 0; j < reactivos[i].A.length; j++) {
-			texto += preg[j] + '<input type="text" data-respuesta="' + reactivos[i].A[j] + '" id="caja_' + (i + 1) + "." + (j + 1) + '">';
-		}
-		texto += preg[j];
-		jq321("#completable").append('<hr><div id="p' + i + '"><p>' + texto + tam(reactivos[i].Q, 0));
-		jq321("#p" + i).append('<span class="retroBien ocultarRetro">' + tam(reactivos[i].F[0], 1) + '</span><span class="retroMal ocultarRetro">' + tam(reactivos[i].F[1], 1) + '</span>');
-	}
-}
-
-function creaArrastrar() {
-	jq321(".reactivos .lista-preguntas").each(function () {
-		jq321(this).html('');
-	});
-	jq321(".respuestas .lista-respuestas").each(function () {
-		jq321(this).html('');
-	});
-
-	if (invPregResp) {
-		jq321(".respuestas").prependTo(".ejercicio-arrastrar")
-	}
-	if (formatoColumnas) {
-		jq321("#reactivo").addClass("col-md-9 col-lg-9");
-		jq321("#respuesta").addClass("col-md-3 col-lg-3");
-		if (!(esTexto)) {
-			jq321("#reactivo").addClass("col-sm-9 col-xs-9");
-			jq321("#respuesta").addClass("col-sm-3 col-xs-3");
-		}
-	} else {
-		jq321("#reactivo").addClass("center");
-		jq321("#respuesta").addClass("center");
-	}
-
-	for (var i = 0; i < preguntas.length; i++) {
-		var preg = preguntas[i].txt1.split("@");
-		jq321("#reactivo .lista-preguntas").append('<div class="sub-item" id="preg' + preguntas[i].ind + '" data-drop=' + preguntas[i].ind + '><p>' + (i + 1) + '.&nbsp;&nbsp;' + tam(preg[0], 1) + '<span class="droppable"></span>' + preg[1] + '<br/></p></div>');
-		jq321('#preg' + preguntas[i].ind).append('<div class="retroBien ocultarRetro" id="retro' + preguntas[i].ind + '0">' + tam(preguntas[i].txt2[0], 1));
-		jq321('#preg' + preguntas[i].ind).append('<div class="retroMal ocultarRetro" id="retro' + preguntas[i].ind + '1">' + tam(preguntas[i].txt2[1], 1));
-		jq321('#preg' + preguntas[i].ind).after('<hr/>');
-	}
-	jq321('div.sub-item:last + hr').remove();
-
-	for (var i = 0; i < respuestas.length; i++) {
-		if (esTexto) { // texto
-			jq321(".respuestas .lista-respuestas").append('<div class="sub-item respuesta" id="resp' + respuestas[i].ind + '"><div data-intentos="1" class="draggable" data-drag="' + respuestas[i].ind + '">' + tam(respuestas[i].txt, 1) + '</div></div>');
-		} else { // imagen
-			jq321(".respuestas .lista-respuestas").append('<div class="sub-item respuesta "id="resp' + respuestas[i].ind + '"><img data-intentos="1" class="draggable" data-drag="' + respuestas[i].ind + '" src="' + respuestas[i].txt + '"></div>');
-		}
-	}
-}
-
 function creaOrdenar() {
 	preguntas = reactivos;
 	for (i = 0; i < reactivosMostrar; i++) {
@@ -220,25 +166,7 @@ function creaOrdenar() {
 	});
 }
 
-//  ============================================================================================================
-function creaTablaVF(numReactivos) {
-	jq321('div#contenedor').append('<table class="tabla-reactivos">');
-	jq321('.tabla-reactivos').append('<tbody>');
-	jq321('tbody').append('<tr>');
-	jq321('tr').append('<th>&nbsp;');
-	jq321('tr').append('<th id="tV">Verdadero');
-	jq321('tr').append('<th id="tF">Falso');
-	jq321('tr').append('<th>&nbsp;');
-	for (i = 0; i < numReactivos; i++) {
-		jq321('tbody').append('<tr class="reactivo">');
-		jq321('tr:last').append('<td class="preguntaTexto" id="' + i + '">' + tam(reactivos[i].Q, 1) + '<br/><div class="retroBien ocultarRetro">' + tam(reactivos[i].F[0], 1) + '</div><div class="retroMal ocultarRetro">' + tam(reactivos[i].F[1], 1) + '</div></td>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="true">' + espacios + '</label>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="false">' + espacios + '</label>');
-		jq321('tr:last').append('<td>' + palomita + tache);
-	}
-}
 
-//  ============================================================================================================
 function creaElegir(mostrar) {
 	var ind = 1;
 
@@ -274,13 +202,6 @@ function creaElegir(mostrar) {
 				correcta: false
 			});
 
-			//Esto es para solo poner un icono para tocar, pero se requiere que toque con la barra de sonido....
-			/*			var armaFunc = "tocaSon('"+sFile+"')";
-						var iconoToca = '<div onclick="'+armaFunc+'" >'; // secuencial es mas facil de leer...
-						iconoToca += '<span class="glyphicon glyphicon-headphones" style="color:blue;"></span>';
-						iconoToca += '</div>'*/
-
-			//	iconoToca += '<div style="background-color:red;">'
 			var iconoToca = '<audio controls="play-pause" preload="auto" > '; //aqui requiere CONTROLS  style="color:red;" style="background-color:powderblue;"
 			iconoToca += '<source src="' + sFile + '" type="audio/mp3" style="background-color:powderblue;"> ';
 			iconoToca += 'Your browser does not support the audio element. ';
@@ -324,7 +245,7 @@ function creaElegir(mostrar) {
 			break;
 		default:
 			jq321("#btnRevisar").text(ic("rasiveR"));
-			jq321("#btnReiniciar").text(ic("otnetni omixórP"));
+			jq321("#btnReiniciar").text(ic("otnetni etneiugiS"));
 	}
 	jq321('#btnRevisar').show();
 	jq321('#btnReiniciar').hide();
@@ -471,20 +392,6 @@ function mostrarEval(tipo, titulo, cadena) {
 	});
 }
 
-
-function tocaSon(fAdress) { // solo se da la direccion del archivo y crea el objeto audio y lo toca....
-	/*	            solo ejemplo
-					var input = document.createElement("input");
-	                input.type = "button";
-	                input.value = "Otra vez";
-	                input.addEventListener("click", self.reiniciar, false);
-	                self.nodoEjercicio.appendChild(input);*/
-	// alert ("toca son");
-	var aObj = document.createElement("AUDIO");
-	aObj.preload = "auto";
-	aObj.src = fAdress;
-	aObj.play();
-}
 
 function esPortable() {
 	if (navigator.userAgent.match(/Android/i) ||

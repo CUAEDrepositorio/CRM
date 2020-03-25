@@ -13,7 +13,7 @@ deberá ser escrita la primera letra en mayúscula y las demás en minúsculas.
 La palabra "contratacion" será correcta SIN acento, si se llega a escribir con acento será incorrecta.
 */
 var reactivos = [{
-	Q: 'Se conoce como @ a la persona que @ la cobertura del seguro y cumple con los requisitos establecidos por la compañía @.',
+		Q: 'Se conoce como @ a la persona que @ la cobertura del seguro y cumple con los requisitos establecidos por la compañía @.',
 		A: ["asegurado", "contratación", "aseguradora"],
 		FA: [{
 				correcta: "respuesta correcta 1A",

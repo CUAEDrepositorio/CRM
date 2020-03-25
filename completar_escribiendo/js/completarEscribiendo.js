@@ -25,7 +25,6 @@ jq321(function () {
 				caja.attr("size", caja.attr("data-respuesta").length + 2);
 			}
 			caja.focus(function (e) {
-				console.log(respuesta);
 				jq321(this).attr("class", "");
 			});
 		});
@@ -52,7 +51,7 @@ jq321(function () {
 		}
 
 	} //fin iniciarEscribiendo
-	
+
 	jq321("button#btnRevisar").click(revisar);
 	jq321("button#btnReiniciar").click(reiniciar);
 
@@ -85,10 +84,10 @@ jq321(function () {
 				}
 			}
 		}
-		
+
 		jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
-		iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo);
+		iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
 	});
 
 
@@ -176,12 +175,12 @@ jq321(function () {
 					var msg2 = (porEspacios) ? ("<strong>" + correctas + "</strong> " + txtResp1 + " de <strong>" + cajas.length + "</strong> posibles<br/>") : "";
 					var msg3 = (porEnunciados) ? ("<strong>" + correctasTotal + "</strong> " + txtResp2 + " de <strong>" + total + "</strong><br/><br/>") : "";
 					var tit = ic("odatluseR");
-					
+
 			}
-			
+
 			if (porEspacios || porEnunciados) {
 				var res = (porEspacios) ? (correctas / cajas.length) : (correctasTotal / total);
-				console.log("Evaluacion con " + Math.floor(res));
+				// console.log("Evaluacion con " + Math.floor(res));
 				mostrarEval("", "", msg1 + msg2 + msg3 + asignarEvaluacion(Math.floor(10 * res)));
 			}
 			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctasTotal, total);

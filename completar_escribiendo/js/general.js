@@ -7,29 +7,7 @@ var totalLimite = 10; // limite de recursos en el arreglo.
 
 // A $( document ).ready() block.
 jq321(document).ready(function () {
-	console.log("ready!");
-	
-	// caja de dialogo general
-	//    uiDialogo = $("#dialog");
-	//    uiDialogo.dialog({
-	//        title: "Mensaje",
-	//        modal: true,
-	//        show: "slideDown",
-	//        hide: "slideUp",
-	//        autoOpen: false,
-	//        buttons: [
-	//            {
-	//                text: "Aceptar",
-	//                icons: {
-	//                    primary: "ui-icon-check"
-	//                },
-	//                click: function() {
-	//                    $(this).dialog("close");
-	//                }
-	//            }
-	//        ]
-	//    });
-	//
+
 	if (mezclarPreguntas) {
 		reordenaArreglo(reactivos)
 	};
@@ -88,15 +66,15 @@ function quitarAcentos(str) {
 	//str = str.toLowerCase();
 	// remove accents, swap ñ for n, etc
 	var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-	var to =   "aáaaeéeeiíiioóoouúüunc------";
+	var to = "aáaaeéeeiíiioóoouúüunc------";
 	for (var i = 0, l = from.length; i < l; i++) {
 		str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
 	}
 	//Acepta mayusculas las respuestas
-	if(revisionEstricta){
-	str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-		.replace(/\s+/g, '-') // collapse whitespace and replace by -
-		.replace(/-+/g, '-'); // collapse dashes
+	if (revisionEstricta) {
+		str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+			.replace(/\s+/g, '-') // collapse whitespace and replace by -
+			.replace(/-+/g, '-'); // collapse dashes
 	}
 
 	return str;

@@ -9,8 +9,6 @@ var respDesordenadas1 = [];
 var respDesordenadas2 = [];
 
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
-// var palomita = "<img class='palomita' style='display:none' src='img/palomita.png' />";
-// var tache = "<img class='tache' style='display:none' src='img/tache.png' />";
 var palomita = "<i class='ip far fa-2x fa-check-circle blink'></i>";
 var tache = "<i class='it far fa-2x fa-times-circle blink'></i>";
 var totalSegmentos = 1;

@@ -81,6 +81,7 @@ function temporizador() {
 
 
     if (seconds == 0) {
+      Revisar();
       clearInterval(countdownTimer);
       swal({
         title: "Se acabó el tiempo",

@@ -46,6 +46,11 @@ var mensaje;
 var conteo;
 var conteo2;
 var final;
+var correctasT = [];
+var incorrectasT = [];
+var ejemploB = [];
+var ejemploM = [];
+
 var Bounds = {
   top: 0,
   right: 0,
@@ -107,7 +112,7 @@ function activate(D) {
   if (decideH1 == 1 && decideV1 == 1) {
     var cadena2 = cadenapro1.substring(pos3 + 1, cadenapro1.length);
     var elegi = document.getElementsByClassName("H" + hori1 + "_" + cadena2);
-    console.log(elegi[0]);
+
     elegi[0].style.backgroundColor = "#f3e8ac";
 
   } else {
@@ -230,24 +235,16 @@ function myarchivo(D, e) {
     var poscomico = cadenamaster.indexOf("V");
     var cadenapro = cadenamaster.substring(0, poscomico);
     var chango = cadenamaster.substring(poscomico, cadenamaster.length);
-    // console.log(chango);
     var pos1 = cadenapro.indexOf("_");
     var pos2 = chango.indexOf("_");
-
     var hori = cadenapro.substring(1, pos1);
     var verti = chango.substring(1, pos2);
-    if (hori == "0") {
-
-    } else {
+    if (hori == "0") {} else {
       decideH = 1;
-
     }
 
-    if (verti == "0") {
-
-    } else {
+    if (verti == "0") {} else {
       decideV = 1;
-
     }
 
     if (decideH == 1) {
@@ -255,9 +252,6 @@ function myarchivo(D, e) {
         if (controlpalabra == "H") {
           direccion = "izquierda";
         }
-
-
-
       }
     }
     if (decideV == 1) {
@@ -265,13 +259,9 @@ function myarchivo(D, e) {
         if (controlpalabra == "V") {
           direccion = "arriba";
         }
-
-
       }
     }
-    console.log(numerobase1);
-    console.log(numerobase2);
-    console.log(direccion);
+
     if (decideH == 1 && decideV == 1) {
       if (direccion == "") {
         if (controlpalabra == "S") {
@@ -294,7 +284,6 @@ function myarchivo(D, e) {
           var ira = "H" + hori + "_" + numerobase;
           decideH = 0;
           decideV = 0;
-
         }
         if (controlpalabra == "V") {
           var cadena2 = chango.substring(pos2 + 1, chango.length);
@@ -334,9 +323,7 @@ function myarchivo(D, e) {
           }
           decideH = 0;
           decideV = 0;
-
         }
-
         if (direccion == "arriba") {
           alucinante = 0;
           var cadena2 = chango.substring(pos2 + 1, chango.length);
@@ -349,8 +336,8 @@ function myarchivo(D, e) {
           }
           decideH = 0;
           decideV = 0;
-
         }
+
         if (direccion == "abajo") {
           alucinante = 0;
           var cadena2 = chango.substring(pos2 + 1, chango.length);
@@ -363,9 +350,7 @@ function myarchivo(D, e) {
           }
           decideH = 0;
           decideV = 0;
-
         }
-
       }
     } else {
       if (decideH == 1) {
@@ -403,12 +388,7 @@ function myarchivo(D, e) {
         controlpalabra = "H";
       }
       if (decideV == 1) {
-
-
-
         var cadena2 = chango.substring(pos2 + 1, chango.length);
-
-
         var numerobase = parseInt(cadena2);
         if (direccion == "") {
           for (var x = 2; x <= numerobase2; x++) {
@@ -424,7 +404,6 @@ function myarchivo(D, e) {
               elegiv[0].style.backgroundColor = "#acdff3";
             }
             numerobase--;
-
           }
           if (direccion == "abajo") {
             alucinante = 0;
@@ -433,7 +412,6 @@ function myarchivo(D, e) {
               elegiv[0].style.backgroundColor = "#acdff3";
             }
             numerobase++;
-            // console.log("pato");
           }
         }
 
@@ -442,14 +420,10 @@ function myarchivo(D, e) {
         decideV = 0;
         controlpalabra = "V";
         direccion == "";
-
       }
-
-
     }
 
     var pardo = document.getElementsByClassName(ira);
-
     if (borradopro == "si") {
       pardo[0].value = "";
       borradopro = "no";
@@ -460,20 +434,7 @@ function myarchivo(D, e) {
     } catch (e) {}
 
   }
-  /*
-  var poscadena= cadenapro.indexOf('_');
-  var cadena1=cadenapro.substring(0,poscadena);
-  var cadena2=cadenapro.substring(poscadena+1,cadenapro.length);
-  console.log(cadena1);
-  console.log(cadena2);
-  var numerobase=parseInt(cadena2);
-  numerobase++;
-  var ira=cadena1+"_"+numerobase;
 
-  var pardo=document.getElementsByClassName(ira);
-  var pat= pardo[0];
-  console.log(pat);
-  */
 
 }
 //---------------------------------//
@@ -485,18 +446,15 @@ function cadenaepicaX(d) {
   var pis1 = comico.indexOf("L");
   comico = comico.substring(0, pis1);
   var poscomico = comico.indexOf("V");
-
   comico = comico.substring(0, poscomico);
   return comico;
 }
 
 function cadenaepicaY(d) {
-  // console.log(d);
   var comico2 = d + "";
   var pis2 = comico2.indexOf("L");
   comico2 = comico2.substring(0, pis2);
   var poscomico2 = comico2.indexOf("V");
-
   comico2 = comico2.substring(poscomico2, comico2.length);
   return comico2;
 }
@@ -506,7 +464,6 @@ function soloLetras(e) {
   tecla = String.fromCharCode(key).toLowerCase();
   letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
   especiales = "8-37-38-39-40-46-6-192";
-
   tecla_especial = false
   for (var i in especiales) {
     if (key == especiales[i]) {
@@ -528,17 +485,14 @@ function quitarextra(d) {
 }
 
 function Play() {
-
   var letterArr = document.getElementsByClassName('letter');
   document.getElementById("btnCreate").style.display = "";
   for (var i = 0; i < letterArr.length; i++) {
-
     var dato = cadenaepicaX(letterArr[i].id);
     var dato2 = cadenaepicaY(letterArr[i].id);
-    console.log(name);
+    // console.log(name);
     letterArr[i].innerHTML = "<input  id='I" + letterArr[i].id + "' onkeypress='return soloLetras(event)'  onkeydown='borra(" + letterArr[i].id + ",event)' onkeyup='myarchivo(" + letterArr[i].id + ",event)'  onclick='activate(" + letterArr[i].id + ")' class='char menguando " + dato2 + " " + dato + "' type='text' maxlength='1'></input>";
   }
-
   mode = 0;
   ToggleInputBoxes(false);
 }
@@ -553,12 +507,9 @@ function creanodos() {
     palabraspro[p][0] = validaciones(palabraspro[p][0].toLowerCase());
   }
   var longitud = 0;
-
-
   palabraspro = palabraspro.sort(function () {
     return Math.random() - 0.5
   });
-
   //limita a 60 palabras
   if (palabraspro.length >= 61) {
     palabraspro.splice(60, 1);
@@ -569,7 +520,6 @@ function creanodos() {
       palabraspro[p][0] = palabraspro[p][0].substring(0, 25);
     }
   }
-
   if (numeropalabras < 4) {
     longitud = palabraspro.length;
   } else if (numeropalabras > palabraspro.length) {
@@ -577,7 +527,6 @@ function creanodos() {
   } else {
     longitud = numeropalabras;
   }
-
   for (var i = 0; i < longitud; i++) {
     var contenedormaestro = document.getElementById("supercenter");
     var contenedorpalabra = document.createElement("div");
@@ -614,44 +563,32 @@ function creanodos() {
     }
     inputsecu.className = "clue";
     contenedorpalabra.appendChild(inputsecu);
-
   }
-
-
 }
 
 function Create() {
   creanodos();
-
-
   iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
   if (mode === 0) {
     ToggleInputBoxes(true);
     document.getElementById("crossword").innerHTML = BoardToHtml(" ")
     mode = 1;
     document.getElementById("btnCreate").style.display = "none";
-
   } else {
-
     GetWordsFromInput();
-
     for (var i = 0, isSuccess = false; i < 10 && !isSuccess; i++) {
       CleanVars();
       isSuccess = PopulateBoard();
     }
     var loco = document.getElementsByClassName("conteni");
-    console.log(loco[0]);
-
     document.getElementById("crossword").innerHTML =
       (isSuccess) ? BoardToHtml(" ") : "Failed to find crossword.";
   }
 }
 
-
 function ToggleInputBoxes(active) {
   var w = document.getElementsByClassName('word'),
     d = document.getElementsByClassName('clue');
-
   for (var i = 0; i < w.length; i++) {
     if (active === true) {
       RemoveClass(w[i], 'hide');
@@ -768,7 +705,7 @@ function obtenerlongitus(d) {
     pronumeral = pato.substring(0, posnumeral);
   }
   var dato = parseInt(pronumeral);
-  console.log(dato);
+  // console.log(dato);
   return dato;
 }
 
@@ -786,14 +723,16 @@ function Revisar() {
   elementospalabra = document.getElementsByClassName("char");
   var pato = 0;
   for (var g = 0; g < elementospalabra.length; g++) {
-    console.log(elementospalabra[g].value);
+    // console.log(elementospalabra[g].value);
     if (elementospalabra[g].value == "") {
       pato = 1;
     }
   }
-  console.log("soy" + pato);
-  console.log(palabrasmagicas);
+  // console.log("soy" + pato);
+  // console.log(palabrasmagicas);
   var arrh = [];
+  correctasT = [];
+  incorrectasT = [];
   if (pato == 0) {
     for (var i = 0; i < posh; i++) {
       var id = arregloincisosh[i].id + "";
@@ -802,74 +741,94 @@ function Revisar() {
       var numeralpro = parseInt(idpro);
       var posx = id.indexOf("_");
       var cadenax = id.substring(1, posx);
-      console.log(cadenax);
+      // console.log(cadenax);
       var numeralpro1 = parseInt(cadenax);
       var castidad = "";
       for (var j = 1; j <= numeralpro; j++) {
         var clasess = "H" + numeralpro1 + "_" + j;
         var superid = document.getElementsByClassName(clasess);
         castidad = castidad + superid[0].value;
-        console.log(superid[0]);
+        // console.log(superid[0]);
       }
       castidad = castidad.toUpperCase();
+
       for (var p = 0; p < palabrasmagicas.length; p++) {
         if (castidad == palabrasmagicas[p]) {
+          correctasT.push(castidad);
           aciertos++;
+
           for (var v = 1; v <= numeralpro; v++) {
             var clasess = "H" + numeralpro1 + "_" + v;
             var superidb = document.getElementsByClassName(clasess);
-
             superidb[0].style.backgroundColor = "#c0fda7";
 
           }
-
+        } else {
+          incorrectasT.push(castidad);
         }
 
       }
       arrh.push(castidad);
-      console.log(arrh);
+      // console.log(arrh);
     }
     for (var k = 0; k < posv; k++) {
       var idv = arregloincisosv[k].id + "";
       var posidv = idv.indexOf("L");
       var idprov = idv.substring(posidv + 1, idv.length);
-      console.log("huhu " + idprov);
       var numeralprov = parseInt(idprov);
       var posvo = idv.indexOf("V");
       idv = idv.substring(posvo, posidv);
-      console.log(idv);
       var posxv = idv.indexOf("_");
       var cadenaxv = idv.substring(1, posxv);
-      console.log(cadenaxv);
       var numeralpro1v = parseInt(cadenaxv);
       var castidadv = "";
       for (var h = 1; h <= numeralprov; h++) {
         var clasessv = "V" + numeralpro1v + "_" + h;
         var superidv = document.getElementsByClassName(clasessv);
         castidadv = castidadv + superidv[0].value;
-        console.log(superidv[0]);
+
       }
 
       castidadv = castidadv.toUpperCase();
       for (var m = 0; m < palabrasmagicas.length; m++) {
         if (castidadv == palabrasmagicas[m]) {
+          correctasT.push(castidadv);
           aciertos++;
+
           for (var r = 1; r <= numeralprov; r++) {
             var clasessv = "V" + numeralpro1v + "_" + r;
             var superidbv = document.getElementsByClassName(clasessv);
             superidbv[0].style.backgroundColor = "#c0fda7";
           }
+        } else {
+          incorrectasT.push(castidadv);
         }
       }
       arrh.push(castidadv);
       conteo = arregloincisosh.length;
       conteo2 = arregloincisosv.length;
       final = conteo + conteo2;
+      let respuestasT = document.getElementsByClassName("respuestacorr")
+      let respHTML = ""
+      for (respuestai of respuestasT) {
+        respHTML = respuestai.textContent.toUpperCase()
+        if (correctasT.indexOf(respHTML) != -1) {
+          //correcta
+
+          // const rMB = correctasT.findIndex(iMB => iMB === correctasT);
+          // console.log("ALGO: "+rMB)
+          respuestai.nextSibling.style.display = "inline";
+        } else {
+          //incorrecta
+          respuestai.nextSibling.nextSibling.style.display = "inline";
+        }
+
+      }
+
 
       mensaje = "";
       for (var j = 0; j < retroCal.length; j++) {
         console.log(aciertos);
-
         if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
           mensaje = retroCal[j].Mensaje;
         }
@@ -879,7 +838,7 @@ function Revisar() {
       try {
         tiempo = ((minutes * 60) + seconds)
         clearInterval(countdownTimer);
-        console.log("TIEMPOOO: " + tiempo);
+        console.log("TIEMPO: " + tiempo);
       } catch (e) {
 
       }
@@ -887,7 +846,7 @@ function Revisar() {
       if (tempo) {
         if (tiempo >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
           d = Number(temporal - seconds);
-          console.log("D: " + d);
+
           var m = Math.floor(d % 3600 / 60);
           var s = Math.floor(d % 3600 % 60);
           var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
@@ -929,7 +888,7 @@ function Revisar() {
       for (var pl = 0; pl < totalpalabras.length; pl++) {
         totalpalabras[pl].style.display = "";
       }
-      
+
 
       // console.log(arrh);
     }
@@ -1147,7 +1106,7 @@ function BoardToHtml(blank) {
     str += "</div>";
   }
   var maximo = Math.max.apply(null, arreglolongitudes);
-  console.log(arreglolongitudes);
+
   var maximo2 = 64.8 + (maximo * 32.4);
   posi = 1;
   posi1 = 1;
@@ -1280,6 +1239,11 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
         if (l == "CT" || l == "TC") {
           var car4 = o + "" + p + "_" + w + "" + o1 + "" + p1 + "_" + w1 + "L" + k1;
           var car5 = o + "" + p + "_" + w + "" + o1 + "" + p1 + "_" + w1 + "L" + k2;
+          ejemploB = palabraspro[i][2]
+          ejemploM = palabraspro[i][3]
+          // var ejemploBV = palabraspro[i][2]
+          // var ejemploMV = palabraspro[i][3]
+          // console.log("00000 "+ejemploB+"00000 "+ejemploM)
           if (defineme == 0) {
             for (var u = 0; u < total.length; u++) {
               var stringloco3 = total[u].id + "";
@@ -1296,20 +1260,17 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
               minus3 = torus3 + "" + minus3;
 
               if (stringloco3 == minus3) {
-                crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0);
+                crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0,ejemploB,ejemploM);
               }
 
               if (stringloco3 == minus5) {
-                crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0);
+                crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,ejemploB,ejemploM);
               }
             }
 
 
           }
-
           var cadenapro5 = "./img/" + arreglocoincidencias[indicecoincidencias] + ".gif";
-
-
           s += "style= 'background-image: url(\"" + cadenapro5 + "\")'";
           indicecoincidencias++;
 
@@ -1322,21 +1283,21 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
             for (var i = 0; i < total.length; i++) {
               var stringloco = total[i].id + "";
               var descript = total[i].value + ""
-
+              var ejemploB = palabraspro[i][2]
+              var ejemploM = palabraspro[i][3]
+              // console.log("00001 "+ejemploB+"0001 "+ejemploM)
               var torus = cad1.substring(0, 1);
               var minus = cad1.substring(1, cad1.length);
               minus = minus.toLowerCase();
               minus = torus + "" + minus;
 
               if (stringloco == minus) {
-                crearespuesta(stringloco, posi, descript, car, 1);
+                crearespuesta(stringloco, posi, descript, car, 1,ejemploB,ejemploM);
               }
             }
           }
 
           var cadenapro3 = "./img/" + posi + ".gif";
-          // console.log("pato " + posi);
-          // console.log(l);
           s += "style= 'background-image: url(\"" + cadenapro3 + "\")'";
           posi++;
         }
@@ -1351,26 +1312,22 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
               var minus = cad2.substring(1, cad2.length);
               minus = minus.toLowerCase();
               minus = torus + "" + minus;
-
+              ejemploB = palabraspro[j][2];
+              ejemploM = palabraspro[j][3];
+              console.log("00002 "+ejemploB+"0002 "+ejemploM)
               if (stringloco == minus) {
-                crearespuesta2(stringloco, posi1, descript, car1, 1);
+                crearespuesta2(stringloco, posi1, descript, car1, 1,ejemploB,ejemploM);
               }
             }
 
           }
-
           var cadenapro4 = "./img/" + posi1 + ".gif";
           s += "style= 'background-image: url(\"" + cadenapro4 + "\")'"
           posi1++;
         }
-
-
       }
     }
-
-
   }
-
   return (s + ">" + h + "</" + e + ">");
 }
 
@@ -1383,16 +1340,52 @@ function ArrayToString(a, s) {
   return r;
 }
 
-function crearespuesta(a, b, c, k, g) {
+function crearespuesta(a, b, c, k, g,rb,rm) {
+  
   if (g == 0) {
     var controlatodo = document.getElementById("primeroh");
-
   } else {
     var controlatodo = document.getElementById("resp");
   }
+  
+  console.log("AH: "+a);
+  console.log("BH: "+b);
+  console.log("CH: "+c);
+  console.log("KH: "+k);
+  console.log("GH: "+g);
+  // console.log("rbH: "+rb);
+  // console.log("rmH: "+rm);
+
+
+  var palomita = document.createElement('i')
+  palomita.setAttribute('class', 'ip far fa-2x fa-check-circle blink')
+  var tache = document.createElement('i')
+  tache.setAttribute('class', 'it far fa-2x fa-times-circle blink')
+  var retroBien = document.createElement("span");
+  // var retroBientxt = document.createElement("span");
+  retroBien.setAttribute('class', 'tooltip');
+  retroBien.setAttribute('class', 'tooltiptext');
+  retroBien.setAttribute('data-toggle', 'tooltip');
+  retroBien.setAttribute('data-placement', 'auto left');
+  retroBien.setAttribute('data-type', 'success');
+  retroBien.setAttribute('title', rb);
+  retroBien.setAttribute('style', "display: none;");
+  retroBien.appendChild(palomita);
+  // retroBien.appendChild(retroBientxt);
+  var retroMal = document.createElement("span");
+  retroMal.setAttribute('data-toggle', 'tooltip');
+  retroMal.setAttribute('data-placement', 'auto left');
+  retroMal.setAttribute('data-type', 'danger');
+  retroMal.setAttribute('style', "display: none;");
+  retroMal.setAttribute('title', rm);
+
+  retroMal.appendChild(tache)
+
   var contenidoprimario = document.createElement("div");
   contenidoprimario.setAttribute('style', 'display:flex');
-
+  controlatodo.appendChild(contenidoprimario);
+  var contenidoprimario = document.createElement("div");
+  contenidoprimario.setAttribute('style', 'display:flex');
   controlatodo.appendChild(contenidoprimario);
   var contentrespuestas = document.createElement("div");
   contentrespuestas.setAttribute('id', k);
@@ -1402,24 +1395,52 @@ function crearespuesta(a, b, c, k, g) {
   var respuestaspalabra = document.createElement("b");
   respuestaspalabra.className = "respuestacorr";
   respuestaspalabra.setAttribute('style', 'display:none');
-  respuestaspalabra.innerHTML = "" + a;
+  respuestaspalabra.innerHTML = "" + a
   contenidoprimario.appendChild(respuestaspalabra);
-
+  contenidoprimario.appendChild(retroBien)
+  contenidoprimario.appendChild(retroMal)
   var patino = a.toUpperCase();
   palabrasmagicas.push(patino);
+
 }
 
-function crearespuesta2(a, b, c, k, g) {
+function crearespuesta2(a, b, c, k, g,rb,rm) {
   if (g == 0) {
     var controlatodo = document.getElementById("primerov");
   } else {
     var controlatodo = document.getElementById("resp1");
   }
+  console.log("AV: "+a);
+  console.log("BV: "+b);
+  console.log("CV: "+c);
+  console.log("KV: "+k);
+  console.log("GV: "+g);
+  // console.log("rbV: "+rb);
+  // console.log("rmV: "+rm);
+  var palomitav = document.createElement('i')
+  palomitav.setAttribute('class', 'ip far fa-2x fa-check-circle blink')
+  var tachev = document.createElement('i')
+  tachev.setAttribute('class', 'it far fa-2x fa-times-circle blink')
+
+  var retroBienv = document.createElement("span");
+  retroBienv.setAttribute('data-toggle', 'tooltip');
+  retroBienv.setAttribute('data-placement', 'auto left');
+  retroBienv.setAttribute('data-type', 'success')
+  retroBienv.setAttribute('style', "display: none;");
+  retroBienv.setAttribute('title', rb);
+  retroBienv.appendChild(palomitav)
+
+  var retroMalv = document.createElement("span");
+  retroMalv.setAttribute('data-toggle', 'tooltip');
+  retroMalv.setAttribute('data-placement', 'auto left');
+  retroMalv.setAttribute('data-type', 'danger')
+  retroMalv.setAttribute('style', "display: none;");
+  retroMalv.setAttribute('title', rm);
+  retroMalv.appendChild(tachev)
 
   var contenidoprimario = document.createElement("div");
   contenidoprimario.setAttribute('style', 'display:flex');
   controlatodo.appendChild(contenidoprimario);
-
   var contentrespuestas = document.createElement("div");
   contentrespuestas.setAttribute('id', k);
   contentrespuestas.className = "prov";
@@ -1432,6 +1453,8 @@ function crearespuesta2(a, b, c, k, g) {
   respuestaspalabra.setAttribute('style', 'display:none');
   respuestaspalabra.innerHTML = "" + a;
   contenidoprimario.appendChild(respuestaspalabra);
+  contenidoprimario.appendChild(retroBienv)
+  contenidoprimario.appendChild(retroMalv)
 }
 
 function AddClass(ele, classStr) {

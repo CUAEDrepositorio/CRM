@@ -5,8 +5,8 @@ var seg = 30;
 var verLongitud = false;
 var debug = false;
 
-var ambSCORM = true;
-var barraSCORM = true;
+var ambSCORM = false;
+var barraSCORM = false;
 var idObjetivo = 0;
 
 var retroCal = [{

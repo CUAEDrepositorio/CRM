@@ -2,78 +2,78 @@
 ------------------------Estructura de listaReactivos----------------
 var palabraspro =[
     ["palabra1","Definición corta",
-    "Retro Bien0","Retro Mal0"],
+    "Retro Bien","Retro Mal"],
     ["palabra2","Definición corta",
-    "Retro Bien1","Retro Mal2"],
+    "Retro Bien","Retro Mal"],
     ["palabra3","Definición corta",
-    "Retro Bien2","Retro Mal2"]
+    "Retro Bien","Retro Mal"]
 ];
 NOTA: Longitud mínima de las palabras 2 y máxima 25
 NOTA: Automáticamente se crea el crucigrama y define las palabras que estarán en forma vertical y horizontal.
 NOTA: Acepta palabras con acento y diéresis, de acuerdo como se escriba la palabra será tomada como correcta.
 Ejemplo:
-    ["Programacion","Ciencia de las computadoras.","Retro Bien0","Retro Mal0"]
+    ["Programacion","Ciencia de las computadoras.","Retro Bien","Retro Mal"]
         Será tomada como correcta programacion SIN acento.
 
-    ["Programación","Ciencia de las computadoras.","Retro Bien1","Retro Mal1"]
+    ["Programación","Ciencia de las computadoras.","Retro Bien","Retro Mal"]
         Será tomada como correcta programacion CON acento.
 */
 
 var palabraspro = [
     ["Separado", "Cuando dos elementos están lejos.",
-    "Retro Bien0","Retro Mal0"],
+    "Retro Bien","Retro Mal"],
     ["Cuidado", "Mantenerse alerta.",
-    "Retro Bien1","Retro Mal1"],
+    "Retro Bien","Retro Mal1"],
     ["ONU", "Organización de las Naciones Unidas.",
-    "Retro Bien2","Retro Mal2"],
+    "Retro Bien","Retro Mal"],
     ["Realidad", "Todo lo real.",
-    "Retro Bien3","Retro Mal3"],
-    ["Amable", "Persona que siempre te trata Bien.",
-    "Retro Bien4","Retro Mal4"],
+    "Retro Bien","Retro Mal"],
+    ["Amable", "Persona que siempre te trata bien.",
+    "Retro Bien","Retro Mal"],
     ["Bienestar", "Tener todo en armonía.",
-    "Retro Bien5","Retro Mal5"],
+    "Retro Bien","Retro Mal"],
     ["Camino", "Cuando regresamos a casa.",
-    "Retro Bien6","Retro Mal6"],
+    "Retro Bien","Retro Mal"],
     ["Programación", "Ciencia de las computadoras.",
-    "Retro Bien7","Retro Mal7"],
+    "Retro Bien","Retro Mal"],
     ["Constitución", "Firmada en 1917.",
-    "Retro Bien8","Retro Mal8"],
+    "Retro Bien","Retro Mal"],
     ["Cuchillo", "Utensilio utilizado para cortar.",
-    "Retro Bien9","Retro Mal9"],
+    "Retro Bien","Retro Mal"],
     ["Celular", "Permite comunicarnos de manera sencilla.",
-    "Retro Bien10","Retro Mal10"],
+    "Retro Bien","Retro Mal"],
     ["Caballo", "Animal con cuatro patas.",
-    "Retro Bien11","Retro Mal11"],
+    "Retro Bien","Retro Mal"],
     ["Corazón", "Late y late para dar vida.",
-    "Retro Bien12","Retro Mal12"],
+    "Retro Bien","Retro Mal"],
     ["Perseverancia", "Seguir adelante apesar de todo.",
-    "Retro Bien13","Retro Mal13"],
+    "Retro Bien","Retro Mal"],
     ["Castillo", "Construcción de la Edad Media.",
-    "Retro Bien14","Retro Mal14"],
+    "Retro Bien","Retro Mal"],
     ["Muralla", "Para que no pase nadie.",
-    "Retro Bien15","Retro Mal15"],
+    "Retro Bien","Retro Mal"],
     ["Computadora", "Conjunto de dispositivos digitales.",
-    "Retro Bien16","Retro Mal16"],
+    "Retro Bien","Retro Mal"],
     ["Lapicero", "Utilizado para escribir.",
-    "Retro Bien17","Retro Mal17"],
+    "Retro Bien","Retro Mal"],
     ["Ingeniería", "El arte del ingenio para resolver problemas.",
-    "Retro Bien18","Retro Mal18"],
+    "Retro Bien","Retro Mal"],
     ["Laboratorio", "Lugar para experimentar.",
-    "Retro Bien19","Retro Mal19"],
+    "Retro Bien","Retro Mal"],
     ["Líbano", "Flor de loto.",
-    "Retro Bien20","Retro Mal20"],
+    "Retro Bien","Retro Mal"],
     ["Esternocleidomastoideo", "Músculo ubicado en la zona anterior y lateral del cuello.",
-    "Retro Bien21","Retro Mal21"],
+    "Retro Bien","Retro Mal"],
     ["Claustrofobia", "Miedo a los espacios cerrados.",
-    "Retro Bien22","Retro Mal22"],
+    "Retro Bien","Retro Mal"],
     ["Ventilador", "Algo que da aire.",
-    "Retro Bien23","Retro Mal23"],
+    "Retro Bien","Retro Mal"],
     ["Tornado", "Catástrofe con vientos.",
-    "Retro Bien24","Retro Mal24"],
+    "Retro Bien","Retro Mal"],
     ["Iglesia", "Lugar de rezo.",
-    "Retro Bien25","Retro Mal25"],
+    "Retro Bien","Retro Mal"],
     ["Miguel Hidalgo", "Padre de la patria (México).",
-    "Retro Bien26","Retro Mal26"],
+    "Retro Bien","Retro Mal"],
     ["Cálculo diferencial", "Materia de ingeniería.",
-    "Retro Bien27","Retro Mal27"]
+    "Retro Bien","Retro Mal"]
 ];

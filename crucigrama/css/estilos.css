@@ -274,45 +274,65 @@ i.it {
 .ocultarRetro{
     display:none;
 }
-.tooltip > title {
-  visibility: hidden;
-  width: 120px;
-  background-color: #83c635;
-  color: #FFF;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  font-family: Arial, Helvetica, sans-serif;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-}
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 180px;
-  height: 250px;
-  background-color: #83c635;;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 15px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
   visibility: visible;
 }
 
+[data-title]:after {
+  content: attr(data-title);
+  background-color: #83c635;
+  color: #fff;
+  font-size: 14px;
+  width: 100px;
+  font-family: 'Open Sans', sans-serif;
+  position: absolute;
+  padding: 3px 20px;
+  bottom: -1.6em;
+  left: 100%;
+  white-space: nowrap;
+  box-shadow: 1px 1px 3px #83c635;
+  opacity: 0;
+  border: 1px solid #83c635;
+  z-index: 99999;
+  visibility: hidden;
+  border-radius: 6px;
+  
+}
+[data-title] {
+  position: relative;
+}
+/**/
+[data1-title]:hover:after {
+opacity: 1;
+transition: all 0.1s ease 0.5s;
+visibility: visible;
+}
+
+[data1-title]:after {
+content: attr(data1-title);
+background-color: #f01b18;
+color: #fff;
+font-size: 14px;
+width: 100px;
+font-family: 'Open Sans', sans-serif;
+position: absolute;
+padding: 3px 20px;
+bottom: -1.6em;
+left: 100%;
+white-space: nowrap;
+box-shadow: 1px 1px 3px #f01b18;
+opacity: 0;
+border: 1px solid #f01b18;
+z-index: 99999;
+visibility: hidden;
+border-radius: 6px;
+
+}
+[data1-title] {
+position: relative;
+}
 .tooltip-inner {font-size: 1.5em; text-align: left;};
 .tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
 .tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }

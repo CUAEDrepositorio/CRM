@@ -48,8 +48,10 @@ var conteo2;
 var final;
 var correctasT = [];
 var incorrectasT = [];
-var ejemploB = [];
-var ejemploM = [];
+var retroB = [];
+var retroM = [];
+var retroBL = ""
+var retroML = ""
 
 var Bounds = {
   top: 0,
@@ -1239,19 +1241,16 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
         if (l == "CT" || l == "TC") {
           var car4 = o + "" + p + "_" + w + "" + o1 + "" + p1 + "_" + w1 + "L" + k1;
           var car5 = o + "" + p + "_" + w + "" + o1 + "" + p1 + "_" + w1 + "L" + k2;
-          ejemploB = palabraspro[i][2]
-          ejemploM = palabraspro[i][3]
-          // var ejemploBV = palabraspro[i][2]
-          // var ejemploMV = palabraspro[i][3]
-          // console.log("00000 "+ejemploB+"00000 "+ejemploM)
+          retroB = palabraspro[i][2]
+          retroM = palabraspro[i][3]
+          retroBL = "<sup>"+retroB.length+"</sup>"              
+          retroML = "<sup>"+retroM.length+"</sup>"
           if (defineme == 0) {
             for (var u = 0; u < total.length; u++) {
               var stringloco3 = total[u].id + "";
               var descript3 = total[u].value + ""
-
               var torus3 = cad1.substring(0, 1);
               var minus3 = cad1.substring(1, cad1.length);
-
               var torus5 = cad2.substring(0, 1);
               var minus5 = cad2.substring(1, cad2.length);
               minus5 = minus5.toLowerCase();
@@ -1260,11 +1259,19 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
               minus3 = torus3 + "" + minus3;
 
               if (stringloco3 == minus3) {
-                crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0,ejemploB,ejemploM);
+                if(verLongitud){
+                  crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0,retroB+retroBL,retroM+retroML);
+                }else{
+                  crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0,retroB,retroM);
+                }
               }
 
               if (stringloco3 == minus5) {
-                crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,ejemploB,ejemploM);
+                if(verLongitud){
+                  crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,retroB+retroBL,retroM+retroML);
+                }else{
+                  crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,retroB,retroM);
+                }
               }
             }
 
@@ -1283,16 +1290,22 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
             for (var i = 0; i < total.length; i++) {
               var stringloco = total[i].id + "";
               var descript = total[i].value + ""
-              var ejemploB = palabraspro[i][2]
-              var ejemploM = palabraspro[i][3]
-              // console.log("00001 "+ejemploB+"0001 "+ejemploM)
+              var retroB = palabraspro[i][2]
+              var retroM = palabraspro[i][3]
+              retroBL = "<sup>"+retroB.length+"</sup>"              
+              retroML = "<sup>"+retroM.length+"</sup>"
+              // console.log("00001 "+retroB+"0001 "+retroM)
               var torus = cad1.substring(0, 1);
               var minus = cad1.substring(1, cad1.length);
               minus = minus.toLowerCase();
               minus = torus + "" + minus;
 
               if (stringloco == minus) {
-                crearespuesta(stringloco, posi, descript, car, 1,ejemploB,ejemploM);
+                if(verLongitud){
+                  crearespuesta(stringloco, posi, descript, car, 1,retroB+retroBL,retroM+retroML);
+                }else{
+                  crearespuesta(stringloco, posi, descript, car, 1,retroB,retroM);
+                }
               }
             }
           }
@@ -1312,11 +1325,16 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
               var minus = cad2.substring(1, cad2.length);
               minus = minus.toLowerCase();
               minus = torus + "" + minus;
-              ejemploB = palabraspro[j][2];
-              ejemploM = palabraspro[j][3];
-              console.log("00002 "+ejemploB+"0002 "+ejemploM)
+              retroB = palabraspro[j][2];
+              retroM = palabraspro[j][3];
+              retroBL = "<sup>"+retroB.length+"</sup>"              
+              retroML = "<sup>"+retroM.length+"</sup>"
               if (stringloco == minus) {
-                crearespuesta2(stringloco, posi1, descript, car1, 1,ejemploB,ejemploM);
+                if(verLongitud){
+                  crearespuesta2(stringloco, posi1, descript, car1, 1,retroB+retroBL,retroM+retroBL);
+                }else{
+                  crearespuesta2(stringloco, posi1, descript, car1, 1,retroB,retroM);
+                }
               }
             }
 
@@ -1368,7 +1386,7 @@ function crearespuesta(a, b, c, k, g,rb,rm) {
   retroBien.setAttribute('data-toggle', 'tooltip');
   retroBien.setAttribute('data-placement', 'auto left');
   retroBien.setAttribute('data-type', 'success');
-  retroBien.setAttribute('title', rb);
+  retroBien.setAttribute('data-title', rb);
   retroBien.setAttribute('style', "display: none;");
   retroBien.appendChild(palomita);
   // retroBien.appendChild(retroBientxt);
@@ -1377,7 +1395,7 @@ function crearespuesta(a, b, c, k, g,rb,rm) {
   retroMal.setAttribute('data-placement', 'auto left');
   retroMal.setAttribute('data-type', 'danger');
   retroMal.setAttribute('style', "display: none;");
-  retroMal.setAttribute('title', rm);
+  retroMal.setAttribute('data1-title', rm);
 
   retroMal.appendChild(tache)
 
@@ -1427,7 +1445,7 @@ function crearespuesta2(a, b, c, k, g,rb,rm) {
   retroBienv.setAttribute('data-placement', 'auto left');
   retroBienv.setAttribute('data-type', 'success')
   retroBienv.setAttribute('style', "display: none;");
-  retroBienv.setAttribute('title', rb);
+  retroBienv.setAttribute('data-title', rb);
   retroBienv.appendChild(palomitav)
 
   var retroMalv = document.createElement("span");
@@ -1435,7 +1453,7 @@ function crearespuesta2(a, b, c, k, g,rb,rm) {
   retroMalv.setAttribute('data-placement', 'auto left');
   retroMalv.setAttribute('data-type', 'danger')
   retroMalv.setAttribute('style', "display: none;");
-  retroMalv.setAttribute('title', rm);
+  retroMalv.setAttribute('data1-title', rm);
   retroMalv.appendChild(tachev)
 
   var contenidoprimario = document.createElement("div");

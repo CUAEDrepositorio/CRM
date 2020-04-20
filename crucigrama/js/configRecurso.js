@@ -1,4 +1,4 @@
-var numeropalabras = 10; //Toma aleatoriamente el número de palabras que esten en listaReactivos.js
+var numeropalabras = 5; //Toma aleatoriamente el número de palabras que esten en listaReactivos.js
 var tempo = false;
 var minutes = 1;
 var seg = 30;

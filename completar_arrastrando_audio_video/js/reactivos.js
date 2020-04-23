@@ -280,8 +280,16 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 		} else {
 			cuentaPreguntasSegmento++;
 		}
+		var enlaza ='';
+		//var textoTem='';
+		for (var k=0;k<preguntas[i].listaResp.length;k++) { //Para que una pregunta sepa todas las respuestas de sus casillas
+			enlaza += "|";
+			textoTemp = preguntas[i].listaResp[k];
+			enlaza += textoTemp;
+		}
+		enlaza += "|";
 		var pClases = "sub-item pregunta ocultar segmento"+cuentaSegmentos;
-		var h1 ='<div class="'+pClases+'" id="preg' + preguntas[i].ind + '" data-drop=' + preguntas[i].ind + '>';
+		var h1 ='<div class="'+pClases+'" id="preg' + preguntas[i].ind + '" data-drop=' + preguntas[i].ind + ' data-listaResp="'+enlaza+'">';
 		var h2 = '<p>' + numeralPregunta + '&nbsp;&nbsp;' + tam(preg[0], 1);
 		var h10 = '</p>';
 		var h11 ='</div>';
@@ -311,7 +319,10 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 var arr=[];
 	for (var i = 0; i < respuestas.length; i++ ) { //armo respuestas....
 		var HTMLArmado ="";
-			var listaDroppables = jq321('[data-resp="'+respuestas[i].txt+'"]');		//ojo que una respuesta puede pertenecer a mas de una pregunta/casilla
+			//var listaDroppables = jq321('[data-resp="'+respuestas[i].txt+'"]');		//ojo que una respuesta puede pertenecer a mas de una pregunta/casilla
+			// RAAR Ago 13,18: El pipe es un truco para que me de el texto exacto y no encuentre una parte...
+			// listaResp esta en la PREGUNTA no en las casillas, es para obtener el segmento....
+			var listaDroppables = jq321('[data-listaResp*="|'+respuestas[i].txt+'|"]');		//ojo que una respuesta puede pertenecer a mas de una pregunta/casilla,* que contenga... por los casos de doble casilla de respuesta
 			var acumulaSegmento='';
 			listaDroppables.each( function( index, elemento ) {
 			   // jq321( el ).attr('class');				
@@ -319,16 +330,12 @@ var arr=[];
 				//var clasesPregunta = respuestas[i].txt+' - '+jq321( el ).parents('.pregunta').attr('class');
 				var guardaSegmento='';	
 				var totalseg= elementosPorSegmento;
-
-
 				if(i==0){
 
 					for(var m=0;m<cuentaSegmentos;m++){
 						arr.push(0);
 					}
 				}
-
-				
 
 				for (var j=1; j<=cuentaSegmentos ;j++) {
 					guardaSegmento = 'segmento'+j;
@@ -415,7 +422,7 @@ numeralpro++;
 			//RAAR Jun 22,18: recuerda, fuen cuando se agrego acumulaSegmento que al restringir la elementosPorSegmento se volvio mas pequeña la casilla de una respuesta que correspondia dos preguntas del mismo segmento...no se que fue....
 //			HTMLArmado = '<div class="sub-item respuesta ocultar'+acumulaSegmento+'" ><object data-respuesta="'+respuestas[i].txt+ '" data-quedan="'+respuestas[i].incidencia+'" class="draggable" data-drag="' + i + '" data="'+respuestas[i].txt+'">'+tam(respuestas[i].txt, 1)+'</object>' +'</div>';	// RAAR Jun 12,18: El despliegue se separa de lo que se considera LA RESPUESTA, 
 			jq321(".respuestas .lista-respuestas").append(HTMLArmado);
-
+			console.log(HTMLArmado+" respuesta "+respuestas[i].txt);
 	}
 	totalSegmentos = cuentaSegmentos;
 

@@ -25,8 +25,8 @@ var invPregResp = false;             // true: invierte orden de preguntas y resp
 var calificaPregunta = false;   // true: Todas las arrobas de una pregunta cuentan como una, false: Cada arroba cuenta como un punto
 var admitirErronea = true; // Para ciertos ejercicios de autoevaluacion se apaga esta bandera, asi solo admite respuestas correctas....
 
-var elementosPorSegmento = 3; // elementos por segmento limita la visiblidad, la idea es que sea menor o igual a reactivosMostrar
-var reactivosMostrar = 6;            // número de reactivos a mostrar
+var elementosPorSegmento = 1; // elementos por segmento limita la visiblidad, la idea es que sea menor o igual a reactivosMostrar
+var reactivosMostrar = 1;            // número de reactivos a mostrar
 var elementosPorSegmentoMovil = 1;    // numero de elementos a mostrar por pagina en vista movil, sugerido 1
 if (reactivos.length < reactivosMostrar) {
 	reactivosMostrar = reactivos.length;

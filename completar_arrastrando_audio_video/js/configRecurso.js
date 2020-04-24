@@ -26,7 +26,7 @@ var calificaPregunta = false;   // true: Todas las arrobas de una pregunta cuent
 var admitirErronea = true; // Para ciertos ejercicios de autoevaluacion se apaga esta bandera, asi solo admite respuestas correctas....
 
 var elementosPorSegmento = 1; // elementos por segmento limita la visiblidad, la idea es que sea menor o igual a reactivosMostrar
-var reactivosMostrar = 1;            // número de reactivos a mostrar
+var reactivosMostrar = 3;            // número de reactivos a mostrar
 var elementosPorSegmentoMovil = 1;    // numero de elementos a mostrar por pagina en vista movil, sugerido 1
 if (reactivos.length < reactivosMostrar) {
 	reactivosMostrar = reactivos.length;
@@ -55,12 +55,12 @@ var retroCal = [
 /*	,{LimInf: 10, LimSup: 10, Mensaje: ["Excelente", "Excellent"]}*/
     ];
     
-
+var debug = false;
     if (debug) {
         document.write("-modo debug true-"); //para avisar en pantalla el modo...
     }
 
-var debug = false;
+
 var idObjetivo = 0;
 var ambSCORM = false;
 var barraSCORM = false;

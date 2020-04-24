@@ -341,7 +341,8 @@ var arr=[];
 					guardaSegmento = 'segmento'+j;
 					//console.log("holi "+cuentaSegmentos);
 					//console.log(respuestas[i].txt+' - '+'segmento'+j+' '+ jq321( elemento ).parents('.pregunta').hasClass(guardaSegmento));
-					if (jq321( elemento ).parents('.pregunta').hasClass(guardaSegmento)) {
+					//if (jq321( elemento ).parents('.pregunta').hasClass(guardaSegmento)) {
+					if (jq321( elemento ).hasClass(guardaSegmento)) {
 						acumulaSegmento += ' '+guardaSegmento; //por ahora dejo que se dupliquen si es que estan en el mismo segmento....
 						conteo++;
 						var posis=acumulaSegmento.indexOf("o");

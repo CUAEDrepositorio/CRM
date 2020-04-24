@@ -415,7 +415,7 @@ function calificar(){
 			console.log(buena.dataType);
 			document.getElementById(idDrop).setAttribute('data-toggle','tooltip');
 			document.getElementById(idDrop).setAttribute('data-type','success');
-			document.getElementById(idDrop).setAttribute('data-placement','auto left');
+			document.getElementById(idDrop).setAttribute('data-placement','auto');
 			document.getElementById(idDrop).title="success";
 
 			jq321(this).find(".palomita").css("display", "inherit");
@@ -525,32 +525,26 @@ function reiniciar() {  //se invoca en el boton Next Atempt, quito taches y acti
 	//reinicio para version movil
 	if(esMobil){
 		if (intentos < maxIntentos) {
-
-		jq321(".reactivos").find("select").each(function(ind2) {
-		//oculamos todas las respuestas erroneas 
-		//damos por defento el valor -------
-	var contieneclase=jq321(this).attr("class");
-	console.log(contieneclase);
-	if(contieneclase.indexOf("mal")>-1){
-
-		jq321(this).val("------");
-		jq321(this).prop("disabled", false);
-	}else{
-	
-	}
-	
-	
-	jq321(this).removeClass("mal");
-	jq321(this).nextAll("span").eq(1).find("i.it").removeClass("mostrar").addClass("ocultar");
-	
-	
-		});
-	
-	
-		jq321('#btnRevisar').show();
-		jq321('#btnReiniciar').hide();
-	correctas=0;}
-		else{
+			jq321(".reactivos").find("select").each(function (ind2) {
+				//oculamos todas las respuestas erroneas 
+				//damos por defento el valor -------
+				var contieneclase = jq321(this).attr("class");
+				console.log(contieneclase);
+				if (contieneclase.indexOf("mal") > -1) {
+					jq321(this).val("------");
+					jq321(this).prop("disabled", false);
+				} else {
+				}
+				jq321(this).removeClass("mal");
+				jq321(this).nextAll("span").eq(1).find("i.it").removeClass("mostrar").addClass("ocultar");
+				
+			});
+			jq321("i.ip").removeClass("mostrar").addClass("ocultar");
+			jq321('#btnRevisar').show();
+			jq321('#btnReiniciar').hide();
+			correctas = 0;
+		}
+		else {
 			mostrarMensaje(1);
 		}
 		

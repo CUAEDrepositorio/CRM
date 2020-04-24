@@ -223,7 +223,7 @@ for(var i=0;i<reactivos[0].A.length;i++){
 	
 
 	}
-retros='<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[0].FA[i].correcta, 1) + '">' + palomita1 + '</span><span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[0].FA[i].incorrecta, 1) + '">' + tache1 + '</span>';
+retros='<span data-toggle="tooltip" data-placement="aut" data-type="success" title="' + tam(reactivos[0].FA[i].correcta, 1) + '">' + palomita1 + '</span><span data-toggle="tooltip" data-placement="auto" data-type="danger" title="' + tam(reactivos[0].FA[i].incorrecta, 1) + '">' + tache1 + '</span>';
 prearmado+=p1+numero+sel1+armadopro+sel2+retros+p2;
 armadopro="";
 }
@@ -333,7 +333,7 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 			//data="img/blanco.png"
 			elemObjeto = '<object class="draggable clonado" data="" data-respuesta="" ></object>'; // Creo los atributos para el enroque de datos en el drop, blanco.png es un truco para q se active para imagenes, hay que quitarlo luego...
 			//HTMLDroppable +='<span class="droppable cpreg'+preguntas[i].ind+' cas'+idCas+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[j]+'">'+elemObjeto+palomita+tache+'</span>'+retroArrobaCorrecta+retroArrobaIncorrecta + preg[j+1]
-			HTMLDroppable +='<span class=" droppable cpreg'+preguntas[i].ind+' cas'+idCas+' buena" id="cas'+idCas+'"   data-resp="'+preguntas[i].listaResp[j]+'" >'+'<span data-toggle="tooltip" class=" toolsti adaptable" data-placement="auto left" data-type="success" title="'+tam(preguntas[i].listaFA[j].correcta,1)+'">' + palomita + '</span><span data-toggle="tooltip" class="toolsti adaptable" data-placement="auto left" data-type="danger" title="'+tam(preguntas[i].listaFA[j].incorrecta,1)+'">' + tache + '</span>'+elemObjeto+'</span>' + preg[j+1];			
+			HTMLDroppable +='<span class=" droppable cpreg'+preguntas[i].ind+' cas'+idCas+' buena" id="cas'+idCas+'"   data-resp="'+preguntas[i].listaResp[j]+'" >'+'<span data-toggle="tooltip" class=" toolsti adaptable" data-placement="auto" data-type="success" title="'+tam(preguntas[i].listaFA[j].correcta,1)+'">' + palomita + '</span><span data-toggle="tooltip" class="toolsti adaptable" data-placement="auto" data-type="danger" title="'+tam(preguntas[i].listaFA[j].incorrecta,1)+'">' + tache + '</span>'+elemObjeto+'</span>' + preg[j+1];			
 		
 			console.log(preguntas[i].listaFA[j].correcta);
 			console.log(preguntas[i].listaFA[j].incorrecta);

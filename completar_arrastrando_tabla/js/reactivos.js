@@ -370,6 +370,8 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 					}
 					//HTMLDroppable +='<td class="cContieneDroppable   "><p data-placeholder="'+preg[j].replace("@","")+'" class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp++]+'"></p></td>';					
 					HTMLDroppable +='<td class="cContieneDroppable   "><p data-placeholder="'+respuestaDebug+'" class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p></td>';	
+				//	HTMLDroppable +='<td class="cContieneDroppable   "><p  class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p>'+preguntas[i].listaResp[cuentaResp]+'</td>';	
+
 					cuentaResp++;				
 
 					/*		} 

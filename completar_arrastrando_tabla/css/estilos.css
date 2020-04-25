@@ -29,11 +29,12 @@ body{
 
 p:empty:not(:focus)::before { /*Este es un truco para simular un placeholder en un <p>*/
   content: attr(data-placeholder);
+  display: block;
   color: blue;
   font-size: .8em;
   font-style: italic;
   overflow: hidden;
-  
+  /*background-color:yellow;*/
 }
 .tablamaster{
     width: 1000px;
@@ -179,7 +180,8 @@ color: black;
 .reactivos .lista-preguntas .droppable{
 	position: relative;
     text-align:inherit;
-	 height:30px; /*funciona mejor definiendo aqui ancho y alto...*/
+    /* height:30px; funciona mejor definiendo aqui ancho y alto...*/
+    height: 100%; /*ya se adapta al superior!!!!*/
 
 
 }

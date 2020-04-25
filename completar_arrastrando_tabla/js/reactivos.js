@@ -351,6 +351,7 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 			if (preg[j].indexOf('@')==-1) { // sino hay arroba....
 
 					HTMLDroppable +='<th><p class="simildroppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp=""  >'+tam(preg[j],1)+'</p></th>';    // JLBG mzo 16, 2019; cambio para poner la primera fila como TH
+
 					cuentaResp++; //si hay una casilla sin dropppable antes de una droppable es importante esto....
 				//}
 
@@ -370,7 +371,8 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 					}
 					//HTMLDroppable +='<td class="cContieneDroppable   "><p data-placeholder="'+preg[j].replace("@","")+'" class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp++]+'"></p></td>';					
 					HTMLDroppable +='<td class="cContieneDroppable   "><p data-placeholder="'+respuestaDebug+'" class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p></td>';	
-				//	HTMLDroppable +='<td class="cContieneDroppable   "><p  class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p>'+preguntas[i].listaResp[cuentaResp]+'</td>';	
+
+					//	HTMLDroppable +='<td class="cContieneDroppable   "><p  class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p>'+preguntas[i].listaResp[cuentaResp]+'</td>';	
 
 					cuentaResp++;				
 

@@ -29,7 +29,7 @@ body{
 
 p:empty:not(:focus)::before { /*Este es un truco para simular un placeholder en un <p>*/
   content: attr(data-placeholder);
-  display: block;
+  display: inline-block;
   color: blue;
   font-size: .8em;
   font-style: italic;
@@ -176,12 +176,14 @@ color: black;
     position: relative;
     text-align:inherit;
     color: #666666;
+    height: 100%; /*ya se adapta al superior!!!!*/
 }
 .reactivos .lista-preguntas .droppable{
+    display: inline-block;
 	position: relative;
     text-align:inherit;
     /* height:30px; funciona mejor definiendo aqui ancho y alto...*/
-    height: 100%; /*ya se adapta al superior!!!!*/
+    height: inherit%; /*ya se adapta al superior!!!!*/
 
 
 }

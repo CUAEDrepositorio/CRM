@@ -49,7 +49,7 @@ jq321(function () {
 			jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
 			jq321("#btnPaginador").removeClass("ocultar").addClass("mostrar");
 		}
-
+		iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
 	} //fin iniciarEscribiendo
 
 	jq321("button#btnRevisar").click(revisar);
@@ -87,7 +87,7 @@ jq321(function () {
 
 		jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
-		iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
+		
 	});
 
 

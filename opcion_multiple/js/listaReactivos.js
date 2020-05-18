@@ -1,8 +1,6 @@
 ﻿ 
 /* Instrucciones
-
-    imagen: "img/formula.png" ó "" si no hay imagen....
-	 QIMG:"img/formula.png" ó "" si no hay imagen....
+Q:  puede usar codigo HTML
 */
 var reactivos = [
 	{Q:"El acto jurídico es..."

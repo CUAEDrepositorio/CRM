@@ -322,6 +322,14 @@ var h1 ='<div class="incontestada '+pClases+'" id="preg' + preguntas[i].ind + '"
 			var debugRespuesta = (debug?'<sup>'+preguntas[i].listaResp[j].correcta+'</sup>':"");
 			var claseRespuestas='';
 			var tagInterno = '<input class="casillaRespuesta preg'+preguntas[i].ind+'" id="preg'+preguntas[i].ind+'-'+j+'" type="button" data-es-respuesta="'+preguntas[i].listaResp[j].correcta+ '" data-respuesta="'+preguntas[i].listaResp[j].opcion+ '"  data-reactivo="preg' + preguntas[i].ind+'" value="'+numeralRespuesta+tamInputValue(preguntas[i].listaResp[j].opcion,1)+'">';
+			
+			/* intento para incluir HTML,
+			<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+			<label for="vehicle1"> <img src='img/26_juridicion.png'></label><br>
+			*/
+			// prueba para usar button en lugar de input y poder unas codigo html.
+			//var tagInterno = '<button class="casillaRespuesta preg'+preguntas[i].ind+'" id="preg'+preguntas[i].ind+'-'+j+'" data-es-respuesta="'+preguntas[i].listaResp[j].correcta+ '" data-respuesta="'+preguntas[i].listaResp[j].opcion+ '"  data-reactivo="preg' + preguntas[i].ind+'" ><img src="img/26_juridicion.png"></button>';
+
 			if (esMobil) {
 				claseRespuestas ="itemRespuestaMobil ocultar segmento"+cuentaSegmentos;
 			} else {

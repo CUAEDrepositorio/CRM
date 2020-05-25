@@ -61,7 +61,7 @@ function continuar() {
 	jq321('#btnReiniciar').hide();
 	if (intentos < maxIntentos) {
 		// jq321("img.palomita, img.tache").css("display","none");
-		jq321("i.ip, i.it").removeClass("mostrar").addClass("ocultar");
+		jq321("i.ip, i.it, i.it1").removeClass("mostrar").addClass("ocultar");
 		if (mostrarRetroIndividual && !(mostrarRetroFinal)) {
 			jq321("select").each(function () {
 				jq321(this).prop("disabled", false).val("-------").removeClass("mal").removeClass("bien");
@@ -84,17 +84,18 @@ function revisar() {
 		jq321('#btnRevisar').hide();
 		jq321('#btnReiniciar').show();
 		if (intentos < maxIntentos) {
-			// jq321("img.palomita, img.tache").css("display","none");
 			jq321("i.ip, i.it").removeClass("mostrar").addClass("ocultar");
 			enunciadosCorrectos = 0;
 			correctas = 0;
-			totalPreguntas = 0;
+			var totalPreguntas = 0;
+			var respCorrecta = "";
+			var respElegida = "";
 			jq321("#contenedor > div > p").each(function (ind1, enunciado) {
 				var correctasReactivo = 0;
 				jq321(enunciado).find("select").each(function (ind2) {
 					totalPreguntas++;
-					var respCorrecta = jq321(this).attr("data-respuesta");
-					var respElegida = jq321(this).val();
+					respCorrecta = jq321(this).attr("data-respuesta");
+					respElegida = jq321(this).val();
 					jq321(this).prop("disabled", true);
 					if (respElegida == respCorrecta) {
 						correctasReactivo++;
@@ -111,23 +112,30 @@ function revisar() {
 				});
 				if (correctasReactivo == jq321(enunciado).find("select").length) {
 					if (mostrarRetroIndividual) {
-						// jq321(this).parent().find("img.palomita").css("display", "inline");
-						// var tmp1 = jq321(this).find("i.ip").removeClass("ocultar").addClass("mostrar");
-						// jq321(this).parent().find(".retroBien").removeClass("ocultarRetro").addClass("mostrarRetro")
 						var jl = jq321(this).parent().find("i.ip").first(); // JLBG may 6, 2019; muestro solo la retroIndividual correcta
 						jq321(this).parent().find("i.ip").first().removeClass("ocultar").addClass("mostrar"); //.css("display", "inline");   // JLBG may 6, 2019; muestro solo la retroIndividual correcta
 						jq321(this).find(".retros, .contenido").css("display", "table-cell");
 					}
 					enunciadosCorrectos++;
 				} else {
-					if (mostrarRetroIndividual) {
-						// jq321(this).parent().find(".retroMal").removeClass("ocultarRetro").addClass("mostrarRetro")
-						// jq321(this).parent().find("img.tache").css("display", "inline");
-						// var tmp1 = jq321(this).find("i.it").removeClass("ocultar").addClass("mostrar");
+					if (mostrarRetroIndividual && mostrarRetroOpcion == false) {
 						var jl = jq321(this).parent().find("i.it").first(); // JLBG may 6, 2019; muestro solo la retroIndividual correcta
 						jq321(this).parent().find("i.it").first().removeClass("ocultar").addClass("mostrar"); //.css("display", "inline");   // JLBG may 6, 2019; muestro solo la retroIndividual correcta
 						jq321(this).find(".retros, .contenido").css("display", "table-cell");
+					}else{
+						if(mostrarRetroOpcion){
+							var inco = jq321(this).parent().find(".retros").find(".incorrect");
+							inco.each(function(e,value){
+								console.log(jq321(this))
+								if(respElegida == jq321(this).attr("data-respuesta")){
+									jq321(this).find("i.it").removeClass("ocultar").addClass("mostrar"); 
+									
+								}
+							})
+							jq321(this).find(".retros, .contenido").css("display", "table-cell");						
+						}
 					}
+
 				}
 				correctas += correctasReactivo;
 			});

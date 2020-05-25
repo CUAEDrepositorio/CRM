@@ -1,62 +1,32 @@
+
 var reactivos = [{
-		Q: "Carmen is from Mexico City and she’s @ FES Aragon’s student. She was born and grew up in Tacubaya, but now she lives just outside @ small town in @ south of Magdalena de las Salinas.",
+		Q: "Carmen is from Mexico City and she’s @ FES Aragon’s student",
 		A: [
 			[{
 					opcion: "a",
-					correcta: true
+					correcta: true,
+					retro: "Retro bien0"
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: "Retro mal0"
 				},
 				{
 					opcion: "the",
-					correcta: false
-				}
-			],
-			[{
-					opcion: "a",
-					correcta: true
-				},
-				{
-					opcion: "an",
-					correcta: false
-				},
-				{
-					opcion: "the",
-					correcta: false
-				}
-			],
-			[{
-					opcion: "a",
-					correcta: false
-				},
-				{
-					opcion: "an",
-					correcta: false
-				},
-				{
-					opcion: "the",
-					correcta: true
+					correcta: false,
+					retro: "Retro mal1"
 				}
 			]
 		],
 		FA: [{
-				correcta: "respuesta correcta 1A",
-				incorrecta: "respuesta incorrecta 1A"
-			},
-			{
-				correcta: "respuesta correcta 1B",
-				incorrecta: "respuesta incorrecta 1B"
-			},
-			{
-				correcta: "respuesta correcta 1C",
-				incorrecta: "respuesta incorrecta 1C"
+				correcta: "Opcion correcta",
+				incorrecta: "Opcion incorrecta"
 			}
 		],
 		F: [
-			"Ese fue un buen trabajo, tu aprendizaje va bien.",
-			"Piensa bien tu respuesta."
+			"Buen trabajo, has reafirmado tu aprendizaje.",
+			"Medita con cuidado tu respuesta."
 		]
 	},
 	{
@@ -64,67 +34,82 @@ var reactivos = [{
 		A: [
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: true
+					correcta: true,
+					retro: ""
 				}
 			],
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: true
+					correcta: true,
+					retro: ""
 				}
 			],
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: true
+					correcta: true,
+					retro: ""
 				}
 			],
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: true
+					correcta: true,
+					retro: ""
 				}
 			],
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: true
+					correcta: true,
+					retro: ""
 				}
 			]
 		],
@@ -159,54 +144,66 @@ var reactivos = [{
 		A: [
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: true
+					correcta: true,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: false
+					correcta: false,
+					retro: ""
 				}
 			],
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: true
+					correcta: true,
+					retro: ""
 				}
 			],
 			[{
 					opcion: "a",
-					correcta: true
+					correcta: true,
+					retro: ""					
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: false
+					correcta: false,
+					retro: ""
 				}
 			],
 			[{
 					opcion: "a",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "an",
-					correcta: false
+					correcta: false,
+					retro: ""
 				},
 				{
 					opcion: "the",
-					correcta: true
+					correcta: true,
+					retro: ""
 				}
 			]
 		],

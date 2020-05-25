@@ -1,4 +1,4 @@
-﻿// JavaScript Document
+// JavaScript Document
 var preguntas = [];
 var respuestas = [];
 var retro = [];
@@ -9,8 +9,6 @@ var respDesordenadas1 = [];
 var respDesordenadas2 = [];
 
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
-// var palomita = "<img class='palomita' style='display:none' src='img/palomita.png' />";
-// var tache = "<img class='tache' style='display:none' src='img/tache.png' />";
 var palomita = "<i class='ip far fa-2x fa-check-circle blink'></i>";
 var tache = "<i class='it far fa-2x fa-times-circle blink'></i>";
 var totalSegmentos = 1;
@@ -50,7 +48,6 @@ jq321(document).ready(function () {
 		jq321("#textoInstrucciones").addClass("mostrarinfo");
 	}
 	jq321(".info").click(function () {
-		console.log("hola");
 		if (jq321(this).hasClass("hiden")) {
 			jq321("#textoInstrucciones").slideUp(300);
 			jq321(this).removeClass("hiden");
@@ -143,30 +140,6 @@ function reordenaArreglo(arreglo) {
 	});
 }
 
-function creaOrdenar() {
-	preguntas = reactivos;
-	for (i = 0; i < reactivosMostrar; i++) {
-		respOriginales.push(preguntas[i].Q);
-		var tmp = preguntas[i].Q.split(" ");
-		preg = [];
-		for (j = 0; j < tmp.length; j++) {
-			preg.push([tmp[j], j]);
-		}
-		reordenaArreglo(preg);
-		var txt = "";
-		for (j = 0; j < preg.length; j++) {
-			txt += "<li class='ui-state-default ui-sortable-handle' data-orden=" + preg[j][1] + "><span class='ui-icon ui-icon-arrowthick-2-e-w'></span>" + preg[j][0] + "</li>";
-		}
-		jq321("#ordenarEnunciado").append("<div class='lista'><ul class='sortable' id='ulId" + i + "'>" + txt + tam(preguntas[i].Q, 0) + "<div class='retroInd'><div class='retroBien ocultarRetro'>" + tam(preguntas[i].F[0], 1) + "</div><div class='retroMal ocultarRetro'>" + tam(preguntas[i].F[1], 1) + "</div></div>");
-		jq321(".lista:last").after("<hr/>");
-	}
-	jq321(".lista > .sortable").each(function () {
-		$(this).sortable();
-		$(this).disableSelection();
-	});
-}
-
-
 function creaElegir(mostrar) {
 	var ind = 1;
 
@@ -233,9 +206,25 @@ function creaElegir(mostrar) {
 			console.log(temp);
 		}
 		jq321("#divId" + i + " .contenido").append(componentes[j] + tam(reactivos[i].Q, 0));
-		// jq321("#divId" + i).append("<div class='retroBien ocultarRetro'>" + tam(reactivos[i].F[0], 1)).append("<div class='retroMal ocultarRetro'>" + tam(reactivos[i].F[1], 1));
+		if(mostrarRetroOpcion){
+			var respTotales = reactivos[i].A[0]
+			var claseRetros = '<p class="retros">'
+			let span2 = ""
+			for ( let a of respTotales){ 
+				if(a.correcta){
+					span2 = '<span class = "correct" data-toggle="tooltip" data-placement="auto left" data-type="success" data-respuesta ="'+a.opcion+'" title="'+a.retro+'">' + palomita + '</span>'
+				}else{
+					span2 = '<span class = "incorrect" data-toggle="tooltip" data-placement="auto left" data-type="danger" data-respuesta ="'+a.opcion+'" title="'+a.retro+'">' + tache + '</span>'				
+				}
+				claseRetros += span2 
+			}
+			claseRetros += "</p>"
+			
+			jq321("#pId" + i).prepend(claseRetros);
+		}else{
 		jq321("#pId" + i).prepend('<p class="retros"><span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[i].F[0], 1) + '">' + palomita + '</span>\
-													<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[i].F[1], 1) + '">' + tache + '</span></p>');
+													<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[i].F[1], 1) + '">' + tache + '</span></p>');			
+		}
 		conteo++;
 	}
 	switch (idioma) {
@@ -264,27 +253,6 @@ function creaElegir(mostrar) {
 	jq321(".segmento1").removeClass("ocultar");
 }
 
-function creaOM(mostrar) {
-	var ind = 1;
-	for (i = 0; i < mostrar; i++) {
-		jq321("#bancoPreguntas").append('<div class="setPregunta" id="sp' + i + '">');
-		jq321(".setPregunta:last").append('<div class="preguntaTexto">' + (i + 1) + '. ' + tam(reactivos[i].Q, 1));
-		jq321(".setPregunta:last").append('<div class="opciones">');
-		jq321(".setPregunta:last").append('<div class="retroIndividual">');
-		if (mezclarRespuestas) {
-			reordenaArreglo(reactivos[i].A);
-		}
-		for (j = 0; j < reactivos[i].A.length; j++) {
-			var res = String.fromCharCode(j + 97) + ') ';
-			jq321(".opciones:last").append('<div class="opcion btn btn-default" data-correcta="' + reactivos[i].A[j].correcta + '">' + res + tam(reactivos[i].A[j].opcion, 1));
-			if (reactivos[i].A[j].correcta) {
-				jq321(".retroIndividual:last").append('<div class="retroBien ocultarRetro bg-success">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			} else {
-				jq321(".retroIndividual:last").append('<div class="retroMal ocultarRetro bg-danger">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			}
-		}
-	}
-}
 
 function tam(cad, n) { // 1T, 0ele.esc.ord
 	var txt = "";

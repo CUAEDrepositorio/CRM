@@ -27,7 +27,7 @@ var ponerNumeroPreguntas = false; // cuantos preguntas son?, no necesariamente c
 var porEspacios = mostrarRetroArroba;
 var porEnunciados = mostrarRetroFinal;
 var carruselContinuo = false; // si se quiere que los botonos previo y proximo no tengan pared TRUE, false para pared
-
+var mostrarRetroOpcion = false; //solo aplica cuando se tiene una respuesta por reactivo
 var retroCal = [{
 		LimInf: 0,
 		LimSup: 3,

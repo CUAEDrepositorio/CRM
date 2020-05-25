@@ -24,6 +24,8 @@ var debug = false; //activar el debug
 var ambSCORM = false;
 var barraSCORM = false;
 var idObjetivo = 0;
+var retroGeneral = false;
+var retroPar = false;
 //para retros en español
 var retroCal = [{
     LimInf: 0,

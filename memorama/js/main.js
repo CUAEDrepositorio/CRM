@@ -23,9 +23,10 @@ var countdownTimer = 0;
 var tiempo;
 var audioBien;
 var audioMal;
+var mov = 1;
 $(document).ready(function () {
     iniciar();
-
+    
 })
 
 //window.addEventListener("load", iniciar, false);
@@ -39,7 +40,7 @@ function getRandomColor() {
 }
 
 function iniciar() {
-    
+
     if (window.parent.data_crm) {
         debug = true;
         activarson = true;
@@ -94,6 +95,13 @@ function conteo() {
     if (tempo == true) {
         document.getElementById("Parte1").disabled = true;
     }
+    retroBien = document.createElement('div');
+    retroBien.className = "retroBien col-md-2 col-md-offset-5";
+    retroBien = document.getElementById("retrocorrecta");
+    retroMal = document.createElement('div');
+    retroMal.className = "retroMal col-md-6 col-md-offset-3";
+    retroMal = document.getElementById("retroincorrecta");
+
     var retroFinal = document.getElementById("retroFinal");
     retroFinal.addEventListener("click", quitarRetro, false);
     document.getElementById("botonCerrarRetroplus").addEventListener("click", quitarRetro, false);
@@ -134,13 +142,13 @@ function conteo() {
         if (idioma == "ESP") {
 
             for (var j = 0; j < retroCal.length; j++) {
-                // console.log(aciertos);
+                console.log(aciertos);
                 if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
                     mensaje = retroCal[j].Mensaje;
                 }
             } //for
         }
-        // console.log(mensaje);
+        console.log(mensaje);
         //SWAL ME RINDO
         if (idioma == "ENG") {
             swal({
@@ -158,11 +166,10 @@ function conteo() {
                 type: "info",
                 button: "Aceptar",
             });
-            guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
         } //ESP
-        
+        guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
         aciertos = 0; //tempo lee aciertos
-        // console.log(testDivs);
+        console.log(testDivs);
     });
 
 
@@ -232,13 +239,16 @@ function crearcartas() {
         imgpng = rutas[i - 1][0].indexOf("png");
         vidmpeg = rutas[i - 1][0].indexOf("mp4");
         soundmp3 = rutas[i - 1][0].indexOf("mp3");
-        // console.log(i - 1);
-        // console.log(imgjpg);
+
+        console.log(i - 1);
+        console.log(imgjpg);
 
         colorArray.push(getRandomColor());
         elemento = document.createElement('div');
         elemento.className = "contenedorCarta " + parte;
         elemento.setAttribute('data-respuesta', parte);
+        elemento.setAttribute('data-respuesta0', rutas[i - 1][2]);
+        elemento.setAttribute('data-respuesta1', rutas[i - 1][3]);
         elemento.setAttribute('style', 'width:' + anchocarta + 'px; height:' + altocarta + 'px;');
 
 
@@ -349,6 +359,8 @@ function crearcartas() {
         elemento = document.createElement('div');
         elemento.className = "contenedorCarta " + parte;
         elemento.setAttribute('data-respuesta', parte);
+        elemento.setAttribute('data-respuesta0', rutas[j - 1][2]);
+        elemento.setAttribute('data-respuesta1', rutas[j - 1][3]);
         elemento.setAttribute('style', 'width:' + anchocarta + 'px; height:' + altocarta + 'px;');
 
 
@@ -444,13 +456,19 @@ function crearcartas() {
         }
 
         elemento5 = document.createElement('div');
+
         if (separador == true) {
             elemento5.className = "caraTapa cubridor parte2";
         } else {
             elemento5.className = "caraTapa cubridor parte1";
         }
+
         elemento2.appendChild(elemento5);
+
     }
+
+
+
 }
 
 function deactivarCartas() {
@@ -474,23 +492,31 @@ function invertirCarta(carta) {
         carta.className = "cuadrito cerrado";
     } else if (carta.className == "cuadrito cerrado") {
         carta.className = "cuadrito abierto";
+
     }
+
 }
 
 
 function alClicCarta(e) {
 
-    // console.log("click: ", e.currentTarget.parentNode.getAttribute("data-respuesta"));
+    console.log("click: ", e.currentTarget.parentNode.getAttribute("data-respuesta"));
     invertirCarta(e.currentTarget);
     if (cartaActiva === null) {
         cartaActiva = e.currentTarget;
         cartaActiva.removeEventListener("click", alClicCarta);
+        if(retroPar){
+            retroMal.innerHTML = e.currentTarget.parentNode.getAttribute("data-respuesta1")    
+        }else{
+            retroMal.innerHTML = "Intenta otra vez."            
+        }
+
     } else {
         if (e.currentTarget.parentNode.getAttribute("data-respuesta") === cartaActiva.parentNode.getAttribute("data-respuesta")) {
-            // console.log("son correctas");
+            console.log("son correctas");
             current2 = e.currentTarget;
             aciertos++;
-            // console.log("Aciertos al clik" + aciertos);
+            console.log("Aciertos al clik" + aciertos);
             cartaActiva.removeEventListener("click", alClicCarta);
             cartaActiva.className = e.currentTarget.className = "cuadritoHecho abierto";
 
@@ -502,6 +528,11 @@ function alClicCarta(e) {
 
             if (activarson) {
                 audioBien.play();
+            }
+            if(retroPar){
+                retroBien.innerHTML = e.currentTarget.parentNode.getAttribute("data-respuesta0")
+            }else{
+                retroBien.innerHTML = "¡Bien hecho!"
             }
             document.getElementById("retroincorrecta").style.display = "none";
             document.getElementById("retrocorrecta").style.display = "block";
@@ -519,12 +550,12 @@ function alClicCarta(e) {
                 try {
                     tiempo = ((minutes * 60) + seg) - (seconds % 60)
                     clearInterval(countdownTimer);
-                    
+                    console.log("TIEMPO FINAL: " + tiempo);
                 } catch (e) {
 
                 }
                 for (var j = 0; j < retroCal.length; j++) {
-                    // console.log(aciertos);
+                    console.log(aciertos);
                     if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
                         mensaje = retroCal[j].Mensaje;
                     }
@@ -539,18 +570,30 @@ function alClicCarta(e) {
                         button: "Ok",
                     });
                 } else if (idioma == "ESP") {
-                    swal({
-                        title: "Resultado",
-                        text: mensaje + ", has obtenido " + aciertos + " de " + final,
-                        confirmButtonText: "Aceptar",
-                        type: "info",
-                        button: "Aceptar",
-                    });
+                    if(retroGeneral){
+                        swal({
+                            title: "Resultado",
+                            text: mensaje + ", has obtenido " + aciertos + " de " + final,
+                            confirmButtonText: "Aceptar",
+                            type: "info",
+                            button: "Aceptar",
+                        });
+                    }else{
+                        swal({
+                            title: "Resultado",
+                            text: "Has obtenido " + aciertos + " de " + final,
+                            confirmButtonText: "Aceptar",
+                            type: "info",
+                            button: "Aceptar",
+                        });
+                    }
+
                 } //español
 
                 if (tempo) {
 
                     if ((tiempo) >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
+                        console.log("Mas de 60");
                         d = Number(tiempo);
                         var m = Math.floor(d % 3600 / 60);
                         var s = Math.floor(d % 3600 % 60);
@@ -575,6 +618,7 @@ function alClicCarta(e) {
                     } //else tiempo
 
                 } //tempo
+
                 aciertos = 0;
                 elemnto.pop();
                 elemnto.pop();
@@ -582,15 +626,16 @@ function alClicCarta(e) {
             }
         } else {
             condicion = 1;
+           
             if (activarson) {
 
                 audioMal.play();
             }
+            
             current = e.currentTarget;
             document.getElementById("retrocorrecta").style.display = "none";
             document.getElementById("retroincorrecta").style.display = "block";
             deactivarCartas();
-
         }
     }
 }
@@ -624,6 +669,9 @@ function crearMemorama() {
 
     } //fin revolver cartas
 
+
+
+
     //función revisar: elimina las cartas levantadas
     document.getElementById("revisar").addEventListener("click", function (e) {
         if (condicion == 1) {
@@ -645,7 +693,7 @@ function crearMemorama() {
         global = 0;
         audioBien.pause();
         audioBien.currentTime = 0;
-        // console.log("hola locotito");
+        console.log("hola locotito");
         if (vidmaster == true) {
             auxmaster2 = window.domino[1];
             auxmaster2.pause();
@@ -676,15 +724,26 @@ function crearMemorama() {
 
         document.getElementById("revisar").removeEventListener("click", function (e) {
             if (condicion == 1) {
+
                 document.getElementById("retroincorrecta").style.display = "none";
+
+
                 deactivarCartas();
                 resetear2cartas(cartaActiva, current);
+
                 cartaActiva = null;
-            } else {}
+
+            } else {
+
+            }
 
         });
     }
+
+
+
 }
+
 
 function isMobile() {
 

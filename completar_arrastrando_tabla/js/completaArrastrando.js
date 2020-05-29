@@ -47,9 +47,9 @@ if(esMobil==true)
 		DragDrop();
 	}
 
+	iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo);
 
-
-	if (ambSCORM) {
+	/*if (ambSCORM) {
 		//Inicio carga SCORM
 		if (parent.conectividadSCORM === undefined) {
 			console.log("Actividad en documento, es con try");
@@ -84,7 +84,7 @@ if(esMobil==true)
 			}
 		}
 		//Fin carga SCORM
-	}
+	}*/
 }
 
 
@@ -501,7 +501,8 @@ function revisaBuenas() {
 			mostrarEval("", "", asignarEvaluacion(res));
 	}
 	console.log("evaluacion " + correctas + " " + txtResp + " :--: " + res);
-	if (ambSCORM) {
+	guardaCalificacionScorm (ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas);
+	/*if (ambSCORM) {
 		//califica SCORM
 		if (parent.conectividadSCORM === undefined) {
 			console.log("Actividad en documento, es con try");
@@ -524,7 +525,7 @@ function revisaBuenas() {
 			parent.conectividadSCORM.verificarEstado();                                           // coloca status de la leccion en completed si cumple los requisitos
 		}
 		//fin califica SCORM
-	}
+	}*/
 }
 
 function reiniciar() {  //se invoca en el boton Next Atempt

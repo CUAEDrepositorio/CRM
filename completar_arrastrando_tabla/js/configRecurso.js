@@ -44,8 +44,10 @@ var retroCalBackupStandard = [
 	{LimInf: 10, LimSup: 10, Mensaje: ["Excelente", "Excellent"]}
 	];
 
-var ambSCORM = false;
-var barraSCORM = false;
+var ambSCORM = false; //prender para que guarde calificacion en moodle...
+var barraSCORM = false; //para indicar si hay barra de avance en ambientes tipo APRENDO MAS. No interactua con la barra, es para que el recurso sepa donde almacenar datos...
+var idObjetivo = 0; // Para dar secuencia a las evaluaciones dentro aprendo+, inicia en cero, si son 4 evaluaciones debe haber 0,1,2,3 recursos de evaluación respectivamente
+	
 var idioma = "ESP";
 var verLongitud = false;
 

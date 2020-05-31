@@ -21,7 +21,7 @@ ga("send", "pageview");
 	<title>CA tabla V3.3</title>
 	<meta charset="utf-8" />
 <!--
-	*v3.3: RAAR may 29,20: Implemento funciones simplificadas scorm.
+	*v3.3: RAAR may 29,20: Implemento funciones simplificadas scorm. Arreglo bug drop
 	*v3.2: RAAR abr 25,20: elimino despliegue "modo debug" y corrijo desbordamiento de respuestas en marca de aguas en debug.
 	*v3.1: RAAR mar 3,20: Librerías locales CUAED, Agrego flecha scroll arriba, codigo google analytics, condiciones CRM
 	*v3.0: RAAR nov 28,19: implemento despliegue de respuestas con flag debug y data-placeholder, inhibo despliegue de casillas-respuesta en blanco
@@ -103,6 +103,7 @@ ga("send", "pageview");
 
 <body>
 	<noscript><br/>Necesitas tener habilitado Javascript para <br/>poder hacer uso de la funcionalidad completa</noscript>
+	<div class="breadcrumb">Unidad 3. ¿Qué le duele? / Lección 1. Tengo mucha gripa</div>
 	<div id="prohibido">
 		<div id="NoMovil" class="ocultar">
 			<i class="fas fa-ban fa-10x"></i>
@@ -115,10 +116,12 @@ ga("send", "pageview");
 				<div class="info ocultar">				
 					<i class="fas fa-info tamico "></i>
 				</div>
-				<h2 class="headings-int ">Título de la evaluación</h2>
+				<!-- <h2 class="headings-int ">Título de la evaluación</h2> -->
+				<h1 class="headings actividad">Autoevaluación</h1>
+				<h2 class="headings-int under-li"><i class="icon-pencil"></i> Lección 1. Tengo mucha gripa</h2><br>
 			
 				<div id="textoInstrucciones" >
-					<p>Instrucciones (pedagógica y técnica) de la evaluación</p>
+					<p>Observa las imágenes y arrastra las frases que corresponden a cada columna.</p>
 				</div>
 				<br/>
 			</div>

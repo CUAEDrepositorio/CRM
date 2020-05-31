@@ -135,7 +135,7 @@ function DragDrop() {
 		jq321( ".respuesta .draggable" ).mouseleave(function() {
 			if (seleccionRapida) { 
 					 //jq321( ".droppable" ).css( "background-color", "white" );
-					 jq321( ".cContieneDroppable" ).css( "border", "1px solid #000000" ); // border: 1px solid #AAAAAA;
+					 jq321( ".cContieneDroppable" ).css( "border", "2px solid #000000" ); // border: 1px solid #AAAAAA;
 			}
 		});	
 	
@@ -498,7 +498,7 @@ function revisaBuenas() {
 			break;
 		default:
 			var txtResp = (correctas == 1) ? "respuesta correcta " : "respuestas correctas ";
-			mostrarEval("", "", asignarEvaluacion(res));
+			mostrarEval("", "Resultado", "Obtuviste " + correctas + " " + txtResp + " de " + totalPreguntas + ".<br/><br/>" + asignarEvaluacion(res));
 	}
 	console.log("evaluacion " + correctas + " " + txtResp + " :--: " + res);
 	guardaCalificacionScorm (ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas);

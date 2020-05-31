@@ -1,17 +1,15 @@
-
-body{
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    color: #000;
-    line-height: 2.3em;
-    margin:0.5em;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: -moz-none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
+.breadcrumb{
+    width: 100%; 
+    height: 30px; 
+    background-color: #deecfc; 
+    color: #4e7cbf; 
+    font-size:.9em; 
+    margin-bottom:20px; 
+    padding: 7px 10px 5px 5px; 
+    text-align: right; 
+    position: sticky;
 }
+
 .ir-arriba {
     display:none;
     padding:15px;
@@ -37,9 +35,10 @@ p:empty:not(:focus)::before { /*Este es un truco para simular un placeholder en 
   /*background-color:yellow;*/
 }
 .tablamaster{
-    width: 1000px;
+    /* width: 1000px; */
     margin: auto;
 }
+
 .info{
     background-color: #0069d9;
     float: right;
@@ -87,7 +86,7 @@ table, th, td { /*Formato a la tabla*/
     border-collapse: collapse; /*Para que la separacion no sean dos lineas sino una*/
     /*que tanto de la pantalla abarca la tabla*/
     font-size: 14px;
-    border: .5px solid black;
+    border: 2px solid black;
     /*border-top: thin;*/
     /*	 border-radius: 25px;*/
     /* JLBG mzo 16, 2019; ajujste en margen interno de las celdas para que no se pegue el borde la celda y el texto */
@@ -118,12 +117,37 @@ td { /*formato al renglones de datos*/
     /*	max-width: 400px;*/
     /* padding: 0px; margen interno de los renglones de captura*/
 }
-/*
-.encabezado {
-	border-top: 1px solid black;
-}*/
 
-
+#encabezado {
+    background-color: #e5e5e5;
+	font-weight: bold;
+}
+tr:not(#encabezado):nth-child(odd){
+    background-color: #e5e5e5;
+}
+tr:not(#encabezado):nth-child(even){
+    background-color: #f0efef;
+}
+td.col0{
+    width:250px;
+}
+td.cContieneDroppable{
+    width: 100px;
+}
+body{
+    font-family: 'Quicksand', sans-serif;
+    color: #666666;
+    font-weight: 300;
+    line-height: 1.42857143;
+    /*line-height: 2.3em;*/
+    /*margin:0.5em;*/
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
 .reactivos.center{
 	float: none;
 	
@@ -134,7 +158,8 @@ td { /*formato al renglones de datos*/
     column-count: auto;
 	max-width: 100%;
 	cursor:move;
-	background-color: #ffffff;
+    background-color: #ffffff;
+    padding: 5px;
 }
 
 .reactivos .lista-preguntas, .respuestas .lista-respuestas{
@@ -178,14 +203,15 @@ color: black;
     color: #666666;
     height: 100%; /*ya se adapta al superior!!!!*/
 }
-.reactivos .lista-preguntas .droppable{
+/*.reactivos .lista-preguntas .droppable{*/
+.droppable{
     display: inline-block;
 	position: relative;
     text-align:inherit;
     /* height:30px; funciona mejor definiendo aqui ancho y alto...*/
-    height: inherit%; /*ya se adapta al superior!!!!*/
-
-
+    height: 100%; /*ya se adapta al superior!!!!*/
+    width: 100%;
+  /*  background-color:yellow;*/
 }
 select.vacio{
     border-color: #0069d9;
@@ -389,7 +415,8 @@ select{
 }
 
 .headings { /*nm*/
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
+    font-family: 'Quicksand', sans-serif;
     color: #b1b1b1;
     letter-spacing: 1px;
     font-size: 1em;
@@ -406,25 +433,37 @@ p {
 }
 .actividad {
     max-width: 250px;
-    background: #b1b1b1;
+    /* background: #b1b1b1; */
+    background: #e63726;
     padding: 5px;
     border-radius: 20px;
     text-align: center;
     color: #fff!important;
     margin-bottom: 15px !important;
+    font-size: 1.2em;
 }
 .headings-int {
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif;
     color: #000;
     letter-spacing: 1px;
     font-size: 2em;
+    margin-top: 0; */
+    font-family: 'Quicksand', sans-serif;
+    color: #283853;
+    letter-spacing: 1px;
+    font-size: 2em;
     margin-top: 0;
+    font-weight: 800;
 }
 .under-li {
-    border-bottom: solid #dbdbdb;
-    border-width: 3px;
+    /* border-bottom: solid #dbdbdb; */
+    /* border-width: 3px; */
    /* padding-bottom: 9px;*/
-    width: 80%;
+    /* width: 80%; */
+    border-bottom: dotted #e63726;
+    border-width: 3px;
+    padding-bottom: 9px;
+    width: 100%;
 }
 .palomita, .tache{
 	margin-left:10px

@@ -26,7 +26,7 @@ var recursoTransformer = true; // autoajuste a portable..
 var forzarRespuestaA = 0; //si se quiere que las respuestas solo se usen 'n' veces, si es cero se ignora...
 var flechaArriba = false;          // true: muestra la flecha-arriba para moverse rápidamente al principio del recurso; false: no lo muestra
 
-var debug = true;
+var debug = false;
 /*if (debug) { // si lo muevo al ready hay colision, por ahora fuera....RAAR abril 24,2020, no debe aparecer en movil
 	document.write("-modo debug true-"); //para avisar en pantalla el modo...
 }*/
@@ -37,7 +37,7 @@ var retroCal = [
 	{LimInf: 12, LimSup: 12, Mensaje: ["Excelente", "Excellent"]}
 	];
 
-var retroCalBackupStandard = [
+var retroCal = [
 	{LimInf: 0, LimSup: 3, Mensaje: ["No fue suficiente", "Insufficient"]},
 	{LimInf: 4, LimSup: 6, Mensaje: ["Esfuérzate más", "Work harder"]},
 	{LimInf: 7, LimSup: 9, Mensaje: ["Suficiente", "Sufficient"]},

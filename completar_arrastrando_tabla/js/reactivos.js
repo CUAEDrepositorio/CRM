@@ -2,11 +2,11 @@
 var preguntas = [];
 var respuestas = [];
 var casillasRespuesta;
-var colores=1;
-var conteno=1;
+var colores = 1;
+var conteno = 1;
 var retro = [];
 var indices = [];
-var arregloeligiendo=[];
+var arregloeligiendo = [];
 var preg = [];
 var respOriginales = [];
 var respDesordenadas1 = [];
@@ -15,64 +15,62 @@ var respDesordenadas2 = [];
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
 var palomita = "<i class='ip  far fa-check-circle blink ocultar' ></i>";
 var tache = "<i class='it  far fa-times-circle blink ocultar' ></i>";
-jq321(document).ready(function(){
-	if (window.name=="movil") {
+jq321(document).ready(function () {
+	if (window.name == "movil") {
 		esMobil = true;
 		// alert ("indexbis.html window.name: "+window.name);
 	}
 	else {
-		esMobil = esPortable();     
+		esMobil = esPortable();
 	}
 	if (esMobil) {
 		elementosPorSegmento = 1;
 		jq321("#NoMovil").removeClass("ocultar").addClass("mostrar");
-	 	jq321("section").addClass("ocultar");
+		jq321("section").addClass("ocultar");
 	}
 	if (window.parent.data_crm) { //para el portal CRM, 
-	//	if (true) {
-			verLongitud = true;
-			debug = true;
-			mostrarRetroIndividual =  true;
-			mostrarRetroFinal =  true;
-			flechaArriba =  true;
-		}
+		//	if (true) {
+		verLongitud = true;
+		debug = true;
+		mostrarRetroIndividual = true;
+		mostrarRetroFinal = true;
+		flechaArriba = true;
+	}
 
 	creaIndice();
 	divideReactivosQF_A(reactivosMostrar);
-	if (mezclarPreguntas) {reordenaArreglo(preguntas)};
-	if (mezclarRespuestas) {reordenaArreglo(respuestas)};
+	if (mezclarPreguntas) { reordenaArreglo(preguntas) };
+	if (mezclarRespuestas) { reordenaArreglo(respuestas) };
 	iniciar();
-	
-	jq321(".info").click(function(){
-		if(jq321(this).hasClass("hiden"))
-			{
-				jq321("#textoInstrucciones").slideUp(300);
-				jq321(this).removeClass("hiden");
-			}
-		else
-		{
-			jq321("#textoInstrucciones").slideDown(300); 
-			jq321(this).addClass("hiden");
-		}
-	
-	});
-	if (flechaArriba) {
-		jq321('.ir-arriba').click(function(){
-		jq321('body, html').animate({
-		scrollTop: '0px'
-		}, 300);
-		});
-		jq321(window).scroll(function(){
-		if( jq321(this).scrollTop() > 0 ){
-		jq321('.ir-arriba').slideDown(300);
-		} else {
-		jq321('.ir-arriba').slideUp(300);
-		}
-		});
+
+	jq321(".info").click(function () {
+		if (jq321(this).hasClass("hiden")) {
+			jq321("#textoInstrucciones").slideUp(300);
+			jq321(this).removeClass("hiden");
 		}
 		else {
-		jq321('.ir-arriba').hide();
+			jq321("#textoInstrucciones").slideDown(300);
+			jq321(this).addClass("hiden");
 		}
+
+	});
+	if (flechaArriba) {
+		jq321('.ir-arriba').click(function () {
+			jq321('body, html').animate({
+				scrollTop: '0px'
+			}, 300);
+		});
+		jq321(window).scroll(function () {
+			if (jq321(this).scrollTop() > 0) {
+				jq321('.ir-arriba').slideDown(300);
+			} else {
+				jq321('.ir-arriba').slideUp(300);
+			}
+		});
+	}
+	else {
+		jq321('.ir-arriba').hide();
+	}
 
 
 });
@@ -94,7 +92,7 @@ function ic(c) {
 	var x = c.length;
 	var ci = "";
 	while (x >= 0) {
-		ci+=c.charAt(x);
+		ci += c.charAt(x);
 		x--;
 	}
 	return ci;
@@ -147,54 +145,54 @@ function divideReactivosQF_A(numReactivos) {  //  RA-01, RA-03,   QF-A
 
 //RAAR Sep 3,18: Implemento doble respuesta
 function divideReactivosQF_A(numReactivos) {  //  RA-01, RA-03,   QF-A
-	var listaRespuestas =[]; // Para generar un listado de respuestas sin repetidos
+	var listaRespuestas = []; // Para generar un listado de respuestas sin repetidos
 	var listaTodas = [];
 	var tantos = 0;
 	for (i = 0; i < numReactivos; i++) { //aqui el ciclo es hasta numreactivos(=reactivosMostrar) por que las respuestas están en un mismo arreglo, pero desde aqui la lista de respuestas puede ser mayor...
-	//	preguntas.push({txt1: "", txt2: "", ind: 0, respA:"", respB:"", listaResp:""});
-		preguntas.push({txt1: "", txt2: "", ind: 0, listaResp:"", listaFA:""});	//se genera en blanco y luego lo encimas...
+		//	preguntas.push({txt1: "", txt2: "", ind: 0, respA:"", respB:"", listaResp:""});
+		preguntas.push({ txt1: "", txt2: "", ind: 0, listaResp: "", listaFA: "" });	//se genera en blanco y luego lo encimas...
 		preguntas[i].txt1 = reactivos[i].Q;
 		preguntas[i].txt2 = reactivos[i].F;
 		preguntas[i].ind = indices[i];
 		preguntas[i].listaResp = reactivos[i].A;
-		preguntas[i].listaFA = reactivos[i].FA;		
+		preguntas[i].listaFA = reactivos[i].FA;
 	}
 
-	var enlaza="";
+	var enlaza = "";
 	for (var i = 0; i < numReactivos; i++) {  // leo todos las respuestas de reactivos y concateno, ojo q va a haber pipes "|".
-		if (reactivos[i].A.length>0) { // el encabezado tiene en blanco la respuesta, esto es para elmininar
+		if (reactivos[i].A.length > 0) { // el encabezado tiene en blanco la respuesta, esto es para elmininar
 			enlaza += reactivos[i].A.join("|");
-			console.log ("reactivo " + reactivos[i].A+ " longitud: "+reactivos[i].A.length);
-		
-	   if (i<numReactivos-1) { enlaza += "|"; }
+			console.log("reactivo " + reactivos[i].A + " longitud: " + reactivos[i].A.length);
+
+			if (i < numReactivos - 1) { enlaza += "|"; }
 		}
-	}	
-//	enlaza = enlaza.replace(/[|]/gi, ","); // Cambios los pipes por comas, por que en las casillas de respuesta no importa...encierro en [] para que lo tome como caracter...
+	}
+	//	enlaza = enlaza.replace(/[|]/gi, ","); // Cambios los pipes por comas, por que en las casillas de respuesta no importa...encierro en [] para que lo tome como caracter...
 	listaTodas = enlaza.split("|");
-	for (var i = 0; i < listaTodas.length; i++) { 
-		if (!listaRespuestas.includes (listaTodas[i])) { 
-		   listaRespuestas.push(listaTodas[i]);
+	for (var i = 0; i < listaTodas.length; i++) {
+		if (!listaRespuestas.includes(listaTodas[i])) {
+			listaRespuestas.push(listaTodas[i]);
 		}
 	}
 
 	listaRespuestas.sort();
 	listaTodas.sort();
-	for (i=0; i<listaRespuestas.length;i++){ // translado a la variable global respuestas....
-		tantos = cuentaElemento(listaTodas,listaRespuestas[i]); // en listaTodas leo cuantas incidencias tiene una respuesta....
-		respuestas.push({txt: listaRespuestas[i], ind:0, incidencia:tantos});
+	for (i = 0; i < listaRespuestas.length; i++) { // translado a la variable global respuestas....
+		tantos = cuentaElemento(listaTodas, listaRespuestas[i]); // en listaTodas leo cuantas incidencias tiene una respuesta....
+		respuestas.push({ txt: listaRespuestas[i], ind: 0, incidencia: tantos });
 		//console.log ("RESPUESTAS "+respuestas[i].txt,"incidencia "+respuestas[i].incidencia);
 	}
-    //casillasRespuesta = listaTodas.length;
+	//casillasRespuesta = listaTodas.length;
 	//console.log (listaRespuestas instanceof Array); // respuestas es un array, por que instancesof da true por que respuestas fue creado por el constructor array
 }
 
-function cuentaElemento (arregloBusqueda, palabraBuscada){ // cuenta cuantas veces aparece una palabra en un arreglo
-	var j=0;
+function cuentaElemento(arregloBusqueda, palabraBuscada) { // cuenta cuantas veces aparece una palabra en un arreglo
+	var j = 0;
 	var cuentaIncidencia = 0;
 	//console.log("cuenta elementos");
 	//alert (palabraBuscada);
-	for (j=0; j<arregloBusqueda.length; j++){
-		if (arregloBusqueda[j]==palabraBuscada) {
+	for (j = 0; j < arregloBusqueda.length; j++) {
+		if (arregloBusqueda[j] == palabraBuscada) {
 			cuentaIncidencia++
 		}
 	}
@@ -202,7 +200,7 @@ function cuentaElemento (arregloBusqueda, palabraBuscada){ // cuenta cuantas vec
 }
 
 function reordenaArreglo(arreglo) {
-    arreglo.sort(function(a, b){return 0.5 - Math.random()}); // es un funcion de comparacion, math. produce valores -1 a 1, y provoca azar...
+	arreglo.sort(function (a, b) { return 0.5 - Math.random() }); // es un funcion de comparacion, math. produce valores -1 a 1, y provoca azar...
 }
 /*
 function creaEscribir(reactivosMostrar){
@@ -219,20 +217,20 @@ function creaEscribir(reactivosMostrar){
 }
 */
 //FUNCION PARA CREAR TABLA EN MODO MOVILE
-function creaelegirtabla(){
+function creaelegirtabla() {
 
 	//REVISA SI HAY PALABRAS CON | para no agregar la palabra por error
-	for (var i = 0; i < reactivos.length; i++ ) {
-		for(var j=0 ;j < reactivos[i].A.length;j++){
-			var cadenacomp=reactivos[i].A[j]; 
-			if(cadenacomp.indexOf("|")>-1){
-				var pos= cadenacomp.indexOf("|");
-				var primeracad=cadenacomp.substring(0,pos);
-				var segundacad= cadenacomp.substring(pos+1,cadenacomp.length);
+	for (var i = 0; i < reactivos.length; i++) {
+		for (var j = 0; j < reactivos[i].A.length; j++) {
+			var cadenacomp = reactivos[i].A[j];
+			if (cadenacomp.indexOf("|") > -1) {
+				var pos = cadenacomp.indexOf("|");
+				var primeracad = cadenacomp.substring(0, pos);
+				var segundacad = cadenacomp.substring(pos + 1, cadenacomp.length);
 				arregloeligiendo.push(primeracad);
 				arregloeligiendo.push(segundacad);
-				
-			}else{
+
+			} else {
 				arregloeligiendo.push(reactivos[i].A[j]);
 
 			}
@@ -240,79 +238,80 @@ function creaelegirtabla(){
 		}
 	}
 
-//creamos la estructura con  un acumulado de string
+	//creamos la estructura con  un acumulado de string
 	var ta1 = '<table class="tablamasterpro" >';
 	var ta11 = '</table>';
-var armadopre="";
-var armadofinal="";
+	var armadopre = "";
+	var armadofinal = "";
 
 
-for(var o=0; o<reactivos[0].Q.length;o++){
-for(var m=0; m<reactivos.length;m++){
-	var numalter="";
-	var contenido="";
-	if(m==0){
-contenido='<p class="simildroppabled">'+ tam(reactivos[m].Q[o],1)+'</p>';
-numalter="1";	
-}
-	else{
-		arregloeligiendo = arregloeligiendo.sort(function() {return Math.random() - 0.5});
-//agregamos todos las opciones y la opcion por default con su data respuesta
-		var selector="";
-		var sel1 = '<select class="opi" data-respuesta="'+reactivos[m].A[o]+'">';
-		var sel2 ='</select>';
-		var op='';
-		op+="<option>------</option>";	
+	for (var o = 0; o < reactivos[0].Q.length; o++) {
+		for (var m = 0; m < reactivos.length; m++) {
+			var numalter = "";
+			var contenido = "";
+			if (m == 0) {
+				contenido = '<p class="simildroppabled">' + tam(reactivos[m].Q[o], 1) + '</p>';
+				numalter = "1";
+			}
+			else {
+				arregloeligiendo = arregloeligiendo.sort(function () { return Math.random() - 0.5 });
+				//agregamos todos las opciones y la opcion por default con su data respuesta
+				var selector = "";
+				var sel1 = '<select class="opi" data-respuesta="' + reactivos[m].A[o] + '">';
+				var sel2 = '</select>';
+				var op = '';
+				op += "<option>------</option>";
 
-		for(var s=0;s<arregloeligiendo.length;s++){
+				for (var s = 0; s < arregloeligiendo.length; s++) {
 
-				op+="<option>"+tam(arregloeligiendo[s],1)	+"</option>";	
+					op += "<option>" + tam(arregloeligiendo[s], 1) + "</option>";
 
-			
+
+				}
+
+				contenido = sel1 + op + sel2;
+				numalter = "2";
+			}
+			var t1 = '<tr class="mind' + numalter + '">';
+			var t2 = '</tr>';
+			var td1 = '<td>';
+			var td2 = '</td>';
+			var retros = "";
+			if (m == 0) {
+				retros = '';
+
+			} else {
+				//retros generales para todos los elementos excepto el default
+				retros = '';//<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[m].FA[o][0], 1) + '">' + palomita + '</span><span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[m].FA[o][1], 1, 1) + '">' + tache + '</span>';
+
+			}
+
+			//agregamos al contenedor maestro
+			armadopre += t1 + td1 + contenido + retros + td2 + t2;
 		}
 
-	contenido=sel1+op+sel2;
-		numalter="2";
-	}
-	var t1='<tr class="mind'+numalter+'">';
-	var t2='</tr>';
-	var td1='<td>';
-	var td2='</td>';
-var retros="";
-	if(m==0){
-		retros='';
-
-	}else{
-		//retros generales para todos los elementos excepto el default
-		retros='';//<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[m].FA[o][0], 1) + '">' + palomita + '</span><span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[m].FA[o][1], 1, 1) + '">' + tache + '</span>';
-
 	}
 
-	//agregamos al contenedor maestro
-	armadopre+= t1+td1+contenido+retros+td2+t2;}
-
-}
-	
-armadofinal=ta1+armadopre+ta11;
-jq321(".reactivos ").append(armadofinal); //anexo al HTML
-console.log("hola");
+	armadofinal = ta1 + armadopre + ta11;
+	jq321(".reactivos ").append(armadofinal); //anexo al HTML
+	console.log("hola");
 }
 
 
 function creaArrastrar() { // Se arman las textos con sus correspondientes cajas...
 	var idCas = 0; //para cololar un ID unica a cada casilla droppable....
 	var textoRetro = '';
-	jq321(".reactivos .lista-preguntas").each(function() { jq321(this).html(''); });
-	jq321(".respuestas .lista-respuestas").each(function() { jq321(this).html(''); });
+	jq321(".reactivos .lista-preguntas").each(function () { jq321(this).html(''); });
+	jq321(".respuestas .lista-respuestas").each(function () { jq321(this).html(''); });
 	//alert ("crea arrastrar");
-	if (invPregResp) {jq321(".respuestas").prependTo(".ejercicio-arrastrar")}
+	if (invPregResp) { jq321(".respuestas").prependTo(".ejercicio-arrastrar") }
 	if (formatoColumnas) {
 		jq321("#reactivo").addClass("col-md-9 col-lg-9");
 		jq321("#respuesta").addClass("col-md-3 col-lg-3");
-/*		if (!(esTexto)) {
-			jq321("#reactivo").addClass("col-sm-9 col-xs-9");
-			jq321("#respuesta").addClass("col-sm-3 col-xs-3");
-		}*/
+		/*		if (!(esTexto)) {
+					jq321("#reactivo").addClass("col-sm-9 col-xs-9");
+					jq321("#respuesta").addClass("col-sm-3 col-xs-3");
+				}*/
 	}
 	else {
 		jq321("#reactivo").addClass("center");
@@ -322,87 +321,96 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 	var HTMLArmado = "";
 	var t1 = '<table class="tablamaster" id="iTabla1">';
 	var t11 = '</table>';
-	var renglon ="renglon";
-	var columna ="columna";
-	for (var i = 0; i < preguntas.length; i++ ) { // Armo las preguntas.....
+	// var renglon = "renglon";
+	// var columna = "columna";
+	for (var i = 0; i < preguntas.length; i++) { // Armo las preguntas.....
 		var preg = preguntas[i].txt1;
-	//	
-		var HTMLArmadoNew ="";
-		var HTMLDroppable ="";
+		//	
+		var HTMLArmadoNew = "";
+		var HTMLDroppable = "";
 		//var segmentos = preg.length;
-		var cuantasArrobas = preg.length-1; // Para formar las casillas droppable de respuesta, puede haber respuestas dummy o sea de mas asi evito casillas de mas.
-		var t2 = '<tr class="alter'+colores+'">';
+		var cuantasArrobas = preg.length - 1; // Para formar las casillas droppable de respuesta, puede haber respuestas dummy o sea de mas asi evito casillas de mas.
+
+		if (i == 0) {
+			// var t2 = '<tr id="encabezado" class="alter' + colores + '">';
+			var t2 = '<tr id="encabezado">';
+		}
+		else {
+			// var t2 = '<tr class="alter' + colores + '">';
+			var t2 = '<tr>';
+		}
 		var t10 = '</tr>';
 
-		if(colores==1){
-			colores=2;
+		if (colores == 1) {
+			colores = 2;
 		}
 
-		if(colores==2){
-			colores=3;
-		}else if(colores==3){
-			colores=2;
+		if (colores == 2) {
+			colores = 3;
+		} else if (colores == 3) {
+			colores = 2;
 		}
 
 		var cuentaResp = 0;
 		//jq321(".lista-preguntas").append(HTMLArmadoNew); //checar, esta en blanco...
-		for (var j=0;j<preg.length;j++){ //preguntas[i].listaResp.length, da casillas de mas por las respuetas dummy
+		for (var j = 0; j < preg.length; j++) { //preguntas[i].listaResp.length, da casillas de mas por las respuetas dummy
 
-			if (preg[j].indexOf('@')==-1) { // sino hay arroba....
+			if (preg[j].indexOf('@') == -1) { // sino hay arroba....
 
-					HTMLDroppable +='<th><p class="simildroppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp=""  >'+tam(preg[j],1)+'</p></th>';    // JLBG mzo 16, 2019; cambio para poner la primera fila como TH
+				// HTMLDroppable += '<th><p class="simildroppable renglon' + i + ' columna' + j + ' cpreg' + preguntas[i].ind + '" id="cas' + idCas + '" data-resp=""  >' + tam(preg[j], 1) + '</p></th>';    // JLBG mzo 16, 2019; cambio para poner la primera fila como TH
+				HTMLDroppable += '<td class="col'+j+'"><p class="simildroppable renglon' + i + ' columna' + j + ' cpreg' + preguntas[i].ind + '" id="cas' + idCas + '" data-resp=""  >' + tam(preg[j], 1) + '</p></td>';    // JLBG mzo 16, 2019; cambio para poner la primera fila como TH
 
-					cuentaResp++; //si hay una casilla sin dropppable antes de una droppable es importante esto....
+				cuentaResp++; //si hay una casilla sin dropppable antes de una droppable es importante esto....
 				//}
 
-			} 
+			}
 			else {
 				//alert(preguntas[i].txt1[j]);
 				//console.log (preguntas[i].txt1[j]);
-			//	if (preg[j].indexOf('?')==-1) {
-					// data-placeholder se establece en estilos.css es un truco para emular un placeholder en un parrafo...
-					if(idCas==0){
-						idCas++;
-					}
-					conteno=2;
-					var respuestaDebug ="";
-					if (debug) {
-						respuestaDebug = preguntas[i].listaResp[cuentaResp];
-					}
-					//HTMLDroppable +='<td class="cContieneDroppable   "><p data-placeholder="'+preg[j].replace("@","")+'" class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp++]+'"></p></td>';					
-					HTMLDroppable +='<td class="cContieneDroppable   "><p data-placeholder="'+respuestaDebug+'" class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p></td>';	
+				//	if (preg[j].indexOf('?')==-1) {
+				// data-placeholder se establece en estilos.css es un truco para emular un placeholder en un parrafo...
+				if (idCas == 0) {
+					idCas++;
+				}
+				conteno = 2;
+				var respuestaDebug = "";
+				if (debug) {
+					respuestaDebug = preguntas[i].listaResp[cuentaResp];
+				}
+				//HTMLDroppable +='<td class="cContieneDroppable"><p data-placeholder="'+preg[j].replace("@","")+'" class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp++]+'"></p></td>';					
+				HTMLDroppable += '<td class="cContieneDroppable"><p data-placeholder="' + respuestaDebug + '" class="droppable renglon' + i + ' columna' + j + ' cpreg' + preguntas[i].ind + '" id="cas' + idCas + '" data-resp="' + preguntas[i].listaResp[cuentaResp] + '"></p></td>';
 
-					//	HTMLDroppable +='<td class="cContieneDroppable   "><p  class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p>'+preguntas[i].listaResp[cuentaResp]+'</td>';	
+				//	HTMLDroppable +='<td class="cContieneDroppable"><p class="droppable renglon'+i+' columna'+j+' cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp]+'"></p>'+preguntas[i].listaResp[cuentaResp]+'</td>';	
 
-					cuentaResp++;				
+				cuentaResp++;
 
-					/*		} 
-				else {
-					HTMLDroppable +='<td rowspan="2" class="cContieneDroppable"><p class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp++]+'">'+"-"+'</p></td>'; //dejo en blanco el campo...
-				}*/
+				/*		} 
+			else {
+				HTMLDroppable +='<td rowspan="2" class="cContieneDroppable"><p class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[cuentaResp++]+'">'+"-"+'</p></td>'; //dejo en blanco el campo...
+			}*/
 
 
-			idCas++;			
+				idCas++;
 			}
-		}	
-		HTMLArmadoNew = t2+HTMLDroppable+t10;
-		HTMLArmado =  HTMLArmado + HTMLArmadoNew; //Armo las celdas....
-/*		jq321('#preg' + preguntas[i].ind).append('<BR><BR><div class="retroArroba ocultarRetro" id="retro' + preguntas[i].ind + '0">' + preguntas[i].listaFA ); //RETRO ARROBA
-		textoRetro = tam(preguntas[i].txt2[0], 1);
-		jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroBien ocultarRetro" id="retro' + preguntas[i].ind + '0">' + textoRetro );
-		textoRetro = tam(preguntas[i].txt2[1], 1);
-		jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroMal ocultarRetro" id="retro' + preguntas[i].ind + '1">' + textoRetro );
-		jq321('#preg' + preguntas[i].ind).after('<hr/>');*/
+		}
+		HTMLArmadoNew = t2 + HTMLDroppable + t10;
+		HTMLArmado = HTMLArmado + HTMLArmadoNew; //Armo las celdas....
+		/*		jq321('#preg' + preguntas[i].ind).append('<BR><BR><div class="retroArroba ocultarRetro" id="retro' + preguntas[i].ind + '0">' + preguntas[i].listaFA ); //RETRO ARROBA
+				textoRetro = tam(preguntas[i].txt2[0], 1);
+				jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroBien ocultarRetro" id="retro' + preguntas[i].ind + '0">' + textoRetro );
+				textoRetro = tam(preguntas[i].txt2[1], 1);
+				jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroMal ocultarRetro" id="retro' + preguntas[i].ind + '1">' + textoRetro );
+				jq321('#preg' + preguntas[i].ind).after('<hr/>');*/
 	}
-	HTMLArmado =  t1+HTMLArmado+t11;
+	HTMLArmado = t1 + HTMLArmado + t11;
 	jq321("#reactivo .lista-preguntas").append(HTMLArmado); //anexo al HTML
-//	jq321('div.sub-item:last + hr').remove(); //Para que?
+	//	jq321('div.sub-item:last + hr').remove(); //Para que?
 
-	for (var i = 0; i < respuestas.length; i++ ) { //armo respuestas....
-		var HTMLArmado ="";
-		var incidenciaRespuestas = (forzarRespuestaA ? forzarRespuestaA : respuestas[i].incidencia);	
-		if (respuestas[i].txt.length>0) { // puede haber casillas que sean solo texto, pero se tiene que rellenar el espaacio como hubiera una respuesta para esa casilla, estaria en blanco, con esto evito desplegarla....
-			HTMLArmado = '<div class="sub-item respuesta" ><div data-resp="'+respuestas[i].txt+'" data-quedanInicial="'+incidenciaRespuestas+'" data-quedan="'+incidenciaRespuestas+'" class="draggable" data-drag="' + i + '">' + '<object height="120" width="120" data="'+respuestas[i].txt+'" type="image/png">'+tam(respuestas[i].txt, 1)+'</object>' + '</div></div>';
+	for (var i = 0; i < respuestas.length; i++) { //armo respuestas....
+		var HTMLArmado = "";
+		var incidenciaRespuestas = (forzarRespuestaA ? forzarRespuestaA : respuestas[i].incidencia);
+		if (respuestas[i].txt.length > 0) { // puede haber casillas que sean solo texto, pero se tiene que rellenar el espaacio como hubiera una respuesta para esa casilla, estaria en blanco, con esto evito desplegarla....
+			HTMLArmado = '<div class="sub-item respuesta" ><div data-resp="' + respuestas[i].txt + '" data-quedanInicial="' + incidenciaRespuestas + '" data-quedan="' + incidenciaRespuestas + '" class="draggable" data-drag="' + i + '">' + '<object height="120" width="120" data="' + respuestas[i].txt + '" type="image/png">' + tam(respuestas[i].txt, 1) + '</object>' + '</div></div>';
 			jq321(".respuestas .lista-respuestas").append(HTMLArmado);
 		}
 	}
@@ -427,7 +435,7 @@ function creaOrdenar() {
 		jq321("#ordenarEnunciado").append("<div class='lista'><ul class='sortable' id='ulId" + i + "'>" + txt + tam(preguntas[i].Q, 0) + "<div class='retroInd'><div class='retroBien ocultarRetro'>" + tam(preguntas[i].F[0], 1) + "</div><div class='retroMal ocultarRetro'>" + tam(preguntas[i].F[1], 1) + "</div></div>");
 		jq321(".lista:last").after("<hr/>");
 	}
-	jq321(".lista > .sortable").each(function() {
+	jq321(".lista > .sortable").each(function () {
 		$(this).sortable();
 		$(this).disableSelection();
 	});
@@ -513,19 +521,19 @@ function creaOM(mostrar) {
 }*/
 
 function tam(cad, n) {// 1T, 0ele.esc.ord Es para imprimir la longitud del texto indicado, crm=var global de impresion, n para apagar en caso particular...
-	console.log("c"+cad);
-	
+	console.log("c" + cad);
+
 	var txt = "";
-	if (verLongitud == false) {txt = (n == 1) ? cad : ""} // i n diferente de 1 pone nada
+	if (verLongitud == false) { txt = (n == 1) ? cad : "" } // i n diferente de 1 pone nada
 	else {
 		txt = "&nbsp;<sup>" + cad.length + "</sup>";
-		if (n == 1) {txt = cad + txt}
+		if (n == 1) { txt = cad + txt }
 	}
 	return txt;
 }
 //function mostrarMensaje(tipo, titulo, cadena) {
 function mostrarMensaje(clase, recurso) {
-	if (!recurso) {recurso = -1}
+	if (!recurso) { recurso = -1 }
 	var msgs = [,
 		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")],  // completar arrastrando
 		[ic("otxet ed sopmac sol sodot anell ,rovaf roP"), ic("sdleif txet lla tuo llif ,esaelP")],                  // completar escribiendo
@@ -534,7 +542,7 @@ function mostrarMensaje(clase, recurso) {
 		[ic("ordaucer adac arap atseupser anu egile ,rovaf roP"), ic("tsil hcae rof rewsna na esoohc ,esaelP")],     // completar eligiendo
 		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")],  // arrastrar esquema
 		["", ""]
-		];
+	];
 	var tipo = "";
 	var tit = "";
 	var msg = "";
@@ -574,14 +582,14 @@ function mostrarMensaje(clase, recurso) {
 			msg = ic("adiconocsed nóicidnoC");
 			btnOK = ic("ratpecA");
 	}
-	msg= tam(msg,1);
-	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
+	msg = tam(msg, 1);
+	swal({ title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
 }
 
 function asignarEvaluacion(calificacion) {
 	var mensaje = "";
 	if (mostrarRetroFinal) {
-		jq321.each(retroCal, function(indice){
+		jq321.each(retroCal, function (indice) {
 			if ((calificacion >= retroCal[indice].LimInf) && (calificacion <= retroCal[indice].LimSup)) {
 				mensaje = (idioma == ic("GNE")) ? retroCal[indice].Mensaje[1] : retroCal[indice].Mensaje[0];
 			}
@@ -600,8 +608,8 @@ function mostrarEval(tipo, titulo, cadena) {
 			//var btnOK = ic("ratpecA");
 			var btnOK = "Aceptar";
 	}
-	cadena=tam(cadena,1);
-	swal({title: titulo, text: cadena, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
+	cadena = tam(cadena, 1);
+	swal({ title: titulo, text: cadena, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
 }
 
 function quitarAcentos(str) {
@@ -609,8 +617,8 @@ function quitarAcentos(str) {
 	str = str.toLowerCase();
 	// remove accents, swap ñ for n, etc
 	var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;"; //Le tengo que quitar que elimine la coma, para que la comparacion funcione	var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;"; 
-	var to   = "aaaaeeeeiiiioooouuuunc------"; // RAAR, Ago13,18, le agrego de nuevo la coma, funcionara?, por las clases para las casillas de respuesta....
-	for (var i = 0, l = from.length ; i < l ; i++) {
+	var to = "aaaaeeeeiiiioooouuuunc------"; // RAAR, Ago13,18, le agrego de nuevo la coma, funcionara?, por las clases para las casillas de respuesta....
+	for (var i = 0, l = from.length; i < l; i++) {
 		str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
 	}
 	str = str.replace(/[^a-z0-9 -|]/g, '') // remove invalid chars
@@ -620,17 +628,17 @@ function quitarAcentos(str) {
 }//
 
 function esPortable() {
-    if (navigator.userAgent.match(/Android/i)
-            || navigator.userAgent.match(/iPhone/i)
-            || navigator.userAgent.match(/iPad/i)
-            || navigator.userAgent.match(/iPod/i)
-            || navigator.userAgent.match(/BlackBerry/i)
-            || navigator.userAgent.match(/Windows Phone/i)
-            || navigator.userAgent.match(/Opera Mini/i)
-            || navigator.userAgent.match(/IEMobile/i)
-            ) {
-        return true;
-    } else {
+	if (navigator.userAgent.match(/Android/i)
+		|| navigator.userAgent.match(/iPhone/i)
+		|| navigator.userAgent.match(/iPad/i)
+		|| navigator.userAgent.match(/iPod/i)
+		|| navigator.userAgent.match(/BlackBerry/i)
+		|| navigator.userAgent.match(/Windows Phone/i)
+		|| navigator.userAgent.match(/Opera Mini/i)
+		|| navigator.userAgent.match(/IEMobile/i)
+	) {
+		return true;
+	} else {
 		return false;
 	}
 }

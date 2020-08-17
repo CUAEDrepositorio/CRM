@@ -83,10 +83,9 @@ function temporizador() {
       $('#Parte1').addClass('complete');
       $('#Parte2').addClass('complete');
       swal({
-        title: "Se acabó el tiempo \n",
-        text: mensaje + ", has obtenido " + aciertos + " de " + final,
+        title: "¡Se acabó el tiempo! \n",
+        text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+mensaje,
         confirmButtonText: "Aceptar",
-        type: "info",
         button: "Aceptar"
       });
       $("#revisar").hide();
@@ -96,6 +95,8 @@ function temporizador() {
       $("#pasar").show();
       $("#botonCerrarRetroplus").hide();
       $("#revisarcont").hide();
+      $(".retroBien").hide();
+      $(".retroMal").hide();
       $("#pasar").click(function () {
         $("#botonCerrarRetroplus").show();
       });

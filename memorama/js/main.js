@@ -1,3 +1,4 @@
+
 /*controles*/
 /*KDMR-05/02/20: Se añadio rutas de liberias del servidor; además de restringuir para moviles
   KDMR-17/02/20: Cambio de version (contiene temporizador, ebug y nueva libreria SCORM)
@@ -23,7 +24,11 @@ var countdownTimer = 0;
 var tiempo;
 var audioBien;
 var audioMal;
-var mov = 1;
+var mov = 0;
+var intentos = 0;
+var idioma = "ESP";
+movimientos = 0;
+var numIntentos = 2;
 $(document).ready(function () {
     iniciar();
     
@@ -80,23 +85,24 @@ function conteo() {
         document.getElementById("pasar").style.display = "";
     }
 
-    if (idioma == "ENG") {
-        document.getElementById("revisar").value = "Close Cards";
-        document.getElementById("revisarcont").value = "Continue";
-        document.getElementById("pasar").value = "I give up";
-        document.getElementById("botonCerrarRetroplus").value = "Play Again";
-    } else if (idioma == "ESP") {
+    // if (idioma == "ENG") {
+    //     document.getElementById("revisar").value = "Close Cards";
+    //     document.getElementById("revisarcont").value = "Continue";
+    //     document.getElementById("pasar").value = "I give up";
+    //     document.getElementById("botonCerrarRetroplus").value = "Play Again";
+    // } else 
+    if (idioma == "ESP") {
         document.getElementById("revisar").value = "Voltear cartas";
         document.getElementById("revisarcont").value = "Continuar";
         document.getElementById("pasar").value = "Me rindo";
         document.getElementById("botonCerrarRetroplus").value = "Jugar de nuevo";
         document.getElementById("btn-iniciar").value = "Iniciar";
     }
-    if (tempo == true) {
+    if (tempo) {
         document.getElementById("Parte1").disabled = true;
     }
     retroBien = document.createElement('div');
-    retroBien.className = "retroBien col-md-2 col-md-offset-5";
+    retroBien.className = "retroBien col-md-6 col-md-offset-3";
     retroBien = document.getElementById("retrocorrecta");
     retroMal = document.createElement('div');
     retroMal.className = "retroMal col-md-6 col-md-offset-3";
@@ -131,45 +137,39 @@ function conteo() {
         document.getElementById("pasar").style.display = "none";
         document.getElementById("botonCerrarRetroplus").style.display = "";
         var final = rutas.length;
-
-        if (idioma == "ENG") {
-            for (var n = 0; n < retroCal2.length; n++) {
-                if (aciertos >= retroCal2[n].LimInf && aciertos <= retroCal2[n].LimSup) {
-                    mensaje = retroCal2[n].Mensaje;
-                }
-            }
-        }
+        
         if (idioma == "ESP") {
 
             for (var j = 0; j < retroCal.length; j++) {
-                console.log(aciertos);
+                // console.log(aciertos);
                 if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
                     mensaje = retroCal[j].Mensaje;
                 }
             } //for
         }
-        console.log(mensaje);
+        // console.log(mensaje);
         //SWAL ME RINDO
-        if (idioma == "ENG") {
-            swal({
-                title: "Result",
-                text: mensaje + " you have " + aciertos + " of " + final,
-                confirmButtonText: "Aceptar",
-                type: "info",
-                button: "Ok",
-            });
-        } else if (idioma == "ESP") {
+        // if (idioma == "ENG") {
+        //     swal({
+        //         title: "Result",
+        //         text: mensaje + " you have " + aciertos + " of " + final,
+        //         confirmButtonText: "Aceptar",
+        //         button: "Ok",
+        //     });
+        // } else 
+        if (idioma == "ESP") {
             swal({
                 title: "Resultado",
-                text: mensaje + ", has obtenido " + aciertos + " de " + final,
+                text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n"+mensaje,
                 confirmButtonText: "Aceptar",
-                type: "info",
                 button: "Aceptar",
             });
         } //ESP
         guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
+        $(".retroBien").hide();
+        $(".retroMal").hide();
         aciertos = 0; //tempo lee aciertos
-        console.log(testDivs);
+        // console.log(testDivs);
     });
 
 
@@ -240,8 +240,8 @@ function crearcartas() {
         vidmpeg = rutas[i - 1][0].indexOf("mp4");
         soundmp3 = rutas[i - 1][0].indexOf("mp3");
 
-        console.log(i - 1);
-        console.log(imgjpg);
+        // console.log(i - 1);
+        // console.log(imgjpg);
 
         colorArray.push(getRandomColor());
         elemento = document.createElement('div');
@@ -328,7 +328,7 @@ function crearcartas() {
             if (imgjpg == -1 || imgjpeg == -1 || imgpng == -1 || vidmpeg == -1 || soundmp3 == -1) {
                 parr = document.createElement('p');
                 parr.className = "parri";
-                parr.setAttribute('style', 'width:80%;');
+                // parr.setAttribute('style', 'width:80%;');
                 parr.innerHTML = rutas[i - 1][0];
                 elemento3.appendChild(parr);
 
@@ -448,7 +448,7 @@ function crearcartas() {
             if (imgjpg == -1 || imgjpeg == -1 || imgpng == -1 || vidmpeg == -1 || soundmp3 == -1) {
                 parr = document.createElement('p');
                 parr.className = "parri";
-                parr.setAttribute('style', 'width:80%;');
+                // parr.setAttribute('style', 'width:80%;');
                 parr.innerHTML = rutas[j - 1][1];
                 elemento3.appendChild(parr);
 
@@ -499,24 +499,16 @@ function invertirCarta(carta) {
 
 
 function alClicCarta(e) {
-
-    console.log("click: ", e.currentTarget.parentNode.getAttribute("data-respuesta"));
+    var totalMov = rutas.length * 2 + 1
     invertirCarta(e.currentTarget);
     if (cartaActiva === null) {
         cartaActiva = e.currentTarget;
         cartaActiva.removeEventListener("click", alClicCarta);
-        if(retroPar){
-            retroMal.innerHTML = e.currentTarget.parentNode.getAttribute("data-respuesta1")    
-        }else{
-            retroMal.innerHTML = "Intenta otra vez."            
-        }
-
+        retroMal.innerHTML = e.currentTarget.parentNode.getAttribute("data-respuesta1")
     } else {
         if (e.currentTarget.parentNode.getAttribute("data-respuesta") === cartaActiva.parentNode.getAttribute("data-respuesta")) {
-            console.log("son correctas");
             current2 = e.currentTarget;
             aciertos++;
-            console.log("Aciertos al clik" + aciertos);
             cartaActiva.removeEventListener("click", alClicCarta);
             cartaActiva.className = e.currentTarget.className = "cuadritoHecho abierto";
 
@@ -529,11 +521,10 @@ function alClicCarta(e) {
             if (activarson) {
                 audioBien.play();
             }
-            if(retroPar){
-                retroBien.innerHTML = e.currentTarget.parentNode.getAttribute("data-respuesta0")
-            }else{
-                retroBien.innerHTML = "¡Bien hecho!"
-            }
+            var mmov = mov += 1;
+            document.getElementById('mov').innerHTML = "Movimientos realizados: "+mmov
+            retroBien.innerHTML = e.currentTarget.parentNode.getAttribute("data-respuesta0")
+            
             document.getElementById("retroincorrecta").style.display = "none";
             document.getElementById("retrocorrecta").style.display = "block";
 
@@ -550,50 +541,37 @@ function alClicCarta(e) {
                 try {
                     tiempo = ((minutes * 60) + seg) - (seconds % 60)
                     clearInterval(countdownTimer);
-                    console.log("TIEMPO FINAL: " + tiempo);
                 } catch (e) {
 
                 }
                 for (var j = 0; j < retroCal.length; j++) {
-                    console.log(aciertos);
                     if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
                         mensaje = retroCal[j].Mensaje;
                     }
                 } //for
 
-                if (idioma == "ENG") {
-                    swal({
-                        title: "Result",
-                        text: "Great job you have " + aciertos + " of " + final,
-                        confirmButtonText: "Aceptar",
-                        type: "info",
-                        button: "Ok",
-                    });
-                } else if (idioma == "ESP") {
-                    if(retroGeneral){
+                // if (idioma == "ENG") {
+                //     swal({
+                //         title: "Result",
+                //         text: "Great job you have " + aciertos + " of " + final,
+                //         confirmButtonText: "Aceptar",
+                //         button: "Ok",
+                //     });
+                // } else
+                if (idioma == "ESP") {
                         swal({
                             title: "Resultado",
-                            text: mensaje + ", has obtenido " + aciertos + " de " + final,
+                            text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+mensaje,
                             confirmButtonText: "Aceptar",
-                            type: "info",
                             button: "Aceptar",
                         });
-                    }else{
-                        swal({
-                            title: "Resultado",
-                            text: "Has obtenido " + aciertos + " de " + final,
-                            confirmButtonText: "Aceptar",
-                            type: "info",
-                            button: "Aceptar",
-                        });
-                    }
-
-                } //español
+                        $(".retroBien").hide();
+                        $(".retroMal").hide();
+                } 
 
                 if (tempo) {
 
                     if ((tiempo) >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
-                        console.log("Mas de 60");
                         d = Number(tiempo);
                         var m = Math.floor(d % 3600 / 60);
                         var s = Math.floor(d % 3600 % 60);
@@ -601,20 +579,22 @@ function alClicCarta(e) {
                         var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
 
                         swal({
+                            text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+" en " + mDisplay + sDisplay+"\n"+mensaje,
                             title: "Resultado",
-                            text: mensaje + ", has obtenido " + aciertos + " de " + final + " en " + mDisplay + sDisplay,
                             confirmButtonText: "Aceptar",
-                            type: "info",
                             button: "Aceptar",
                         });
+                        $(".retroBien").hide();
+                        $(".retroMal").hide();
                     } else {
                         swal({
                             title: "Resultado",
-                            text: mensaje + ", has obtenido " + aciertos + " de " + final + " en " + tiempo + " segundos",
+                            text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+ " en " + tiempo + " segundos"+ "\n"+mensaje,
                             confirmButtonText: "Aceptar",
-                            type: "info",
                             button: "Aceptar",
                         });
+                        $(".retroBien").hide();
+                        $(".retroMal").hide();
                     } //else tiempo
 
                 } //tempo
@@ -626,7 +606,8 @@ function alClicCarta(e) {
             }
         } else {
             condicion = 1;
-           
+            var mmov = mov += 1;
+            document.getElementById('mov').innerHTML = "Movimientos realizados: "+mmov
             if (activarson) {
 
                 audioMal.play();
@@ -638,6 +619,34 @@ function alClicCarta(e) {
             deactivarCartas();
         }
     }
+        
+            if(movimientos>totalMov){
+                if(mov >= movimientos){
+                    swal({
+                        title: "¡Se acabó el número de movimientos permitidos!\n",
+                        confirmButtonText: "Aceptar",
+                        button: "Aceptar"
+                    });
+                    $("#revisar").hide();
+                    $("#pasar").show();
+                    intentos++;
+                }
+            }else{
+                if(mov >= totalMov){
+                    swal({
+                        title: "¡Se acabó el número de movimientos permitidos!\n",
+                        confirmButtonText: "Aceptar",
+                        button: "Aceptar"
+                    });
+                    $("#revisar").hide();
+                    $("#pasar").show();
+                    intentos++;
+                }
+            }
+              $("#botonCerrarRetroplus").click(function () {
+                    intentos++;
+                  }); 
+
 }
 
 
@@ -693,7 +702,6 @@ function crearMemorama() {
         global = 0;
         audioBien.pause();
         audioBien.currentTime = 0;
-        console.log("hola locotito");
         if (vidmaster == true) {
             auxmaster2 = window.domino[1];
             auxmaster2.pause();
@@ -754,3 +762,109 @@ function isMobile() {
     }
     $("#mododebug").hide();
 }
+
+
+//Código en el index
+// var html5_audiotypes = {
+//     "mp3": "audio/mpeg",
+//     "mp4": "audio/mp4",
+//     "ogg": "audio/ogg",
+//     "wav": "audio/wav"
+// }
+
+// function escucharadui() {
+//     var audioBien = document.getElementById('click1');
+//     audioBien.play();
+
+// }
+
+// function imagen() {
+//     var texto = "<img src='./imagenes/bocina.png' style='width: 80%; '/>";
+//     document.writeln(texto);
+// }
+
+
+// function createsoundbite(sound) {
+//     var html5audio = document.createElement('audio')
+//     if (html5audio.canPlayType) { //Comprobar soporte para audio HTML5
+//         for (var i = 0; i < arguments.length; i++) {
+//             var sourceel = document.createElement('source')
+//             sourceel.setAttribute('src', arguments[i])
+//             if (arguments[i].match(/.(w+)$/i))
+//                 sourceel.setAttribute('type', html5_audiotypes[RegExp.$1])
+//             html5audio.appendChild(sourceel)
+//         }
+//         html5audio.load()
+//         html5audio.playclip = function () {
+//             html5audio.pause()
+//             html5audio.currentTime = 0
+//             html5audio.play()
+//         }
+//         return html5audio
+//     } else {
+//         return {
+//             playclip: function () {
+//                 throw new Error('Su navegador no soporta audio HTML5')
+//             }
+//         }
+//     }
+// }
+
+// // //Inicializar sonidos
+// var click1 = createsoundbite('audios/audio1_i1u2t10.mp3');
+
+// // función que impide que solamente los elementos levantados y los correctos se escuchen
+// function sonido(audiopro, dato) {
+//     var variable = document.getElementById(audiopro);
+
+//     console.log(variable);
+
+//     if (window.global < 2) {
+
+//         if (window.elemnto.includes(dato)) {
+//             variable.play();
+
+//         } else {
+//             window.elemnto.push(dato);
+//             window.global = window.global + 1;
+//             variable.play();
+//             console.log(global);
+//         }
+
+//     } else {
+//         if (window.elemnto.includes(dato)) {
+//             variable.play();
+
+//         }
+//     }
+// }
+// var auxmaster;
+
+// function video(idvideo, dato) {
+//     var variable = document.getElementById(idvideo);
+//     window.domino.push(variable);
+//     console.log(window.domino);
+//     console.log("TAMANO" + window.domino.length)
+
+//     if (window.domino.length == 2) {
+//         auxmaster = window.domino[0];
+//         auxmaster.pause();
+//     }
+//     if (window.global < 2) {
+
+//         if (window.elemnto.includes(dato)) {
+//             variable.play();
+//         } else {
+//             window.elemnto.push(dato);
+//             window.global = window.global + 1;
+//             variable.play();
+//             console.log(global);
+//         }
+
+//     } else {
+//         if (window.elemnto.includes(dato)) {
+//             variable.play();
+
+//         }
+//     }
+// }

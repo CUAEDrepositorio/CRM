@@ -1,42 +1,22 @@
 <!DOCTYPE html>
 <html lang="es-MX">
-
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i["GoogleAnalyticsObject"] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
-        ga("create", "UA-158134453-1", {
-            "cookieDomain": "auto"
-        });
-        ga("set", "anonymizeIp", true);
-        ga('set', 'dimension1', "CUAED");
-        ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
-        ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
-        ga('set', 'dimension4', "2019");
-        ga('set', 'dimension5', "LÚDICO");
-        ga('set', 'dimension6', "RL02-19");
-        ga('set', 'dimension7', "MEMORAMA");
-        ga('set', 'dimension8', "VERSIÓN 1");
-        ga("set", "metric1", 1);
-        ga("set", "metric2", 2);
-        ga("set", "metric3", 3);
-        ga("set", "metric4", 4);
-        ga("set", "metric5", 5);
-        ga("set", "metric6", 6);
-        ga("set", "metric7", 7);
-        ga("set", "metric8", 8);
-        ga("send", "pageview");
-    </script>
+  <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<!--   <script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+  ga("create", "UA-158134453-1", {"cookieDomain":"auto"});
+  ga("set", "anonymizeIp", true);
+  ga('set', 'dimension1', "CUAED");
+  ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS" );
+  ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA" );
+  ga('set', 'dimension4', "2019" );
+  ga('set', 'dimension5', "LÚDICO" );
+  ga('set', 'dimension6', "RL02-19" );
+  ga('set', 'dimension7', "MEMORAMA" );
+  ga('set', 'dimension8', "VERSIÓN 1" );
+  ga("set", "metric1", 1);ga("set", "metric2", 2);ga("set", "metric3", 3);ga("set", "metric4", 4); ga("set", "metric5", 5);ga("set", "metric6", 6);ga("set", "metric7", 7);ga("set", "metric8", 8);
+  ga("send", "pageview");
+  </script> -->
     <meta charset="UTF-8">
     <title>Memorama V2.0</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -50,7 +30,8 @@
     <script src="js/listaReactivos.js"></script>
     <script src="js/configRecurso.js"></script>
     <script src="js/tempo.js"></script>
-    <script src="SCORM/conectividadSCORM.js"></script>
+    <script src="./SCORM/conectividadSCORM.js"></script>
+    <script src="./SCORM/barraDeInfo.js"></script>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
@@ -58,118 +39,6 @@
     <script src="js/sweetalert.min.js"></script>
     <link rel="stylesheet" href="css/sweetalert.css" />
 
-
-
-    <script>
-        var html5_audiotypes = {
-            "mp3": "audio/mpeg",
-            "mp4": "audio/mp4",
-            "ogg": "audio/ogg",
-            "wav": "audio/wav"
-        }
-
-        function escucharadui() {
-            var audioBien = document.getElementById('click1');
-            audioBien.play();
-
-        }
-
-        function voltear() {
-
-
-        }
-
-        function imagen() {
-            var texto = "<img src='./imagenes/bocina.png' style='width: 80%; '/>";
-            document.writeln(texto);
-        }
-
-
-        function createsoundbite(sound) {
-            var html5audio = document.createElement('audio')
-            if (html5audio.canPlayType) { //Comprobar soporte para audio HTML5
-                for (var i = 0; i < arguments.length; i++) {
-                    var sourceel = document.createElement('source')
-                    sourceel.setAttribute('src', arguments[i])
-                    if (arguments[i].match(/.(w+)$/i))
-                        sourceel.setAttribute('type', html5_audiotypes[RegExp.$1])
-                    html5audio.appendChild(sourceel)
-                }
-                html5audio.load()
-                html5audio.playclip = function () {
-                    html5audio.pause()
-                    html5audio.currentTime = 0
-                    html5audio.play()
-                }
-                return html5audio
-            } else {
-                return {
-                    playclip: function () {
-                        throw new Error('Su navegador no soporta audio HTML5')
-                    }
-                }
-            }
-        }
-
-        // //Inicializar sonidos
-        var click1 = createsoundbite('audios/audio1_i1u2t10.mp3');
-
-        // función que impide que solamente los elementos levantados y los correctos se escuchen
-        function sonido(audiopro, dato) {
-            var variable = document.getElementById(audiopro);
-
-            console.log(variable);
-
-            if (window.global < 2) {
-
-                if (window.elemnto.includes(dato)) {
-                    variable.play();
-
-                } else {
-                    window.elemnto.push(dato);
-                    window.global = window.global + 1;
-                    variable.play();
-                    console.log(global);
-                }
-
-            } else {
-                if (window.elemnto.includes(dato)) {
-                    variable.play();
-
-                }
-            }
-        }
-        var auxmaster;
-
-        function video(idvideo, dato) {
-            var variable = document.getElementById(idvideo);
-            window.domino.push(variable);
-            console.log(window.domino);
-            console.log("TAMANO" + window.domino.length)
-
-            if (window.domino.length == 2) {
-                auxmaster = window.domino[0];
-                auxmaster.pause();
-            }
-            if (window.global < 2) {
-
-                if (window.elemnto.includes(dato)) {
-                    variable.play();
-                } else {
-                    window.elemnto.push(dato);
-                    window.global = window.global + 1;
-                    variable.play();
-                    console.log(global);
-                }
-
-            } else {
-                if (window.elemnto.includes(dato)) {
-                    variable.play();
-
-                }
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -178,7 +47,7 @@
     <div id="prohibido">
         <div id="NoMovil" class="ocultar">
             <i class="fas fa-ban fa-10x"></i>
-            <br />NO DISPONIBLE EN MOVIL
+            <br />NO DISPONIBLE
         </div>
     </div>
     <!-- <audio id="click1"><source src="audios/audio20_i1u2t10.mp3" type="audio/mp3"></audio> -->
@@ -200,12 +69,15 @@
     <!-- <h1 class="headings actividad">Tipo de actividad</h1> -->
     <i class="icon-horizontal-icon icono"></i>
     <h2 class="headings-int">Título de la actividad</h2><br />
-    <p>Instrucciones (pedagógica y técnica) de la actividad</p>
+    <p>Instrucciones (pedagógica y técnica) de la actividad.</p>
     <span id="countdown"> </span>
 
     <div id="bloqueCartas" class="row bonito">
         <span id="mododebug"> -MODO DEBUG ACTIVADO -</span>
+        <span id="mov"> </span>
         <div id="Parte1">
+        </div>
+        <div id="Parte2">
         </div>
         <div class="retroBien col-md-6 col-md-offset-3" id="retrocorrecta" style="display: none;"></div>
         <div class="retroMal col-md-6 col-md-offset-3" id="retroincorrecta" style="display: none;"></div>

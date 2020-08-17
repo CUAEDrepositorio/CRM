@@ -6,11 +6,9 @@ body{
     color: #666666 !important;
     line-height: normal !important;
     margin:2em !important;
-	font-size: 12px;
+    font-size: 12px;
 }
-#bloqueCartas{
 
-}
 #countdown{
     display: flex;
     align-items: center;
@@ -80,13 +78,14 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
 }
 .parri{
     text-align: center;
+    width: 100%;
 }
 .caraRespuesta{
-
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+    width: 80%;
 }
 .caraRespuesta div{
     display: table-cell;
@@ -100,7 +99,8 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
     border: 4px #fff solid;
 }
 .caraRespuesta.parte2{
-    font-weight: bold;
+    font-weight: lighter;
+    /* width: 80%; */
 }
 .barraInferior{
     text-align: center;
@@ -143,28 +143,27 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
     clear: both;
     text-align: center;
 }
+
+.revisar{
+    margin-top: 40px;
+}
 .retroBien{
-    color: rgb(0, 131, 0);
     background-color: rgba(0, 255, 0, 0.1);
-    border: 1px solid rgb(0, 165, 0);
-    padding: 6px;
+    border: 1px solid rgb(131, 198, 53);
+    padding: 16px;
     border-radius: 3px;
     margin: 0 2px;
     line-height:30px;
     text-align: center;
     margin-top: 20px;
 }
-.revisar{
-    margin-top: 40px;
-}
 
 .retroMal{
-    color: rgb(131, 0, 0);
     background-color: rgba(255, 0, 0, 0.1);
-    border: 1px solid rgb(165, 0, 0);
-    padding: 6px;
+    border: 1px solid rgb(240, 27, 24);
+    padding: 16px;
     border-radius: 3px;
-	margin: 0 2px;
+    margin: 0 2px;
     line-height:30px;
     text-align: center;
     margin-top: 20px;
@@ -192,11 +191,10 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
     margin-bottom: 15px !important;
 }
 .headings-int {
-    font-family: 'Open Sans', sans-serif;
-    color: #6c6b82;
-    letter-spacing: 1px;
-    font-size: 2em;
-    margin-top: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+  font-size: 1.8em;
+  text-align: left;
 }
 .under-li {
     border-bottom: solid #dbdbdb;
@@ -208,8 +206,12 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
 /***** RESPONSIVE 480 *****************/
 /*******************************************/
 
-@media (max-width: 480px) {
+@media (max-width: 992px) {
     html{
+        margin:0;
+        padding: 0;
+    }
+    .retroBien{
         margin:0;
         padding: 0;
     }
@@ -221,9 +223,7 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
         -webkit-box-shadow: none;
         margin:0.5em;
     }
-    p{
 
-    }
 }
 
 #prohibido{
@@ -241,5 +241,13 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
   align-items: center;
   justify-content: left;
   font-size: 2vw;
+  border-radius: 10px;
+}
+
+#mov{
+  display: flex;
+  align-items: right;
+  justify-content: center;
+  font-size: 1.5vw;
   border-radius: 10px;
 }

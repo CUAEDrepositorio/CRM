@@ -7,13 +7,11 @@ var rendirse = false;
 var imagentapa = "./imagenes/bocina.png";
 
 //ancho y alto de la carta del memorama
-var anchocarta = 105;
-var altocarta = 105;
+var anchocarta = 120;
+var altocarta = 120;
 
 //opcion para separar las cartas o tenerlas en un solo contenedor
 var separador = false;
-//idioma ya sea español= ESP ò bien inglès=ENG
-var idioma = "ESP";
 
 var activarson = false; //Activar sonido
 var tempo = false; //Activar funcion de temporizador KDMR
@@ -24,49 +22,26 @@ var debug = false; //activar el debug
 var ambSCORM = false;
 var barraSCORM = false;
 var idObjetivo = 0;
-var retroGeneral = false;
-var retroPar = false;
-//para retros en español
+var movimientos = 0;
+
 var retroCal = [{
     LimInf: 0,
-    LimSup: 3,
-    Mensaje: "No fue suficiente"
+    LimSup: 5,
+    Mensaje: "¡Vaya! Parece que no es suficiente."
   },
   {
-    LimInf: 4,
-    LimSup: 6,
-    Mensaje: "Esfuérzate más"
+    LimInf: 6,
+    LimSup: 7,
+    Mensaje: "¡Esfuérzate más!"
   },
   {
-    LimInf: 7,
+    LimInf: 8,
     LimSup: 9,
-    Mensaje: "Suficiente"
+    Mensaje: "¡Sigue esforzándote!"
   },
   {
     LimInf: 10,
     LimSup: 10,
-    Mensaje: "Excelente"
-  }
-];
-//para retros en inglès
-var retroCal2 = [{
-    LimInf: 0,
-    LimSup: 3,
-    Mensaje: "It was not enough"
-  },
-  {
-    LimInf: 4,
-    LimSup: 6,
-    Mensaje: "Work harder"
-  },
-  {
-    LimInf: 7,
-    LimSup: 9,
-    Mensaje: "Enough"
-  },
-  {
-    LimInf: 10,
-    LimSup: 10,
-    Mensaje: "Excelent"
+    Mensaje: "¡Felicidades!"
   }
 ];

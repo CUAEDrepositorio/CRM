@@ -12,68 +12,138 @@ NOTA: Longitud mínima de las palabras 2 y máxima 25
 NOTA: Automáticamente se crea el crucigrama y define las palabras que estarán en forma vertical y horizontal.
 NOTA: Acepta palabras con acento y diéresis, de acuerdo como se escriba la palabra será tomada como correcta.
 Ejemplo:
-    ["Programacion","Ciencia de las computadoras.","Retro Bien","Retro Mal"]
-        Será tomada como correcta programacion SIN acento.
+    ["Programacion",
+    "Ciencia de las computadoras.",
+    "Retro Bien",
+    "Retro Mal"]
+    Será tomada como correcta programacion SIN acento.
 
-    ["Programación","Ciencia de las computadoras.","Retro Bien","Retro Mal"]
-        Será tomada como correcta programacion CON acento.
+    ["Programación",
+    "Ciencia de las computadoras.",
+    "Retro Bien",
+    "Retro Mal"]
+    Será tomada como correcta programación CON acento.
 */
 
+
 var palabraspro = [
-    ["Separado", "Cuando dos elementos están lejos.",
-    "Retro Bien","Retro Mal"],
-    ["Cuidado", "Mantenerse alerta.",
-    "Retro Bien","Retro Mal1"],
-    ["ONU", "Organización de las Naciones Unidas.",
-    "Retro Bien","Retro Mal"],
-    ["Realidad", "Todo lo real.",
-    "Retro Bien","Retro Mal"],
-    ["Amable", "Persona que siempre te trata bien.",
-    "Retro Bien","Retro Mal"],
-    ["Bienestar", "Tener todo en armonía.",
-    "Retro Bien","Retro Mal"],
-    ["Camino", "Cuando regresamos a casa.",
-    "Retro Bien","Retro Mal"],
-    ["Programación", "Ciencia de las computadoras.",
-    "Retro Bien","Retro Mal"],
-    ["Constitución", "Firmada en 1917.",
-    "Retro Bien","Retro Mal"],
-    ["Cuchillo", "Utensilio utilizado para cortar.",
-    "Retro Bien","Retro Mal"],
-    ["Celular", "Permite comunicarnos de manera sencilla.",
-    "Retro Bien","Retro Mal"],
-    ["Caballo", "Animal con cuatro patas.",
-    "Retro Bien","Retro Mal"],
-    ["Corazón", "Late y late para dar vida.",
-    "Retro Bien","Retro Mal"],
-    ["Perseverancia", "Seguir adelante apesar de todo.",
-    "Retro Bien","Retro Mal"],
-    ["Castillo", "Construcción de la Edad Media.",
-    "Retro Bien","Retro Mal"],
-    ["Muralla", "Para que no pase nadie.",
-    "Retro Bien","Retro Mal"],
-    ["Computadora", "Conjunto de dispositivos digitales.",
-    "Retro Bien","Retro Mal"],
-    ["Lapicero", "Utilizado para escribir.",
-    "Retro Bien","Retro Mal"],
-    ["Ingeniería", "El arte del ingenio para resolver problemas.",
-    "Retro Bien","Retro Mal"],
-    ["Laboratorio", "Lugar para experimentar.",
-    "Retro Bien","Retro Mal"],
-    ["Líbano", "Flor de loto.",
-    "Retro Bien","Retro Mal"],
-    ["Esternocleidomastoideo", "Músculo ubicado en la zona anterior y lateral del cuello.",
-    "Retro Bien","Retro Mal"],
-    ["Claustrofobia", "Miedo a los espacios cerrados.",
-    "Retro Bien","Retro Mal"],
-    ["Ventilador", "Algo que da aire.",
-    "Retro Bien","Retro Mal"],
-    ["Tornado", "Catástrofe con vientos.",
-    "Retro Bien","Retro Mal"],
-    ["Iglesia", "Lugar de rezo.",
-    "Retro Bien","Retro Mal"],
-    ["Miguel Hidalgo", "Padre de la patria (México).",
-    "Retro Bien","Retro Mal"],
-    ["Cálculo diferencial", "Materia de ingeniería.",
-    "Retro Bien","Retro Mal"]
+    ["Separado", 
+    "Cuando dos elementos están lejos.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Cuidado",
+    "Mantenerse alerta.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["ONU", 
+    "Organización de las Naciones Unidas. ",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Realidad", 
+    "Todo lo real.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Amable", 
+    "Persona que siempre te trata bien.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Camino", 
+    "Cuando regresamos a casa.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Programación", 
+    "Ciencia de las computadoras.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Constitución",
+    "Firmada en 1917.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Cuchillo",
+    "Utensilio utilizado para cortar.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Celular",
+    "Permite comunicarnos de manera sencilla.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Caballo",
+    "Animal con cuatro patas.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Corazón",
+    "Late y late para dar vida.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Castillo",
+    "Construcción de la Edad Media.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Muralla",
+    "Para que no pase nadie.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Computadora",
+    "Conjunto de dispositivos digitales.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Ingeniería",
+    "El arte del ingenio para resolver problemas.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Laboratorio",
+    "Lugar para experimentar.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Esternocleidomastoideo",
+    "Músculo ubicado en la zona anterior y lateral del cuello.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Claustrofobia",
+    "Miedo a los espacios cerrados.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Ventilador",
+    "Algo que da aire.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Tornado",
+    "Catástrofe con vientos.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Iglesia",
+    "Lugar de rezo.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Miguel Hidalgo",
+    "Padre de la patria (México).",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."],
+
+    ["Cálculo diferencial",
+    "Materia de ingeniería.",
+    "Respuesta correcta.",
+    "Respuesta incorrecta."]
 ];

@@ -1,7 +1,7 @@
-var numeropalabras = 5; //Toma aleatoriamente el número de palabras que esten en listaReactivos.js
+var numeropalabras = 10 //Toma aleatoriamente el número de palabras que esten en listaReactivos.js
 var tempo = false;
-var minutes = 1;
-var seg = 30;
+var minutes = 5;
+var seg = 10;
 var verLongitud = false;
 var debug = false;
 
@@ -11,22 +11,22 @@ var idObjetivo = 0;
 
 var retroCal = [{
 		LimInf: 0,
-		LimSup: 3,
-		Mensaje: "No fue suficiente"
+		LimSup: 5,
+		Mensaje: "¡Vaya! Parece que no es suficiente."
 	},
 	{
-		LimInf: 4,
-		LimSup: 6,
-		Mensaje: "Esfuérzate más"
+		LimInf: 6,
+		LimSup: 7,
+		Mensaje: "¡Esfuérzate más!"
 	},
 	{
-		LimInf: 7,
+		LimInf: 8,
 		LimSup: 9,
-		Mensaje: "Suficiente"
+		Mensaje: "¡Sigue esforzándote!"
 	},
 	{
 		LimInf: 10,
 		LimSup: 10,
-		Mensaje: "Excelente"
+		Mensaje: "¡Felicidades!"
 	},
 ];

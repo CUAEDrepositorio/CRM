@@ -3,7 +3,7 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <!-- <script async="" src="https://www.google-analytics.com/analytics.js"></script>
   <script>
     (function (i, s, o, g, r, a, m) {
       i["GoogleAnalyticsObject"] = r;
@@ -36,27 +36,30 @@
     ga("set", "metric7", 7);
     ga("set", "metric8", 8);
     ga("send", "pageview");
-  </script>
+  </script> -->
 
   <meta charset="UTF-8">
-  <title>Crucigrama V2.0</title>
+  <title>Crucigrama V2.1</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
     integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <script src="https://lib.cuaed.unam.mx/R019/js/jquery-v3.2.1.js"> </script>  
+  <link rel="stylesheet" href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css" />
+  <script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
   <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
   <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-  <script src="https://lib.cuaed.unam.mx/R019/js/jquery-v2.1.3.min.js"></script>
+
   <link rel="stylesheet" href="css/estilos.css">
-  <link rel="stylesheet" href="css/estilos.css">
-  <script src="js/sweetalert.min.js"></script>
-  <script src="js/index.js"></script>
-  <script src="js/listaReactivos.js"></script>
+  
   <script src="js/configRecurso.js"></script>
-  <script src="js/tempo.js"></script>
+
+  <script src="js/listaReactivos.js"></script>
+  <script src="js/cruci.js"></script>
+  <script src="js/sweetalert.min.js"></script>
   <link rel="stylesheet" href="css/sweetalert.css" />
   <script src="SCORM/conectividadSCORM.js"></script>
-
+  <script src="js/tempo.js"></script>
 </head>
 
 <body>
@@ -65,13 +68,13 @@
   <div id="prohibido">
     <div id="NoMovil" class="ocultar">
       <i class="fas fa-ban fa-10x"></i>
-      <br />NO DISPONIBLE EN MOVIL
+      <br>NO DISPONIBLE
     </div>
   </div>
   <div class="container">
     <br>
-    <h2 class="headings-int ">Título de la actividad</h2>
-    <p>Instrucciones (pedagógica y técnica) de la actividad</p>
+    <h2 class="headings-int ">12Título de la evaluación</h2>
+    <p>Instrucciones (pedagógica y técnica) de la actividad.</p>
 
     <br>
 
@@ -87,22 +90,54 @@
     <div class="misterpro" id="supermister">
       <div class="center crossword" id="crossword"></div><br />
       <div class="center" id="supercenter">
-        <div class="contrespuestas" id="respuestaspro">
+        <div class="contrespuestash" id="respuestaspro">
           <div id="resp" class="respuestas">
             <h3>Horizontales</h3>
             <div id="primeroh"></div>
           </div>
-          <div id="resp1" class="respuestas">
+          
+         </div>
+         <div class="contrespuestasv" id="respuestaspro">
+            <div id="resp1" class="respuestas">
             <h3>Verticales</h3>
             <div id="primerov"></div>
           </div>
-        </div>
+         </div>
       </div>
+      <br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
     <br></br>
   </div>
 
   <script src="js/index.js"></script>
+    <script>
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').each(function () {
+        var options = {
+          html: true
+        };
+  
+        if ($(this)[0].hasAttribute('data-type')) {
+          options['template'] =
+            '<div class="tooltip ' + $(this).attr('data-type') + '" role="tooltip">' +
+            ' <div class="tooltip-arrow"></div>' +
+            ' <div class="tooltip-inner"></div>' +
+            '</div>';
+        }
+        $(this).tooltip(options);
+      });
+      Create();
+      Play();
+      RegisterEvents();
+      if (tempo) {
+        iniciarTempo();
+        $("#countdown").show();
+        $("#btnReinicio").hide();
+      }
+
+    });
+    
+  </script>
 </body>
 
 </html>

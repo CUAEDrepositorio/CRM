@@ -39,7 +39,6 @@ body.stop-scrolling {
       left: 15px;
       right: 15px; } }
   .sweet-alert h2 {
-    color: #575757;
     font-size: 30px;
     text-align: center;
     font-weight: 600;
@@ -48,9 +47,10 @@ body.stop-scrolling {
     margin: 25px 0;
     padding: 0;
     line-height: 40px;
-    display: block; }
+    display: block;
+    color: #0069d9;
+     }
   .sweet-alert p {
-    color: #797979;
     font-size: 16px;
     text-align: center;
     font-weight: 300;
@@ -59,7 +59,8 @@ body.stop-scrolling {
     float: none;
     margin: 0;
     padding: 0;
-    line-height: normal; }
+    line-height: normal; 
+    color: #000 }
   .sweet-alert fieldset {
     border: none;
     position: relative; }
@@ -172,7 +173,8 @@ body.stop-scrolling {
     opacity: 0;
     visibility: hidden; }
   .sweet-alert button {
-    background-color: #8CD4F5;
+  
+    background-color: #0069d9 !important;
     color: white;
     border: none;
     box-shadow: none;
@@ -187,9 +189,9 @@ body.stop-scrolling {
       outline: none;
       box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05); }
     .sweet-alert button:hover {
-      background-color: #7ecff4; }
+      background-color: #0062cc; }
     .sweet-alert button:active {
-      background-color: #5dc2f1; }
+      background-color:#0069d9 }
     .sweet-alert button.cancel {
       background-color: #C1C1C1; }
       .sweet-alert button.cancel:hover {
@@ -246,7 +248,8 @@ body.stop-scrolling {
           transform: rotate(-45deg);
           right: 16px; }
     .sweet-alert .sa-icon.sa-warning {
-      border-color: #F8BB86; }
+      border-color: #0069d9;
+    background-color: #0069d9;}
       .sweet-alert .sa-icon.sa-warning .sa-body {
         position: absolute;
         width: 5px;
@@ -256,7 +259,7 @@ body.stop-scrolling {
         -webkit-border-radius: 2px;
         border-radius: 2px;
         margin-left: -2px;
-        background-color: #F8BB86; }
+        background-color: #fff; }
       .sweet-alert .sa-icon.sa-warning .sa-dot {
         position: absolute;
         width: 7px;
@@ -266,7 +269,7 @@ body.stop-scrolling {
         margin-left: -3px;
         left: 50%;
         bottom: 10px;
-        background-color: #F8BB86; }
+        background-color: #fff; }
     .sweet-alert .sa-icon.sa-info {
       border-color: #C9DAE1; }
       .sweet-alert .sa-icon.sa-info::before {
@@ -687,15 +690,15 @@ body.stop-scrolling {
 
 @-webkit-keyframes pulseWarning {
   0% {
-    border-color: #F8D486; }
+    border-color: #fff; }
   100% {
-    border-color: #F8BB86; } }
+    border-color: #fff; } }
 
 @keyframes pulseWarning {
   0% {
-    border-color: #F8D486; }
+    border-color: #fff; }
   100% {
-    border-color: #F8BB86; } }
+    border-color: #fff; } }
 
 .pulseWarning {
   -webkit-animation: pulseWarning 0.75s infinite alternate;
@@ -703,15 +706,15 @@ body.stop-scrolling {
 
 @-webkit-keyframes pulseWarningIns {
   0% {
-    background-color: #F8D486; }
+    background-color: #fff; }
   100% {
-    background-color: #F8BB86; } }
+    background-color: #fff; } }
 
 @keyframes pulseWarningIns {
   0% {
-    background-color: #F8D486; }
+    background-color: #fff; }
   100% {
-    background-color: #F8BB86; } }
+    background-color: #Fff; } }
 
 .pulseWarningIns {
   -webkit-animation: pulseWarningIns 0.75s infinite alternate;

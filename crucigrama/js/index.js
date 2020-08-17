@@ -48,11 +48,12 @@ var conteo2;
 var final;
 var correctasT = [];
 var incorrectasT = [];
-var retroB = [];
-var retroM = [];
-var retroBL = ""
-var retroML = ""
-
+var retroB;
+var retroM;
+var retroBL;
+var retroML;
+// retroB = palabraspro[j][2];
+// retroM = palabraspro[j][3];
 var Bounds = {
   top: 0,
   right: 0,
@@ -510,7 +511,7 @@ function creanodos() {
   }
   var longitud = 0;
   palabraspro = palabraspro.sort(function () {
-    return Math.random() - 0.5
+    return Math.random()
   });
   //limita a 60 palabras
   if (palabraspro.length >= 61) {
@@ -725,13 +726,10 @@ function Revisar() {
   elementospalabra = document.getElementsByClassName("char");
   var pato = 0;
   for (var g = 0; g < elementospalabra.length; g++) {
-    // console.log(elementospalabra[g].value);
     if (elementospalabra[g].value == "") {
       pato = 1;
     }
   }
-  // console.log("soy" + pato);
-  // console.log(palabrasmagicas);
   var arrh = [];
   correctasT = [];
   incorrectasT = [];
@@ -768,10 +766,8 @@ function Revisar() {
         } else {
           incorrectasT.push(castidad);
         }
-
       }
       arrh.push(castidad);
-      // console.log(arrh);
     }
     for (var k = 0; k < posv; k++) {
       var idv = arregloincisosv[k].id + "";
@@ -790,13 +786,11 @@ function Revisar() {
         castidadv = castidadv + superidv[0].value;
 
       }
-
       castidadv = castidadv.toUpperCase();
-      for (var m = 0; m < palabrasmagicas.length; m++) {
-        if (castidadv == palabrasmagicas[m]) {
+      // for (var m = 0; m < palabrasmagicas.length; m++) {
+        if (palabrasmagicas.indexOf(castidadv) != -1) {
           correctasT.push(castidadv);
           aciertos++;
-
           for (var r = 1; r <= numeralprov; r++) {
             var clasessv = "V" + numeralpro1v + "_" + r;
             var superidbv = document.getElementsByClassName(clasessv);
@@ -805,103 +799,87 @@ function Revisar() {
         } else {
           incorrectasT.push(castidadv);
         }
-      }
+      //}//
       arrh.push(castidadv);
-      conteo = arregloincisosh.length;
-      conteo2 = arregloincisosv.length;
-      final = conteo + conteo2;
-      let respuestasT = document.getElementsByClassName("respuestacorr")
-      let respHTML = ""
-      for (respuestai of respuestasT) {
-        respHTML = respuestai.textContent.toUpperCase()
-        if (correctasT.indexOf(respHTML) != -1) {
-          //correcta
 
-          // const rMB = correctasT.findIndex(iMB => iMB === correctasT);
-          // console.log("ALGO: "+rMB)
-          respuestai.nextSibling.style.display = "inline";
-        } else {
-          //incorrecta
-          respuestai.nextSibling.nextSibling.style.display = "inline";
-        }
-
+    }//posv
+    conteo = arregloincisosh.length;
+    conteo2 = arregloincisosv.length;
+    final = conteo + conteo2;
+    let respuestasT = document.getElementsByClassName("respuestacorr")
+    let respHTML = ""
+    for (respuestai of respuestasT) {
+      respHTML = respuestai.textContent.toUpperCase()
+      if (correctasT.indexOf(respHTML) != -1) {
+        respuestai.nextSibling.style.display = "inline";
+      } else {
+        respuestai.nextSibling.nextSibling.style.display = "inline";
       }
+    }
+    document.getElementById("btnPlay").style.display = "none";
+    document.getElementById("btnCreate").style.display = "none";
+    document.getElementById("btnRevisar").style.display = "none";
+    document.getElementById("btnReinicio").style.display = "";
+    var totalpalabras = document.getElementsByClassName("respuestacorr");
+    for (var pl = 0; pl < totalpalabras.length; pl++) {
+      totalpalabras[pl].style.display = "";
+    }
 
-
-      mensaje = "";
-      for (var j = 0; j < retroCal.length; j++) {
-        console.log(aciertos);
-        if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
-          mensaje = retroCal[j].Mensaje;
-        }
+    mensaje = "";
+    for (var j = 0; j < retroCal.length; j++) {
+      console.log(aciertos);
+      if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
+        mensaje = retroCal[j].Mensaje;
       }
+    }
+    try {
+      tiempo = ((minutes * 60) + seconds)
+      clearInterval(countdownTimer);
+      console.log("TIEMPO: " + tiempo);
+    } catch (e) {}
+    //boton revisar
+    if (tempo) {
+      
+      if (tiempo >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
+        d = Number(temporal - seconds);
 
+        var m = Math.floor(d % 3600 / 60);
+        var s = Math.floor(d % 3600 % 60);
+        var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
+        var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
 
-      try {
-        tiempo = ((minutes * 60) + seconds)
-        clearInterval(countdownTimer);
-        console.log("TIEMPO: " + tiempo);
-      } catch (e) {
-
-      }
-      //boton revisar
-      if (tempo) {
-        if (tiempo >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
-          d = Number(temporal - seconds);
-
-          var m = Math.floor(d % 3600 / 60);
-          var s = Math.floor(d % 3600 % 60);
-          var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
-          var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
-
-          swal({
-            title: "Resultado",
-            text: mensaje + ", has obtenido " + aciertos + " de " + final + " en " + mDisplay + sDisplay + ".",
-            confirmButtonText: "Aceptar",
-            type: "info",
-            button: "Aceptar",
-          });
-          clearInterval(countdownTimer);
-        } else {
-          swal({
-            title: "Resultado",
-            text: mensaje + ", has obtenido " + aciertos + " de " + final + " en " + tiempo + " segundos.",
-            confirmButtonText: "Aceptar",
-            type: "info",
-            button: "Aceptar",
-          });
-        } //else tiempo
-        clearInterval(countdownTimer);
-        $("#countdown").remove();
-      } else { //tiempo
         swal({
           title: "Resultado",
-          text: mensaje + ", has obtenido " + aciertos + " de " + final + ".",
+          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas"+" en " + mDisplay + sDisplay + ".\n"+mensaje,
           confirmButtonText: "Aceptar",
-          type: "info",
           button: "Aceptar",
         });
-      }
-      document.getElementById("btnPlay").style.display = "none";
-      document.getElementById("btnCreate").style.display = "none";
-      document.getElementById("btnRevisar").style.display = "none";
-      document.getElementById("btnReinicio").style.display = "";
-      var totalpalabras = document.getElementsByClassName("respuestacorr");
-      for (var pl = 0; pl < totalpalabras.length; pl++) {
-        totalpalabras[pl].style.display = "";
-      }
-
-
-      // console.log(arrh);
+        clearInterval(countdownTimer);
+      } else {
+        swal({
+          title: "Resultado",
+          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas"+" en " + tiempo + " segundos.\n "+mensaje,
+          confirmButtonText: "Aceptar",
+          button: "Aceptar",
+        });
+      } //else tiempo
+      clearInterval(countdownTimer);
+      $("#countdown").remove();
+    } else { //tiempo
+      swal({
+        title: "Resultado",
+        text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas.\n"+mensaje,
+        confirmButtonText: "Aceptar",
+        button: "Aceptar",
+      });
     }
 
   } else {
     //REVISAR Falta respuestas
     swal({
       title: "Atención",
-      text: "Por favor, llena todos los campos",
+      text: "Llena todos los campos.",
       confirmButtonText: "Aceptar",
-      type: "info",
       button: "Aceptar",
     });
 
@@ -1156,20 +1134,7 @@ function WordObj(stringValue) {
 }
 
 
-//---------------------------------//
-//   EVENTS                        //
-//---------------------------------//
 
-function RegisterEvents() {
-
-
-  document.getElementById("btnCreate").addEventListener('click', Create, false);
-  document.getElementById("btnPlay").addEventListener('click', Play, false);
-  document.getElementById("btnRevisar").addEventListener('click', Revisar, false);
-  document.getElementById("btnReinicio").addEventListener('click', Reinicio, false);
-
-}
-RegisterEvents();
 
 
 //---------------------------------//
@@ -1241,10 +1206,14 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
         if (l == "CT" || l == "TC") {
           var car4 = o + "" + p + "_" + w + "" + o1 + "" + p1 + "_" + w1 + "L" + k1;
           var car5 = o + "" + p + "_" + w + "" + o1 + "" + p1 + "_" + w1 + "L" + k2;
-          retroB = palabraspro[i][2]
-          retroM = palabraspro[i][3]
-          retroBL = "<sup>"+retroB.length+"</sup>"              
-          retroML = "<sup>"+retroM.length+"</sup>"
+          try {
+            retroB = palabraspro[i][2]
+            retroM = palabraspro[i][3]
+            retroBL = "<sup>"+retroB.length+"</sup>"              
+            retroML = "<sup>"+retroM.length+"</sup>"
+          } catch (error) {
+            
+          }
           if (defineme == 0) {
             for (var u = 0; u < total.length; u++) {
               var stringloco3 = total[u].id + "";
@@ -1271,6 +1240,7 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
                   crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,retroB+retroBL,retroM+retroML);
                 }else{
                   crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,retroB,retroM);
+                  // crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0);
                 }
               }
             }
@@ -1305,6 +1275,7 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
                   crearespuesta(stringloco, posi, descript, car, 1,retroB+retroBL,retroM+retroML);
                 }else{
                   crearespuesta(stringloco, posi, descript, car, 1,retroB,retroM);
+                  // crearespuesta(stringloco, posi, descript, car, 1);
                 }
               }
             }
@@ -1334,6 +1305,7 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
                   crearespuesta2(stringloco, posi1, descript, car1, 1,retroB+retroBL,retroM+retroBL);
                 }else{
                   crearespuesta2(stringloco, posi1, descript, car1, 1,retroB,retroM);
+                  // crearespuesta2(stringloco, posi1, descript, car1, 1);
                 }
               }
             }
@@ -1358,6 +1330,7 @@ function ArrayToString(a, s) {
   return r;
 }
 
+
 function crearespuesta(a, b, c, k, g,rb,rm) {
   
   if (g == 0) {
@@ -1365,45 +1338,30 @@ function crearespuesta(a, b, c, k, g,rb,rm) {
   } else {
     var controlatodo = document.getElementById("resp");
   }
-  
-  console.log("AH: "+a);
-  console.log("BH: "+b);
-  console.log("CH: "+c);
-  console.log("KH: "+k);
-  console.log("GH: "+g);
-  // console.log("rbH: "+rb);
-  // console.log("rmH: "+rm);
-
 
   var palomita = document.createElement('i')
   palomita.setAttribute('class', 'ip far fa-2x fa-check-circle blink')
   var tache = document.createElement('i')
   tache.setAttribute('class', 'it far fa-2x fa-times-circle blink')
   var retroBien = document.createElement("span");
-  // var retroBientxt = document.createElement("span");
-  retroBien.setAttribute('class', 'tooltip');
-  retroBien.setAttribute('class', 'tooltiptext');
+
   retroBien.setAttribute('data-toggle', 'tooltip');
   retroBien.setAttribute('data-placement', 'auto left');
   retroBien.setAttribute('data-type', 'success');
-  retroBien.setAttribute('data-title', rb);
+  retroBien.setAttribute('title', rb);
   retroBien.setAttribute('style', "display: none;");
   retroBien.appendChild(palomita);
-  // retroBien.appendChild(retroBientxt);
+  
   var retroMal = document.createElement("span");
   retroMal.setAttribute('data-toggle', 'tooltip');
   retroMal.setAttribute('data-placement', 'auto left');
   retroMal.setAttribute('data-type', 'danger');
+  retroMal.setAttribute('title', rm);
   retroMal.setAttribute('style', "display: none;");
-  retroMal.setAttribute('data1-title', rm);
-
   retroMal.appendChild(tache)
 
   var contenidoprimario = document.createElement("div");
-  contenidoprimario.setAttribute('style', 'display:flex');
-  controlatodo.appendChild(contenidoprimario);
-  var contenidoprimario = document.createElement("div");
-  contenidoprimario.setAttribute('style', 'display:flex');
+  contenidoprimario.setAttribute('style', 'display:flex;align-items:center');
   controlatodo.appendChild(contenidoprimario);
   var contentrespuestas = document.createElement("div");
   contentrespuestas.setAttribute('id', k);
@@ -1423,56 +1381,52 @@ function crearespuesta(a, b, c, k, g,rb,rm) {
 }
 
 function crearespuesta2(a, b, c, k, g,rb,rm) {
+  
   if (g == 0) {
     var controlatodo = document.getElementById("primerov");
   } else {
     var controlatodo = document.getElementById("resp1");
   }
-  console.log("AV: "+a);
-  console.log("BV: "+b);
-  console.log("CV: "+c);
-  console.log("KV: "+k);
-  console.log("GV: "+g);
-  // console.log("rbV: "+rb);
-  // console.log("rmV: "+rm);
-  var palomitav = document.createElement('i')
-  palomitav.setAttribute('class', 'ip far fa-2x fa-check-circle blink')
-  var tachev = document.createElement('i')
-  tachev.setAttribute('class', 'it far fa-2x fa-times-circle blink')
+  
+  var palomita = document.createElement('i')
+  palomita.setAttribute('class', 'ip far fa-2x fa-check-circle blink')
+  var tache = document.createElement('i')
+  tache.setAttribute('class', 'it far fa-2x fa-times-circle blink')
+  var retroBien = document.createElement("span");
 
-  var retroBienv = document.createElement("span");
-  retroBienv.setAttribute('data-toggle', 'tooltip');
-  retroBienv.setAttribute('data-placement', 'auto left');
-  retroBienv.setAttribute('data-type', 'success')
-  retroBienv.setAttribute('style', "display: none;");
-  retroBienv.setAttribute('data-title', rb);
-  retroBienv.appendChild(palomitav)
-
-  var retroMalv = document.createElement("span");
-  retroMalv.setAttribute('data-toggle', 'tooltip');
-  retroMalv.setAttribute('data-placement', 'auto left');
-  retroMalv.setAttribute('data-type', 'danger')
-  retroMalv.setAttribute('style', "display: none;");
-  retroMalv.setAttribute('data1-title', rm);
-  retroMalv.appendChild(tachev)
+  retroBien.setAttribute('data-toggle', 'tooltip');
+  retroBien.setAttribute('data-placement', 'auto left');
+  retroBien.setAttribute('data-type', 'success');
+  retroBien.setAttribute('title', rb);
+  retroBien.setAttribute('style', "display: none;");
+  retroBien.appendChild(palomita);
+  
+  var retroMal = document.createElement("span");
+  retroMal.setAttribute('data-toggle', 'tooltip');
+  retroMal.setAttribute('data-placement', 'auto left');
+  retroMal.setAttribute('data-type', 'danger');
+  retroMal.setAttribute('title', rm);
+  retroMal.setAttribute('style', "display: none;");
+  retroMal.appendChild(tache)
 
   var contenidoprimario = document.createElement("div");
-  contenidoprimario.setAttribute('style', 'display:flex');
+  contenidoprimario.setAttribute('style', 'display:flex;align-items:center');
   controlatodo.appendChild(contenidoprimario);
   var contentrespuestas = document.createElement("div");
   contentrespuestas.setAttribute('id', k);
   contentrespuestas.className = "prov";
-  var patinov = a.toUpperCase();
-  palabrasmagicas.push(patinov);
-  contentrespuestas.innerHTML = b + ". " + c;
+  contentrespuestas.innerHTML = b + ".  " + c;
   contenidoprimario.appendChild(contentrespuestas);
   var respuestaspalabra = document.createElement("b");
   respuestaspalabra.className = "respuestacorr";
   respuestaspalabra.setAttribute('style', 'display:none');
-  respuestaspalabra.innerHTML = "" + a;
+  respuestaspalabra.innerHTML = "" + a
   contenidoprimario.appendChild(respuestaspalabra);
-  contenidoprimario.appendChild(retroBienv)
-  contenidoprimario.appendChild(retroMalv)
+  contenidoprimario.appendChild(retroBien)
+  contenidoprimario.appendChild(retroMal)
+  var patinov = a.toUpperCase();
+  palabrasmagicas.push(patinov);
+
 }
 
 function AddClass(ele, classStr) {
@@ -1493,15 +1447,39 @@ String.prototype.replaceAll = function (replaceThis, withThis) {
   return this.replace(re, withThis);
 };
 
+//---------------------------------//
+//   EVENTS                        //
+//---------------------------------//
 
+function RegisterEvents() {
+  document.getElementById("btnCreate").addEventListener('click', Create, false);
+  document.getElementById("btnPlay").addEventListener('click', Play, false);
+  document.getElementById("btnRevisar").addEventListener('click', Revisar, false);
+  document.getElementById("btnReinicio").addEventListener('click', Reinicio, false);
+  }
 //---------------------------------//
 //   INITIAL LOAD                  //
 //---------------------------------//
+$(document).ready(function () {
+
+
 $("#btnRecargar").hide();
 $("#prohibido").hide();
 $("#btnIniciar").hide();
 $("#countdown").hide();
 $("#mododebug").hide();
+
+window.onresize = function(){
+//alert("body.scrollWidth "+document.body.scrollWidth + "screen.availWidth " +screen.availWidth + "document.body.clientWidth "+document.body.clientWidth );
+  if(document.body.scrollWidth > 675){
+    $(".container").show();
+    $("#prohibido").hide();
+  } else{
+    $(".container").hide();
+    $("#prohibido").show();
+  }
+
+}
 if (window.parent.data_crm) {
   debug = true;
   tempo = true;
@@ -1515,12 +1493,10 @@ if (window.name == "movil") {
 $("#btnIniciar").hide();
 if (esMobil) {
   $(".container").hide();
-
   $("#prohibido").show();
 } else {
   Create();
   Play();
-  // isMobile();
 }
 
 $("#btnCreate").click(function () {
@@ -1530,9 +1506,10 @@ $("#btnCreate").click(function () {
   $("#btnReinicio").show();
 }); //btnCreate
 
+});
 
-if (tempo) {
-  iniciarTempo();
-  $("#countdown").show();
-  $("#btnReinicio").hide();
-}
+
+$(document).ready(function () {
+
+
+});

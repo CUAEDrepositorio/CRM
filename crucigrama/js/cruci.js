@@ -327,13 +327,10 @@ function WordObj(stringValue) {
 //---------------------------------//
 
 function RegisterEvents() {
-  document.getElementById("crossword").onfocus = function () {
-    return false;
-  }
-  document.getElementById("btnCreate").addEventListener('click', CrYeate, false);
+  document.getElementById("crossword").onfocus = function () {return false;}
+  document.getElementById("btnCreate").addEventListener('click', Create, false);
   document.getElementById("btnPlay").addEventListener('click', Play, false);
 }
-RegisterEvents();
 
 
 //---------------------------------//
@@ -374,10 +371,3 @@ String.prototype.replaceAll = function (replaceThis, withThis) {
   var re = new RegExp(replaceThis, "g");
   return this.replace(re, withThis);
 };
-
-//---------------------------------//
-//   INITIAL LOAD                  //
-//---------------------------------//
-
-Create();
-Play();

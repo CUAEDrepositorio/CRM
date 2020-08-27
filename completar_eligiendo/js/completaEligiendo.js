@@ -6,6 +6,11 @@ Created, Modified and Updated by @juan_becerril on 2017-11-15.
 	- windows messages standard
 */
 var enunciadosCorrectos = 0;
+var tempCalif = 0;
+tempCalif = guardarCalificacion
+var calificaciones = [];
+var maxCalif = 0;
+var intCalif = 0;
 
 function hayVacios() {
 	var salir = false;
@@ -50,7 +55,6 @@ function paginar(boton) {
 			}
 		}
 	}
-	iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
 	jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
 	jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
 };
@@ -122,17 +126,17 @@ function revisar() {
 						var jl = jq321(this).parent().find("i.it").first(); // JLBG may 6, 2019; muestro solo la retroIndividual correcta
 						jq321(this).parent().find("i.it").first().removeClass("ocultar").addClass("mostrar"); //.css("display", "inline");   // JLBG may 6, 2019; muestro solo la retroIndividual correcta
 						jq321(this).find(".retros, .contenido").css("display", "table-cell");
-					}else{
-						if(mostrarRetroOpcion){
+					} else {
+						if (mostrarRetroOpcion) {
 							var inco = jq321(this).parent().find(".retros").find(".incorrect");
-							inco.each(function(e,value){
+							inco.each(function (e, value) {
 								console.log(jq321(this))
-								if(respElegida == jq321(this).attr("data-respuesta")){
-									jq321(this).find("i.it").removeClass("ocultar").addClass("mostrar"); 
-									
+								if (respElegida == jq321(this).attr("data-respuesta")) {
+									jq321(this).find("i.it").removeClass("ocultar").addClass("mostrar");
+
 								}
 							})
-							jq321(this).find(".retros, .contenido").css("display", "table-cell");						
+							jq321(this).find(".retros, .contenido").css("display", "table-cell");
 						}
 					}
 
@@ -140,6 +144,18 @@ function revisar() {
 				correctas += correctasReactivo;
 			});
 			intentos++;
+
+
+			if (siguienteIntentoBlanco) {
+				jq321("#btnReiniciar").click(function () {
+					jq321("select").each(function () {
+						if (intentos < maxIntentos) {
+							jq321(this).prop("disabled", false).val("-------").removeClass("mal").removeClass("bien");
+						}
+					});
+				});
+			}
+
 		}
 		switch (idioma) {
 			case "ENG":
@@ -151,18 +167,42 @@ function revisar() {
 				var tit = ic("tluseR");
 				break;
 			default:
-				var txtResp1 = (correctas == 1) ? ic("atcerroc atseupser") : ic("satcerroc satseupser");
-				var txtResp2 = (enunciadosCorrectos == 1) ? ic("otcerroc odaicnune") : ic("sotcerroc sodaicnune");
-				var msg1 = (porEspacios || porEnunciados) ? ic(">/rb<>naps/<etsivutbO> 'odatluser'=di naps<") : "";
-				var msg2 = (porEspacios) ? (ic(">gnorts<") + correctas + ic(" >gnorts/<") + txtResp1 + ic(">gnorts< ed ") + totalPreguntas + ic(">/rb<>/rb<selbisop >gnorts/<")) : "";
-				var msg3 = (porEnunciados) ? (ic(">gnorts<") + enunciadosCorrectos + ic(" >gnorts/<") + txtResp2 + ic(">gnorts< ed ") + total + ic(">/rb<>/rb<>gnorts/<")) : "";
-				var tit = ic("odatluseR");
+				var txtResp1 = (correctas == 1) ? " respuestas correctas. " : " respuestas correctas.";
+				var txtResp2 = (enunciadosCorrectos == 1) ? " respuestas correctas." : " respuestas correctas.";
+				var msg1 = (porEspacios || porEnunciados) ? "<span id='resultado'> <strong> Resultado <br> </strong> </span>" : "";
+				var msg2 = (porEspacios) ? ("Obtuviste " + correctas + "/" + totalPreguntas + txtResp1 + "<br><br>") : "";
+				var msg3 = (porEnunciados) ? ("Obtuviste " + enunciadosCorrectos + "/" + total + txtResp1 + "<br><br>") : "";
+				var tit = "Resultado";
 		}
 		if (porEspacios || porEnunciados) {
 			var res = (porEspacios) ? (correctas / totalPreguntas) : (enunciadosCorrectos / total);
 			console.log("evaluacion con " + Math.floor(res));
 			mostrarEval("", "", msg1 + msg2 + msg3 + asignarEvaluacion(Math.floor(10 * res)));
 		}
-		guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas);
+
+		calificaciones.push(correctas);
+		intCalif = calificaciones[tempCalif];
+		iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
+		for (var i = 0, len = calificaciones.length; i < len; i++) {
+			if (maxCalif < calificaciones[i]) {
+				maxCalif = calificaciones[i];
+			}
+		}
+		if (guardarCalificacion == 0) { //ultimo intento
+			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, total);
+		}
+
+		if (guardarCalificacion == -1) { //intento mas alto
+			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, maxCalif, total);
+		}
+
+		if (guardarCalificacion > 0) {
+			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, intCalif, total);
+		}
+
+		console.log("Int Calif: " + intCalif)
+		console.log("Max Calif: " + maxCalif)
+
+
 	}
 }

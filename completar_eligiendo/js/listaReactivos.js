@@ -232,5 +232,5 @@ var reactivos = [{
 			"Lo has hecho bien.",
 			"Medita con cuidado lo que vas a responder."
 		]
-	},
-]
+	}
+];

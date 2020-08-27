@@ -13,7 +13,7 @@ var palomita = "<i class='ip far fa-2x fa-check-circle blink'></i>";
 var tache = "<i class='it far fa-2x fa-times-circle blink'></i>";
 var totalSegmentos = 1;
 var recorreSegmentos = 1; // por lo menos existe el primer segmento o sea el unico
-
+var idioma = "ESP";
 var esMobil = false;
 
 jq321(document).ready(function () {
@@ -74,16 +74,7 @@ jq321(document).ready(function () {
 			jq321('.ir-arriba').slideUp(300);
 		}
 	});
-	// if (elementosPorSegmento < reactivosMostrar) { // los botones de paginas...
-	// 	if (carruselContinuo) {
-	// 		jq321( ".cPaginador.cProximo" ).removeClass("invisible").addClass("visible");
-	// 		jq321( ".cPaginador.cPrevio" ).removeClass("invisible").addClass("visible");
-	// 	} else {
-	// 		jq321( ".cPaginador.cProximo" ).removeClass("invisible").addClass("visible");
-	// 	}
-	// 	jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
-	// 	jq321("#btnPaginador").removeClass("ocultar").addClass("mostrar");
-	// }
+
 });
 
 function escribeArreglo(arreglo) {
@@ -142,12 +133,44 @@ function reordenaArreglo(arreglo) {
 
 function creaElegir(mostrar) {
 	var ind = 1;
+	var iconoPlay = '<i class="play fas fa-play-circle fa-3x"></i>';
+	var iconoPause = '<i class="pause fas fa-pause-circle fa-3x"></i>';
+	var iconoExpandirVideo = '<i class="fas fa-expand fa-2x botonexp"></i>';
+	var iconoContraerVideo = '<i class="fas fa-expand fa-2x botonexp"></i>';
+	var respuesta = [];
+	var titulo = "";
+	var elemento = "";
+	var play = "";
+	var pause = "";
+	var control = "";
+	var barraDeslizante = "";
+	var contVideo = "";
+	var nombre = "";
+	var ext = "";
+	var IDtmp = '';
+
 
 	if (elementosPorSegmento >= reactivosMostrar || elementosPorSegmento <= 0) {
 		elementosPorSegmento = reactivosMostrar;
 	}
 	var conteo = 0;
 	for (i = 0; i < mostrar; i++) {
+	var componentes = reactivos[i].Q.split("@");
+	var respuestas = reactivos[i].A;
+	// var extensiones = ["jpeg","jpg","gif","png","svg","bmp","ico"];
+	// var reactivoPregunta = reactivos[i].Q;
+
+	// for(k=0; k<extensiones.length; k++){
+	// 	if(reactivoPregunta.includes(extensiones[k])){
+	// 		nombre = "Imagen " + i;
+	// 		IDtmp = "imagen" + i;
+	// 		elemento = '<img id="imagen' + k + '" class="zoom imagen" src=img/' + componentes + 
+	// 		' alt="" title="Imagen ' + k + '" onclick="zoom(' + IDtmp + ')"><br/>';
+
+	// 	}
+	// }
+
+
 		if (conteo >= elementosPorSegmento) {
 			conteo = 0;
 			totalSegmentos++;
@@ -161,10 +184,7 @@ function creaElegir(mostrar) {
 		jq321("#contenedor").append('<div id="divId' + i + '" class=segmento' + totalSegmentos + '>');
 		jq321("div#divId" + i).append('<p id="pId' + i + '">');
 		jq321("p#pId" + i).append('<p class="contenido">' + numeralPregunta);
-		var componentes = reactivos[i].Q.split("@");
-		var respuestas = reactivos[i].A;
-		var sFile = reactivos[i].soundFile;
-		// var texto = "<p class='contenido'>";
+
 		for (j = 0; j < respuestas.length; j++) {
 			var opciones = respuestas[j];
 			if (mezclarRespuestas) {
@@ -175,22 +195,10 @@ function creaElegir(mostrar) {
 				correcta: false
 			});
 
-			var iconoToca = '<audio controls="play-pause" preload="auto" > '; //aqui requiere CONTROLS  style="color:red;" style="background-color:powderblue;"
-			iconoToca += '<source src="' + sFile + '" type="audio/mp3" style="background-color:powderblue;"> ';
-			iconoToca += 'Your browser does not support the audio element. ';
-			iconoToca += '</audio> ';
-			//	iconoToca += '</div> ';
-
-			console.log(iconoToca);
 			var texto = '<select id="selId' + ind + '"></select>'; // JLBG May 23, 2019,   agrego retro por caja
 			texto += '<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[i].FA[j].correcta, 1) + '">' + palomita + '</span><span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[i].FA[j].incorrecta, 1) + '">' + tache + '</span>';
-			if (sFile == null) { //si no hay archivo de sonido se vuela el control     // JLBG May 23, 2019,   cambio la condicion de "" a null, si no existe el sFile en listaReactivos.js
-				// var temp = jq321("#pId" + i).append(componentes[j]).append('<select id="selId' + ind + '"></select>'); // de origen no tenia el </select>, RAAR agrego abril 11,18
-				var jl = jq321("#divId" + i + " .contenido");
-				var temp = jq321("#divId" + i + " .contenido").append(componentes[j]).append(texto); // de origen no tenia el </select>, RAAR agrego abril 11,18
-			} else {
-				var temp = jq321("#divId" + i + " .contenido").append(componentes[j]).append(iconoToca).append(texto); // de origen no tenia el </select>, RAAR agrego abril 11,18
-			}
+			jq321("#divId" + i + " .contenido");
+			jq321("#divId" + i + " .contenido").append(elemento+componentes[j]).append(texto); // de origen no tenia el </select>, RAAR agrego abril 11,18
 
 			for (k = 0; k < opciones.length; k++) {
 				jq321("select:last").append("<option>" + opciones[k].opcion);
@@ -203,38 +211,38 @@ function creaElegir(mostrar) {
 				}
 			}
 			ind++;
-			console.log(temp);
 		}
 		jq321("#divId" + i + " .contenido").append(componentes[j] + tam(reactivos[i].Q, 0));
-		if(mostrarRetroOpcion){
+		if (mostrarRetroOpcion) {
 			var respTotales = reactivos[i].A[0]
 			var claseRetros = '<p class="retros">'
 			let span2 = ""
-			for ( let a of respTotales){ 
-				if(a.correcta){
-					span2 = '<span class = "correct" data-toggle="tooltip" data-placement="auto left" data-type="success" data-respuesta ="'+a.opcion+'" title="'+a.retro+'">' + palomita + '</span>'
-				}else{
-					span2 = '<span class = "incorrect" data-toggle="tooltip" data-placement="auto left" data-type="danger" data-respuesta ="'+a.opcion+'" title="'+a.retro+'">' + tache + '</span>'				
+			for (let a of respTotales) {
+				if (a.correcta) {
+					span2 = '<span class = "correct" data-toggle="tooltip" data-placement="auto left" data-type="success" data-respuesta ="' + a.opcion + '" title="' + a.retro + '">' + palomita + '</span>'
+				} else {
+					span2 = '<span class = "incorrect" data-toggle="tooltip" data-placement="auto left" data-type="danger" data-respuesta ="' + a.opcion + '" title="' + a.retro + '">' + tache + '</span>'
 				}
-				claseRetros += span2 
+				claseRetros += span2
 			}
 			claseRetros += "</p>"
-			
+
 			jq321("#pId" + i).prepend(claseRetros);
-		}else{
-		jq321("#pId" + i).prepend('<p class="retros"><span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[i].F[0], 1) + '">' + palomita + '</span>\
-													<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[i].F[1], 1) + '">' + tache + '</span></p>');			
+		} else {
+			jq321("#pId" + i).prepend(
+				'<p class="retros"><span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[i].F[0], 1) + '">' + palomita + '</span>\
+			<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[i].F[1], 1) + '">' + tache + '</span></p>');
 		}
 		conteo++;
 	}
 	switch (idioma) {
 		case "ENG":
-			jq321("#btnRevisar").text(ic("kcehC"));
+			jq321("#btnRevisar").text("");
 			jq321("#btnReiniciar").text(ic("tpmetta txeN"));
 			break;
 		default:
-			jq321("#btnRevisar").text(ic("rasiveR"));
-			jq321("#btnReiniciar").text(ic("otnetni etneiugiS"));
+			jq321("#btnRevisar").text("Revisar");
+			jq321("#btnReiniciar").text("Siguiente intento");
 	}
 	jq321('#btnRevisar').show();
 	jq321('#btnReiniciar').hide();
@@ -272,16 +280,26 @@ function mostrarMensaje(clase, recurso) {
 	if (!recurso) {
 		recurso = -1
 	}
+	// var msgs = [,
+	// 	[ic(".setneidnopserroc soicapse sol a satseupser sal sadot artsarrA"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // completar arrastrando
+	// 	[ic(".otxet ed sopmac sol sodot anelLA"), ic("sdleif txet lla tuo llif ,esaelP")], // completar escribiendo
+	// 	[ic(".satnugerp sal sadot atsetnoC"), ic("snoitseuq lla rewsna ,esaelP")], // verdadero-falso
+	// 	[ic(".sodaicnune sol sodot anedrO"), ic("secnetnes lla tros ,esaelP")], // ordenar enunciados
+	// 	[ic(".ordaucer adac arap atseupser anu egilEA"), ic("tsil hcae rof rewsna na esoohc ,esaelP")], // completar eligiendo
+	// 	[ic(".setneidnopserroc soicapse sol a satseupser sal sadot artsarrA"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // arrastrar esquema
+	// 	["", ""]
+	// ];
 	var msgs = [,
-		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // completar arrastrando
-		[ic("otxet ed sopmac sol sodot anell ,rovaf roP"), ic("sdleif txet lla tuo llif ,esaelP")], // completar escribiendo
-		[ic("satnugerp sal sadot atsetnoc ,rovaf roP"), ic("snoitseuq lla rewsna ,esaelP")], // verdadero-falso
-		[ic("sodaicnune sol sodot anedro ,rovaf roP"), ic("secnetnes lla tros ,esaelP")], // ordenar enunciados
-		[ic("ordaucer adac arap atseupser anu egile ,rovaf roP"), ic("tsil hcae rof rewsna na esoohc ,esaelP")], // completar eligiendo
-		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // arrastrar esquema
+		["Arrastrar todas las respuestas a los espacios correspondientes.", ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // completar arrastrando
+		["Llena todos los campos de texto.", ic("sdleif txet lla tuo llif ,esaelP")], // completar escribiendo
+		["Contesta todas las preguntas", ic("snoitseuq lla rewsna ,esaelP")], // verdadero-falso
+		["Ordena todos los enunciados", ic("secnetnes lla tros ,esaelP")], // ordenar enunciados
+		["Elige una respuesta para cada recuadro.", ic("tsil hcae rof rewsna na esoohc ,esaelP")], // completar eligiendo
+		["Arrastra todas las respuestas a los espacios correspondientes.", ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // arrastrar esquema
 		["", ""]
 	];
-	var tipo = "";
+
+
 	var tit = "";
 	var msg = "";
 	var btnOK = "";
@@ -295,9 +313,9 @@ function mostrarMensaje(clase, recurso) {
 					btnOK = ic("KO");
 					break;
 				default:
-					tit = ic("nóicnetA");
-					msg = ic(maxIntentos + " :sotnetni ed oremún omixám le odaznacla saH");
-					btnOK = ic("ratpecA");
+					tit = ("Atención");
+					msg = ("Has alcanzado el máximo número de intentos: " + maxIntentos + ".")
+					btnOK = ("Aceptar");
 			}
 			break;
 		case 2: // Contestar TODO
@@ -309,21 +327,20 @@ function mostrarMensaje(clase, recurso) {
 					btnOK = ic("KO");
 					break;
 				default:
-					tit = ic("nóicnetA");
+					tit = ("Atención");
 					msg = msgs[recurso][0]; //recurso,0
-					btnOK = ic("ratpecA");
+					btnOK = ("Aceptar");
 			}
 			break;
 		default:
-			tipo = ic("rorre");
-			tit = ic("ametsis ed rorrE");
-			msg = ic("adiconocsed nóicidnoC");
-			btnOK = ic("ratpecA");
+			tipo = ("Error");
+			tit = ("Error de sistema");
+			msg = ("Condición desconocida");
+			btnOK = ("Aceptar");
 	}
 	swal({
 		title: tit,
 		text: msg,
-		type: tipo,
 		confirmButtonText: btnOK,
 		closeOnConfirm: true,
 		html: true
@@ -345,15 +362,14 @@ function asignarEvaluacion(calificacion) {
 function mostrarEval(tipo, titulo, cadena) {
 	switch (idioma) {
 		case "ENG":
-			var btnOK = ic("KO");
+			var btnOK = ("OK");
 			break;
 		default:
-			var btnOK = ic("ratpecA");
+			var btnOK = ("Aceptar");
 	}
 	swal({
 		title: titulo,
 		text: cadena,
-		type: tipo,
 		confirmButtonText: btnOK,
 		closeOnConfirm: true,
 		html: true
@@ -374,5 +390,110 @@ function esPortable() {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+
+function reproducir(ind) {
+	/* TODAS LAS PLAY SE MUESTRAN Y SE DETIENEN */
+	/* TODAS LAS PAUSE SE OCULTAN */
+	iniciaPlayer(ind);
+	var selector = "";
+	var tipo1 = jq321("#audio" + ind);
+	var tipo2 = jq321("#video" + ind);
+	selector = (tipo1.length > 0 ? tipo1 : tipo2)
+	if (jq321(selector).attr("disabled") != "disabled") {
+		jq321('[id^=audio], [id^=video]').each(function () {
+			jq321(this)[0].pause();
+		});
+		if (esPortable()) {
+			jq321('[id^=pause]').css("display", "none");
+			jq321('[id^=play]').css("display", "block");
+		}
+		else {
+			jq321('[id^=pause]').css("display", "none");
+			jq321('[id^=play]').css("display", "block");
+		}
+		jq321(selector)[0].play();
+		jq321("#play" + ind).css("display", "none");
+		if (esPortable()) {
+			jq321('#pause' + ind).css("display", "block");
+		}
+		else {
+			jq321("#pause" + ind).css("display", "block");
+		}
+	}
+}
+
+function pausar(ind) {
+	audio = document.getElementById('audio' + ind);
+	video = document.getElementById('video' + ind);
+	var elemento = (audio !== null ? audio : video);
+	elemento.pause();
+	document.getElementById('pause' + ind).style.display = "none";
+	document.getElementById('play' + ind).style.display = "block";
+	if (esPortable()) {
+		document.getElementById('play' + ind).style.display = "block";
+	}
+}
+
+//ESTA FUNCION CONTROLA EL SEEKER DEL REPRODUCTOR EN RESPUESTAS 
+function iniciaPlayer(ind) {
+	audio = document.getElementById("audio" + ind);
+	video = document.getElementById("video" + ind);
+	ctrlDeslizante = document.getElementById("ctrlDeslizante" + ind);
+	ctrlDeslizante.addEventListener("change", vidSeek, false);
+	var elemento = (audio !== null ? audio : video);
+	elemento.addEventListener("timeupdate", seektimeupdate, false);
+}
+
+function vidSeek() {
+	var elemento = (audio !== null ? audio : video);
+	var seekto = elemento.duration * (ctrlDeslizante.value / 100);
+	elemento.currentTime = seekto;
+}
+
+function seektimeupdate() {
+	var elemento = (audio !== null ? audio : video);
+
+	var nt = elemento.currentTime * (100 / elemento.duration);
+	ctrlDeslizante.value = nt;
+}
+//ESTA FUNCION FUNCIONA PARA AGRANDAR EL VIDEO
+function expande(ind) {
+	var elemento = document.getElementById("video" + ind);
+	if (elemento.requestFullscreen) {
+		elemento.requestFullscreen();
+	} else if (elemento.mozRequestFullScreen) {
+		elemento.mozRequestFullScreen();
+	} else if (elemento.webkitRequestFullscreen) {
+		elemento.webkitRequestFullscreen();
+	} else if (elemento.msRequestFullscreen) {
+		elemento.msRequestFullscreen();
+	}
+	document.getElementById("exp" + ind).style.display = "none";
+	document.getElementById("comp" + ind).style.display = "";
+}
+
+///FUNCION PARA QUITAR EL AMPLIADO DE PANTALLA LO IMPORTANTE ESTA EN EL DISPLAY DE ELEMENTOS
+function contrae(ind) {
+	// var elemente = document.getElementById("contenedor" + ind);
+	if (document.exitFullscreen) {
+		document.exitFullscreen();
+	} else if (document.mozCancelFullScreen) { /* Firefox */
+		document.mozCancelFullScreen();
+	} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+		document.webkitExitFullscreen();
+	} else if (document.msExitFullscreen) { /* IE/Edge */
+		document.msExitFullscreen();
+	}
+	document.getElementById("comp" + ind).style.display = "none";
+	document.getElementById("exp" + ind).style.display = "";
+}
+//inicia la linea seek en su punto inicial
+function estandarizar() {
+	var todostotal = document.getElementsByClassName("rangos");
+	for (var i = 0; i < todostotal.length; i++) {
+		todostotal[i].value = 0;
 	}
 }

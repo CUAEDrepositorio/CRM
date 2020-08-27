@@ -2,9 +2,10 @@ var remainingSeconds = 0;
 var countdownTimer = 0;
 var seconds = 0;
 var temporal;
-seconds = ((minutes * 60)) + (seg % 60)
+
+seconds = ((minutes * 60)) + (seg % 60);
 temporal = seconds;
-console.log("TEMPORAL: " + temporal);
+// console.log("TEMPORAL: " + temporal);
 
 if (seg > 59) {
   seg = 0;
@@ -78,10 +79,9 @@ function temporizador() {
       var final = words.length;
       $('.puzzleSquare').addClass('complete');
       swal({
-        title: "Se acabó el tiempo",
-        text: mensaje + ", has encontrado " + aciertos + " de " + final,
+        title: "¡Se acabó el tiempo!",
+        text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas. \n"+ mensaje,
         confirmButtonText: "Aceptar",
-        type: "info",
         button: "Aceptar",
       });
       $(".puzzleSquare").prop("disabled", true);

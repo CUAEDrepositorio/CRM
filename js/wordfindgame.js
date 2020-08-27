@@ -15,7 +15,7 @@ var inc = 0;
 var camino;
 var bodyOriginal;
 var countdownTimer = 0;
-var tiempo;
+// var tiempo;
 var mensaje;
 var countdownTimer = 0;
 var d;
@@ -23,6 +23,14 @@ var txt = "";
 var wordTemp;
 var retroBien = [];
 var retroMal = [];
+var palomita = "<i class='ip far fa-2x fa-check-circle blink'></i>";
+var tache = "<i class='it far fa-2x fa-times-circle blink'></i>";
+// var retroBienT;
+var retroMalT;
+var retroBien;
+var retroMal;
+
+
 if (window.parent.data_crm) {
   debug = true;
   tempo = true;
@@ -61,11 +69,6 @@ var patrono = creaColores(50);
    * @api private
    */
   var WordFindGame = function () {
-
-
-
-
-
     // List of words for this game
     var wordList = [];
     var parrlist = [];
@@ -121,11 +124,11 @@ var patrono = creaColores(50);
               if (debug) {
                 $("#mododebug").show();
                 contenido += '<span data-resp="' + word + '" class="word ' + word +
-                 ' ocultar normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
+                  ' ocultar normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
                   debugWords;
               } else
                 contenido += '<span data-resp="' + word + '" class="word ' + word +
-                 ' ocultar normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                ' ocultar normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
             } else {
               contenido += oracion.charAt(m);
             }
@@ -134,13 +137,13 @@ var patrono = creaColores(50);
             txt = "&nbsp;<sup>" + oracion.length + "</sup>";
             output += '<li>' + contenido + txt;
           } else {
-            output += '<li>' + contenido;
+            output += '<li id="' + word + '">' + contenido;
           }
 
 
         } else { //cuando solo son palabras
           var word = words[i];
-          output += '<li class="word ' + word + '">' + word;
+          output += '<li id="' + word + '" class="word ' + word + '">' + (i + 1) + '. ' + word + "</li>";
           if (verLongitud) {
             txt = "&nbsp;<sup>" + word.length + "</sup>";
             output += txt;
@@ -275,7 +278,8 @@ var patrono = creaColores(50);
       // make sure we are still forming a valid word
       for (var i = 0, len = wordList.length; i < len; i++) {
         if (wordList[i].indexOf(curWord + $(square).text()) === 0) {
-          console.log("CurdWord " + curWord)
+          // console.log("CurdWord " + curWord)
+          // console.log("wordList " + wordList)
           $(square).addClass('selected');
           selectedSquares.push(square);
           curWord += $(square).text();
@@ -290,33 +294,49 @@ var patrono = creaColores(50);
      * resets the game state to start a new word.
      *
      */
+    
     var endTurn = function () {
 
       // see if we formed a valid word
       for (var i = 0, len = wordList.length; i < len; i++) {
 
+
         if (wordList[i] === curWord) {
+
           aciertos++;
           $('.selected').addClass('found');
           //colores aleatorios que se le agregan a las palabras
           $('.selected').css("background-color", patrono[inc])
           console.log(wordList.length);
-          wordList.splice(i, 1);
-          console.log("PALABRA " + curWord + "Longitud: " + curWord.length);
-          var noValido = /\s/;
+          retroBien = words[i][2];
 
-          retroBien = words[i][2]
-          var palomita = "<i class='ip far fa-2x fa-check-circle blink' data-title='"+retroBien+"'></i>";
+          var retroBienT = '<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + retroBien + '">' + palomita + '</span>'
+          // wordList.splice(i, 1);
           //se agregan las clases para mostrar la palabra
+          $('#' + curWord).prepend(retroBienT);
           $('.' + curWord).addClass('wordFound');
           var dato = $('.' + curWord).attr("data-resp");
           $('.' + curWord).html(dato);
-          $(".palom").attr('title',words[i][3]);
-          $('.' + curWord).append(palomita);
+
           $('.' + curWord).css("color", patrono[inc])
           $('.' + curWord).removeClass("normal");
+          $('[data-toggle="tooltip"]').each(function () {
+            var options = {
+              html: true
+            };
+
+            if ($(this)[0].hasAttribute('data-type')) {
+              options['template'] =
+                '<div class="tooltip ' + $(this).attr('data-type') + '" role="tooltip">' +
+                ' <div class="tooltip-arrow"></div>' +
+                ' <div class="tooltip-inner"></div>' +
+                '</div>';
+            }
+            $(this).tooltip(options);
+          });
           inc++;
-        }
+        } //if wordlist
+
         var mensaje = "";
         for (var j = 0; j < retroCal.length; j++) {
           console.log(aciertos);
@@ -325,34 +345,32 @@ var patrono = creaColores(50);
             mensaje = retroCal[j].Mensaje;
           }
         }
-
+        var tempSeg = seg-seconds
         //se revisa si estan todas encontradas
-        if (wordList.length === 0) {
+        if (inc == words.length) {
           var final = words.length;
           $('.puzzleSquare').addClass('complete');
+
           if (tempo) {
             if ((tiempo) >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
               d = Number(temporal - seconds);
-              console.log("D: " + d);
               var m = Math.floor(d % 3600 / 60);
               var s = Math.floor(d % 3600 % 60);
               var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
               var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
 
               swal({
-                title: "Resultado",
-                text: mensaje + ", has obtenido " + aciertos + " de " + final + " en " + mDisplay + sDisplay,
+                title: "Resultado\n",
+                text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas en " + mDisplay + sDisplay + ".\n" + mensaje,
                 confirmButtonText: "Aceptar",
-                type: "info",
                 button: "Aceptar",
               });
               clearInterval(countdownTimer);
             } else {
               swal({
-                title: "Resultado",
-                text: mensaje + ", has obtenido " + aciertos + " de " + final + " en " + tiempo + " segundos",
+                title: "Resultado\n",
+                text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas en " + tempSeg + " segundos" + ".\n" + mensaje,
                 confirmButtonText: "Aceptar",
-                type: "info",
                 button: "Aceptar",
               });
             } //else tiempo
@@ -363,15 +381,14 @@ var patrono = creaColores(50);
           } else {
             swal({
               title: "Resultado",
-              text: mensaje + ", has obtenido " + aciertos + " de " + final,
+              text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n" + mensaje,
               confirmButtonText: "Aceptar",
-              type: "info",
               button: "Aceptar",
             });
           }
         }
         // location.reload();
-        
+
       }
       guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
       // reset the turn
@@ -481,18 +498,16 @@ var patrono = creaColores(50);
             x = solution[i].x,
             y = solution[i].y,
             next = wordfind.orientations[orientation];
-            // retroMal = words[i][3]
+          // retroMal = words[i][3]
           if (!$('.' + word).hasClass('wordFound')) {
             for (var j = 0, size = word.length; j < size; j++) {
               var nextPos = next(x, y, j);
               $('[x="' + nextPos.x + '"][y="' + nextPos.y + '"]').addClass('solved');
             }
             retroMal = words[i][3]
-            var tache = "<i class='ta it far fa-2x fa-times-circle blink' data1-title='"+retroMal+"'></i>";
-            // var tache = "<i class='ta it far fa-2x fa-times-circle blink'></i>";
+            retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal + '">' + tache + '</span>'
             $('.' + word).addClass('wordFound');
-            $('.' + word).append(tache);
-            // $('.' + curWord).append(retroMal);
+            $('#' + word).prepend(retroMalT);
           }
         }
 
@@ -500,11 +515,11 @@ var patrono = creaColores(50);
 
         for (var m = 0; m < subraya.length; m++) {
           $(subraya[m]).addClass("subraya");
-          
+
           var contenidopalabra = $(subraya[m]).attr("data-resp");
           retroMal = words[m][3]
-          var tache = "<i class='ta it far fa-2x fa-times-circle blink' data1-title='"+retroMal+"'></i>";
-          $(subraya[m]).html(contenidopalabra+tache);
+          retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal + '">' + tache + '</span>'
+          $(subraya[m]).html(contenidopalabra);
         }
 
         var final = words.length;
@@ -519,13 +534,12 @@ var patrono = creaColores(50);
 
         //SWAL ver respuestas
         swal({
-          title: "Resultado",
-          text: mensaje + ", has obtenido " + aciertos + " de " + final,
+          title: "Resultado\n",
+          text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n" + mensaje,
           confirmButtonText: "Aceptar",
-          type: "info",
           button: "Aceptar",
         });
-
+        clearInterval(countdownTimer);
       }
     };
   };

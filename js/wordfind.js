@@ -10,6 +10,7 @@ var countdownTimer = 0;
 var tiempo;
 var mensaje;
 
+
 (function () {
 
   'use strict';
@@ -362,7 +363,6 @@ var mensaje;
         // if it contains a different letter, than our word doesn't fit
         // here, return -1
         else if (square !== '') {
-          // console.log("pato");
           return -1;
         }
       }
@@ -465,7 +465,7 @@ var mensaje;
         wordList = words.slice(0).sort(function (a, b) {
           return (a.length < b.length) ? 1 : 0;
         });
-        console.log(wordList);
+        // console.log(wordList);
 
         // initialize the options
         var options = {
@@ -582,7 +582,7 @@ var mensaje;
           puzzleString += '\n';
         }
 
-        console.log(puzzleString);
+        // console.log(puzzleString);
         return puzzleString;
       }
     };
@@ -606,8 +606,9 @@ function isMobile() {
   }
 }
 
-$(document).ready(function () {
-
+$(document).ready(function () {   
+  
+  
   if (window.name == "movil") {
     esMobil = true;
   } else {
@@ -619,11 +620,8 @@ $(document).ready(function () {
   } else {
     $("#mododebug").hide();
   }
-
-  console.log("ready!");
   // isMobile();
   if (esMobil) {
-    console.log("Es movil en sopa");
     $(".container").hide();
     $(".row").hide();
     $("#prohibido").show();
@@ -631,20 +629,43 @@ $(document).ready(function () {
   }
 
   $("#countdown").hide();
+
+  // window.onresize = function(){
+  //   console.log("body.scrollWidth "+document.body.scrollWidth + "screen.availWidth " +screen.availWidth + "document.body.clientWidth "+document.body.clientWidth );
+  //     if(document.body.scrollWidth < screen.availWidth){
+  //       if(document.body.scrollWidth > document.body.clientWidth){
+  //         $(".container").show();
+  //         console.log("ENTRO1")
+  //         $("#prohibido").hide();
+  //       } else{
+  //       console.log("ENTRO2")
+  //       $(".container").hide();
+  //       $("#prohibido").show();
+  //     }
+    
+  //   }
+  // }
+
+
   if (tempo) {
     $(".puzzleSquare").prop("disabled", true);
-    iniciarTempo();
+    
     clearInterval(countdownTimer);
+    iniciarTempo();
+    tiempo = ((minutes * 60) + seconds);
+    clearInterval(countdownTimer);
+    console.log("TIEMPO: " + tiempo);
     try {
-      tiempo = ((minutes * 60) + seconds)
-      clearInterval(countdownTimer);
-      console.log("TIEMPOOO: " + tiempo);
-    } catch (e) {
 
-    }
+      
+    } catch (e) {}
   } else {
     $("#btn-iniciar").hide();
   }
 
-
+  $("#solve").click(function () {
+    $("#again").hide();
+    $("#solve").hide();
+  });
 });
+

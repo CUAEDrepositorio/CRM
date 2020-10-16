@@ -7,13 +7,12 @@ var preg = [];
 var respOriginales = [];
 var respDesordenadas1 = [];
 var respDesordenadas2 = [];
-
+var idioma = "ESP";
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
 var palomita = "<i class='ip far fa-2x fa-check-circle blink'></i>";
 var tache = "<i class='it far fa-2x fa-times-circle blink'></i>";
 var totalSegmentos = 1;
 var recorreSegmentos = 1; // por lo menos existe el primer segmento o sea el unico
-
 jq321(document).ready(function () {
 	jq321("#mododebug").hide();
 	if (window.parent.data_crm) {
@@ -22,8 +21,7 @@ jq321(document).ready(function () {
 		mezclarPreguntas = true;
 		ponerNumeral = false;
 		elementosPorSegmento = 3;
-
-
+		siguienteIntentoBlanco = true;
 	}
 	if (window.name == "movil") {
 		esMobil = true;
@@ -170,135 +168,6 @@ function creaEscribir(reactivosMostrar) {
 	jq321(".segmento1").removeClass("ocultar");
 }
 
-function creaArrastrar() {
-	jq321(".reactivos .lista-preguntas").each(function () {
-		jq321(this).html('');
-	});
-	jq321(".respuestas .lista-respuestas").each(function () {
-		jq321(this).html('');
-	});
-
-	if (invPregResp) {
-		jq321(".respuestas").prependTo(".ejercicio-arrastrar")
-	}
-	if (formatoColumnas) {
-		jq321("#reactivo").addClass("col-md-9 col-lg-9");
-		jq321("#respuesta").addClass("col-md-3 col-lg-3");
-		if (!(esTexto)) {
-			jq321("#reactivo").addClass("col-sm-9 col-xs-9");
-			jq321("#respuesta").addClass("col-sm-3 col-xs-3");
-		}
-	} else {
-		jq321("#reactivo").addClass("center");
-		jq321("#respuesta").addClass("center");
-	}
-
-	for (var i = 0; i < preguntas.length; i++) {
-		var preg = preguntas[i].txt1.split("@");
-		jq321("#reactivo .lista-preguntas").append('<div class="sub-item" id="preg' + preguntas[i].ind + '" data-drop=' + preguntas[i].ind + '><p>' + (i + 1) + '.&nbsp;&nbsp;' + tam(preg[0], 1) + '<span class="droppable"></span>' + preg[1] + '<br/></p></div>');
-		jq321('#preg' + preguntas[i].ind).append('<div class="retroBien ocultarRetro" id="retro' + preguntas[i].ind + '0">' + tam(preguntas[i].txt2[0], 1));
-		jq321('#preg' + preguntas[i].ind).append('<div class="retroMal ocultarRetro" id="retro' + preguntas[i].ind + '1">' + tam(preguntas[i].txt2[1], 1));
-		jq321('#preg' + preguntas[i].ind).after('<hr/>');
-	}
-	jq321('div.sub-item:last + hr').remove();
-
-	for (var i = 0; i < respuestas.length; i++) {
-		if (esTexto) { // texto
-			jq321(".respuestas .lista-respuestas").append('<div class="sub-item respuesta" id="resp' + respuestas[i].ind + '"><div data-intentos="1" class="draggable" data-drag="' + respuestas[i].ind + '">' + tam(respuestas[i].txt, 1) + '</div></div>');
-		} else { // imagen
-			jq321(".respuestas .lista-respuestas").append('<div class="sub-item respuesta "id="resp' + respuestas[i].ind + '"><img data-intentos="1" class="draggable" data-drag="' + respuestas[i].ind + '" src="' + respuestas[i].txt + '"></div>');
-		}
-	}
-}
-
-function creaOrdenar() {
-	preguntas = reactivos;
-	for (i = 0; i < reactivosMostrar; i++) {
-		respOriginales.push(preguntas[i].Q);
-		var tmp = preguntas[i].Q.split(" ");
-		preg = [];
-		for (j = 0; j < tmp.length; j++) {
-			preg.push([tmp[j], j]);
-		}
-		reordenaArreglo(preg);
-		var txt = "";
-		for (j = 0; j < preg.length; j++) {
-			txt += "<li class='ui-state-default ui-sortable-handle' data-orden=" + preg[j][1] + "><span class='ui-icon ui-icon-arrowthick-2-e-w'></span>" + preg[j][0] + "</li>";
-		}
-		jq321("#ordenarEnunciado").append("<div class='lista'><ul class='sortable' id='ulId" + i + "'>" + txt + tam(preguntas[i].Q, 0) + "<div class='retroInd'><div class='retroBien ocultarRetro'>" + tam(preguntas[i].F[0], 1) + "</div><div class='retroMal ocultarRetro'>" + tam(preguntas[i].F[1], 1) + "</div></div>");
-		jq321(".lista:last").after("<hr/>");
-	}
-	jq321(".lista > .sortable").each(function () {
-		$(this).sortable();
-		$(this).disableSelection();
-	});
-}
-
-//  ============================================================================================================
-function creaElegir(mostrar) {
-	var ind = 1;
-	for (i = 0; i < mostrar; i++) {
-		jq321("#contenedor").append('<hr/>').append('<div id="divId' + i + '">');
-		jq321("div#divId" + i).append('<p id="pId' + i + '">');
-		var componentes = reactivos[i].Q.split("@");
-		var respuestas = reactivos[i].A;
-		for (j = 0; j < respuestas.length; j++) {
-			var opciones = respuestas[j];
-			if (mezclarRespuestas) {
-				reordenaArreglo(opciones)
-			}
-			opciones.unshift({
-				opcion: "-------",
-				correcta: false
-			});
-			jq321("#pId" + i).append(componentes[j]).append('<select id="selId' + ind + '">');
-			for (k = 0; k < opciones.length; k++) {
-				jq321("select:last").append("<option>" + opciones[k].opcion);
-				if (opciones[k].correcta) {
-					jq321("select:last").attr("data-respuesta", opciones[k].opcion);
-				}
-			}
-			ind++;
-		}
-		jq321("#pId" + i).append(componentes[j] + tam(reactivos[i].Q, 0));
-		jq321("#divId" + i).append("<div class='retroBien ocultarRetro'>" + tam(reactivos[i].F[0], 1)).append("<div class='retroMal ocultarRetro'>" + tam(reactivos[i].F[1], 1));
-	}
-	switch (idioma) {
-		case "ENG":
-			jq321("#btnRevisar").text(ic("kcehC"));
-			jq321("#btnReiniciar").text(ic("tpmetta txeN"));
-			break;
-		default:
-			jq321("#btnRevisar").text(ic("rasiveR"));
-			jq321("#btnReiniciar").text(ic("otnetni omixórP"));
-	}
-	jq321('#btnRevisar').show();
-	jq321('#btnReiniciar').hide();
-
-
-}
-
-function creaOM(mostrar) {
-	var ind = 1;
-	for (i = 0; i < mostrar; i++) {
-		jq321("#bancoPreguntas").append('<div class="setPregunta" id="sp' + i + '">');
-		jq321(".setPregunta:last").append('<div class="preguntaTexto">' + (i + 1) + '. ' + tam(reactivos[i].Q, 1));
-		jq321(".setPregunta:last").append('<div class="opciones">');
-		jq321(".setPregunta:last").append('<div class="retroIndividual">');
-		if (mezclarRespuestas) {
-			reordenaArreglo(reactivos[i].A);
-		}
-		for (j = 0; j < reactivos[i].A.length; j++) {
-			var res = String.fromCharCode(j + 97) + ') ';
-			jq321(".opciones:last").append('<div class="opcion btn btn-default" data-correcta="' + reactivos[i].A[j].correcta + '">' + res + tam(reactivos[i].A[j].opcion, 1));
-			if (reactivos[i].A[j].correcta) {
-				jq321(".retroIndividual:last").append('<div class="retroCorrecta bg-success">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			} else {
-				jq321(".retroIndividual:last").append('<div class="retroIncorrecta bg-danger">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			}
-		}
-	}
-}
 
 function tam(cad, n) { // 1T, 0ele.esc.ord
 	var txt = "";
@@ -318,15 +187,15 @@ function mostrarMensaje(clase, recurso) {
 		recurso = -1
 	}
 	var msgs = [,
-		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // completar arrastrando
-		[ic("otxet ed sopmac sol sodot anell ,rovaf roP"), ic("sdleif txet lla tuo llif ,esaelP")], // completar escribiendo
-		[ic("satnugerp sal sadot atsetnoc ,rovaf roP"), ic("snoitseuq lla rewsna ,esaelP")], // verdadero-falso
-		[ic("sodaicnune sol sodot anedro ,rovaf roP"), ic("secnetnes lla tros ,esaelP")], // ordenar enunciados
-		[ic("ordaucer adac arap atseupser anu egile ,rovaf roP"), ic("tsil hcae rof rewsna na esoohc ,esaelP")], // completar eligiendo
-		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")], // arrastrar esquema
-		["", ""]
+		[("Arrastra todas las respuestas a los espacios correspondientes."), ("Please, drag all answers to appropriate spaces.")], //completar arrastrando
+		[("Llena todos los campos de texto."), ("Please, fill out all text fields")], //completar escribiendo
+		[("Contesta todas las preguntas."), ("Please, answer all questions")], // verdadero-falso
+		[("Ordena todos los encunciados."), ("Please, sort all sentences")], //Ordenar
+		[("Elige una respuesta para cada recuadro."), ("Please, choose an answer for each list")], // completar eligiendo
+		[("Arrastra todas las respuestas a los espacios correspondientes."), ("Please, drag all answer appropriate spaces.")]
+		[(""), ("")]
 	];
-	var tipo = "";
+
 	var tit = "";
 	var msg = "";
 	var btnOK = "";
@@ -340,9 +209,9 @@ function mostrarMensaje(clase, recurso) {
 					btnOK = ic("KO");
 					break;
 				default:
-					tit = ic("nóicnetA");
-					msg = ic(maxIntentos + " :sotnetni ed oremún omixám le odaznacla saH");
-					btnOK = ic("ratpecA");
+					tit = ("Atención");
+					msg = ("Has alcanzado el máximo número de intentos: " + maxIntentos + ".")
+					btnOK = ("Aceptar");
 			}
 			break;
 		case 2: // Contestar TODO
@@ -354,21 +223,20 @@ function mostrarMensaje(clase, recurso) {
 					btnOK = ic("KO");
 					break;
 				default:
-					tit = ic("nóicnetA");
+					tit = ("Atención");
 					msg = msgs[recurso][0]; //recurso,0
-					btnOK = ic("ratpecA");
+					btnOK = ("Aceptar");
 			}
 			break;
 		default:
-			tipo = ic("rorre");
-			tit = ic("ametsis ed rorrE");
-			msg = ic("adiconocsed nóicidnoC");
-			btnOK = ic("ratpecA");
+			tipo = ("Error");
+			tit = ("Error del sistema");
+			msg = ("Condición desconocida")
+			btnOK = ("Aceptar");
 	}
 	swal({
 		title: tit,
 		text: msg,
-		type: tipo,
 		confirmButtonText: btnOK,
 		closeOnConfirm: true,
 		html: true
@@ -390,15 +258,14 @@ function asignarEvaluacion(calificacion) {
 function mostrarEval(tipo, titulo, cadena) {
 	switch (idioma) {
 		case "ENG":
-			var btnOK = ic("KO");
+			var btnOK = ("OK");
 			break;
 		default:
-			var btnOK = ic("ratpecA");
+			var btnOK = ("Aceptar");
 	}
 	swal({
 		title: titulo,
 		text: cadena,
-		type: tipo,
 		confirmButtonText: btnOK,
 		closeOnConfirm: true,
 		html: true

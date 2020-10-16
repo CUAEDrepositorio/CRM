@@ -3,15 +3,19 @@
  * By CUAED
  * Update: 2017-1004 @juan_becerril
  */
+var tempCalif = 0;
+tempCalif = guardarCalificacion
 
 jq321(function () {
-	//var eScormActividad = false; // true si se toma en cuenta como objetivo del scorm, false si no
-	//var totalEs = 0;
-	var intentosEs = 2; // 0 = ilimitados
+	// var eScormActividad = false; // true si se toma en cuenta como objetivo del scorm, false si no
+	// var totalEs = 0;
+	// var maxIntentos = 2;
 	var intentosRealizadosEs = 0;
-	//var indiceActividad = 3; //
+	// var indiceActividad = 3; //
 	iniciarEscribiendo();
-
+	var calificaciones = [];
+	var maxCalif = 0;
+	var intCalif = 0;
 
 	function iniciarEscribiendo() {
 		var caja;
@@ -39,6 +43,7 @@ jq321(function () {
 		}
 		jq321("button#btnRevisar").show();
 		jq321("button#btnReiniciar").hide();
+
 		if (elementosPorSegmento < reactivosMostrar) { // los botones de paginas...
 			if (carruselContinuo) {
 				jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
@@ -49,7 +54,7 @@ jq321(function () {
 			jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
 			jq321("#btnPaginador").removeClass("ocultar").addClass("mostrar");
 		}
-		iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
+
 	} //fin iniciarEscribiendo
 
 	jq321("button#btnRevisar").click(revisar);
@@ -84,15 +89,9 @@ jq321(function () {
 				}
 			}
 		}
-
 		jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
-		
 	});
-
-
-
-
 
 	function revisar() {
 		var cajas = jq321("#completable input");
@@ -113,7 +112,6 @@ jq321(function () {
 					jq321(".retros").css("display", "table-cell");
 				}
 				buenasParrafo = 0;
-				// jq321(this).parent().find("img.palomita, img.tache").css("display", "none");
 				jq321(this).parent().find("i.ip, i.it").css("display", "none"); // JLBG may 2, 2019; cambio imagen palomita-tache por icono palomita-tache
 				bien = jq321(this).parent().find(".retroBien");
 				mal = jq321(this).parent().find(".retroMal");
@@ -125,8 +123,7 @@ jq321(function () {
 					if (compararResultados(respReal, respEscrita)) {
 						jq321(this).attr("class", "correcto");
 						if (mostrarRetroArroba) {
-							var xx = jq321(this).nextAll("span").eq(0);
-							// jq321(this).nextAll().eq(0).find("img.palomita").css("display", "inline");  // JLBG mzo 18, 2019; muestro la palomita que está a continuación del input
+							// var xx = jq321(this).nextAll("span").eq(0);
 							jq321(this).nextAll().eq(0).find("i.ip").css("display", "inline"); // JLBG may 2, 2019; cambio imagen palomita por icono palomita
 						}
 						correctas++;
@@ -146,14 +143,10 @@ jq321(function () {
 				if (buenasParrafo == cajasParrafo) {
 					correctasTotal++;
 					if (mostrarRetroIndividual) {
-						// jq321(bien).removeClass("ocultarRetro").addClass("mostrarRetro");
-						// jq321(this).parent().find("img.palomita").first().css("display", "inline");   // JLBG mzo 18, 2019; muestro solo la retroIndividual correcta
 						jq321(this).parent().find("i.ip").first().css("display", "inline"); // JLBG may 6, 2019; muestro solo la retroIndividual correcta
 					}
 				} else {
 					if (mostrarRetroIndividual) {
-						// jq321(mal).removeClass("ocultarRetro").addClass("mostrarRetro")
-						// jq321(this).parent().find("img.tache").first().css("display", "inline");   // JLBG mzo 18, 2019; muestro solo la retroIndividual incorrecta
 						jq321(this).parent().find("i.it").first().css("display", "inline"); // JLBG may 6, 2019; muestro solo la retroIndividual incorrecta
 					}
 				}
@@ -171,24 +164,45 @@ jq321(function () {
 				default:
 					var txtResp1 = (correctas == 1) ? "respuesta correcta" : "respuestas correctas";
 					var txtResp2 = (correctasTotal == 1) ? "enunciado correcto" : "enunciados correctos";
-					var msg1 = (porEspacios || porEnunciados) ? "<span id='resultado'>Obtuviste</span><br/>" : "";
-					var msg2 = (porEspacios) ? ("<strong>" + correctas + "</strong> " + txtResp1 + " de <strong>" + cajas.length + "</strong> posibles<br/>") : "";
-					var msg3 = (porEnunciados) ? ("<strong>" + correctasTotal + "</strong> " + txtResp2 + " de <strong>" + total + "</strong><br/><br/>") : "";
+					var msg1 = (porEspacios || porEnunciados) ? "<span id='resultado'> <strong>Resultado </strong></span> <br>" : "";
+					var msg2 = (porEspacios) ? ("<br>Obtuviste " + correctas + "/" + cajas.length + " respuestas correctas.<br/><br/>") : "";
+					var msg3 = (porEnunciados) ? ("<br>Obtuviste " + correctasTotal + "/" + total + " respuestas correctas.<br/><br/>") : "";
 					var tit = ic("odatluseR");
-
 			}
 
 			if (porEspacios || porEnunciados) {
 				var res = (porEspacios) ? (correctas / cajas.length) : (correctasTotal / total);
-				// console.log("Evaluacion con " + Math.floor(res));
+				console.log("Evaluacion con " + Math.floor(res));
 				mostrarEval("", "", msg1 + msg2 + msg3 + asignarEvaluacion(Math.floor(10 * res)));
 			}
-			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctasTotal, total);
 			var totalPreguntas = total;
-			var correctasRedondeadas = (porEspacios) ? correctas : correctasTotal; //uuuy no se excluye cuando tambien prenden porEnunciado			intentosRealizadosEs++;
+			var correctasRedondeadas = (porEspacios) ? correctas : correctasTotal; //uuuy no se excluye cuando tambien prenden porEnunciado
+			intentosRealizadosEs++;
+			calificaciones.push(correctasTotal);
+			intCalif = calificaciones[tempCalif];
+			console.log("Int Calif: " + intCalif)
+			for (var i = 0, len = calificaciones.length; i < len; i++) {
+				if (maxCalif < calificaciones[i]) {
+					maxCalif = calificaciones[i];
+				}
+			}
+
 			jq321("button#btnRevisar").hide();
 			jq321("button#btnReiniciar").show();
+			if (guardarCalificacion == 0) { //ultimo intento
+				guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctasTotal, total);
+			}
+
+			if (guardarCalificacion == -1) { //intento mas alto
+				guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, maxCalif, total);
+			}
+
+			if (guardarCalificacion > 0) {
+				guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, intCalif, total);
+			}
+
 		}
+
 	}
 
 	function compararResultados(valorAtributo, valorEscrito) {
@@ -209,14 +223,16 @@ jq321(function () {
 	}
 
 	function reiniciar() {
-		var caja;
 		// verificamos el numero de intentos
-		if ((intentosEs == 0) || (intentosRealizadosEs < intentosEs)) {
+		if ((maxIntentos == 0) || (intentosRealizadosEs < maxIntentos)) {
 			jq321("i.ip, i.it").css("display", "none");
 			if (mostrarRetroIndividual && !(mostrarRetroFinal)) {
 				jq321(".correcto").attr("class", "").val("").prop("disabled", false);
 			}
 			jq321(".incorrecto").attr("class", "").val("").prop("disabled", false);
+			if (siguienteIntentoBlanco) {
+				jq321(".correcto").attr("class", "").val("").prop("disabled", false);
+			}
 			jq321(".retroBien").removeClass("mostrarRetro").addClass("ocultarRetro")
 			jq321(".retroMal").removeClass("mostrarRetro").addClass("ocultarRetro")
 			jq321(".escribiendo .retroalimentacionFinal .retroRango").removeClass('mostrarRetro').addClass('ocultarRetro');
@@ -227,8 +243,6 @@ jq321(function () {
 		else {
 			mostrarMensaje(1);
 		} // fin else
-		// JLBG mzo 18, 2019; oculto todas las palomitas y taches luego de cada revisión
-		// jq321("img.palomita, img.tache").css("display","none");
 		jq321("button#btnRevisar").show();
 		jq321("button#btnReiniciar").hide();
 	}

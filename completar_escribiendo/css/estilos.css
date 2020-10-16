@@ -371,8 +371,21 @@ i.it {
     margin: 5px;
 }
 
+#btnPaginador {
+        margin-left: 5px;
+        margin-right: 5px;
+        opacity: 1;
+        cursor: default;
+}
 
-.tooltip-inner {font-size: 1.2em; text-align: left;};
+.headings-int {
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+  font-size: 1.8em;
+  text-align: left;
+}
+
+.tooltip-inner {font-size: 1.2em; text-align: left; min-width: 280px; padding: 10px}
 .tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
 .tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }
 .tooltip.primary.right > .tooltip-arrow  { border-right-color:  #337ab7; }

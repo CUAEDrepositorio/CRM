@@ -1,12 +1,12 @@
 ﻿var maxIntentos = 2; // número de intentos máximo para resolver el ejercicio
-var maxIntentosReactivo = 2;
 var calificacionGlobal = false;
 var formatoColumnas = true; // true: muestra preguntas y respuesta en columnas; false muestra preguntas y respuesta apiliados
 var esTexto = true; // true: respuestas son TEXTO; false respuestas son IMAGENES
 var invPregResp = false; // true: invierte orden de preguntas y respuestas; false NO invierte orden de preguntas y respuestas
-
+var siguienteIntentoBlanco = false;
 var elementosPorSegmento = 5;
 var reactivosMostrar = 5; // número de reactivos a mostrar
+
 if (reactivos.length < reactivosMostrar) {
 	reactivosMostrar = reactivos.length;
 }
@@ -18,7 +18,7 @@ var contestadas = 0;
 var totalPreguntas = 0;
 var mezclarPreguntas = false; // true: mezcla preguntas; false NO mezcla preguntas
 var mezclarRespuestas = false; // true: mezcla respuestas; false NO mezcla respuestas
-var mostrarRetroArroba = false; // Por cada arroba, true: muestra; false: NO muestra
+var mostrarRetroArroba = true; // Por cada arroba, true: muestra; false: NO muestra
 var mostrarRetroIndividual = !mostrarRetroArroba; // true: muestra retro por pregunta individual; false: NO muestra retro por pregunta individual
 var mostrarRetroFinal = true; // true: muestra retro por aciertos; false: NO muestra retro
 var numeralAlfabetico = true; //si queremos letras en vez de números, true.
@@ -30,32 +30,32 @@ var carruselContinuo = false; // si se quiere que los botonos previo y proximo n
 
 var retroCal = [{
 		LimInf: 0,
-		LimSup: 3,
-		Mensaje: ["No fue suficiente", "Insufficient"]
+		LimSup: 5,
+		Mensaje: ["¡Vaya! Parece que no es suficiente."]
 	},
 	{
-		LimInf: 4,
-		LimSup: 6,
-		Mensaje: ["Esfuérzate más", "Work harder"]
+		LimInf: 6,
+		LimSup: 7,
+		Mensaje: ["¡Esfuérzate más!"]
 	},
 	{
-		LimInf: 7,
+		LimInf: 8,
 		LimSup: 9,
-		Mensaje: ["Suficiente", "Sufficient"]
+		Mensaje: ["¡Sigue esforzándote!"]
 	},
 	{
 		LimInf: 10,
 		LimSup: 10,
-		Mensaje: ["Excelente", "Excellent"]
+		Mensaje: ["¡Felicidades!"]
 	},
 ];
 
 var ambSCORM = false;
 var barraSCORM = false;
 var idObjetivo = 0;
-
-var idioma = "ESP";
 var debug = false;
 var verLongitud = false;
 var flechaArriba = false;
-var revisionEstricta = false;
+var revisionEstricta = true;
+//Calificacion mas alta -1; Ultima calificacion 0, Calificacion de determinado intento #
+var guardarCalificacion = 0; 

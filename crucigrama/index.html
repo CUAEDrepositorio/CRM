@@ -3,57 +3,83 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <script async="" src="https://www.google-analytics.com/analytics.js"></script>
   <script>
-    (function (i, s, o, g, r, a, m) {
-      i["GoogleAnalyticsObject"] = r;
-      i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
-    ga("create", "UA-158134453-1", {
-      "cookieDomain": "auto"
-    });
-    ga("set", "anonymizeIp", true);
-    ga('set', 'dimension1', "CUAED");
-    ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
-    ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
-    ga('set', 'dimension4', "2019");
-    ga('set', 'dimension5', "LÚDICO");
-    ga('set', 'dimension6', "RL02-19");
-    ga('set', 'dimension7', "MEMORAMA");
-    ga('set', 'dimension8', "VERSIÓN 1");
-    ga("set", "metric1", 1);
-    ga("set", "metric2", 2);
-    ga("set", "metric3", 3);
-    ga("set", "metric4", 4);
-    ga("set", "metric5", 5);
-    ga("set", "metric6", 6);
-    ga("set", "metric7", 7);
-    ga("set", "metric8", 8);
-    ga("send", "pageview");
-  </script> -->
+    if (!window.parent.data_crm) {
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+      ga("create", "UA-158134453-1", {
+        "cookieDomain": "auto"
+      });
+      ga("set", "anonymizeIp", true);
+      ga('set', 'dimension1', "CUAIEED");
+      ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
+      ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
+      ga('set', 'dimension4', "2021");
+      ga('set', 'dimension5', "LÚDICO");
+      ga('set', 'dimension6', "RL02-21");
+      ga('set', 'dimension7', "CRUCIGRAMA");
+      ga('set', 'dimension8', "VERSIÓN 2");
+      ga("set", "metric1", 1);
+      ga("set", "metric2", 2);
+      ga("set", "metric3", 3);
+      ga("set", "metric4", 4);
+      ga("set", "metric5", 5);
+      ga("set", "metric6", 6);
+      ga("set", "metric7", 7);
+      ga("set", "metric8", 8);
+      ga("send", "pageview");
+    }
+  </script>
 
-  <meta charset="UTF-8">
-  <title>Crucigrama V2.1</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Crucigrama" />
+  <meta name="keywords" content="UNAM, CUAIEED" />
+  <meta name="author" content="UNAM CUAIEED" />
+  <meta name="news_keywords" content="UNAM, CUAIEED" />
+  <meta name="generator" content="UNAM CUAIEED" />
+  <meta property="og:site_name" content="Crucigrama" />
+  <meta itemprop="name" content="UNAM, CUAIEED" />
+  <meta itemprop="image" content="" />
+  <meta itemprop="description" content="Crucigrama" />
+  <meta property="og:title" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:type" content="activity" />
+  <meta property="og:description" content="Crucigrama" />
+  <meta property="og:image" content="" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+  <!--
+        3.0 KDMR Sep 25, 2020: Armado de crucigrama de manera aleatoria, botón de ver respuestas muestra todos, botón limpiar, borra todas las respuestas escritas.
+        3.0 KDMR Sep 25, 2020: Se añadio longitud de reactivos y fueron divididas las cajas de reactivos en horizontales y verticales
+        3.0 KDMR Sep 25, 2020: Retroalimentación en tooltip (palomita, tache) en cada reactivo, modificando el archivo de listaReactivos.js
+        3.0 KDMR Sep 25, 2020: Se añadio temporizador, además el modo debug el cual consiste en escribir la palabra a encontrar en las cajas de reactivos.
+        3.0 KDMR Sep 25, 2020: Se ajustaron dimensiones para visualización, en móvil es NO DISPONIBLE en desktop cuando (scrollWidth < 675) se deja de visualizar.
+        3.0 KDMR Sep 25, 2020: Se bloquea el crucigrama cuando se da clic en el botón revisar
+        3.0 KDMR Sep 25, 2020: Se añadio ambiente SCORM y cambio del archivo conectividadSCORM.js creado por RAAR, y código Analytics por JLBG
+    -->
+  <title>Crucigrama V3.0</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
     integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-  <script src="https://lib.cuaed.unam.mx/R019/js/jquery-v3.2.1.js"> </script>  
-  <link rel="stylesheet" href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css" />
-  <script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+  <script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"> </script>
+  <link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/bootstrap-v3.3.7.min.css" />
+  <script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
   <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
-  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-
   <link rel="stylesheet" href="css/estilos.css">
-  
   <script src="js/configRecurso.js"></script>
-
   <script src="js/listaReactivos.js"></script>
   <script src="js/cruci.js"></script>
   <script src="js/sweetalert.min.js"></script>
@@ -73,20 +99,21 @@
   </div>
   <div class="container">
     <br>
-    <h2 class="headings-int ">12Título de la evaluación</h2>
+    <h2 class="headings-int ">Título de la evaluación</h2>
     <p>Instrucciones (pedagógica y técnica) de la actividad.</p>
 
     <br>
-
+    <span id="countdown"> </span>
+    <span id="mododebug"> -MODO DEBUG ACTIVADO -</span>
     <button class="btn blue" id="btnCreate">Ver respuestas</button>
     <button class="btn blue" id="btnPlay">Limpiar</button>
     <button class="btn blue" id="btnRevisar">Revisar</button>
     <button class="btn blue" style="display:none" id="btnReinicio">Reiniciar</button>
     <button class="btn blue" id="btnIniciar"> Iniciar </button>
-    <br /><br />
-    <span id="countdown"> </span>
-    <span id="mododebug"> -MODO DEBUG ACTIVADO -</span>
-    <br /><br />
+    <br><br>
+
+
+    <br><br>
     <div class="misterpro" id="supermister">
       <div class="center crossword" id="crossword"></div><br />
       <div class="center" id="supercenter">
@@ -95,14 +122,14 @@
             <h3>Horizontales</h3>
             <div id="primeroh"></div>
           </div>
-          
-         </div>
-         <div class="contrespuestasv" id="respuestaspro">
-            <div id="resp1" class="respuestas">
+
+        </div>
+        <div class="contrespuestasv" id="respuestaspro">
+          <div id="resp1" class="respuestas">
             <h3>Verticales</h3>
             <div id="primerov"></div>
           </div>
-         </div>
+        </div>
       </div>
       <br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
@@ -110,13 +137,13 @@
   </div>
 
   <script src="js/index.js"></script>
-    <script>
+  <script>
     $(document).ready(function () {
       $('[data-toggle="tooltip"]').each(function () {
         var options = {
           html: true
         };
-  
+
         if ($(this)[0].hasAttribute('data-type')) {
           options['template'] =
             '<div class="tooltip ' + $(this).attr('data-type') + '" role="tooltip">' +
@@ -134,9 +161,7 @@
         $("#countdown").show();
         $("#btnReinicio").hide();
       }
-
     });
-    
   </script>
 </body>
 

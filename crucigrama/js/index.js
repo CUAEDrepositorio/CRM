@@ -840,17 +840,16 @@ function Revisar() {
     //boton revisar
     if (tempo) {
       
+      d = Number(temporal - seconds);
+
+      var m = Math.floor(d % 3600 / 60);
+      var s = Math.floor((d % 3600 % 60) - 1);
+      var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
+      var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
       if (tiempo >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
-        d = Number(temporal - seconds);
-
-        var m = Math.floor(d % 3600 / 60);
-        var s = Math.floor(d % 3600 % 60);
-        var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
-        var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
-
         swal({
           title: "Resultado",
-          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas"+" en " + mDisplay + sDisplay + ".\n"+mensaje,
+          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas. "+"\n Empleaste " + mDisplay + (sDisplay) + ".\n"+mensaje,
           confirmButtonText: "Aceptar",
           button: "Aceptar",
         });
@@ -858,13 +857,12 @@ function Revisar() {
       } else {
         swal({
           title: "Resultado",
-          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas"+" en " + tiempo + " segundos.\n "+mensaje,
+          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas."+"\n Empleaste " + sDisplay + " segundos.\n "+mensaje,
           confirmButtonText: "Aceptar",
           button: "Aceptar",
         });
       } //else tiempo
       clearInterval(countdownTimer);
-      $("#countdown").remove();
     } else { //tiempo
       swal({
         title: "Resultado",
@@ -872,6 +870,8 @@ function Revisar() {
         confirmButtonText: "Aceptar",
         button: "Aceptar",
       });
+      $("input").attr('disabled','disabled');
+      // clearInterval(countdownTimer);
     }
 
   } else {
@@ -1462,7 +1462,6 @@ function RegisterEvents() {
 //---------------------------------//
 $(document).ready(function () {
 
-
 $("#btnRecargar").hide();
 $("#prohibido").hide();
 $("#btnIniciar").hide();
@@ -1477,9 +1476,10 @@ window.onresize = function(){
   } else{
     $(".container").hide();
     $("#prohibido").show();
+    // clearInterval(countdownTimer);
   }
-
 }
+
 if (window.parent.data_crm) {
   debug = true;
   tempo = true;
@@ -1504,12 +1504,10 @@ $("#btnCreate").click(function () {
   $("#btnRevisar").hide();
   $("#btnRecargar").show();
   $("#btnReinicio").show();
+  
+  clearInterval(countdownTimer);
 }); //btnCreate
 
-});
-
-
-$(document).ready(function () {
-
 
 });
+

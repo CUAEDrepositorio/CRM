@@ -1,5 +1,4 @@
 var remainingSeconds = 0;
-// var countdownTimer = 0;
 var seconds = 0;
 var temporal;
 
@@ -22,17 +21,20 @@ function inicial() {
   $("#btnPlay").hide();
   $("#btnRevisar").hide();
   $("#btnCreate").hide();
-  $("#respuestaspro").hide();
   $(".row").hide();
+  $(".contrespuestasv").hide();
+  $(".contrespuestash").hide();
+
 }
 
 function iniciarTempo() {
   console.log("iniciarTempo");
-  // var countdownTimer = 0;
   inicial();
+
   $("#btnIniciar").click(function () {
     $(".row").show();
-    $("#respuestaspro").show();
+    $(".contrespuestasv").show();
+    $(".contrespuestash").show();
     $("#btnIniciar").hide();
     $("#btnPlay").show();
     $("#btnRevisar").show();
@@ -59,16 +61,18 @@ function temporizador() {
       document.getElementById('countdown').innerHTML = a + ":" + remainingSeconds;
     } catch (e) {}
     if (seconds == 0) {
-      // clearInterval(countdownTimer);
       swal({
         title: "¡Se acabó el tiempo!\n",
         confirmButtonText: "Aceptar",
         button: "Aceptar",
       });
+      clearInterval(countdownTimer);
+      $("input").attr('disabled','disabled');
       $("#btnPlay").hide();
       $("#btnRevisar").hide();
       $("#btnReinicio").hide();
       $("#btnCreate").show();
+
     } else {
       seconds --;
     }

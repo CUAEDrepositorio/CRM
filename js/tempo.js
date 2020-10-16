@@ -73,14 +73,12 @@ function temporizador() {
         mensaje = retroCal[j].Mensaje;
       }
     }
-    var final = words.length;
     if (seconds == 0) {
       clearInterval(countdownTimer);
       var final = words.length;
       $('.puzzleSquare').addClass('complete');
       swal({
         title: "¡Se acabó el tiempo!",
-        text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas. \n"+ mensaje,
         confirmButtonText: "Aceptar",
         button: "Aceptar",
       });

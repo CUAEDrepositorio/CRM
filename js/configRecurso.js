@@ -2,8 +2,8 @@
 var esParrafo = true; //cuando se necesita que que con base a un parrafo se encuentre una palabra; FALSE cuando solo se ocupan palabras
 var debug = false; //Esta opción solo aplica cuando listaReactivos,js esta conformado por una frase y palabra
 var tempo = false; //Activar funcion de temporizador KDMR
-var minutes = 0;
-var seg = 20; //establecer el tiempo del temporizador, antes debe estar en TRUE la variable TEMPO KDMR
+var minutes = 2;
+var seg = 30; //establecer el tiempo del temporizador, antes debe estar en TRUE la variable TEMPO KDMR
 var verLongitud = false;
 var orientaciones = false;
 var retroCal = [{

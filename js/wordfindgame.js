@@ -9,13 +9,13 @@
 	-LPFR Agosto 27, 2019 se agrego estructura nueva de lista de reactivas
    -LPFR Agosto 27, 2019 se agrego visibildiad de palabras encontradas en respuestas.
 */
+
 var idObjetivo = 0;
 var aciertos = 0;
 var inc = 0;
 var camino;
 var bodyOriginal;
 var countdownTimer = 0;
-// var tiempo;
 var mensaje;
 var countdownTimer = 0;
 var d;
@@ -25,7 +25,6 @@ var retroBien = [];
 var retroMal = [];
 var palomita = "<i class='ip far fa-2x fa-check-circle blink'></i>";
 var tache = "<i class='it far fa-2x fa-times-circle blink'></i>";
-// var retroBienT;
 var retroMalT;
 var retroBien;
 var retroMal;
@@ -54,7 +53,7 @@ var patrono = creaColores(50);
 (function (document, $, wordfind) {
 
 
-  'use strict';
+  // 'use strict';
 
   /**
    * An example game using the puzzles created from wordfind.js. Click and drag
@@ -135,7 +134,7 @@ var patrono = creaColores(50);
           } //for oracion
           if (verLongitud) {
             txt = "&nbsp;<sup>" + oracion.length + "</sup>";
-            output += '<li>' + contenido + txt;
+            output += '<li id="' + word + '">' + contenido + txt;
           } else {
             output += '<li id="' + word + '">' + contenido;
           }
@@ -143,11 +142,12 @@ var patrono = creaColores(50);
 
         } else { //cuando solo son palabras
           var word = words[i];
-          output += '<li id="' + word + '" class="word ' + word + '">' + (i + 1) + '. ' + word + "</li>";
+          output += '<li id="' + word + '" class="word ' + word + '">' + (i + 1) + '. ' + word;
           if (verLongitud) {
             txt = "&nbsp;<sup>" + word.length + "</sup>";
             output += txt;
           }
+          output += "</li>";
         }
       } //for words.length
       output += '</ul>';
@@ -278,8 +278,6 @@ var patrono = creaColores(50);
       // make sure we are still forming a valid word
       for (var i = 0, len = wordList.length; i < len; i++) {
         if (wordList[i].indexOf(curWord + $(square).text()) === 0) {
-          // console.log("CurdWord " + curWord)
-          // console.log("wordList " + wordList)
           $(square).addClass('selected');
           selectedSquares.push(square);
           curWord += $(square).text();
@@ -294,7 +292,7 @@ var patrono = creaColores(50);
      * resets the game state to start a new word.
      *
      */
-    
+
     var endTurn = function () {
 
       // see if we formed a valid word
@@ -309,8 +307,13 @@ var patrono = creaColores(50);
           $('.selected').css("background-color", patrono[inc])
           console.log(wordList.length);
           retroBien = words[i][2];
-
-          var retroBienT = '<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + retroBien + '">' + palomita + '</span>'
+          if(verLongitud){
+            var retroBienT = '<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + retroBien;
+            retroBienT += '<sup>'+ retroBien.length + '</sup>' + '">' + palomita + '</span>'
+          }else{
+            var retroBienT = '<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + retroBien + '">' + palomita + '</span>'
+          }
+          
           // wordList.splice(i, 1);
           //se agregan las clases para mostrar la palabra
           $('#' + curWord).prepend(retroBienT);
@@ -345,23 +348,23 @@ var patrono = creaColores(50);
             mensaje = retroCal[j].Mensaje;
           }
         }
-        var tempSeg = seg-seconds
         //se revisa si estan todas encontradas
         if (inc == words.length) {
           var final = words.length;
           $('.puzzleSquare').addClass('complete');
 
           if (tempo) {
+            d = Number(temporal - seconds);
+            var m = Math.floor(d % 3600 / 60);
+            var s = Math.floor((d % 3600 % 60) - 1);
+            var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
+            var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
+
             if ((tiempo) >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
-              d = Number(temporal - seconds);
-              var m = Math.floor(d % 3600 / 60);
-              var s = Math.floor(d % 3600 % 60);
-              var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
-              var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
 
               swal({
                 title: "Resultado\n",
-                text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas en " + mDisplay + sDisplay + ".\n" + mensaje,
+                text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas. \n Empleaste " + mDisplay + sDisplay + ".\n" + mensaje,
                 confirmButtonText: "Aceptar",
                 button: "Aceptar",
               });
@@ -369,13 +372,12 @@ var patrono = creaColores(50);
             } else {
               swal({
                 title: "Resultado\n",
-                text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas en " + tempSeg + " segundos" + ".\n" + mensaje,
+                text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas. \n Empleaste " + sDisplay + " segundos" + ".\n" + mensaje,
                 confirmButtonText: "Aceptar",
                 button: "Aceptar",
               });
             } //else tiempo
             clearInterval(countdownTimer);
-            $("#countdown").remove();
             $("#again").show();
             $("#solve").hide();
           } else {
@@ -487,9 +489,9 @@ var patrono = creaColores(50);
        * @param {[[String]]} puzzle: The puzzle to solve
        * @param {[String]} words: The words to solve for
        */
-      solve: function (puzzle, words) {
-        //iniciaAmbienteScorm  (ambSCORM, barraSCORM, idObjetivo);
 
+
+      solve: function (puzzle, words) {
         var solution = wordfind.solve(puzzle, words).found;
 
         for (var i = 0, len = solution.length; i < len; i++) {
@@ -498,14 +500,19 @@ var patrono = creaColores(50);
             x = solution[i].x,
             y = solution[i].y,
             next = wordfind.orientations[orientation];
-          // retroMal = words[i][3]
           if (!$('.' + word).hasClass('wordFound')) {
             for (var j = 0, size = word.length; j < size; j++) {
               var nextPos = next(x, y, j);
               $('[x="' + nextPos.x + '"][y="' + nextPos.y + '"]').addClass('solved');
             }
-            retroMal = words[i][3]
-            retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal + '">' + tache + '</span>'
+            retroMal = words[i][3];
+            if(verLongitud){
+              retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal;
+              retroMalT += '<sup>'+retroMal.length +'</sup>'+ '">' + tache + '</span>'
+            }else{
+              retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal + '">' + tache + '</span>'
+            }
+            
             $('.' + word).addClass('wordFound');
             $('#' + word).prepend(retroMalT);
           }
@@ -518,7 +525,12 @@ var patrono = creaColores(50);
 
           var contenidopalabra = $(subraya[m]).attr("data-resp");
           retroMal = words[m][3]
-          retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal + '">' + tache + '</span>'
+          if(verLongitud){
+            retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal;
+            retroMalT += '<sup>'+retroMal.length +'</sup>'+ '">' + tache + '</span>'
+          }else{
+            retroMalT = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + retroMal + '">' + tache + '</span>'
+          }
           $(subraya[m]).html(contenidopalabra);
         }
 
@@ -540,14 +552,15 @@ var patrono = creaColores(50);
           button: "Aceptar",
         });
         clearInterval(countdownTimer);
-      }
+      } //solve
     };
-  };
+  }; //wordFindGam
 
 
   /**
    * Allow game to be used within the browser
    */
   window.wordfindgame = WordFindGame();
+
 
 }(document, jQuery, wordfind));

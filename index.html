@@ -1,47 +1,79 @@
 <!DOCTYPE html>
 <html lang="es-MX">
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <head>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
- <!--  <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <!-- <script async="" src="https://www.google-analytics.com/analytics.js"></script>
   <script>
-    (function (i, s, o, g, r, a, m) {
-      i["GoogleAnalyticsObject"] = r;
-      i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
-    ga("create", "UA-158134453-1", {
-      "cookieDomain": "auto"
-    });
-    ga("set", "anonymizeIp", true);
-    ga('set', 'dimension1', "CUAED");
-    ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
-    ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
-    ga('set', 'dimension4', "2019");
-    ga('set', 'dimension5', "LÚDICO");
-    ga('set', 'dimension6', "RL03-19");
-    ga('set', 'dimension7', "SOPA DE LETRAS");
-    ga('set', 'dimension8', "VERSIÓN 1");
-    ga("set", "metric1", 1);
-    ga("set", "metric2", 2);
-    ga("set", "metric3", 3);
-    ga("set", "metric4", 4);
-    ga("set", "metric5", 5);
-    ga("set", "metric6", 6);
-    ga("set", "metric7", 7);
-    ga("set", "metric8", 8);
-    ga("send", "pageview");
-  </script>
- -->
-  <title>Sopa de letras V2.1</title>
+    if (!window.parent.data_crm) {
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+      ga("create", "UA-158134453-1", {
+        "cookieDomain": "auto"
+      });
+      ga("set", "anonymizeIp", true);
+      ga('set', 'dimension1', "CUAIEED");
+      ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
+      ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
+      ga('set', 'dimension4', "2021");
+      ga('set', 'dimension5', "LÚDICO");
+      ga('set', 'dimension6', "RL03-21");
+      ga('set', 'dimension7', "SOPA DE LETRAS");
+      ga('set', 'dimension8', "VERSIÓN 2");
+      ga("set", "metric1", 1);
+      ga("set", "metric2", 2);
+      ga("set", "metric3", 3);
+      ga("set", "metric4", 4);
+      ga("set", "metric5", 5);
+      ga("set", "metric6", 6);
+      ga("set", "metric7", 7);
+      ga("set", "metric8", 8);
+      ga("send", "pageview");
+    }
+  </script> -->
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sopa de letras" />
+  <meta name="keywords" content="UNAM, CUAIEED" />
+  <meta name="author" content="UNAM CUAIEED" />
+  <meta name="news_keywords" content="UNAM, CUAIEED" />
+  <meta name="generator" content="UNAM CUAIEED" />
+  <meta property="og:site_name" content="Sopa de letras" />
+  <meta itemprop="name" content="UNAM, CUAIEED" />
+  <meta itemprop="image" content="" />
+  <meta itemprop="description" content="Sopa de letras" />
+  <meta property="og:title" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:type" content="activity" />
+  <meta property="og:description" content="Sopa de letras" />
+  <meta property="og:image" content="" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+  <!--
+        3.0 KDMR Sep 25, 2020: Se genera de manera aleatoria el sopa de letras solo permite 50 palabras y un máximo de 18 carácteres.
+        3.0 KDMR Sep 25, 2020: Cada palabra encontrada se muestra en un color diferente tanto en la sopa como en la caja de reactivos.
+        3.0 KDMR Sep 25, 2020: En caso de que no se encuentran las palabras aparecen de color amarillo (dorado) tanto en reativos como en la sopa
+        3.0 KDMR Sep 25, 2020: Se añadio la variable esParrafo, donde en caso de true es parrafo y false una sopa de letras convecional.
+        3.0 KDMR Sep 25, 2020: En el modo solo palabras se muestra enumeradas
+        3.0 KDMR Sep 25, 2020: Se añadio debug solo en la versión esParrafo es true, mostrando la palabra a encontrar a un lado del espacio de la respuesta
+        3.0 KDMR Sep 25, 2020: Se añadio retroalimentaciones (palomita, tache) en modo tooltip
+        3.0 KDMR Sep 25, 2020: Se añadio temporizador(minutos y segundos) y ambiente SCORM
+        3.0 KDMR Sep 25, 2020: No disponible en movil, además se añadio longitud en la caja de reactivos como en retroalimentaciones
+		    3.0 KDMR Sep 25, 2020: Se añadio ambiente SCORM y cambio del archivo conectividadSCORM.js creado por RAAR, y código Analytics por JLBG  
+        -->
+  <title>Sopa de letras V3.0</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/estilos.css">
@@ -49,11 +81,11 @@
   <script src="js/sweetalert.min.js"></script>
   <!-- <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> NO -->
   <!-- <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script> -->
-  <script src="https://lib.cuaed.unam.mx/R019/js/jquery-v3.2.1.js"></script>
+  <script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"></script>
   <script src="js/listaReactivos.js"></script>
   <script src="js/configRecurso.js"></script>
   <script src="js/wordfind.js"></script>
-  
+
   <script src="js/wordfindgame.js">
     var patrono = [];
     var words = [];
@@ -62,8 +94,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
     integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css">
-  <script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+  <link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/bootstrap-v3.3.7.min.css">
+  <script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <script src="js/tempo.js"></script>
@@ -101,7 +133,7 @@
     <div class="row">
 
       <div style="text-align:center">
-        <button id='solve'>Ver respuestas</button>
+        <button id='solve'>Revisar</button>
         <button id='again' onclick="location.reload();">Reiniciar</button>
       </div>
     </div>
@@ -133,7 +165,7 @@
         var options = {
           html: true
         };
-  
+
         if ($(this)[0].hasAttribute('data-type')) {
           options['template'] =
             '<div class="tooltip ' + $(this).attr('data-type') + '" role="tooltip">' +
@@ -144,7 +176,6 @@
         $(this).tooltip(options);
       });
     });
-
   </script>
 
 </body>

@@ -606,9 +606,9 @@ function isMobile() {
   }
 }
 
-$(document).ready(function () {   
-  
-  
+$(document).ready(function () {
+
+
   if (window.name == "movil") {
     esMobil = true;
   } else {
@@ -642,14 +642,14 @@ $(document).ready(function () {
   //       $(".container").hide();
   //       $("#prohibido").show();
   //     }
-    
+
   //   }
   // }
 
 
   if (tempo) {
     $(".puzzleSquare").prop("disabled", true);
-    
+
     clearInterval(countdownTimer);
     iniciarTempo();
     tiempo = ((minutes * 60) + seconds);
@@ -657,7 +657,7 @@ $(document).ready(function () {
     console.log("TIEMPO: " + tiempo);
     try {
 
-      
+
     } catch (e) {}
   } else {
     $("#btn-iniciar").hide();
@@ -668,4 +668,3 @@ $(document).ready(function () {
     $("#solve").hide();
   });
 });
-

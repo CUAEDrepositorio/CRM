@@ -2,20 +2,18 @@
 var rutas = [
         ["Par1",
         "Par1",
-        "retro bien",
-        "retro mal"],
-        ["Par2",
-        "Par2",
-        "retro bien",
-        "retro mal"],
-        ["ruta/imagen1",
+        "Retroalimentación correcta",
+        "Retroalimentación incorrecta"],
+
+        ["Texto de referencia a la imagen1",
         "ruta/imagen1",        
-        "retro bien",
-        "retro mal"],
+        "Retroalimentación correcta",
+        "Retroalimentación incorrecta"],
+        
         ["ruta/imagen2",
         "ruta/imagen2",
-        "retro bien",
-        "retro mal"],
+        "Retroalimentación correcta",
+        "Retroalimentación incorrecta"],
 ];
 
 */
@@ -24,51 +22,51 @@ var rutas = [
 var rutas = [
         ["Hola", 
         "Hola",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 1",
+        "Retroalimentación incorrecta 1"],
 
         ["Felicidades", 
         "Felicidades",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 2",
+        "Retroalimentación incorrecta 2"],
 
-        ["¿Cómo estas?", 
-        "¿Cómo estas?",
-        "retro Bien",
-        "retro Mal"],
+        ["Rio", 
+        "./imagenes/rio.jpg",
+        "Retroalimentación correcta 3",
+        "Retroalimentación incorrecta 3"],
 
         ["./imagenes/perro1.jpg",
         "./imagenes/perro1.jpg",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 4",
+        "Retroalimentación incorrecta 4"],
 
         ["./imagenes/perro2.jpg",
         "./imagenes/perro2.jpg",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 5",
+        "Retroalimentación incorrecta 5"],
 
         ["./imagenes/perro3.jpg",
         "./imagenes/perro3.jpg",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 6",
+        "Retroalimentación incorrecta 6"],
 
         ["./imagenes/perro4.jpg",
         "./imagenes/perro4.jpg",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 7",
+        "Retroalimentación incorrecta 7"],
 
         ["./imagenes/perro5.jpg",
         "./imagenes/perro5.jpg",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 8",
+        "Retroalimentación incorrecta 8"],
 
         ["Buenos días", 
         "Buenos días",
-        "retro Bien",
-        "retro Mal"],
+        "Retroalimentación correcta 9",
+        "Retroalimentación incorrecta 9"],
 
         ["Hasta luego",
         "Hasta luego",
-        "retro Bien",
-        "retro Mal"]
+        "Retroalimentación correcta 10",
+        "Retroalimentación incorrecta 10"]
 ];

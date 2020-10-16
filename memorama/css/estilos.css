@@ -244,9 +244,9 @@ button, .cuadrito, .cubridor, .cuadritoHecho{/*Animación para estos selectores*
   border-radius: 10px;
 }
 
-#mov{
+.mov{
   display: flex;
-  align-items: right;
+  /*margin: 150px;*/
   justify-content: center;
   font-size: 1.5vw;
   border-radius: 10px;

@@ -1,4 +1,3 @@
-
 /*controles*/
 /*KDMR-05/02/20: Se añadio rutas de liberias del servidor; además de restringuir para moviles
   KDMR-17/02/20: Cambio de version (contiene temporizador, ebug y nueva libreria SCORM)
@@ -22,6 +21,7 @@ var current = null;
 var mensaje = "";
 var countdownTimer = 0;
 var tiempo;
+var tiempo2;
 var audioBien;
 var audioMal;
 var mov = 0;
@@ -29,9 +29,10 @@ var intentos = 0;
 var idioma = "ESP";
 movimientos = 0;
 var numIntentos = 2;
+var final = rutas.length;
 $(document).ready(function () {
     iniciar();
-    
+
 })
 
 //window.addEventListener("load", iniciar, false);
@@ -52,6 +53,8 @@ function iniciar() {
         tempo = true;
         rendirse = true;
         separador = true;
+        conteoMovimientos = true;
+        movimientos =  0;
     }
     if (window.name == "movil") {
         esMobil = true;
@@ -76,8 +79,6 @@ function iniciar() {
     bloqueOriginal = document.getElementById("bloqueCartas").innerHTML;
     conteo();
 
-    //Retro
-    //Fin Retro
 }
 
 function conteo() {
@@ -107,13 +108,10 @@ function conteo() {
     retroMal = document.createElement('div');
     retroMal.className = "retroMal col-md-6 col-md-offset-3";
     retroMal = document.getElementById("retroincorrecta");
-
     var retroFinal = document.getElementById("retroFinal");
     retroFinal.addEventListener("click", quitarRetro, false);
     document.getElementById("botonCerrarRetroplus").addEventListener("click", quitarRetro, false);
-
     retroFinal.style.display = "none";
-
     document.getElementById("pasar").addEventListener("click", function () {
         if (vidmaster == true) {
             auxmaster2 = window.domino[1];
@@ -137,7 +135,7 @@ function conteo() {
         document.getElementById("pasar").style.display = "none";
         document.getElementById("botonCerrarRetroplus").style.display = "";
         var final = rutas.length;
-        
+
         if (idioma == "ESP") {
 
             for (var j = 0; j < retroCal.length; j++) {
@@ -147,20 +145,11 @@ function conteo() {
                 }
             } //for
         }
-        // console.log(mensaje);
-        //SWAL ME RINDO
-        // if (idioma == "ENG") {
-        //     swal({
-        //         title: "Result",
-        //         text: mensaje + " you have " + aciertos + " of " + final,
-        //         confirmButtonText: "Aceptar",
-        //         button: "Ok",
-        //     });
-        // } else 
+
         if (idioma == "ESP") {
             swal({
                 title: "Resultado",
-                text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n"+mensaje,
+                text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n" + mensaje,
                 confirmButtonText: "Aceptar",
                 button: "Aceptar",
             });
@@ -249,6 +238,7 @@ function crearcartas() {
         elemento.setAttribute('data-respuesta', parte);
         elemento.setAttribute('data-respuesta0', rutas[i - 1][2]);
         elemento.setAttribute('data-respuesta1', rutas[i - 1][3]);
+        // elemento.setAttribute('data-respuesta2', rutas[i - 1][3].length);
         elemento.setAttribute('style', 'width:' + anchocarta + 'px; height:' + altocarta + 'px;');
 
 
@@ -261,10 +251,7 @@ function crearcartas() {
             elemento.setAttribute('onclick', "sonido('" + aud + "'," + datover + ")");
         }
 
-
-
         contenedor1.appendChild(elemento);
-
         elemento2 = document.createElement('div');
         elemento2.className = "cuadrito cerrado";
         elemento2.setAttribute('style', 'width:' + (anchocarta) + 'px; height:' + (altocarta) + 'px;');
@@ -308,7 +295,6 @@ function crearcartas() {
             audiocontrol.setAttribute('type', 'audio/mpeg');
             audiocontrol.setAttribute('preload', 'preload');
             elemento4.appendChild(audiocontrol);
-
             audioimagen = document.createElement('img');
             audioimagen.setAttribute('src', imagentapa);
             audioimagen.setAttribute('style', 'width: 80%;');
@@ -331,18 +317,12 @@ function crearcartas() {
                 // parr.setAttribute('style', 'width:80%;');
                 parr.innerHTML = rutas[i - 1][0];
                 elemento3.appendChild(parr);
-
-
             }
         }
-
-
         elemento5 = document.createElement('div');
         elemento5.className = "caraTapa cubridor parte1";
         elemento2.appendChild(elemento5);
     }
-
-
     //ciclo pares
     for (var j = 1; j <= rutas.length; j++) {
         parte = "par" + j;
@@ -355,14 +335,13 @@ function crearcartas() {
         imgpng = rutas[j - 1][1].indexOf("png");
         vidmpeg = rutas[j - 1][1].indexOf("mp4");
         soundmp3 = rutas[j - 1][1].indexOf("mp3");
-
         elemento = document.createElement('div');
         elemento.className = "contenedorCarta " + parte;
         elemento.setAttribute('data-respuesta', parte);
         elemento.setAttribute('data-respuesta0', rutas[j - 1][2]);
         elemento.setAttribute('data-respuesta1', rutas[j - 1][3]);
+        // elemento.setAttribute('data-respuesta2', rutas[j - 1][3].length);
         elemento.setAttribute('style', 'width:' + anchocarta + 'px; height:' + altocarta + 'px;');
-
 
         //video
         if (vidmpeg != -1) {
@@ -371,8 +350,6 @@ function crearcartas() {
         if (soundmp3 != -1) {
             elemento.setAttribute('onclick', "sonido('" + aud + "'," + datover + ")");
         }
-
-
 
         //separador de divs
         if (separador == true) {
@@ -392,10 +369,7 @@ function crearcartas() {
         }
 
         elemento.appendChild(elemento2);
-
         elemento3 = document.createElement('div');
-
-
         if (separador) {
             elemento3.className = "caraRespuesta parte2";
         } else {
@@ -406,7 +380,6 @@ function crearcartas() {
         }
 
         elemento2.appendChild(elemento3);
-
         elemento4 = document.createElement('div');
         elemento3.appendChild(elemento4);
         //si es video
@@ -464,11 +437,7 @@ function crearcartas() {
         }
 
         elemento2.appendChild(elemento5);
-
     }
-
-
-
 }
 
 function deactivarCartas() {
@@ -497,9 +466,8 @@ function invertirCarta(carta) {
 
 }
 
-
 function alClicCarta(e) {
-    var totalMov = rutas.length * 2 + 1
+    var totalMov = rutas.length * 3 + 1
     invertirCarta(e.currentTarget);
     if (cartaActiva === null) {
         cartaActiva = e.currentTarget;
@@ -521,10 +489,20 @@ function alClicCarta(e) {
             if (activarson) {
                 audioBien.play();
             }
-            var mmov = mov += 1;
-            document.getElementById('mov').innerHTML = "Movimientos realizados: "+mmov
+
+            if (conteoMovimientos) {
+                var mmov = mov += 1;
+                if ((movimientos == 0) ||  (movimientos < 0)) {
+                    var mmovRestante = totalMov - mmov;
+                    document.getElementById('restante').innerHTML = "Movimientos restantes: " + mmovRestante
+                }else{
+                    var mmovRestante = movimientos - mmov;
+                    document.getElementById('restante').innerHTML = "Movimientos restantes: " + mmovRestante
+                }
+                
+            }
+
             retroBien.innerHTML = e.currentTarget.parentNode.getAttribute("data-respuesta0")
-            
             document.getElementById("retroincorrecta").style.display = "none";
             document.getElementById("retrocorrecta").style.display = "block";
 
@@ -538,48 +516,40 @@ function alClicCarta(e) {
                 document.getElementById("revisar").style.display = "none";
                 document.getElementById("revisarcont").style.display = "none";
                 document.getElementById("pasar").style.display = "none";
-                try {
-                    tiempo = ((minutes * 60) + seg) - (seconds % 60)
-                    clearInterval(countdownTimer);
-                } catch (e) {
 
-                }
                 for (var j = 0; j < retroCal.length; j++) {
                     if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
                         mensaje = retroCal[j].Mensaje;
                     }
                 } //for
 
-                // if (idioma == "ENG") {
-                //     swal({
-                //         title: "Result",
-                //         text: "Great job you have " + aciertos + " of " + final,
-                //         confirmButtonText: "Aceptar",
-                //         button: "Ok",
-                //     });
-                // } else
                 if (idioma == "ESP") {
-                        swal({
-                            title: "Resultado",
-                            text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+mensaje,
-                            confirmButtonText: "Aceptar",
-                            button: "Aceptar",
-                        });
-                        $(".retroBien").hide();
-                        $(".retroMal").hide();
-                } 
-
+                    swal({
+                        title: "Resultado",
+                        text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n " + mensaje,
+                        confirmButtonText: "Aceptar",
+                        button: "Aceptar",
+                    });
+                    $(".retroBien").hide();
+                    $(".retroMal").hide();
+                }
+                try {
+                    tiempo2 = ((minutes * 60)) + (seg % 60)
+                    tiempo = ((minutes * 60) + seg) - (seconds % 60)
+                    clearInterval(countdownTimer);
+                } catch (e) {}
                 if (tempo) {
+                    console.log("1")
+                    d = Number(tiempo);
+                    var m = Math.floor(d % 3600 / 60);
+                    var s = Math.floor((d % 3600 % 60) - 1);
+                    var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
+                    var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
 
-                    if ((tiempo) >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
-                        d = Number(tiempo);
-                        var m = Math.floor(d % 3600 / 60);
-                        var s = Math.floor(d % 3600 % 60);
-                        var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
-                        var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
-
+                    if ((tiempo2 - seconds) >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
+                        console.log("2")
                         swal({
-                            text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+" en " + mDisplay + sDisplay+"\n"+mensaje,
+                            text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n " + "Empleaste " + mDisplay + sDisplay + ".\n" + mensaje,
                             title: "Resultado",
                             confirmButtonText: "Aceptar",
                             button: "Aceptar",
@@ -587,9 +557,10 @@ function alClicCarta(e) {
                         $(".retroBien").hide();
                         $(".retroMal").hide();
                     } else {
+                        console.log("3")
                         swal({
                             title: "Resultado",
-                            text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+ " en " + tiempo + " segundos"+ "\n"+mensaje,
+                            text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n " + "Empleaste " + sDisplay + " segundos" + ".\n" + mensaje,
                             confirmButtonText: "Aceptar",
                             button: "Aceptar",
                         });
@@ -606,46 +577,50 @@ function alClicCarta(e) {
             }
         } else {
             condicion = 1;
-            var mmov = mov += 1;
-            document.getElementById('mov').innerHTML = "Movimientos realizados: "+mmov
+            if (conteoMovimientos) {
+                var mmov = mov += 1;
+                if ((movimientos == 0) ||  (movimientos < 0)) {
+                    var mmovRestante = totalMov - mmov;
+                    document.getElementById('restante').innerHTML = "Movimientos restantes: " + mmovRestante
+                }else{
+                    var mmovRestante = movimientos - mmov;
+                    document.getElementById('restante').innerHTML = "Movimientos restantes: " + mmovRestante
+                }
+                
+            }
             if (activarson) {
-
                 audioMal.play();
             }
-            
+
             current = e.currentTarget;
             document.getElementById("retrocorrecta").style.display = "none";
             document.getElementById("retroincorrecta").style.display = "block";
             deactivarCartas();
         }
     }
-        
-            if(movimientos>totalMov){
-                if(mov >= movimientos){
-                    swal({
-                        title: "¡Se acabó el número de movimientos permitidos!\n",
-                        confirmButtonText: "Aceptar",
-                        button: "Aceptar"
-                    });
-                    $("#revisar").hide();
-                    $("#pasar").show();
-                    intentos++;
-                }
-            }else{
-                if(mov >= totalMov){
-                    swal({
-                        title: "¡Se acabó el número de movimientos permitidos!\n",
-                        confirmButtonText: "Aceptar",
-                        button: "Aceptar"
-                    });
-                    $("#revisar").hide();
-                    $("#pasar").show();
-                    intentos++;
-                }
+
+    if (conteoMovimientos) {
+        if ((movimientos < totalMov) || (movimientos < 0)) {
+            movimientos = totalMov;
+        }
+        if ((movimientos > 0 && mov >= movimientos) || (movimientos == 0 && mov >= totalMov)) {
+            if (mov >= movimientos) {
+                swal({
+                    title: "¡Se acabó el número de movimientos permitidos!\n",
+                    confirmButtonText: "Aceptar",
+                    button: "Aceptar"
+                });
+                clearInterval(countdownTimer);
+                $("#countdown").hide();
+                $("#revisar").hide();
+                $("#pasar").show();
+                intentos++;
             }
-              $("#botonCerrarRetroplus").click(function () {
-                    intentos++;
-                  }); 
+        }
+    }
+    $("#botonCerrarRetroplus").click(function () {
+        intentos++;
+    });
 
 }
 
@@ -708,8 +683,6 @@ function crearMemorama() {
             domino.pop();
             domino.pop();
         }
-
-
         cartaActiva = null;
         document.getElementById("revisar").style.display = "";
         document.getElementById("revisarcont").style.display = "none";
@@ -725,33 +698,21 @@ function crearMemorama() {
             domino.pop();
             domino.pop();
         }
-
         carta1.className = carta2.className = "cuadrito cerrado";
         activarCartas();
         condicion = 0;
 
         document.getElementById("revisar").removeEventListener("click", function (e) {
             if (condicion == 1) {
-
                 document.getElementById("retroincorrecta").style.display = "none";
-
-
                 deactivarCartas();
                 resetear2cartas(cartaActiva, current);
-
                 cartaActiva = null;
-
-            } else {
-
-            }
-
+            } else {}
         });
     }
 
-
-
 }
-
 
 function isMobile() {
 
@@ -764,7 +725,7 @@ function isMobile() {
 }
 
 
-//Código en el index
+//Código en el index 31/08/20
 // var html5_audiotypes = {
 //     "mp3": "audio/mpeg",
 //     "mp4": "audio/mp4",

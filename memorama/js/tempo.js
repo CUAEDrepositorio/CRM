@@ -84,7 +84,7 @@ function temporizador() {
       $('#Parte2').addClass('complete');
       swal({
         title: "¡Se acabó el tiempo! \n",
-        text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+mensaje,
+        // text: "Obtuviste " + aciertos + "/"+ final +" respuestas correctas.\n "+mensaje,
         confirmButtonText: "Aceptar",
         button: "Aceptar"
       });

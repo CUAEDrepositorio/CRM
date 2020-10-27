@@ -39,7 +39,7 @@ body {
 	float:left;
 }
 .logo-cuaed{
-	width: 100%;
+	/* width: 100%; */
 	margin: auto;
 	margin-right: 50px;
 	padding-top: 5px;
@@ -93,18 +93,20 @@ div > i:hover {
 	color:#2196F3;
 }
 
-#creditos {
+#creditos, #contactos {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
 }
 
-#creditos td, #creditos th {
+#creditos td, #creditos th, #contactos td, #contactos th {
 	border: 1px solid #ddd;
 	padding: 8px;
 }
 
-#creditos tr:nth-child(odd){background-color: #f2f2f2;}
+#creditos tr:nth-child(odd), #contactos tr:nth-child(odd) {
+	background-color: #f2f2f2;
+}
 
 #creditos th {
 	padding-top: 12px;
@@ -346,7 +348,8 @@ footer {
 }
 .monitorPC .content{
 	height: 100%;
-	width:100%
+	width:100%;
+	background: white;
 }
 
 /* The keyboard of the laptop */

@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<title>..:: CRM 2019 ::..</title>
+	<title>..:: CRM 2021 ::..</title>
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 	<link href="css/jquery-multitabs.css" rel="stylesheet" type="text/css">
 	<link href="css/estilos.css" rel="stylesheet" type="text/css">
@@ -24,15 +24,21 @@
 </head>
 
 <body data-offset="50">
-	<div class="cinta">
+	<div class="cinta container-fluid">
 		<div class="row">
-			<div class="col-xs-2" id="logo1"><a href="https://www.unam.mx" target="_blank"><img class="logo-unam"
-						src="img/logounam.svg" alt="logounam"></a></div>
+			<div class="col-xs-2" id="logo1">
+				<a href="https://www.unam.mx" target="_blank">
+					<img class="logo-unam" src="img/logounam.svg" alt="logounam">
+				</a>
+			</div>
 			<div class="col-xs-8" id="CRM" data-toggle="tooltip" data-placement="bottom" data-type="info"
 				title="Se recomienda visualizar en PC desktop, con zoom de 100%">Catálogo de Recursos Multimedia
 			</div>
-			<div class="col-xs-2" id="logo2"><a href="#" target="_blank"><img class="logo-cuaed"
-						src="img/logo_cuaed1.svg" alt="logo-cuaed"></a></div>
+			<div class="col-xs-2" id="logo2">
+				<a href="#" target="_blank">
+					<img class="logo-cuaed" src="img/CUAIEED_blanco.png" alt="logo-cuaed">
+				</a>
+			</div>
 		</div>
 	</div>
 	<div class="tab1">
@@ -50,51 +56,47 @@
 					<div data-child="true" class="tab__header">
 						<div class="tab__header-1 tab__header--active">Fichero de conceptos</div>
 						<div class="tab__header-2">Fichero de conceptos vertical</div>
-						<div class="tab__header-3">Galería Imágenes (carrusel)</div>
-						<div class="tab__header-4">Contenedor Acordeón</div>
-						<div class="tab__header-5">Hot Spot</div>
-						<div class="tab__header-6">Línea de Tiempo</div>
+						<div class="tab__header-3">Galería imágenes (carrusel)</div>
+						<div class="tab__header-4">Contenedor acordeón</div>
+						<div class="tab__header-5">Hot spot</div>
+						<div class="tab__header-6">Línea de tiempo</div>
 					</div>
 					<div class="tab__content">
 						<div class="tab__content-1 tab__content--active">
-							<p class="nombre-recurso RA1">Clave RC01-19 (antes RC-01V2)</p>
+							<p class="nombre-recurso RA1">Clave RC01-21 (antes RC-01V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								En este recurso se da clic en cada concepto para que muestre su información
 								correspondiente.<br />
 								Se recomienda la inclusión de imágenes para reforzar los contenidos textuales.
 							</p>
-							<h4>
-								Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 								<a href="contenidos/fichero-conceptos/fichero-conceptos.rar" download><span
-										class="glyphicon glyphicon-cloud-download fa-2x"
-										style="color:#2196F3"></span></a>
-							</h4>
+										class="glyphicon glyphicon-cloud-download fa-2x" style="color:#2196F3"></span></a>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
 										<div onclick="elegirDispositivo(1,'FH')" class="img">
-											<i id="FHdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="PC"
-												style="opacity:1.0"></i>
+											<i id="FHdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="PC" style="opacity:1.0"></i>
 										</div>
 										<div onclick="elegirDispositivo(2,'FH')" class="img">
-											<i id="FHcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Móvil vertical"></i>
+											<i id="FHcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Móvil vertical"></i>
 										</div>
 										<div onclick="elegirDispositivo(3,'FH')" class="img">
-											<i id="FHtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Tablet vertical"></i>
+											<i id="FHtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Tablet vertical"></i>
 										</div>
 										<div onclick="elegirDispositivo(4,'FH')" class="img">
-											<i id="FHcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Móvil horizontal"></i>
+											<i id="FHcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Móvil horizontal"></i>
 										</div>
 										<div onclick="elegirDispositivo(5,'FH')" class="img">
-											<i id="FHtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Tablet horizontal"></i>
+											<i id="FHtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Tablet horizontal"></i>
 										</div>
 									</div>
 								</div>
@@ -135,45 +137,41 @@
 							</div>
 						</div>
 						<div class="tab__content-2">
-							<p class="nombre-recurso">Clave RC02-19 (antes RC-02V2)</p>
+							<p class="nombre-recurso">Clave RC02-21 (antes RC-02V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								En este recurso se da clic en cada concepto para que muestre su información
 								correspondiente.<br />
 								Se recomienda la inclusión de elementos gráficos de tipo iconográfico para establecer la
-								interactividad de contenidos.</p>
-							<h4>
-								<p>Descarga el recurso
-									<a href="contenidos/fichero-conceptos-vertical/fichero-conceptos-vertical.rar"
-										download><span class="glyphicon glyphicon-cloud-download fa-2x"
-											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+								interactividad de contenidos.
+							</p>
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
+								<a href="contenidos/fichero-conceptos-vertical/fichero-conceptos-vertical.rar" download><span
+										class="glyphicon glyphicon-cloud-download fa-2x" style="color:#2196F3"></span></a>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
 										<div onclick="elegirDispositivo(1,'FV')" class="img">
-											<i id="FVdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="PC"
-												style="opacity:1.0"></i>
+											<i id="FVdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="PC" style="opacity:1.0"></i>
 										</div>
 										<div onclick="elegirDispositivo(2,'FV')" class="img">
-											<i id="FVcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Móvil vertical"></i>
+											<i id="FVcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Móvil vertical"></i>
 										</div>
 										<div onclick="elegirDispositivo(3,'FV')" class="img">
-											<i id="FVtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Tablet vertical"></i>
+											<i id="FVtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Tablet vertical"></i>
 										</div>
 										<div onclick="elegirDispositivo(4,'FV')" class="img">
-											<i id="FVcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Móvil horizontal"></i>
+											<i id="FVcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Móvil horizontal"></i>
 										</div>
 										<div onclick="elegirDispositivo(5,'FV')" class="img">
-											<i id="FVtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Tablet horizontal"></i>
+											<i id="FVtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Tablet horizontal"></i>
 										</div>
 									</div>
 								</div>
@@ -181,36 +179,31 @@
 									<div class="col-xs-12 marco" style="display:block; padding:20px">
 										<div class="monitorPC" id="FVpc">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/fichero-conceptos-vertical/index.html"
+												<object type="text/html" data="contenidos/fichero-conceptos-vertical/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="smartphoneV" style="display: none" id="FVcelV">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/fichero-conceptos-vertical/index.html"
+												<object type="text/html" data="contenidos/fichero-conceptos-vertical/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="smartphoneH" style="display: none" id="FVcelH">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/fichero-conceptos-vertical/index.html"
+												<object type="text/html" data="contenidos/fichero-conceptos-vertical/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="tabletV" style="display: none" id="FVtabletV">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/fichero-conceptos-vertical/index.html"
+												<object type="text/html" data="contenidos/fichero-conceptos-vertical/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="tabletH" style="display: none" id="FVtabletH">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/fichero-conceptos-vertical/index.html"
+												<object type="text/html" data="contenidos/fichero-conceptos-vertical/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
@@ -219,20 +212,20 @@
 							</div>
 						</div>
 						<div class="tab__content-3">
-							<p class="nombre-recurso">Clave RC03-19 (antes RC-03V2)</p>
+							<p class="nombre-recurso">Clave RC03-21 (antes RC-03V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								En este recurso se pueden insertar una serie de imágenes con su descripción y cita, al
 								dar clic en las flechas adelante y atrás se muestran el resto de las imágenes.<br />
 								También se pueden emplear los bullets inferiores para una navegación por las imágenes.
-								Los tiempos de transición de cada imagen se pueden personalizar.</p>
-							<h4>
-								<p>Descarga el recurso
-									<a href="contenidos/galeria-imagenes/galeria-imagenes.rar" download><span
+								Los tiempos de transición de cada imagen se pueden personalizar.
+							</p>
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
+								<a href="contenidos/galeria-imagenes/galeria-imagenes.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+											</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
@@ -298,44 +291,40 @@
 							</div>
 						</div>
 						<div class="tab__content-4">
-							<p class="nombre-recurso">Clave RC04-19 (antes RC-04V2)</p>
+							<p class="nombre-recurso">Clave RC04-21 (antes RC-04V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								En este recurso al dar clic en cada concepto, tema o subtema, se desplegará el
 								contenido. El contenido desplegado vuelve a su posición inicial cuando se da clic en
-								otro concepto.</p>
-							<h4>
-								<p>Descarga el recurso
-									<a href="contenidos/contenedor-acordeon/contenedor-acordeon.rar" download><span
-											class="glyphicon glyphicon-cloud-download fa-2x"
-											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+								otro concepto.
+							</p>
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
+								<a href="contenidos/contenedor-acordeon/contenedor-acordeon.rar" download><span
+										class="glyphicon glyphicon-cloud-download fa-2x" style="color:#2196F3"></span></a>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
 										<div onclick="elegirDispositivo(1,'AC')" class="img">
-											<i id="ACdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="PC"
-												style="opacity:1.0"></i>
+											<i id="ACdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="PC" style="opacity:1.0"></i>
 										</div>
 										<div onclick="elegirDispositivo(2,'AC')" class="img">
-											<i id="ACcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Móvil vertical"></i>
+											<i id="ACcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Móvil vertical"></i>
 										</div>
 										<div onclick="elegirDispositivo(3,'AC')" class="img">
-											<i id="ACtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Tablet vertical"></i>
+											<i id="ACtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Tablet vertical"></i>
 										</div>
 										<div onclick="elegirDispositivo(4,'AC')" class="img">
-											<i id="ACcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Móvil horizontal"></i>
+											<i id="ACcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Móvil horizontal"></i>
 										</div>
 										<div onclick="elegirDispositivo(5,'AC')" class="img">
-											<i id="ACtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Tablet horizontal"></i>
+											<i id="ACtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Tablet horizontal"></i>
 										</div>
 									</div>
 								</div>
@@ -343,36 +332,31 @@
 									<div class="col-xs-12 marco" style="display:initial; padding:20px">
 										<div class="monitorPC" id="ACpc">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/contenedor-acordeon/index.html"
+												<object type="text/html" data="contenidos/contenedor-acordeon/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="smartphoneV" style="display: none" id="ACcelV">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/contenedor-acordeon/index.html"
+												<object type="text/html" data="contenidos/contenedor-acordeon/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="smartphoneH" style="display: none" id="ACcelH">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/contenedor-acordeon/index.html"
+												<object type="text/html" data="contenidos/contenedor-acordeon/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="tabletV" style="display: none" id="ACtabletV">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/contenedor-acordeon/index.html"
+												<object type="text/html" data="contenidos/contenedor-acordeon/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
 										<div class="tabletH" style="display: none" id="ACtabletH">
 											<div class="content">
-												<object type="text/html"
-													data="contenidos/contenedor-acordeon/index.html"
+												<object type="text/html" data="contenidos/contenedor-acordeon/index.html"
 													style="width:100%; border:none; height:100%"></object>
 											</div>
 										</div>
@@ -381,43 +365,39 @@
 							</div>
 						</div>
 						<div class="tab__content-5">
-							<p class="nombre-recurso">Clave RC05-19 (antes RC-06V2)</p>
+							<p class="nombre-recurso">Clave RC05-21 (antes RC-06V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								En una imagen o diagrama que puede ser animado, se coloca el cursor sobre un área
-								específica y al momento de seleccionar se desplegará la información.</p>
-							<h4>
-								<p>Descarga el recurso
-									<a href="contenidos/hot-spot/hot-spot.rar" download><span
-											class="glyphicon glyphicon-cloud-download fa-2x"
-											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+								específica y al momento de seleccionar se desplegará la información.
+							</p>
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
+								<a href="contenidos/hot-spot/hot-spot.rar" download><span class="glyphicon glyphicon-cloud-download fa-2x"
+										style="color:#2196F3"></span></a>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'HS')" class="img" id="pc">
-											<i id="HSdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="PC"
-												style="opacity:1.0"></i>
+										<div onclick="elegirDispositivo(1,'HS')" class="img">
+											<i id="HSdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="PC" style="opacity:1.0"></i>
 										</div>
 										<div onclick="elegirDispositivo(2,'HS')" class="img">
-											<i id="HScelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Móvil vertical"></i>
+											<i id="HScelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'HS')" class="img" id="tableta">
-											<i id="HStabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Tablet vertical"></i>
+										<div onclick="elegirDispositivo(3,'HS')" class="img">
+											<i id="HStabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'HS')" class="img" id="celver">
-											<i id="HScelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Móvil horizontal"></i>
+										<div onclick="elegirDispositivo(4,'HS')" class="img">
+											<i id="HScelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'HS')" class="img" id="tabletaver">
-											<i id="HStabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Tablet horizontal"></i>
+										<div onclick="elegirDispositivo(5,'HS')" class="img">
+											<i id="HStabH" class="fas fa-tablet-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Tablet horizontal"></i>
 										</div>
 									</div>
 								</div>
@@ -458,43 +438,38 @@
 							</div>
 						</div>
 						<div class="tab__content-6">
-							<p class="nombre-recurso">Clave RC06-19</p>
+							<p class="nombre-recurso">Clave RC06-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								En este recurso se desplegará el contenido conforme se realiza un desplazamiento. Se
 								recomienda el uso de imágenes para ilustrar los contenidos textuales.</p>
-							<h4>
-								<p>Descarga el recurso
-									<a href="contenidos/linea-tiempo/linea-tiempo.rar" download><span
-											class="glyphicon glyphicon-cloud-download fa-2x"
-											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
+								<a href="contenidos/linea-tiempo/linea-tiempo.rar" download><span
+										class="glyphicon glyphicon-cloud-download fa-2x" style="color:#2196F3"></span></a>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'LT')" class="img" id="pc">
-											<i id="LTdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="PC"
-												style="opacity:1.0"></i>
+										<div onclick="elegirDispositivo(1,'LT')" class="img">
+											<i id="LTdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="PC" style="opacity:1.0"></i>
 										</div>
 										<div onclick="elegirDispositivo(2,'LT')" class="img">
-											<i id="LTcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Móvil vertical"></i>
+											<i id="LTcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'LT')" class="img" id="tableta">
-											<i id="LTtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
-												data-placement="top" data-type="info" title="Tablet vertical"></i>
+										<div onclick="elegirDispositivo(3,'LT')" class="img">
+											<i id="LTtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip" data-placement="top"
+												data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'LT')" class="img" id="celver">
-											<i id="LTcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Móvil horizontal"></i>
+										<div onclick="elegirDispositivo(4,'LT')" class="img">
+											<i id="LTcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'LT')" class="img" id="tabletaver">
-											<i id="LTtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
-												data-toggle="tooltip" data-placement="top" data-type="info"
-												title="Tablet horizontal"></i>
+										<div onclick="elegirDispositivo(5,'LT')" class="img">
+											<i id="LTtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90" data-toggle="tooltip"
+												data-placement="top" data-type="info" title="Tablet horizontal"></i>
 										</div>
 									</div>
 								</div>
@@ -554,7 +529,7 @@
 					</div>
 					<div class="tab__content">
 						<div id="seccion1" class="tab__content-1 tab__content--active">
-							<p class="nombre-recurso RA1">Clave RA01-19 (antes RA-01V2)</p>
+							<p class="nombre-recurso RA1">Clave RA01-21 (antes RA-01V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso de relación de columnas con elementos de respuestas arrastrables para texto e
@@ -571,26 +546,26 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Los reactivos se pueden enumerar.</li>
 								<li>La enumeración de reactivos puede ser con letras o con números.</li>
 								<li>Permite múltiples respuestas por casilla.</li>
 								<li>Permite múltiples casillas por reactivo.</li>
-								<li>Los bloques de preguntas y respuestas pueden ubicarse en diferentes posiciones de la
-									pantalla.</li>
+								<!-- <li>Los bloques de preguntas y respuestas pueden ubicarse en diferentes posiciones de la
+									pantalla.</li> -->
+								<li>Las respuestas se muestran en tipo carrusel.</li>
+								<li>Se pueden intercambiar respuestas ya utilizadas.</li>
 								<li>En presentación PC_desktop, permite selección rápida de la respuesta por doble clic.
 								</li>
-								<li>Permite presentación de reactivos por bloques (Paginado).</li>
+								<li>Permite presentación de reactivos por bloques (paginado).</li>
 								<li>Acepta imágenes en reactivos o en respuestas.</li>
 								<!-- <li>Permite la permuta de respuestas entre casillas.</li> -->
 							</ul>
-							<h4>
-								<p>Descarga el recurso
-									<a href="recursos/completar_arrastrando/completar_arrastrando.rar" download><span
-											class="glyphicon glyphicon-cloud-download fa-2x"
-											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
+								<a href="recursos/completar_arrastrando/completar_arrastrando.rar" download><span
+										class="glyphicon glyphicon-cloud-download fa-2x"
+										style="color:#2196F3"></span></a>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
@@ -661,7 +636,7 @@
 							</div>
 						</div>
 						<div id="seccion2" class="tab__content-2">
-							<p class="nombre-recurso">Clave RA02-19</p>
+							<p class="nombre-recurso">Clave RA02-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Completar arrastrando tabla.
@@ -677,24 +652,23 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Permite múltiples respuestas por casilla.</li>
-								<li>Los bloques de preguntas y respuestas pueden ubicarse en diferentes posiciones de la
-									pantalla.</li>
+								<!-- <li>Los bloques de preguntas y respuestas pueden ubicarse en diferentes posiciones de la
+									pantalla.</li> -->
+								<li>Las respuestas se muestran en tipo carrusel.</li>
 								<li>En presentación PC_desktop, permite selección rápida de la respuesta por doble clic.
 								</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
-									<a href="recursos/completar_arrastrando_tabla/completar_arrastrando_tabla.rar"
-										download><span class="glyphicon glyphicon-cloud-download fa-2x"
-											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
+								<a href="recursos/completar_arrastrando_tabla/completar_arrastrando_tabla.rar"
+									download><span class="glyphicon glyphicon-cloud-download fa-2x"
+										style="color:#2196F3"></span></a>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'CT')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'CT')" class="img">
 											<i id="CTdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -703,16 +677,16 @@
 											<i id="CTcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'CT')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'CT')" class="img">
 											<i id="CTtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'CT')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'CT')" class="img">
 											<i id="CTcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'CT')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'CT')" class="img">
 											<i id="CTtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -761,7 +735,7 @@
 							</div>
 						</div>
 						<div id="seccion3" class="tab__content-3">
-							<p class="nombre-recurso">Clave RA03-19</p>
+							<p class="nombre-recurso">Clave RA03-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Completar arrastrando en esquema.
@@ -773,21 +747,20 @@
 								<li>La retroalimentación final es por ponderación a 10.</li>
 								<li>Puede manejar retroalimentación por casilla o final.</li>
 								<li>Las retroalimentaciones se muestran en cada casilla como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
+								<li>Se pueden intercambiar respuestas ya utilizadas.</li>
 								<li>En presentación PC_desktop, permite selección rápida de la respuesta por doble clic.
 								</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/completar_arrastrando_esquema/completar_arrastrando_esquema.rar"
 										download><span class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'AE')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'AE')" class="img">
 											<i id="AEdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -796,16 +769,16 @@
 											<i id="AEcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'AE')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'AE')" class="img">
 											<i id="AEtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'AE')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'AE')" class="img">
 											<i id="AEcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'AE')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'AE')" class="img">
 											<i id="AEtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -854,7 +827,7 @@
 							</div>
 						</div>
 						<div id="seccion4" class="tab__content-4">
-							<p class="nombre-recurso">Clave RA04-19</p>
+							<p class="nombre-recurso">Clave RA04-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Completar arrastrando audio-video.
@@ -870,26 +843,24 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Los reactivos se pueden enumerar.</li>
 								<li>La enumeración de reactivos puede ser con letras o con números.</li>
 								<li>Permite múltiples casillas por reactivo.</li>
-								<li>Los bloques de preguntas y respuestas pueden ubicarse en diferentes posiciones de la
-									pantalla.</li>
-								<li>Permite presentación de reactivos por bloques (Paginado).</li>
+								<li>Las respuestas se muestran en tipo carrusel.</li>
+								<li>Se pueden intercambiar respuestas ya utilizadas.</li>
+								<li>Permite presentación de reactivos por bloques (paginado).</li>
 								<li>Acepta imágenes en reactivos o en respuestas.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/completar_arrastrando_audio_video/completar_arrastrando_audio_video.rar"
 										download><span class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'AV')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'AV')" class="img">
 											<i id="AVdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -898,16 +869,16 @@
 											<i id="AVcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'AV')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'AV')" class="img">
 											<i id="AVtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'AV')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'AV')" class="img">
 											<i id="AVcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'AV')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'AV')" class="img">
 											<i id="AVtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -956,7 +927,7 @@
 							</div>
 						</div>
 						<div id="seccion5" class="tab__content-5">
-							<p class="nombre-recurso">Clave RA05-19</p>
+							<p class="nombre-recurso">Clave RA05-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso con múltiples respuestas elegidas en listas desplegables.
@@ -972,24 +943,22 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Los reactivos se pueden enumerar.</li>
 								<li>La enumeración de reactivos puede ser con letras o con números.</li>
 								<li>Despliega una lista de múltiples respuestas por casilla.</li>
-								<li>Permite presentación de reactivos por bloques (Paginado).</li>
+								<li>Permite presentación de reactivos por bloques (paginado).</li>
 								<li>Manejo de imágenes o sonidos en reactivos.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/completar_eligiendo/completar_eligiendo.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'CL')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'CL')" class="img">
 											<i id="CLdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -998,16 +967,16 @@
 											<i id="CLcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'CL')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'CL')" class="img">
 											<i id="CLtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'CL')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'CL')" class="img">
 											<i id="CLcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'CL')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'CL')" class="img">
 											<i id="CLtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -1055,7 +1024,7 @@
 							</div>
 						</div>
 						<div id="seccion6" class="tab__content-6">
-							<p class="nombre-recurso">Clave RA06-19 (antes RA-02V2)</p>
+							<p class="nombre-recurso">Clave RA06-21 (antes RA-02V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso para textos con respuestas en blanco para completar texteando.
@@ -1071,25 +1040,23 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Los reactivos se pueden enumerar.</li>
 								<li>La enumeración de reactivos puede ser con letras o con números.</li>
 								<li>Permite múltiples respuestas por casilla.</li>
 								<li>Permite múltiples casillas por reactivo.</li>
-								<li>Permite presentación de reactivos por bloques (Paginado).</li>
+								<li>Permite presentación de reactivos por bloques (paginado).</li>
 								<li>Acepta números y letras en las casillas de respuesta.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/completar_escribiendo/completar_escribiendo.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'CS')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'CS')" class="img">
 											<i id="CSdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -1098,16 +1065,16 @@
 											<i id="CScelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'CS')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'CS')" class="img">
 											<i id="CStabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'CS')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'CS')" class="img">
 											<i id="CScelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'CS')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'CS')" class="img">
 											<i id="CStabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -1156,7 +1123,7 @@
 							</div>
 						</div>
 						<div id="seccion7" class="tab__content-7">
-							<p class="nombre-recurso">Clave RA07-19 (antes RA-05V2)</p>
+							<p class="nombre-recurso">Clave RA07-21 (antes RA-05V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso con preguntas y respuestas paso a paso.
@@ -1172,23 +1139,21 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Los reactivos se pueden enumerar.</li>
-								<li>La enumeración de los reactivos y/o las opciones puede ser con letras o con números.
+								<li>La enumeración de los reactivos o las opciones puede ser con letras o con números.
 								</li>
-								<li>Permite presentación de reactivos por bloques (Paginado).</li>
+								<li>Permite presentación de reactivos por bloques (paginado).</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/opcion_multiple/opcion_multiple.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'OM')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'OM')" class="img">
 											<i id="OMdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -1197,16 +1162,16 @@
 											<i id="OMcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'OM')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'OM')" class="img">
 											<i id="OMtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'OM')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'OM')" class="img">
 											<i id="OMcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'OM')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'OM')" class="img">
 											<i id="OMtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -1254,7 +1219,7 @@
 							</div>
 						</div>
 						<div id="seccion8" class="tab__content-8">
-							<p class="nombre-recurso">Clave RA08-19 (antes RA-03V2)</p>
+							<p class="nombre-recurso">Clave RA08-21 (antes RA-03V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Caso especial de un recurso de opción múltiple con solo dos opciones de respuesta.
@@ -1264,6 +1229,7 @@
 								<li>Mensajes configurables español/inglés.</li>
 								<li>En dispositivo móvil, la instrucción pedagógica y técnica se encuentra en <i
 										class="fa fa-info-circle fa-lg icono_info"></i>.</li>
+								<li>Puede seleccionarse la respuesta al dar clic en el texto del reactivo.</li>
 								<li>Resalta los reactivos sin contestar.</li>
 								<li>La retroalimentación final puede ser por número de aciertos o por ponderación a 10.
 								</li>
@@ -1271,23 +1237,21 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Los reactivos se pueden enumerar.</li>
 								<li>La enumeración de reactivos puede ser con letras o con números.</li>
-								<li>Permite presentación de reactivos por bloques (Paginado).</li>
+								<li>Permite presentación de reactivos por bloques (paginado).</li>
 								<li>En PC-desktop, el encabezado está fijo.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/verdadero_falso/verdadero_falso.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'VF')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'VF')" class="img">
 											<i id="VFdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -1296,16 +1260,16 @@
 											<i id="VFcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'VF')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'VF')" class="img">
 											<i id="VFtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'VF')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'VF')" class="img">
 											<i id="VFcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'VF')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'VF')" class="img">
 											<i id="VFtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -1353,7 +1317,7 @@
 							</div>
 						</div>
 						<div id="seccion9" class="tab__content-9">
-							<p class="nombre-recurso">Clave RA09-19 (antes RA-04V2)</p>
+							<p class="nombre-recurso">Clave RA09-21 (antes RA-04V2)</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso de elementos arrastrables, para acomodar lógicamente.
@@ -1369,23 +1333,22 @@
 								<li>Las retroalimentaciones se muestran en <i
 										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
 										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
-								<li>Puede guardar la calificación obtenida.</li>
 								<li>Los reactivos se pueden enumerar.</li>
 								<li>La enumeración de reactivos puede ser con letras o con números.</li>
-								<li>Permite presentación de reactivos por bloques (Paginado).</li>
-								<li>Puede ordenar palabras, frases o imágenes.</li>
+								<li>Permite presentación de reactivos por bloques (paginado).</li>
+								<li>Puede ordenar palabras, frases, imágenes, audios y videos.</li>
+								<li>Puede establecer nombres genéricos para imágenes, audios y videos.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/ordenar/ordenar.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'OE')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'OE')" class="img">
 											<i id="OEdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -1394,16 +1357,16 @@
 											<i id="OEcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'OE')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'OE')" class="img">
 											<i id="OEtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'OE')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'OE')" class="img">
 											<i id="OEcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'OE')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'OE')" class="img">
 											<i id="OEtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -1447,7 +1410,7 @@
 							</div>
 						</div>
 						<div id="seccion10" class="tab__content-10">
-							<p class="nombre-recurso">Clave RA10-19</p>
+							<p class="nombre-recurso">Clave RA10-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso de rúbrica.
@@ -1455,24 +1418,23 @@
 							<h4>Características</h4>
 							<ul style="column-count: 3">
 								<li>Mensajes configurables español/inglés.</li>
+								<li>Soporta hasta 5 criterios como máximo.</li>
 								<li>En dispositivo móvil, la instrucción pedagógica y técnica se encuentra en <i
 										class="fa fa-info-circle fa-lg icono_info"></i>.</li>
 								<li>Resalta los reactivos sin contestar.</li>
 								<li>La retroalimentación final es opcional, y el puntaje dado se obtendrá según las
 									selecciones que se hagan.</li>
-								<li>Puede guardar el puntaje obtenido.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/rubrica/rubrica.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'RU')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'RU')" class="img">
 											<i id="RUdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -1481,16 +1443,16 @@
 											<i id="RUcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'RU')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'RU')" class="img">
 											<i id="RUtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'RU')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'RU')" class="img">
 											<i id="RUcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'RU')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'RU')" class="img">
 											<i id="RUtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -1535,7 +1497,7 @@
 							</div>
 						</div>
 						<div id="seccion11" class="tab__content-11">
-							<p class="nombre-recurso">Clave RA11-19</p>
+							<p class="nombre-recurso">Clave RA11-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso de Lista de Verificación.
@@ -1543,23 +1505,23 @@
 							<h4>Características</h4>
 							<ul style="column-count: 3">
 								<li>Mensajes configurables español/inglés.</li>
+								<li>Soporta hasta 8 criterios como máximo.</li>
+								<li>Puede seleccionarse la respuesta al dar clic en el texto del reactivo.</li>
 								<li>En dispositivo móvil, la instrucción pedagógica y técnica se encuentra en <i
 										class="fa fa-info-circle fa-lg icono_info"></i>.</li>
 								<li>Resalta los reactivos sin contestar.</li>
-								<li>Puede guardar el puntaje obtenido que se determine.</li>
 								<li>En PC-desktop, el encabezado está fijo.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="recursos/lista_verificacion/lista_verificacion.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
-										<div onclick="elegirDispositivo(1,'LV')" class="img" id="pc">
+										<div onclick="elegirDispositivo(1,'LV')" class="img">
 											<i id="LVdesktop" class="fas fa-desktop fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="PC"
 												style="opacity:1.0"></i>
@@ -1568,16 +1530,16 @@
 											<i id="LVcelularV" class="fas fa-mobile-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Móvil vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(3,'LV')" class="img" id="tableta">
+										<div onclick="elegirDispositivo(3,'LV')" class="img">
 											<i id="LVtabV" class="fas fa-tablet-alt fa-4x" data-toggle="tooltip"
 												data-placement="top" data-type="info" title="Tablet vertical"></i>
 										</div>
-										<div onclick="elegirDispositivo(4,'LV')" class="img" id="celver">
+										<div onclick="elegirDispositivo(4,'LV')" class="img">
 											<i id="LVcelularH" class="fas fa-mobile-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Móvil horizontal"></i>
 										</div>
-										<div onclick="elegirDispositivo(5,'LV')" class="img" id="tabletaver">
+										<div onclick="elegirDispositivo(5,'LV')" class="img">
 											<i id="LVtabH" class="fas fa-tablet-alt fa-4x fa-rotate-90"
 												data-toggle="tooltip" data-placement="top" data-type="info"
 												title="Tablet horizontal"></i>
@@ -1637,28 +1599,30 @@
 					</div>
 					<div class="tab__content">
 						<div class="tab__content-1 tab__content--active">
-							<p class="nombre-recurso RA1">Clave RL01-19</p>
+							<p class="nombre-recurso RA1">Clave RL01-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
-								Dinámico recurso-juego de aprendizaje para completar escribiendo las respuestas tanto
+								Dinámico recurso-juego de aprendizaje para contestar escribiendo las respuestas tanto
 								horizontal como verticalmente.
 							</p>
 							<h4>Características</h4>
 							<ul style="column-count: 3">
 								<li>Crucigramas aleatorios.</li>
 								<li>Máximo número de 60 pistas entre horizontales y verticales.</li>
+								<li>Las retroalimentaciones se muestran en <i
+										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
+										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
 								<li>Respuesta de mínimo 2 y máximo 25 caracteres.</li>
 								<li>Acepta espacios en blanco y acentos.</li>
 								<li>Puede mostrar las respuestas faltantes.</li>
 								<li>Al revisar, las respuestas se mostrarán junto a las pistas.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="ludicos/crucigrama/crucigrama.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
@@ -1728,7 +1692,7 @@
 							</div>
 						</div>
 						<div class="tab__content-2">
-							<p class="nombre-recurso">Clave RL02-19</p>
+							<p class="nombre-recurso">Clave RL02-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso juego para encontrar palabras en cualquier dirección.</p>
@@ -1736,18 +1700,20 @@
 							<ul style="column-count: 3">
 								<li>Sopas aleatorias.</li>
 								<li>Máximo número de 50 palabras.</li>
+								<li>Las retroalimentaciones se muestran en <i
+										class='ip far fa-check-circle fa-lg'></i>&nbsp;<i
+										class='it far fa-times-circle fa-lg'></i> como tooltip.</li>
 								<li>Respuesta de máximo 18 caracteres.</li>
 								<li>Acepta espacios en blanco y acentos.</li>
 								<li>Cada palabra se muestra en un color diferente.</li>
 								<li>Puede mostrar las respuestas faltantes.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="ludicos/sopa_letras/sopa_letras.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
@@ -1817,7 +1783,7 @@
 							</div>
 						</div>
 						<div class="tab__content-3">
-							<p class="nombre-recurso">Clave RL03-19</p>
+							<p class="nombre-recurso">Clave RL03-21</p>
 							<h4>Descripción</h4>
 							<p class="descripcion">
 								Recurso para formar parejas de conceptos.</p>
@@ -1825,26 +1791,23 @@
 							<ul style="column-count: 3">
 								<li>Memoramas aleatorios.</li>
 								<li>Máximo número de 60 parejas de elementos.</li>
-								<!-- <li>Acepta combinaciones de texto, imágenes, audios y videos.</li> -->
 								<li>Acepta combinaciones de texto e imágenes.</li>
 								<li>Las imágenes sólo pueden estar en formatos JPG, JPEG y PNG.</li>
-								<!-- <li>Los audios sólo pueden estar en formato MP3.</li>
-									<li>Los videos sólo pueden estar en formato MP4.</li> -->
 								<li>El reverso de las cartas se puede modificar con una imagen personalizada.</li>
 								<li>Las cartas pueden mostrarse en uno o dos bloques.</li>
 								<li>El tamaño de las cartas se puede modificar.</li>
 								<li>Las parejas encontradas permanecen destapadas hasta la finalización de la actividad.
 								</li>
 								<li>Se pueden destapar todas las cartas.</li>
+								<li>Se puede mostrar la cantidad de movimientos empleados/faltantes.</li>
 								<li>El botón para destapar las cartas es opcional.</li>
 							</ul>
-							<h4>
-								<p>Descarga el recurso
+							<h4 style="display:inline-block">Descarga el recurso</h4>
+							<div style="display:inline-block">
 									<a href="ludicos/memorama/memorama.rar" download><span
 											class="glyphicon glyphicon-cloud-download fa-2x"
 											style="color:#2196F3"></span></a>
-								</p>
-							</h4>
+							</div>
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 div-img">
@@ -1923,15 +1886,19 @@
 										<div style="margin:20px">
 											<div class="panel-group" id="accordion">
 												<div class="panel panel-default">
-													<div class="panel-heading btn collapsed" data-toggle="collapse"
-														data-target="#collapse8" data-parent="#accordion"
-														aria-expanded="true">¿Todos los recursos tienen los mismos parámetros de configuración?
+													<div class="panel-heading btn collapsed" data-toggle="collapse" data-target="#collapse8" data-parent="#accordion" aria-expanded="true">
+														¿Todos los recursos tienen los mismos parámetros de configuración?
 													</div>
 													<div id="collapse8" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>No, y  si bien la tendencia es tratar de homogeneizar estos para que el esfuerzo del diseñador sea mínimo al momento de adaptarlos, la naturaleza de los mismos recursos implica diferencias sustanciales en la naturaleza de su funcionamiento.
+																	<p>No, y si bien la tendencia es tratar de
+																		homogeneizar estos para que el esfuerzo del
+																		diseñador sea mínimo al momento de adaptarlos,
+																		la naturaleza de los mismos recursos implica
+																		diferencias sustanciales en la naturaleza de su
+																		funcionamiento.
 																	</p>
 																</div>
 															</div>
@@ -1941,14 +1908,19 @@
 												<div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse7" data-parent="#accordion"
-														aria-expanded="true">¿Todos los recursos están disponibles tanto en escritorio como en movil?
+														aria-expanded="true">¿Todos los recursos están disponibles tanto
+														en escritorio como en móvil?
 													</div>
 													<div id="collapse7" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>No, la naturaleza visual y funcional de ciertos recursos dificulta la funcionalidad
-																		para el usuario final, por lo que su uso está restringido. De hecho los recursos que por razones de diseño no son aptos para usarse en celular notifican al usuario esta restricción.
+																	<p>No, la naturaleza visual y funcional de ciertos
+																		recursos dificulta la funcionalidad
+																		para el usuario final, por lo que su uso está
+																		limitado. De hecho los recursos que por
+																		razones de diseño no son aptos para usarse en
+																		celular notifican al usuario esta restricción.
 																	</p>
 																</div>
 															</div>
@@ -1958,13 +1930,18 @@
 												<div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse9" data-parent="#accordion"
-														aria-expanded="true">¿Como sé cuál versión de recurso estoy usando?
+														aria-expanded="true">¿Como sé cuál versión de recurso estoy
+														usando?
 													</div>
 													<div id="collapse9" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>En el archivo <strong>index.html</strong> de cada recurso, en la parte superior está el historial de versiones, el cual indica, versión, autor, fecha y la descripción de los cambios de esa versión.
+																	<p>En el archivo <strong>index.html</strong> de cada
+																		recurso, en la parte superior está el historial
+																		de versiones, el cual indica, versión, autor,
+																		fecha y la descripción de los cambios de esa
+																		versión.
 																	</p>
 																</div>
 															</div>
@@ -1972,17 +1949,24 @@
 													</div>
 												</div>
 												<div class="panel panel-default">
-													<div class="panel-heading btn collapsed" data-toggle="collapse" data-target="#collapse1" data-parent="#accordion"
-														aria-expanded="true">¿Qué debo hacer si el reactivo acepta más de una respuesta?
+													<div class="panel-heading btn collapsed" data-toggle="collapse"
+														data-target="#collapse1" data-parent="#accordion"
+														aria-expanded="true">¿Qué debo hacer si el reactivo acepta más
+														de una respuesta?
 													</div>
 													<div id="collapse1" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>Dirígete al archivo <strong>listaReactivos.js</strong> y en el apartado de respuestas (A) coloca las respuestas separadas por la
-																		<span data-toggle="tooltip" data-placement="bottom" data-type="info" title="Mac OS en inglés: <kbd>[Shift]</kbd>+<kbd>[tecla de barra invertida]</kbd><br/>Mac OS en español: <kbd>[Alt]</kbd> + <kbd>[1]</kbd>"><kbd
-																				class="blink">&nbsp;barra vertical |&nbsp;</kbd></span>
-																	</p>
+																	<p>Dirígete al archivo
+																		<strong>listaReactivos.js</strong> y en el
+																		apartado de respuestas (A) coloca las respuestas
+																		separadas por la
+																		<span data-toggle="tooltip"
+																			data-placement="bottom" data-type="info"
+																			title="Mac OS en inglés: <kbd>[Shift]</kbd>+<kbd>[tecla de barra invertida]</kbd><br/>Mac OS en español: <kbd>[Alt]</kbd> + <kbd>[1]</kbd>"><kbd
+																				class="blink">&nbsp;barra vertical
+																				|&nbsp;</kbd></span>
 																	</p>
 																	<p>Por ejemplo<br />
 																		<kbd>{ Q: 'Se conoce como <mark
@@ -2004,7 +1988,6 @@
 																	Donde el conjunto de respuestas (respuestaA1,
 																	respuestaA2, respuestaA3) corresponden al
 																	primer @ del reactivo, y así sucesivamente.
-																	</p>
 																</div>
 															</div>
 														</div>
@@ -2013,9 +1996,9 @@
 												<div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse2" data-parent="#accordion"
-														aria-expanded="true">¿Cómo y en qué archivo necesito modificar
-														para que se
-														visualice cierta cantidad de reactivos por página/segmento?
+														aria-expanded="true">¿Qué necesito modificar para que se
+														visualice una cantidad específica de reactivos por
+														página/segmento?
 													</div>
 													<div id="collapse2" class="panel-collapse collapse">
 														<div class="panel-body">
@@ -2039,8 +2022,8 @@
 																		autoevaluación podrá mostrar.</p>
 																	Por lo tanto para el ejemplo antes mencionado
 																	quedaría
-																	<p><kbd>elementosPorSegmento = 3;</kbd></p>
-																	<p><kbd>reactivosMostrar = 10;</kbd></p>
+																	<p><kbd>var elementosPorSegmento = 3;</kbd></p>
+																	<p><kbd>var reactivosMostrar = 10;</kbd></p>
 																</div>
 															</div>
 														</div>
@@ -2061,14 +2044,15 @@
 																		<strong>configRecurso.js</strong>. Existe una
 																		variable llamada
 																		<strong>retroCal</strong></p>
-																	<kbd>{LimInf: 0, LimSup: 3, Mensaje: ["No fue
+																	<kbd>var retroCal = [<br />{LimInf: 0, LimSup: 3,
+																		Mensaje: ["No fue
 																		suficiente", "Insufficient"]},</kbd><br />
 																	<kbd>{LimInf: 4, LimSup: 6, Mensaje: ["Esfuérzate
 																		más", "Work harder"]},</kbd><br />
 																	<kbd>{LimInf: 7, LimSup: 9, Mensaje: ["Suficiente",
 																		"Sufficient"]},</kbd><br />
 																	<kbd>{LimInf: 10, LimSup: 10, Mensaje: ["Excelente",
-																		"Excellent"]},</kbd><br />
+																		"Excellent"]}<br />];</kbd><br />
 
 																	Donde de acuerdo a los criterios de evaluación se
 																	colocan los valores correspondientes a
@@ -2079,13 +2063,12 @@
 																	Mensaje: ["Excelente", "Excellent"] para dividir los
 																	mensajes en español y los mensajes
 																	en inglés.
-																	</p>
 																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-												<div class="panel panel-default">
+												<!-- <div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse4" data-parent="#accordion"
 														aria-expanded="true">¿Puedo guardar calificación en cualquiera
@@ -2099,18 +2082,13 @@
 																		<strong>configRecurso.js</strong>.
 																		Para que se guarde calificación debe encenderse
 																		la variable <strong>ambSCORM</strong>.</p>
-																	<p><kbd>ambSCORM = true;</kbd><br /></p>
+																	<p><kbd>var ambSCORM = true;</kbd><br /></p>
 																	<p>Solamente si estás
 																		en un ambiente que use una barra de avance, se
 																		debe activar además la variable
 																		<strong>barraSCORM</strong> que debe estar con
 																		el valor de “true”.</p>
-																	<p><kbd>barraSCORM = true;</kbd></p>
-																	</p>
-
-																	<!-- <p><kbd>ambSCORM = true;</kbd><br />
-																		<kbd>barraSCORM = true;</kbd></p> -->
-
+																	<p><kbd>var barraSCORM = true;</kbd></p>
 																	<p>Para definir cuáles actividades o
 																		autoevaluaciones serán parte de SCORM se
 																		modifica
@@ -2121,11 +2099,11 @@
 																		enumerará, comenzado desde 0, es
 																		decir:<br />
 																		Actividad o autoevaluacion 1<br />
-																		<kbd>idObjetivo = 0;</kbd><br />
+																		<kbd>var idObjetivo = 0;</kbd><br />
 																		Actividad o autoevaluacion 2<br />
-																		<kbd>idObjetivo = 1;</kbd><br />
+																		<kbd>var idObjetivo = 1;</kbd><br />
 																		Actividad o autoevaluacion 3<br />
-																		<kbd>idObjetivo = 2;</kbd>
+																		<kbd>var idObjetivo = 2;</kbd>
 
 																		<br />Donde en este ejemplo existen 3
 																		actividades o autoevaluaciones y les
@@ -2136,18 +2114,67 @@
 														</div>
 													</div>
 												</div>
-												<!-- <div class="panel panel-default">
+												<div class="panel panel-default">
+													<div class="panel-heading btn collapsed" data-toggle="collapse"
+														data-target="#collapse13" data-parent="#accordion"
+														aria-expanded="true">Si una actividad tiene varios intentos, ¿se puede guardar la calificación de un intento específico?
+													</div>
+													<div id="collapse13" class="panel-collapse collapse">
+														<div class="panel-body">
+															<div class="row">
+																<div class="col-md-12">
+																	<p>Si, para esto debes dirigirte al archivo
+																		<strong>configRecurso.js</strong>; 
+																		para que se guarde la calificación de un intento específico, en la variable <kbd>guardarCalificacion</kbd> debe especificarse de la siguiente manera:</p>
+																	<p><kbd>var guardarCalificacion = -1;</kbd><br /></p>
+																	<p>Se guarda la calificación más alta que se obtenga en todos los intentos.</p>
+																	<p><kbd>var guardarCalificacion = 0;</kbd><br /></p>
+																	<p>Se guarda la calificación que se obtenga en el último intento, que es el valor predefinido.</p>
+																	<p><kbd>var guardarCalificacion = <i>n</i></kbd><br /></p>
+																	<p>Se guarda la calificación del intento <i>n</i> que se desee (1, 2, 3, etc.).</p>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div> -->
+												<div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse5" data-parent="#accordion"
-														aria-expanded="true">¿Cómo establecer retroalimentaciones por
-														respuesta?
+														aria-expanded="true">Cuando una actividad cuenta con múltiples
+														intentos, ¿cómo se pueden
+														<em>conservar</em> las respuestas correctas del intento previo?
 													</div>
 													<div id="collapse5" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>EN DESARROLLO POR RESPUESTA (ARROBA)
-																	</p>
+																	<p>Por su naturaleza, sólo algunos recursos soportan
+																		el poder <em>conservar</em> las respuestas
+																		correctas del intento previo, y son
+																	<ul>
+																		<li>Completar arrastrando</li>
+																		<li>Completar arrastrando tabla</li>
+																		<li>Completar arrastrando esquema</li>
+																		<li>Completar arrastrando audio-video</li>
+																		<li>Completar eligiendo</li>
+																		<li>Completar escribiendo</li>
+																		<li>Opción múltiple</li>
+																		<li>Verdadero-falso</li>
+																		<li>Ordenar</li>
+																	</ul>
+																	<p>Dirígete al archivo
+																		<strong>configRecurso.js</strong>. Existe una
+																		variable llamada
+																		<strong>siguienteIntentoBlanco</strong></p>
+																	<p>Para conservar las respuestas correctas, la
+																		variable debe tener valor "false"</p>
+																	<p><kbd>var siguienteIntentoBlanco =
+																			false;</kbd><br /></p>
+																	<p>En caso de que no se tengan que conservar las
+																		respuestas correctas, la variable debe tener
+																		valor "true"</p>
+																	<p><kbd>var siguienteIntentoBlanco =
+																			true;</kbd><br /></p>
 																</div>
 															</div>
 														</div>
@@ -2156,34 +2183,56 @@
 												<div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse6" data-parent="#accordion"
-														aria-expanded="true">¿Cómo establecer retroalimentaciones por
-														reactivo?
+														aria-expanded="true">En el recurso <strong>Completar
+															escribiendo</strong>, ¿hay reglas para la escritura de las
+														respuestas?
 													</div>
 													<div id="collapse6" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>EN DESARROLLO POR REACTIVO
-																	</p>
+																	<p>En estricto sentido, las respuestas se
+																		calificarán como correctas según aparezcan en el
+																		guión instruccional, esto es, con mayúsculas,
+																		minúsculas, tildes y diéresis. Esto está
+																		establecido en una variable llamada
+																		<strong>revisionEstricta</strong> que se
+																		encuentra en el archivo
+																		<strong>configRecurso.js</strong>. Debe tener el
+																		valor "true".<br /></p>
+																	<p><kbd>var revisionEstricta = true;</kbd></p>
+																	<p>Si se considera que la forma de las respuestas
+																		puede ser más <em>flexible</em>, la variable
+																		debe tener el valor "false".</p>
+																	<p><kbd>var revisionEstricta = false;</kbd></p>
 																</div>
 															</div>
 														</div>
 													</div>
-												</div> -->
+												</div>
 												<div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse10" data-parent="#accordion"
-														aria-expanded="true">¿Para qué se utiliza la variable <strong>esParrafo</strong> en la sopa de letras?
+														aria-expanded="true">¿Para qué se utiliza la variable
+														<kbd>esParrafo</kbd> en el recurso <strong>Sopa de
+															letras</strong>?
 													</div>
 													<div id="collapse10" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>Se utiliza cuando los reactivos en la sopa de letras están conformados por una frase y se necesita encontrar la palabra. Para esto, dirígete al archivo
+																	<p>Se utiliza cuando los reactivos en la sopa de
+																		letras está conformado por una frase y se
+																		necesite encontrar la palabra. Para esto,
+																		dirígete al archivo
 																		<strong>configRecurso.js</strong></p>
-																	<p>Existe una variable llamada <strong>esParrafo</strong> que debe estar con el valor de "true".</p>
+																	<p>Existe una variable llamada
+																		<strong>esParrafo</strong> que debe estar con el
+																		valor de "true".</p>
 																	<p><kbd>var esParrafo = true;</kbd></p>
-																	<p>Si se necesita que solo se busquen palabras en la sopa de letras, la variable esParrafo debe tener el valor de "false".</p>
+																	<p>Si se necesita que solo se busquen palabras en la
+																		sopa de letras, la variable esParrafo debe tener
+																		el valor de "false".</p>
 																	<p><kbd>var esParrafo = false;</kbd></p>
 																</div>
 															</div>
@@ -2199,10 +2248,16 @@
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>En cualquiera de los recursos lúdicos, dirígete al archivo
+																	<p>En cualquiera de los recursos lúdicos, dirígete
+																		al archivo
 																		<strong>configRecurso.js</strong></p>
-																	<p>Existe una variable llamada <strong>tempo</strong> que debe estar con el valor de "true".
-																		Para especificar el tiempo que se necesita, cambia los valores de las variables de <strong>minutes</strong> y <strong>seg</strong></p>
+																	<p>Existe una variable llamada
+																		<strong>tempo</strong> que debe estar con el
+																		valor de "true".
+																		Para especificar el tiempo que se necesita,
+																		cambia los valores de las variables de
+																		<strong>minutes</strong> y <strong>seg</strong>
+																	</p>
 																	<p><kbd>var tempo = true;</kbd></p>
 																	<p><kbd>var minutes = 1;</kbd></p>
 																	<p><kbd>var seg = 45;</kbd></p>
@@ -2214,17 +2269,20 @@
 												<div class="panel panel-default">
 													<div class="panel-heading btn collapsed" data-toggle="collapse"
 														data-target="#collapse12" data-parent="#accordion"
-														aria-expanded="true">¿Cómo modificar los encabezados en el recurso Verdadero-Falso?
+														aria-expanded="true">¿Cómo utilizar el conteo de movimientos en el recurso de <strong>Memorama</strong>?
 													</div>
 													<div id="collapse12" class="panel-collapse collapse">
 														<div class="panel-body">
 															<div class="row">
 																<div class="col-md-12">
-																	<p>Dirígete al archivo
-																		<strong>configRecurso.js</strong></p>
-																	<p>Existe una variable llamada <strong>encabezados</strong>, que es en donde se definen los dos textos que corresponden a las dos columnas de alveolos.
-																		</p>
-																	<p><kbd>var encabezados = ["Verdadero", "Falso"];</kbd></p>
+																	<p>Si se desea que haya un conteo de movimientos, en el archivo <strong>configRecurso.js</strong> se debe colocar la siguiente variable en "true"</p>
+																	<p><kbd>var conteoMovimientos = true;</kbd></p>
+																	<p>Se puede establecer cuál es el número máximo de movimientos permitidos con la siguiente variable</p>
+																	<p><kbd>var movimientos = 10;</kbd></p>
+																	<p>NOTA: Si no se establece un número de movimientos, el recurso automáticamente lo establecerá.</p>
+													
+																	<p>En el caso de que se quiera permitir un número de movimientos indefinidos, hay que establecer la variable en "false"</p>
+																	<p><kbd>var conteoMovimientos = false;</kbd></p>
 																</div>
 															</div>
 														</div>
@@ -2264,18 +2322,20 @@
 		<!--**************INICIA FOOTER***********-->
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 col-sm-6" style="padding: 0px">
-					<h3 style="text-align:center; color:#fff">Desarrollado por:</h3>
+				<div class="col-xs-2" style="padding: 0px">
+					<h3 style="color:#fff">Desarrollado por:</h3>
 					<p style="text-align:left; padding-left:10px;">
-						<a href="http://web.cuaed.unam.mx/"><img id="cuaedlogo" src="img/logo_cuaed2.svg" width="180"
-								height="auto" alt="Sitio CUAED"></a>
+						<a href="http://web.cuaed.unam.mx/" target="_blank">
+							<img class="logo-cuaed" src="img/CUAIEED_blanco.png" alt="Sitio CUAIEED" style="margin-right: 1em;">
+						</a>
 					</p>
 				</div>
-				<div class="col-md-8 col-sm-6" style="padding-right: 55px; padding-left: 60px;">
+				<div class="col-xs-8" style="padding-right: 55px; padding-left: 60px;">
 					<h3 style="color: #fff">Aviso</h3>
 					<div class="post" style="text-align: justify">
-						<p>Coordinación de Universidad Abierta y Educación a Distancia de la UNAM. ©Todos los derechos
-							reservados 2019. Hecho en México. Este sitio puede ser reproducido con fines no lucrativos,
+						<p>Coordinación de Universidad Abierta, Innovación Educativa y Educación a Distancia de la UNAM.
+							©Todos los derechos
+							reservados 2020. Hecho en México. Este sitio puede ser reproducido con fines no lucrativos,
 							siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica, de
 							otra forma, se requiere permiso previo por escrito de la Institución.</p>
 						<p>Al navegar en este sitio, encontrará contenidos diseñados por académicos de la UNAM,
@@ -2288,7 +2348,7 @@
 							intelectual de terceros.</p>
 					</div>
 				</div>
-				<div class="col-md-2 col-sm-6">
+				<div class="col-xs-2">
 					<ul class="footer-ul" style="padding-top: 50px;">
 						<li><a href="#" data-target="#creditos-modal" data-toggle="modal">Créditos</a></li>
 						<li><a href="http://proyectos.cuaed.unam.mx/aviso-privacidad/" target="_blank">Aviso de
@@ -2306,7 +2366,7 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 								aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Créditos</h4>
+						<h4 class="modal-title" id="myModalLabel1">Créditos</h4>
 					</div>
 					<div class="modal-body">
 						<table class="table" id="creditos">
@@ -2375,9 +2435,18 @@
 					<div class="modal-body">
 						<table class="table" id="contactos">
 							<tbody>
-								<tr><td>Juan Luis Becerril Gutiérrez</td><td>juan_becerril@cuaed.unam.mx</td></tr>
-								<tr><td>Karen Denise Maya Ramírez</td><td>karen_maya@cuaed.unam.mx</td></tr>
-								<tr><td>Rafael Angel Angulo Robles</td><td>rafael_angulo@cuaed.unam.mx</td></tr>
+								<tr>
+									<td class="dark-table">Juan Luis Becerril Gutiérrez</td>
+									<td class="light-border">juan_becerril@cuaieed.unam.mx</td>
+								</tr>
+								<tr>
+									<td class="light-table">Karen Denise Maya Ramírez</td>
+									<td class="light-border">karen_maya@cuaieed.unam.mx</td>
+								</tr>
+								<tr>
+									<td class="dark-table">Rafael Angel Angulo Robles</td>
+									<td class="light-border">rafael_angulo@cuaieed.unam.mx</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

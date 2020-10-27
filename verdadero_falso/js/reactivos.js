@@ -7,9 +7,9 @@ var preg = [];
 var respOriginales = [];
 var respDesordenadas1 = [];
 var respDesordenadas2 = [];
-var cuentaIntentos = 0;
 var totalSegmentos = 1;
 var recorreSegmentos = 1; // por lo menos existe el primer segmento o sea el unico
+var califMax = 0;      // JLBG Jun 03, 2020;  variable para guardar la calificacion máxima de todos los intentos
 
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
 var palomita = "<i class='ip far fa-2x fa-check-circle blink'></i>";
@@ -71,20 +71,20 @@ jq321(document).ready(function () {
 	if (mezclarPreguntas) { reordenaArreglo(reactivos) };
 	creaTablaVF(reactivosMostrar);
 	limpiaRadiosVF();
+	iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
 	jq321("button#btnRevisar").show();
 	jq321("button#btnReiniciar").hide();
-	iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
+	jq321("#btnPaginador").hide();
 	if (elementosPorSegmento < reactivosMostrar) { // los botones de paginas...
+		jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
 		if (carruselContinuo) {
-			jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
 			jq321(".cPaginador.cPrevio").removeClass("invisible").addClass("visible");
 		} else {
-			jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
+			jq321(".cPaginador.cPrevio").removeClass("visible").addClass("invisible");
 		}
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
-		jq321("#btnPaginador").removeClass("ocultar").addClass("mostrar");
+		jq321("#btnPaginador").show();
 	}
-	// console.log("READY de INDEX.HTML");
 	jq321('[data-toggle="tooltip"]').each(function () {
 		var options = {
 			html: true
@@ -163,12 +163,7 @@ function creaTablaVF(numReactivos) {
 			jq321('div#contenedor').append('<div class="row" id="encabezado">');
 			jq321("#encabezado").append('<div class="col-xs-12 col-sm-12 col-md-10">&nbsp;');
 			for (j = 0; j < encabezados.length; j++) {
-				if (j == 0) {
-					jq321("#encabezado").append('<div class="col-xs-12 col-sm-12 col-md-1">' + encabezados[j]);
-
-				} else {
-					jq321("#encabezado").append('<div class="col-xs-12 col-sm-12 col-md-1">' + encabezados[j]);
-				}
+				jq321("#encabezado").append('<div class="col-xs-12 col-sm-12 col-md-1">' + encabezados[j]);
 			}
 		}
 
@@ -187,7 +182,7 @@ function creaTablaVF(numReactivos) {
 		jq321("#reng" + i).append('<div class="primera opcion">' + toolTipSi + toolTipNo + '</div>');
 
 		jq321("#reng" + i).append('<div id="conteni' + i + '" class="conteni col-xs-12 col-sm-12 col-md-12" >');
-		jq321("#conteni" + i).append('<div class="col-xs-12 col-sm-12 col-md-10">' + numeralPregunta + tam(reactivos[i].Q, 1) + debugRespuesta);
+		jq321("#conteni" + i).append('<div class="col-xs-12 col-sm-12 col-md-10" onclick="elegir()" id="p' + i + '">' + numeralPregunta + tam(reactivos[i].Q, 1) + debugRespuesta);
 		for (j = 0; j < puntaje.length; j++) {
 			if (puntaje[j] == 1) {
 				jq321("#conteni" + i).append('<div class="col-xs-6 col-sm-6 col-md-1 opcion"><label class="content-input"><input class="cRbutton" type="radio" name="pregunta' + i + '" value="true"><i></i><span class="txt">' + encabezados[j] + '</span><br></label></div>');
@@ -213,17 +208,17 @@ function tam(cad, n) {// 1T, 0ele.esc.ord
 	}
 	return txt;
 }
-//function mostrarMensaje(tipo, titulo, cadena) {
+
 function mostrarMensaje(clase, recurso) {
 	if (!recurso) { recurso = -1 }
 	var msgs = [,
-		[ic(".setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic(".secaps etairporppa ot srewsna lla gard ,esaelP")],  // completar arrastrando
-		[ic(".otxet ed sopmac sol sodot anell ,rovaf roP"), ic(".sdleif txet lla tuo llif ,esaelP")],                  // completar escribiendo
-		[ic(".satnugerp sal sadot atsetnoc ,rovaf roP"), ic(".snoitseuq lla rewsna ,esaelP")],                         // verdadero-falso
-		[ic(".sotnemele sol sodot anedro ,rovaf roP"), ic(".secnetnes lla tros ,esaelP")],                            // ordenar enunciados
-		[ic(".ordaucer adac arap atseupser anu egile ,rovaf roP"), ic(".tsil hcae rof rewsna na esoohc ,esaelP")],     // completar eligiendo
-		[ic(".setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic(".secaps etairporppa ot srewsna lla gard ,esaelP")],  // arrastrar esquema
-		["", ""]
+		[ic(".setneidnopserroc soicapse sol a satseupser sal sadot artsarrA"), ic(".secaps etairporppa ot srewsna lla garD")],  // completar arrastrando
+		[ic(".otxet ed sopmac sol sodot anelL"), ic(".sdleif txet lla tuo lliF")],                  // completar escribiendo
+		[ic(".satnugerp sal sadot atsetnoC"), ic(".snoitseuq lla rewsnA")],                         // verdadero-falso
+		[ic(".odatluser ut reconoc arap sovitcaer sol sodot anedrO"), ic(".snoitseuq lla troS")],                            // ordenar
+		[ic(".ordaucer adac arap atseupser anu egilE"), ic(".tsil hcae rof rewsna na esoohC")],     // completar eligiendo
+		[ic(".setneidnopserroc soicapse sol a satseupser sal sadot artsarrA"), ic(".secaps etairporppa ot srewsna lla garD")],  // arrastrar esquema
+		[ic(".oñepmesed ut reconoc arap oiretirc adac ed nóicpo anu anoicceleS"), ""]   // rubrica
 	];
 	var tipo = "";
 	var tit = "";
@@ -231,21 +226,21 @@ function mostrarMensaje(clase, recurso) {
 	var btnOK = "";
 	switch (clase) {
 		case 1: // intentos
-			tipo = ic("gninraw");
+			// tipo = ic("gninraw");
 			switch (idioma) {
 				case "ENG":
 					tit = ic("gninraW");
-					msg = ic(maxIntentos + " :stpmetta fo rebmun mumixam dehcaer evah uoY");
+					msg = ic("." + maxIntentos + " :stpmetta fo rebmun mumixam dehcaer evah uoY");
 					btnOK = ic("KO");
 					break;
 				default:
 					tit = ic("nóicnetA");
-					msg = ic(maxIntentos + " :sotnetni ed oremún omixám le odaznacla saH");
+					msg = ic("." + maxIntentos + " :sotnetni ed oremún omixám le odaznacla saH");
 					btnOK = ic("ratpecA");
 			}
 			break;
 		case 2: // Contestar TODO
-			tipo = ic("gninraw");
+			// tipo = ic("gninraw");
 			switch (idioma) {
 				case "ENG":
 					tit = ic("gninraW");
@@ -303,5 +298,45 @@ function esPortable() {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+function elegir(e) {
+	var ElementosClick = new Array();
+	// Funcion para capturar el click del raton
+	var HaHechoClick;
+	if (e == null) {
+		// Si hac click un elemento, lo leemos
+		HaHechoClick = event.srcElement;
+	} else {
+		// Si ha hecho click sobre un destino, lo leemos
+		HaHechoClick = e.target;
+	}
+	// Añadimos el elemento al array de elementos
+	ElementosClick.push(HaHechoClick);
+	// Una prueba con salida en consola
+	console.log("Contenido sobre lo que se hizo click:\n" + ElementosClick[0].innerHTML);
+
+	var respuesta = jq321(HaHechoClick).parent().parent().hasClass("correcto");
+	if (!respuesta) {
+		var opciones = jq321(HaHechoClick).parent().find("input:radio");
+		var listado = opciones.length;
+		var marcado = -1;
+		var porMarcar = 0;
+		for (var i = 0; i < listado; i++) {
+			var marca = jq321(opciones[i]).prop("checked");
+			if (jq321(opciones[i]).prop("checked")) { marcado = i }
+			console.log("opcion[i] marcado es: " + marca);
+		}
+		if (!(marcado == -1 || marcado == (listado - 1))) {
+			porMarcar = marcado + 1;
+		}
+		var disponible = jq321(opciones[0]).attr("disabled");
+		if (disponible != "disabled") {
+			jq321("opciones").each(function(){
+				jq321(this).prop("checked", false);
+			});
+			jq321(opciones[porMarcar]).prop("checked", true);
+		}
 	}
 }

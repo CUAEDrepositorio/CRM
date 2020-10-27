@@ -1,78 +1,87 @@
 ﻿//  ============================================================================================================
-function limpiaRadiosVF(){ /*Aqui se alteran titulos */
+function limpiaRadiosVF() { /*Aqui se alteran titulos */
 	jq321("input:radio").attr("checked", false);
 	switch (idioma) {
 		case "ENG":
-			jq321("#btnRevisar").text("Check");
-			jq321("#btnReiniciar").text("Restart");
+			jq321("#btnRevisar").text(ic("kcehC"));
+			jq321("#btnReiniciar").text(ic("tpmetta txeN"));
 			jq321("th#tV").text("True");
 			jq321("th#tF").text("False");
 			break;
 		default:
-			jq321("#btnRevisar").text("Revisar");
-			jq321("#btnReiniciar").text("Reiniciar");
+			jq321("#btnRevisar").text(ic("rasiveR"));
+			jq321("#btnReiniciar").text(ic("otnetni etneiugiS"));
 			jq321("th#tV").text(encabezados[0]);
 			jq321("th#tF").text(encabezados[1]);
 	}
 }
 
-function revisarVF(){ //se invoca con el boton "revisar"
+//  ============================================================================================================
+function revisarVF() { //se invoca con el boton "revisar"
 	jq321(".vacio").removeClass("vacio");
-	jq321("[id^=reng]").each(function(indice){
+	jq321("[id^=reng]").each(function (indice) {
 		if (jq321(this).find("input:checked").length == 0) {
 			jq321(this).addClass("vacio");
 		}
 	});
-	if (jq321(":checked").length != reactivosMostrar) { 
+	if (jq321(":checked").length != reactivosMostrar) {
 		mostrarMensaje(2, 3);
-		return
-	};
-	jq321("button#btnRevisar").hide();
-	jq321("button#btnReiniciar").show();
-	jq321("input:radio").attr("disabled", true);
+	}
+	else {
+		correctas = 0;
+		jq321("button#btnRevisar").hide();
+		jq321("button#btnReiniciar").show();
+		jq321("input:radio").attr("disabled", true);
 
-	jq321(".opcioncontenedor").each(function(indice){
-		var x4 = jq321("input:radio[name=pregunta" + indice + "]:checked").attr("value");
-		if (x4 == reactivos[indice].A.toString()) {
-			jq321(this).find("i.ip").css("display", "initial");
-			correctas++;
+		jq321(".opcioncontenedor").each(function (indice) {
+			var valor = jq321("input:radio[name=pregunta" + indice + "]:checked").attr("value");
+			if (valor == reactivos[indice].A.toString()) {
+				jq321(this).find("i.ip").css("display", "initial");
+				jq321(this).addClass("correcto");
+				correctas++;
+			}
+			else {
+				jq321(this).find("i.it").css("display", "initial");
+				jq321(this).addClass("incorrecto");
+			}
+		});
+		intentos++;
+		var res = Math.ceil(10 * correctas / total);
+		console.log("Correctas: " + correctas);
+		console.log("Total: " + total);
+		console.log("Calificación: " + res.toPrecision());
+		switch (idioma) {
+			case "ENG":
+				var txtResp = (correctas == 1) ? ic("rewsna thgir") : ic("srewsna thgir");
+				mostrarEval("", ic("tluseR"), ic(" nettog evah uoY") + correctas + " " + txtResp + ic(" fo ") + total + "<br/><br/>" + asignarEvaluacion(res));
+				break;
+			default:
+				var txtResp = ic(".satcerroc satseupser ");
+				var txt = ic(" etsivutbO") + correctas + "/" + total + txtResp;
+				mostrarEval("", ic("odatluseR"), txt + "<br/><br/>" + asignarEvaluacion(res));
 		}
-		else {
-			jq321(this).find("i.it").css("display", "initial");
+		// guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, total);
+		// JLBG Jun 03, 2020;  para guardar calificación por distintos criterios
+		// -1 : guardar calificación más alta de todos los intentos
+		// 0  : guardar calificación del último intento (default-actual)
+		// n  : guardar calificación del intento n
+
+		if (guardarCalificacion == 0) {   // guarda siempre -> último intento
+			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, total);
 		}
-	});
-	var res = 10 * correctas / total;
-	console.log("Correctas: " + correctas);
-	console.log("Total: " + total);
-	console.log("Calificación: " + res.toPrecision());
-	guardaCalificacionScorm (ambSCORM, barraSCORM, idObjetivo, correctas, total);
-	switch (idioma) {
-		case "ENG":
-			var txtResp = (correctas == 1) ? "right answer" : "right answers";
-			mostrarEval(ic(""), ic(""), "<span id='resultado'>You have gotten</span><br> <strong>" + correctas + "</strong> " + txtResp + " of <strong>" + total + "</strong>.<br/><br/>" + asignarEvaluacion(Math.round(res)));
-			break;
-		default:
-			var txtResp = (correctas == 1) ? "respuesta correcta" : "respuestas correctas";
-			mostrarEval(ic(""), ic(""), "<span id='resultado'>Obtuviste</span><br> <strong>" + correctas + "</strong> " + txtResp + " de <strong>" + total + "</strong>.<br/><br/>" + asignarEvaluacion(Math.round(res)));
+		else if (guardarCalificacion == intentos) {   // guarda en el intento n
+			guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, total);
+		}
+		else if (guardarCalificacion == -1) {    // CALIFICACION MAS ALTA DE TODOS LOS INTENTOS
+			if (correctas > califMax) {
+				califMax = correctas;
+				guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, califMax, total);
+				console.log("califMax es " + califMax);
+			}
+		}
 	}
 }
-
-function revisarReactivoVF(numero){
-	txtMarcado = "input:radio[name=pregunta" + numero + "]";
-	jq321(txtMarcado).attr("disabled", "true"); //RAAR Jun 19, 18: lo deshabilito mientras averiguo por que no se reactiva en reinicio()
-	if (jq321(txtMarcado + ":checked").length > 0) {
-		if (jq321(txtMarcado + ":checked").attr("value").toString() == reactivos[numero].A.toString()) {
-			correctas++;
-			jq321(txtMarcado).parent().parent().parent().find(".palomita").css("display", "inherit");
-			if (mostrarRetroIndividual) {jq321("#" + numero).find("div.retroBien").removeClass("ocultarRetro").addClass("mostrarRetro")};
-		}
-		else {
-			jq321(txtMarcado).parent().parent().parent().find(".tache").css("display", "inherit");
-			if (mostrarRetroIndividual) {jq321("#" + numero).find("div.retroMal").removeClass("ocultarRetro").addClass("mostrarRetro")};
-		}
-	}
-}
-
+//  ============================================================================================================
 function mostrarEval(tipo, titulo, cadena) {
 	switch (idioma) {
 		case "ENG":
@@ -81,66 +90,87 @@ function mostrarEval(tipo, titulo, cadena) {
 		default:
 			var btnOK = ic("ratpecA");
 	}
-	swal({title: titulo, text: cadena, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
+	swal({ title: titulo, text: cadena, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
 }
 
-function reiniciar () {
-	// window.location.reload();
-	jq321("i.ip, i.it").css("display", "none");
-	cuentaIntentos++;
-	if (cuentaIntentos < maxIntentos) {
-		jq321(".cRbutton").attr("disabled", false);
-		jq321(":checked").prop('checked', false);
-		jq321("button#btnRevisar").show();
-		jq321("button#btnReiniciar").hide();
-		correctas = 0;
-	} else {
-		switch (idioma) {
-			case "ENG":
-				mostrarEval("info", "Information", "You have reached maximum number of attempts: " + maxIntentos);
-				break;
-			default:
-				mostrarEval("info", "Información", "Has alcanzado el número máximo de intentos: " + maxIntentos);
+//  ============================================================================================================
+function reiniciar() {
+	jq321(".ip, .it").hide();
+	jq321(".opcioncontenedor").removeClass("correcto incorrecto");
+	if (intentos < maxIntentos) {
+		if (siguienteIntentoBlanco) {
+			jq321(".cRbutton").attr("disabled", false);  // HABILITAR
+			jq321(":checked").prop('checked', false);   // LIMPIAR
+		}
+		else {
+			jq321(".opcioncontenedor").each(function (indice) {
+				var valor = jq321("input:radio[name=pregunta" + indice + "]:checked").attr("value");
+				if (valor != reactivos[indice].A.toString()) {
+					jq321(this).find(".cRbutton").attr("disabled", false);  // HABILITAR
+					jq321(this).find(":checked").prop('checked', false);   // LIMPIAR
+				}
+				else {
+					jq321(this).addClass("correcto");
+				}
+			});
 		}
 	}
+	else {
+		switch (idioma) {
+			case "ENG":
+				mostrarEval("", "Attention", "You have reached maximum number of attempts: " + maxIntentos + ".");
+				break;
+			default:
+				mostrarEval("", "Atención", "Has alcanzado el máximo número de intentos: " + maxIntentos + ".");
+		}
+	}
+	jq321("button#btnRevisar").show();
+	jq321("button#btnReiniciar").hide();
 	recorreSegmentos = 1;
 	jq321("[class^=segmento]").addClass("ocultar");
 	jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
 	if (recorreSegmentos < totalSegmentos) {
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
-		jq321( ".cPaginador.cProximo" ).removeClass("invisible").addClass("visible");
-		jq321( ".cPaginador.cPrevio" ).addClass("invisible");
+		jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
+		jq321(".cPaginador.cPrevio").addClass("invisible");
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
 		jq321("#btnPaginador").removeClass("ocultar").addClass("mostrar");
 	}
 }
+
+//  ============================================================================================================
 function paginar(boton) {
 	self = jq321("." + boton);
 	// self= this; //practica para asegurar que estoy en el que dio click....
-	jq321(".segmento" + recorreSegmentos).removeClass("mostrar").addClass("ocultar");	
+	jq321(".segmento" + recorreSegmentos).removeClass("mostrar").addClass("ocultar");
 	if (jq321(self).hasClass('cProximo')) {
-		if (carruselContinuo) {		
+		if (carruselContinuo) {
 			recorreSegmentos = (recorreSegmentos < totalSegmentos ? ++recorreSegmentos : 1);
-		} else {
+		}
+		else {
 			recorreSegmentos = (recorreSegmentos < totalSegmentos ? ++recorreSegmentos : recorreSegmentos);
 			if (recorreSegmentos < totalSegmentos) {
-				jq321(".cPaginador.cPrevio").removeClass("invisible").addClass("visible");	
-			} else {
+				jq321(".cPaginador.cPrevio").removeClass("invisible").addClass("visible");
+			}
+			else {
 				jq321(self).removeClass("visible").addClass("invisible");
 				jq321(".cPrevio").removeClass("invisible").addClass("visible");
 			}
 		}
-	} else {
-		if (carruselContinuo){
-			recorreSegmentos = (recorreSegmentos > 1 ? --recorreSegmentos : totalSegmentos);	
-		} else {
-			recorreSegmentos = (recorreSegmentos > 1 ? --recorreSegmentos : 1);	
+	}
+	else {
+		if (carruselContinuo) {
+			recorreSegmentos = (recorreSegmentos > 1 ? --recorreSegmentos : totalSegmentos);
+		}
+		else {
+			recorreSegmentos = (recorreSegmentos > 1 ? --recorreSegmentos : 1);
 			if (recorreSegmentos > 1) {
-				jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");	
-			} else {
+				jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
+			}
+			else {
 				jq321(self).removeClass("visible").addClass("invisible");
 				jq321(".cProximo").removeClass("invisible").addClass("visible");
-			}			
+			}
 		}
 	}
 	jq321(".segmento" + recorreSegmentos).removeClass("ocultar");

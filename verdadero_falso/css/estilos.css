@@ -47,6 +47,12 @@ div [id^=reng]{
   background-color: #f0efef;
   border: 1px solid #FFF;
 }
+#btnPaginador {
+  margin-left: 5px;
+  margin-right: 5px;
+  opacity: 1;
+  cursor: default;
+}
 
 .opcion{  /*   ALINEAR VERTICALMENTE */
   display: flex;
@@ -69,9 +75,6 @@ div [id^=reng]{
 span.txt{
   display: none;
 }
-/* .encCol{
-  padding: 0;
-} */
 
 .blink {
   animation: blink 2s linear infinite;
@@ -129,12 +132,14 @@ p{
 
 .content-input{
 	position: relative;
-  /* margin-right: 20px; */
   margin-bottom: 12px;
   display: block;
   cursor: pointer;
   padding-left: 30px;
-  /* padding-right: 30px; */
+  padding-right: 30px;
+}
+.row{
+  margin-bottom: 2px;
 }
  
 /* Estas reglas se aplicarán a todos las elementos i después de cualquier input*/
@@ -154,6 +159,13 @@ p{
   top: 25%;
 }
 
+.correcto{
+  border: 1px solid #83c635 !important;
+}
+
+.incorrecto{
+  border: 1px solid #f01b18 !important;
+}
 /* .content-input input[type=radio] + i.vacio{
     border: 2px solid #0069d9;
 } */
@@ -243,7 +255,11 @@ p{
       padding-right: 0px;
     }
 }
-.retroBien{
+
+.conteni{
+  padding: 0;
+}
+/* .retroBien{
   color: #008300;
   background-color: #00ff001a;
   border: 1px solid #00a500;
@@ -260,7 +276,7 @@ p{
   border-radius: 3px;
   margin: 0 2px;
   line-height:30px;
-}
+} */
 .palomita, .tache{
     display: none;
 }
@@ -318,7 +334,7 @@ i.it {
 }
 
 /*  Estilos para retros */
-.tooltip-inner {font-size: 1.2em; text-align: left;};
+.tooltip-inner {font-size: 1.2em; text-align: left; min-width: 280px; padding: 10px}
 .tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
 .tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }
 .tooltip.primary.right > .tooltip-arrow  { border-right-color:  #337ab7; }
@@ -331,7 +347,7 @@ i.it {
 .tooltip.info.bottom > .tooltip-arrow { border-bottom-color: #31b0d5; }
 .tooltip.info.left > .tooltip-arrow   { border-left-color:   #31b0d5; }
 
-.tooltip.success .tooltip-inner          { background-color:    #83c635; z-index: 100001; width: 400px; }
+.tooltip.success .tooltip-inner          { background-color:    #83c635; z-index: 100001; }
 .tooltip.success.top > .tooltip-arrow    { border-top-color:    #83c635; }
 .tooltip.success.right > .tooltip-arrow  { border-right-color:  #83c635; }
 .tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #83c635; }
@@ -343,7 +359,7 @@ i.it {
 .tooltip.warning.bottom > .tooltip-arrow { border-bottom-color: #ec971f; }
 .tooltip.warning.left > .tooltip-arrow   { border-left-color:   #ec971f; }
 
-.tooltip.danger .tooltip-inner          { background-color:    #f01b18; z-index: 1000001; width: 400px; }
+.tooltip.danger .tooltip-inner          { background-color:    #f01b18; z-index: 1000001; }
 .tooltip.danger.top > .tooltip-arrow    { border-top-color:    #f01b18; }
 .tooltip.danger.right > .tooltip-arrow  { border-right-color:  #f01b18; }
 .tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #f01b18; }

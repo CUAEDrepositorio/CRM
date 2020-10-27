@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script>
+		if (!window.parent.data_crm) { 
+			(function (i, s, o, g, r, a, m) { i["GoogleAnalyticsObject"] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+			ga("create", "UA-158134453-1", { "cookieDomain": "auto" });
+			ga("set", "anonymizeIp", true);
+			ga('set', 'dimension1', "CUAIEED");
+			ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
+			ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
+			ga('set', 'dimension4', "2021");
+			ga('set', 'dimension5', "EVALUACIÓN");
+			ga('set', 'dimension6', "RA11-21");
+			ga('set', 'dimension7', "LISTA DE VERIFICACIÓN");
+			ga('set', 'dimension8', "VERSIÓN 2");
+			ga("set", "metric1", 1); ga("set", "metric2", 2); ga("set", "metric3", 3); ga("set", "metric4", 4); ga("set", "metric5", 5); ga("set", "metric6", 6); ga("set", "metric7", 7); ga("set", "metric8", 8);
+			ga("send", "pageview");
+		}
+	</script>
+	<title>Lista de verificación V2.0</title>
+	<meta charset="utf-8" />
+	<!--
+		*v2.0: JLBG Sep 24,20:  funcionalidad nueva para seleccionar consecutivamente los alveolos al dar clic en el texto de las preguntas;
+		se agrega funcionalidad de incluir grupos de criterios en listaReactivos.js;
+		limitado a un máximo de 8 criterios;
+		se parametriza mostrar el valor máximo obtenido o todos
+		*v1.1: JLBG Nov 13,19: se ajustan estilos para uniformidad; se parametriza flecha-arriba; se agrega variable verLongitud para longitudes de texto
+		*v1.0: JLBG Oct 11,19: se agrega versión 2.3 de conectividadSCORM y se cambia la carga de dichas librerías
+		*v0.8: JLBG Mar 25,19: cambio de nombre de archivo ra05.css a estilos.css; ajuste en mensajes en inglés
+		*v0.7: RAAR Ene 17,19: Agrego capacidad SCORM
+		*v0.6: RAAR Nov 21,18: Elimino los reversos en limpiaRadiosVF()
+		*v0.5: JLBG-RAAR Oct 07,18: Modifico reiniciar(); para que oculte retros y activo el habilitado/deshabilitado de los radio-boton
+		*v0.4: JLBG Sep 08,18: se modificó ra05.css para animación de los radiobuttons, y uso de parámetro invPregResp para colocar respuestas a la izq o der ....	
+		*v0.3: RAAR Jun 19,18: modifico boton reinicio y agrego funcion reinicio() blanqueando opciones....	
+		*v0.2: RAAR May 21,18: Elimino archivos ofuscados, corrijo falla en la retro final.
+	-->
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Lista de verificación" />
+	<meta name="keywords" content="UNAM, CUAIEED" />
+	<meta name="author" content="UNAM CUAIEED" />
+	<meta name="news_keywords" content="UNAM, CUAIEED" />
+	<meta name="generator" content="UNAM CUAIEED" />
+	<meta property="og:site_name" content="Lista de verificación" />
+	<meta property="og:title" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:type" content="activity" />
+	<meta property="og:description" content="Lista de verificación" />
+	<meta property="og:image" content="" />
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script> -->
+	<script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+	<script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+	<script>
+		var jq321 = $.noConflict();
+		
+		var crm = 0; // 0 para desplegar longitud de textos, es booleano...
+	</script>
+
+
+	<link rel="stylesheet" href="css/estilos.css" />
+	<script src="js/reactivos.js"></script>
+	<script src="js/listaReactivos.js"></script>
+	<script src="js/configRecurso.js"></script>
+	<script src="js/listaverificacion.js"></script>
+	<!-- SCORM -->
+	<script src="./SCORM/conectividadSCORM.js"></script>
+	<!-- JQuery UI -->
+	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" /> -->
+	<!-- Estilos generales de los recursos // -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="css/font.css" rel="stylesheet" />
+	<script src="js/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/sweetalert.css" />
+
+	<script>
+		jq321(document).ready(function () {
+			jq321('[data-toggle="tooltip"]').each(function () {
+				var options = {
+					html: true
+				};
+
+				if (jq321(this)[0].hasAttribute('data-type')) {
+					options['template'] =
+						'<div class="tooltip ' + jq321(this).attr('data-type') + '" role="tooltip">' +
+						'	<div class="tooltip-arrow"></div>' +
+						'	<div class="tooltip-inner"></div>' +
+						'</div>';
+				}
+				jq321(this).tooltip(options);
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<noscript>Necesitas tener habilitado Javascript para poder continuar</noscript>
+	<section class="container">
+		<div class="row titulo">
+			<div id="head">
+				<h2 class="headings-int">Título de la actividad</h2>
+			</div>
+			<div class="info ocultar">
+				<i class="fas fa-info fa-2x"></i>
+			</div>
+		</div>
+		<div class="row" id="textoInstrucciones">
+			<div>
+				<p>Instrucciones (pedagógica y técnica) de la evaluación.</p>
+			</div>
+		</div>
+		<br />
+		<div class="row container" id="contenedor"></div>
+		<i class="ir-arriba fas fa-chevron-up fa-2x"></i>
+		<div class="pager col-md-12 col-lg-12 col-sm-12 col-xs-12">
+			<button id="btnRevisar" class="btn btn-primary" onClick="evaluarLV()">Revisar</button>
+			<button id="btnReiniciar" class="btn btn-primary" onClick="reiniciar()">Reiniciar</button>
+		</div>
+	</section>
+</body>
+
+</html>

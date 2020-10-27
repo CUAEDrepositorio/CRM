@@ -1,12 +1,14 @@
 ﻿html{    /*  Usado para trabajar con definición 'em'  */
   font-size: 16px;
 }
+
 body{
   font-family: 'Open Sans', sans-serif;
-  color: #000;
+  font-size: 1em;
   line-height: 1.8em;
-  font-weight: 400;
   text-align: left;
+  color: #000;
+  font-weight: 400;
   margin:1em;
   user-select: none;
   -webkit-user-select: none;
@@ -15,12 +17,8 @@ body{
   -ms-user-select: none;
   -o-user-select: none;
 
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
-  line-height: 1.8em;
-  text-align: left;
-  color: #000  
 }
+
 .texto{
   font-size: 1em;
 }
@@ -37,10 +35,12 @@ div [id^=reng]{
   background-color: #e5e5e5;
   border: 1px solid #FFF;
 }
+
 [id^=reng]:nth-child(even), .set.row:nth-child(even){
   background-color: #f0efef;
   border: 1px solid #FFF;
 }
+
 .ir-arriba {
 	display:none;
 	padding:15px;
@@ -59,12 +59,13 @@ div [id^=reng]{
 .opcion, .pager{
   text-align: center;
 }
+
 .opcion{  /*   ALINEAR VERTICALMENTE */
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
+
 #encabezado{
   text-align: center;
   position: sticky;
@@ -75,8 +76,11 @@ div [id^=reng]{
   text-align: center;
   color: #fff;
   background: #969696;
-  padding: 15px;
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
 }
+
 span.txt{
   display: none;
 }
@@ -253,6 +257,7 @@ p{
     }
 }
 /*  Clases para retros */
+.tooltip-inner {font-size: 1.2em; text-align: left; min-width: 280px; padding: 10px}
 .tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
 .tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }
 .tooltip.primary.right > .tooltip-arrow  { border-right-color:  #337ab7; }
@@ -265,11 +270,11 @@ p{
 .tooltip.info.bottom > .tooltip-arrow { border-bottom-color: #31b0d5; }
 .tooltip.info.left > .tooltip-arrow   { border-left-color:   #31b0d5; }
 
-.tooltip.success .tooltip-inner          { background-color:    #449d44; }
-.tooltip.success.top > .tooltip-arrow    { border-top-color:    #449d44; }
-.tooltip.success.right > .tooltip-arrow  { border-right-color:  #449d44; }
-.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #449d44; }
-.tooltip.success.left > .tooltip-arrow   { border-left-color:   #449d44; }
+.tooltip.success .tooltip-inner          { background-color:    #83c635; }
+.tooltip.success.top > .tooltip-arrow    { border-top-color:    #83c635; }
+.tooltip.success.right > .tooltip-arrow  { border-right-color:  #83c635; }
+.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #83c635; }
+.tooltip.success.left > .tooltip-arrow   { border-left-color:   #83c635; }
 
 .tooltip.warning .tooltip-inner          { background-color:    #ec971f; }
 .tooltip.warning.top > .tooltip-arrow    { border-top-color:    #ec971f; }
@@ -277,11 +282,12 @@ p{
 .tooltip.warning.bottom > .tooltip-arrow { border-bottom-color: #ec971f; }
 .tooltip.warning.left > .tooltip-arrow   { border-left-color:   #ec971f; }
 
-.tooltip.danger .tooltip-inner          { background-color:    #d9534f; }
-.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #d9534f; }
-.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #d9534f; }
-.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #d9534f; }
-.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #d9534f; }
+.tooltip.danger .tooltip-inner          { background-color:    #f01b18; }
+.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #f01b18; }
+.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #f01b18; }
+.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #f01b18; }
+.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #f01b18; }
+.tooltip.in {opacity:1!important;}
 
   .vacio{
     border:  1px solid #0069d9 !important;

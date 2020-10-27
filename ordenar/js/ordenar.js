@@ -11,7 +11,6 @@ Added:
 	- display feedback
 	- windows messages standard
 */
-var marcado = false;
 jq321(document).ready(function () { // RAAR Jun 28,18: Lo traigo de index, es chocosa la dispersion....
 	if (mezclarPreguntas) { reordenaArreglo(reactivos) };
 	creaOrdenar(reactivosMostrar);
@@ -20,17 +19,19 @@ jq321(document).ready(function () { // RAAR Jun 28,18: Lo traigo de index, es ch
 	jq321("button#btnReiniciar").hide();
 	// mobilepro();
 	iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
-
+	jq321("#btnPrevio, #btnProximo").addClass("invisible");
+	jq321("#btnPaginador").hide();
 	if (elementosPorSegmento < reactivosMostrar) { // los botones de paginas...
+		jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
 		if (carruselContinuo) {
-			jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
 			jq321(".cPaginador.cPrevio").removeClass("invisible").addClass("visible");
 		} else {
-			jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
+			jq321(".cPaginador.cPrevio").removeClass("visible").addClass("invisible");
 		}
 		jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
-		jq321("#btnPaginador").removeClass("ocultar").addClass("mostrar");
+		jq321("#btnPaginador").show();
 	}
+	estandarizar();
 });
 
 function creaRespuestas(arreglo) {
@@ -42,6 +43,39 @@ function creaRespuestas(arreglo) {
 		arreglo.push(piezas);
 	});
 }
+
+// jq321(".zoom").click(function () {
+function zoom(item) {
+	// alert("AQUI");
+	var padreImagen = jq321(item).parent().parent().parent().parent();
+
+	jq321(padreImagen).sortable("option", "disabled", true);
+
+
+	var self = jq321(item);
+	// var self = this;
+	//	alert ("Zoom "+jq321(self).parents(".respuesta").find(".draggable").attr("data"));
+	// var imagen = jq321(self).parents(".respuesta").find(".draggable").attr("data");
+	var imagen = jq321(self).attr("src");
+	//https://www.w3schools.com/howto/howto_css_modal_images.asp
+	var modal = document.getElementById("myModal");
+	var modalImg = document.getElementById("imgZoom");
+	// Get the <span> element that closes the modal
+	///var span = document.getElementsByClassName("close")[0];
+	var span = document.getElementById("closeZoom");
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+	modal.style.display = "block";
+	//modalImg.src = this.src;
+
+	modalImg.src = imagen;
+	// });
+	jq321(padreImagen).sortable("option", "disabled", false);
+}
+
+
 
 jq321(function () {
 	switch (idioma) {
@@ -55,16 +89,10 @@ jq321(function () {
 	}
 	var eScormActividad = false; // true si se toma en cuenta como objetivo del scorm, false si no
 	var listas = jq321(".lista > .sortable");
-	var bRevisor = jq321("button#btnRevisar");
 	var intTotal = 0;
 	var totalOr = 0;
-	var intentosRealizadosOr = 0;
-	var indiceActividad = 8; // 
-	iniciarOrdenar();
-
-	var objetoOrdenar = {
-		stop: alDetener
-	};
+	jq321('#btnReiniciar').hide();
+	jq321('#btnRevisar').show();
 
 	jq321(".sortable").sortable({ //checar el $ a la larga puede funcionar, pero aqui nojala con jq321
 		change: function (event, ui) {
@@ -72,12 +100,7 @@ jq321(function () {
 		}
 	});
 
-	function iniciarOrdenar() {
-		jq321('#btnReiniciar').hide();
-		jq321('#btnRevisar').show();
-	}//fin init
-
-	bRevisor.click(function () {
+	jq321("#btnRevisar").click(function () {
 		var contador = 0;
 		var enunciados = jq321(".lista > .sortable");
 		jq321(".lista.vacio").removeClass("vacio");
@@ -94,69 +117,87 @@ jq321(function () {
 		});
 		if (sinOrdenar) {
 			mostrarMensaje(2, 4);
-			return;
 		}
-		enunciados.each(function (index) {
-			jq321(this).sortable("option", "disabled", true);
-			var respuestaCorrecta = obtenerEnunciado(jq321(this));
-			if (respuestaCorrecta === respOriginales[index]) {
-				jq321(this).closest(".lista").removeClass("mal").addClass("bien");
-				if (mostrarRetroIndividual) {
-					jq321(this).parent().find(".retroBien").removeClass("ocultarRetro").addClass("mostrarRetro");
-					// jq321(this).find("i.ip").removeClass("ocultar").addClass("mostrar");
-					jq321(this).find("span.ip").removeClass("ocultar").addClass("mostrar");
-				}
-				contador++;
+		else {
+			jq321('#btnRevisar').hide();
+			jq321('#btnReiniciar').show();
+			jq321("input:radio, audio, video, .compr-exp").attr("disabled", true);
+			// jq321("[id^=ctrlDeslizante], .controlesVid").css("display", "none");
+			jq321("[id^=ctrlDeslizante], .controlesVid").hide();
+			jq321('[id^=audio]').each(function () {
+				jq321(this)[0].pause();
+			});
+			if (esPortable()) {
+				jq321('[id^=pause]').css("display", "none");
+				jq321('[id^=play]').css("display", "block");
 			}
 			else {
-				jq321(this).closest(".lista").removeClass("bien").addClass("mal");
-				if (mostrarRetroIndividual) {
-					jq321(this).parent().find(".retroMal").removeClass("ocultarRetro").addClass("mostrarRetro")
-					jq321(this).find("span.it").removeClass("ocultar").addClass("mostrar");
-					// jq321(this).find("i.it").removeClass("ocultar").addClass("mostrar");
-				}
+				jq321('[id^=pause]').css("display", "none");
+				jq321('[id^=play]').css("display", "block");
 			}
-		});
 
-		var res = Math.floor(10 * contador / total);
-		switch (idioma) {
-			case "ENG":
-				var txtResp = (contador == 1) ? ic("rewsna thgir") : ic("srewsna thgir");
-				mostrarEval(ic("ofni"), ic("tluseR"), ic(" nettog evah uoY") + contador + " " + txtResp + ic(" fo ") + total + "<br/><br/>" + asignarEvaluacion(res));
-				break;
-			default:
-				var txtResp = (contador == 1) ? ic("atcerroc atseupser") : ic("satcerroc satseupser");
-				mostrarEval(ic("ofni"), ic("odatluseR"), ic(" etsivutbO") + contador + " " + txtResp + ic(" ed ") + total + "<br/><br/>" + asignarEvaluacion(res));
-		}
-
-		intentosRealizadosOr++;
-		if (intentosRealizadosOr == maxIntentos) {
-			var lista = jq321(".lista");
-			lista.each(function (indice) {
-				if (jq321(this).hasClass("mal")) {
-					var tmp = respOriginales[indice];
-					if (tmp.indexOf('/') > 0) {
-						var tmp2 = tmp.split("@");
-						var txt = "";
-						for (i = 0; i < tmp2.length; i++) {
-							txt += "<img src='" + tmp2[i] + "' alt='" + tmp2[i] + "' class='imagenResp'>";
-						}
-						jq321(this).append(txt);
+			enunciados.each(function (index) {
+				jq321(this).sortable("option", "disabled", true);
+				var respuestaCorrecta = obtenerEnunciado(jq321(this));
+				if (respuestaCorrecta === respOriginales[index]) {
+					jq321(this).closest(".lista").removeClass("mal").addClass("bien");
+					if (mostrarRetroIndividual) {
+						jq321(this).parent().find(".retroBien").removeClass("ocultarRetro").addClass("mostrarRetro");
+						jq321(this).find(".ip").show();
 					}
-					else {
-						jq321(this).append('<span class="resp">' + respOriginales[indice].replace(/@/g, " "));
+					contador++;
+				}
+				else {
+					jq321(this).closest(".lista").removeClass("bien").addClass("mal");
+					if (mostrarRetroIndividual) {
+						jq321(this).parent().find(".retroMal").removeClass("ocultarRetro").addClass("mostrarRetro")
+						jq321(this).find(".it").show();
 					}
 				}
 			});
+
+			var res = Math.floor(10 * contador / total);
+			switch (idioma) {
+				case "ENG":
+					var txtResp = (contador == 1) ? ic("rewsna thgir") : ic("srewsna thgir");
+					// mostrarEval(ic("ofni"), ic("tluseR"), ic(" nettog evah uoY") + contador + " " + txtResp + ic(" fo ") + total + "<br/><br/>" + asignarEvaluacion(res));
+					mostrarEval("", ic("tluseR"), ic(" nettog evah uoY") + contador + " " + txtResp + ic(" fo ") + total + "<br/><br/>" + asignarEvaluacion(res));
+					break;
+				default:
+					// var txtResp = (contador == 1) ? ic("atcerroc atseupser") : ic("satcerroc satseupser");
+					var txtResp = ic(".satcerroc satseupser ");
+					// mostrarEval(ic("ofni"), ic("odatluseR"), ic(" etsivutbO") + contador + " " + txtResp + ic(" ed ") + total + "<br/><br/>" + asignarEvaluacion(res));
+					var txt = ic(" etsivutbO") + contador + "/" + total + txtResp;
+					// mostrarEval("", ic("odatluseR"), ic(" etsivutbO") + contador + " " + txtResp + ic(" ed ") + total + "<br/><br/>" + asignarEvaluacion(res));
+					mostrarEval("", ic("odatluseR"), txt + "<br/><br/>" + asignarEvaluacion(res));
+			}
+			intentos++;
+			if (intentos == maxIntentos) {
+				jq321(".mal > .resp2").show();
+			}
+			//save eScormActividad
+			var correctas = contador;
+			var totalPreguntas = total;
+
+			// JLBG Jun 03, 2020;  para guardar calificación por distintos criterios
+			// -1 : guardar calificación más alta de todos los intentos
+			// 0  : guardar calificación del último intento (default-actual)
+			// n  : guardar calificación del intento n
+
+			if (guardarCalificacion == 0) {   // guarda siempre -> último intento
+				guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas);
+			}
+			else if (guardarCalificacion == intentos) {   // guarda en el intento n
+				guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas);
+			}
+			else if (guardarCalificacion == -1) {    // CALIFICACION MAS ALTA DE TODOS LOS INTENTOS
+				if (correctas > califMax) {
+					califMax = correctas;
+					guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, califMax, totalPreguntas);
+					console.log("califMax es " + califMax);
+				}
+			}
 		}
-		//save eScormActividad
-		var correctas = contador;
-		var totalPreguntas = total;
-
-		guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, correctas, totalPreguntas);
-
-		jq321('#btnRevisar').hide();
-		jq321('#btnReiniciar').show();
 	});
 
 	function obtenerEnunciado(lista) {
@@ -173,35 +214,33 @@ jq321(function () {
 		}).join("@");
 	}
 
-	function alDetener(event, ui) {
-		//console.log(ui.item[0]);
-	}
-
-	jq321("button#btnReiniciar").click(function () {
+	jq321("#btnReiniciar").click(function () {
 		listas = jq321(".lista > .sortable");
-		if (intentosRealizadosOr < maxIntentos) {
+		if (intentos < maxIntentos) {
 			respDesordenadas1 = [];
+			jq321(".ip, .it").hide();
 			listas.each(function (index) {
 				var estaLista = jq321(this);
-				if (mostrarRetroIndividual && !(mostrarRetroFinal)) {
-					estaLista.parent().removeClass("bien").addClass("mal")
-				}
-				if (estaLista.parent().hasClass("mal")) {
+
+				if (siguienteIntentoBlanco || estaLista.parent().hasClass("mal")) {
 					jq321(this).sortable("option", "disabled", false);
-					tmp = respOriginales[index].split("@");
+					var tmp2 = respOriginales[index];
+					debugRespuesta = tmp2.replace(/@/g, "|");
+					tmp1 = respOriginales[index].split("@");
 					preg1 = [];
-					jq321.each(tmp, function (indice1) {
-						preg1.push([tmp[indice1], indice1]);
+					jq321.each(tmp1, function (indice1) {
+						preg1.push([tmp1[indice1], indice1]);
 					});
 					do {
 						preg = [];
-						jq321.each(tmp, function (indice1) {
-							preg.push([tmp[indice1], indice1]);
+						jq321.each(tmp1, function (indice1) {
+							preg.push([tmp1[indice1], indice1]);
 						});
 						reordenaArreglo(preg);
 					}
 					while (preg.join() == preg1.join());
 					estaLista.empty();
+					estaLista.parent().find("span").remove("span");
 					var valorInicial = respOriginales[index];
 					do {
 						reordenaArreglo(preg);
@@ -214,26 +253,69 @@ jq321(function () {
 					var txt = "";
 					for (j = 0; j < preg.length; j++) { // RAAR Jun 28,18:data-orden es para evaluar, data-despliegue es para saber si ha movido algo, debugguear
 						var tmp = preg[j][0];
-						tmp = tmp.split("/");
-						if (tmp.length > 1) {
-							console.log("HAY UNA RUTA INVOLUCRADA");
-							txt += "<li class='ui-state-active ui-sortable-handle listaImagen' data-txt='" + preg[j][0] + "' data-orden=" + preg[j][1] + " data-despliegue=" + j + ">" + lupa + "<img src='" + preg[j][0] + "' alt='" + preg[j][0] + "' class='imagen'></li>";
+
+						var resp = [];
+						var ext = "";
+						var pregunta = tmp;
+						var posUltimaDiagonal = pregunta.lastIndexOf('/') + 1;
+						if (posUltimaDiagonal != 0) {
+							ext = pregunta.toLowerCase().substring(pregunta.lastIndexOf('.') + 1);
+						}
+						var contador = (index + 1).toString() + (j + 1).toString();
+						resp = objetoMultimedia(pregunta, contador);
+						var titulo = resp[0];
+						var pregunta = resp[1];
+						var play = resp[2];
+						var pause = resp[3];
+						var control = resp[4];
+						var barraDeslizante = resp[5];
+						var contVideo = resp[6];
+
+						var elemento = '<label class="contenido" id=lbl' + contador + '><span class="opcion" id=opc' + contador + '>' + titulo + pregunta + control + contVideo + barraDeslizante + '</span></label>';
+						var pos1 = pregunta.lastIndexOf('<img');
+						var pos2 = pregunta.lastIndexOf('<audio');
+						var pos3 = pregunta.lastIndexOf('<video');
+
+						if (pos1 >= 0) {
+							txt += '<li class="ui-state-active listaImagen" data-txt="' + preg[j][0] + '" data-orden=' + preg[j][1] + ' data-despliegue=' + j + '>' + lupa + elemento + '</li>';
+						}
+						else if (pos2 >= 0) {
+							txt += '<li class="ui-state-active listaAudio" data-txt="' + preg[j][0] + '" data-orden=' + preg[j][1] + ' data-despliegue=' + j + '>' + lupa + elemento + '</li>';
+						}
+						else if (pos3 >= 0) {
+							txt += '<li class="ui-state-active listaVideo" data-txt="' + preg[j][0] + '" data-orden=' + preg[j][1] + ' data-despliegue=' + j + '>' + lupa + elemento + '</li>';
 						}
 						else {
-							console.log("Seguro que es un texto");
-							txt += "<li class='ui-state-active ui-sortable-handle' data-txt='" + preg[j][0] + "' data-orden=" + preg[j][1] + " data-despliegue=" + j + ">" + preg[j][0] + "</li>";
+							txt += '<li class="ui-state-active listaTexto" data-txt="' + preg[j][0] + '" data-orden=' + preg[j][1] + ' data-despliegue=' + j + '>' + lupa + elemento + '</li>';
 						}
+						indImg++;
+						if (pos1 >= 0) {
+							var p2 = debugRespuesta.replace(tmp, resp[7]);
+							debugRespuesta = p2;
+						}
+						if (pos2 >= 0) {
+							var p2 = debugRespuesta.replace(tmp, resp[7]);
+							debugRespuesta = p2;
+						}
+						if (pos3 >= 0) {
+							var p2 = debugRespuesta.replace(tmp, resp[7]);
+							debugRespuesta = p2;
+						} // SOLO PARA DEBUG
 					}
-					if (debug) {
-						var v1 = valorInicial.replace("@", "|");
-						 txt += v1;
-					} // SOLO PARA DEBUG
-					jq321(estaLista).append(txt + tam(valorInicial, 0) + '<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[index].F[0], 1) + '">' + palomita + '</span><span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[index].F[1], 1) + '">' + tache + '</span>');
+
+					var toolTipSi = '<span data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(reactivos[index].F[0], 1) + '">' + palomita + '</span>';
+					var toolTipNo = '<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(reactivos[index].F[1], 1) + '">' + tache + '</span>';
+
+					jq321(estaLista).append(txt + tam(valorInicial, 0) + toolTipSi + toolTipNo);
+					jq321(estaLista).parent().append("<span class='debug'><sup>" + debugRespuesta + "</sup></br></span>");
+					jq321(estaLista).parent().append("<span class='resp2'>" + debugRespuesta + "</br></span>");
+					jq321(".ip, .it").hide();
+					jq321(estaLista).sortable();
+					jq321(estaLista).disableSelection();
+					if (siguienteIntentoBlanco) {
+						jq321(".ordenar .lista").removeClass('bien');
+					}
 				}
-				jq321(estaLista).sortable();
-				jq321(estaLista).disableSelection();
-				// jq321(estaLista).find("i.ip, i.it").removeClass("mostrar").addClass("ocultar");
-				jq321(estaLista).find("span.ip, span.it").removeClass("mostrar").addClass("ocultar");
 			});
 			jq321(".ordenar .lista").removeClass('mal');
 			creaRespuestas(respDesordenadas1);
@@ -244,6 +326,9 @@ jq321(function () {
 					respDesordenadas1[index] = tmp;
 				}
 			});
+			jq321("span.debug, span.resp2").hide();
+			if (debug) { jq321(".debug").show() }
+
 		}//fin if
 		else {
 			mostrarMensaje(1);
@@ -268,20 +353,9 @@ jq321(function () {
 				jq321(this).tooltip(options);
 			});
 		});
+		estandarizar();
 	});
-
-	function mostrarEval(tipo, titulo, cadena) {
-		switch (idioma) {
-			case "ENG":
-				var btnOK = ic("KO");
-				break;
-			default:
-				var btnOK = ic("ratpecA");
-		}
-		swal({ title: "", text: cadena, type: "", confirmButtonText: btnOK, closeOnConfirm: true, html: true });
-	}
 });
-;
 
 function mobilepro() {
 	var imagenes = document.getElementsByClassName("fa-search-plus");
@@ -303,8 +377,7 @@ function mobilepro() {
 }
 function paginar(boton) {
 	self = jq321("." + boton);
-	// self= this; //practica para asegurar que estoy en el que dio click....
-	jq321(".segmento" + recorreSegmentos).removeClass("mostrar").addClass("ocultar");
+	jq321(".segmento" + recorreSegmentos).hide();
 	if (jq321(self).hasClass('cProximo')) {
 		if (carruselContinuo) {
 			recorreSegmentos = (recorreSegmentos < totalSegmentos ? ++recorreSegmentos : 1);
@@ -330,6 +403,6 @@ function paginar(boton) {
 			}
 		}
 	}
-	jq321(".segmento" + recorreSegmentos).removeClass("ocultar");
+	jq321(".segmento" + recorreSegmentos).show();
 	jq321("#btnPaginador").text(recorreSegmentos + " / " + totalSegmentos);
 };

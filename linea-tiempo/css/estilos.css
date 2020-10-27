@@ -12,11 +12,13 @@ body {
   color: #fff;
   overflow-x: hidden;
   padding-bottom: 50px;
+  --fondo: #dbae58;
+  --fondo-texto: #488a99;
 }  /* INTRO SECTION
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .intro {
-  background: #488a99;
+  background: var(--fondo-texto);
   padding: 20px 0;
 }
 
@@ -36,7 +38,7 @@ h1 {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .timeline ul {
-  background: #dbae58;
+  background: var(--fondo);
   padding: 50px 0;
 }
 
@@ -66,7 +68,7 @@ h1 {
   bottom: 0;
   width: 400px;
   padding: 15px;
-  background: #488a99;
+  background: var(--fondo-texto);
 }
 
 .timeline ul li div::before {
@@ -85,7 +87,7 @@ h1 {
 .timeline ul li:nth-child(odd) div::before {
   left: -15px;
   border-width: 8px 16px 8px 0;
-  border-color: transparent #488a99 transparent transparent;
+  border-color: transparent var(--fondo-texto) transparent transparent;
 }
 
 .timeline ul li:nth-child(even) div {
@@ -95,7 +97,7 @@ h1 {
 .timeline ul li:nth-child(even) div::before {
   right: -15px;
   border-width: 8px 0 8px 16px;
-  border-color: transparent transparent transparent #488a99;
+  border-color: transparent transparent transparent var(--fondo-texto);
 }
 
 time {
@@ -114,7 +116,7 @@ time {
 }
 
 .timeline ul li.in-view::after {
-  background: #488a99;
+  background: var(--fondo-texto);
 }
 
 .timeline ul li div {
@@ -166,6 +168,6 @@ time {
   .timeline ul li:nth-child(even) div::before {
     left: -15px;
     border-width: 8px 16px 8px 0;
-    border-color: transparent #488a99 transparent transparent;
+    border-color: transparent var(--fondo-texto) transparent transparent;
   }
 }

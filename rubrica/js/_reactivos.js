@@ -1,13 +1,13 @@
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
 var palomita = "<i class='ip far fa-check-circle blink'></i>";
 var tache = "<i class='it far fa-times-circle blink'></i>";
-var intentos = 0;
 
 jq341(document).ready(function () {
 	console.log("READY de reactivos.js");
 	if (window.parent.data_crm) {
 		verLongitud = true;
 		mostrarRetroFinal = true;
+		verLongitud = true;
 	}
 	if (window.name == "movil") {
 		esMobil = true;
@@ -22,7 +22,6 @@ jq341(document).ready(function () {
 		jq341("#textoInstrucciones").addClass("mostrarinfo");
 	}
 	jq341(".info").click(function () {
-		console.log("hola");
 		if (jq341(this).hasClass("hiden")) {
 			jq341("#textoInstrucciones").slideUp(300);
 			jq341(this).removeClass("hiden");
@@ -54,63 +53,28 @@ jq341(document).ready(function () {
 
 function creaRubrica(numReactivos) {
 	jq341("#contenedor").append('<div class="row" id="encabezado">');
-	var numEnc = encabezados.length;
-	if (numEnc > 5) { numEnc = 5 }
-	if (numEnc <= 4) {
-		jq341("#encabezado").append('<div class="col-12 col-lg-3" id="encCol">');
-		jq341("#encabezado").append('<div class="row col-12 col-lg-9" id="textos">');
-	}
-	if (numEnc == 5) {
-		jq341("#encabezado").append('<div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2" id="textos">');
-	}
-	for (k = 0; k < numEnc; k++) {
-		var ptos = (encabezados[k][1] === 1) ? " punto" : " puntos";
-		if (numEnc == 3) {
-			jq341('#textos').append('<div class="col-12 col-lg-4 enc">' + tam(encabezados[k][0] + " <br/>" + encabezados[k][1] + ptos, 1) + '</div>');
-		}
-		else if (numEnc == 4) {
-			jq341('#textos').append('<div class="col-12 col-lg-3 enc">' + tam(encabezados[k][0] + " <br/>" + encabezados[k][1] + ptos, 1) + '</div>');
-		}
-		else if (numEnc == 5) {
-			jq341('#encabezado').append('<div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 enc">' + tam(encabezados[k][0] + " <br/>" + encabezados[k][1] + ptos, 1) + '</div>');
-		}
+	jq341("#encabezado").append('<div class="col-12 col-xs-12 col-lg-3" id="encCol">Criterio');
+	jq341("#encabezado").append('<div class="row col-12 col-xs-12 col-lg-9" id="textos">');
+	for (k = 0; k < encabezados.length; k++) {
+		var ptos = (encabezados[k][1] == 1) ? " punto" : " puntos";
+		jq341('#textos').append('<div class="col-12 col-xs-12 col-lg-3 enc">' + tam(encabezados[k][0] + " <br/>" + encabezados[k][1] + ptos, 1) + '</div>');
 	}
 	for (i = 0; i < numReactivos; i++) {
-		if (numeralAlfabetico) {
-			numeralPregunta = (ponerNumeral ? String.fromCharCode(i + 65) : '') + ((ponerNumeral || ponerNumeroPreguntas) ? '.&nbsp;&nbsp;' : '');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true
-		} else {
-			numeralPregunta = (ponerNumeral ? (i + 1) : '') + (ponerNumeroPreguntas ? '/' + reactivosMostrar : '') + ((ponerNumeral || ponerNumeroPreguntas) ? '.&nbsp;&nbsp;' : '');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
-		}
-		if (numEnc <= 4) {
-			jq341('#contenedor').append('<div class="set row" id="elem' + i + '">');
-		}
-		else if (numEnc == 5) {
-			jq341('#contenedor').append('<div class="set row btn-group btn-group-toggle d-flex flex-column flex-sm-row grupo" data-toggle="buttons"  id="elem' + i + '">');
-		}
-		// for (j = 0; j < reactivos[i].length; j++) {
-		for (j = 0; j < (numEnc + 1); j++) {
-			var gpoBtn = '<div class="btn-group btn-group-toggle d-flex flex-column flex-sm-row grupo" data-toggle="buttons" id="grp' + i + '">';
+		var gpoBtn = '<div class="btn-group btn-group-toggle d-flex flex-column flex-lg-row grupo" data-toggle="buttons" id="grp' + i + '">';
+		jq341('#contenedor').append('<div class="set row" id="elem' + i + '">');
+		for (j = 0; j < reactivos[i].length; j++) {
 			if (j == 0) {
-				if (numEnc <= 4) {
-					jq341('#elem' + i).append('<div class="col-12 col-lg-3 pregunta vertical-center">' + numeralPregunta + tam(reactivos[i][j], 1)).append('<div class="col-12 col-lg-9 vertical-center">' + gpoBtn);
-				}
-				if (numEnc == 5) {
-					jq341('#elem' + i).append('<div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 pregunta vertical-center">' + numeralPregunta + tam(reactivos[i][j], 1));
-				}
+				jq341('#elem' + i).append('<div class="col-12 col-xs-12 col-lg-3 pregunta vertical-center">' + tam(reactivos[i][j], 1)).append('<div class="col-12 col-xs-12 col-lg-9 vertical-center">' + gpoBtn);
 			}
 			else {
-				var ptos = (encabezados[j - 1][1] === 1) ? " punto" : " puntos";
-				var radio = '<input type="radio" name="opcion' + i + '" id="opcion' + i + j + '" value="' + encabezados[j - 1][1] + '"/>';
-				var txtPto = '<p class="txt">' + tam(encabezados[j - 1][0] + "<br/>" + encabezados[j - 1][1] + ptos, 1) + '</p>';
-				if (numEnc == 3) {
-					jq341('#grp' + i).append('<hr class="hrEspecial"/><div class="btn col-sm-4 col-md-4">' + radio + tam(reactivos[i][j], 1) + txtPto + '</div>');
+				ptos = (encabezados[j - 1][1] == 1) ? " punto" : " puntos";
+				if (rubricaMultiple) {
+					jq341('#grp' + i).append('<label class="btn"><input type="checkbox" name="opcion' + i + '" id="opcion' + i + j + '" value="' + encabezados[j - 1][1] + '"/>' + tam(reactivos[i][j], 1) + '</label>');
 				}
-				else if (numEnc == 4) {
-					jq341('#grp' + i).append('<hr class="hrEspecial"/><div class="btn col-sm-3 col-md-3">' + radio + tam(reactivos[i][j], 1) + txtPto + '</div>');
+				else {
+					jq341('#grp' + i).append('<hr class="hrEspecial"/><div class="btn"><input type="radio" name="opcion' + i + '" id="opcion' + i + j + '" value="' + encabezados[j - 1][1] + '"/>' + tam(reactivos[i][j], 1) + '<p class="txt">' + tam(encabezados[j - 1][0] + "<br/>" + encabezados[j - 1][1] + ptos, 1) + '</p></div>');
 				}
-				else if (numEnc == 5) {
-					jq341('#elem' + i).append('<hr class="hrEspecial"/><div class="btn col-12 col-sm-12 col-sp col-lg-2 col-xl-2 c5">' + radio + tam(reactivos[i][j], 1) + txtPto + '</div>');
-				}
+
 			}
 		}
 	}

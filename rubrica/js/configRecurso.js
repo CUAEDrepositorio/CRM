@@ -1,9 +1,6 @@
-﻿/* Configuracion
-
-*/
+﻿/* Configuracion */
  
-var maxIntentos = 2;                 // número de intentos máximo para resolver el ejercicio
-var maxIntentosReactivo = 2;
+var maxIntentos = 1;                 // número de intentos máximo para resolver el ejercicio
 var calificacionGlobal = false;
 var formatoColumnas = true;          // true: muestra preguntas y respuesta en columnas; false muestra preguntas y respuesta apiliados
 var esTexto = true;                  // true: respuestas son TEXTO; false respuestas son IMAGENES
@@ -23,6 +20,9 @@ var mezclarPreguntas = true;         // true: mezcla preguntas; false NO mezcla 
 var mezclarRespuestas = true;        // true: mezcla respuestas; false NO mezcla respuestas
 var mostrarRetroIndividual = true;  // true: muestra retro por pregunta individual; false: NO muestra retro por pregunta individual
 var mostrarRetroFinal = false;       // true: muestra retro por aciertos; false: NO muestra retro
+var numeralAlfabetico = false; //si queremos letras en vez de números, true.
+var ponerNumeral = true;     // Para poner o agregar numeros secuenciales al inicio de las las preguntas... 
+var ponerNumeroPreguntas = false // cuantos preguntas son?, no necesariamente cuantas son visibles...
 var porEspacios = true;
 var porEnunciados = true;
 
@@ -39,7 +39,5 @@ var ambSCORM = false;
 var barraSCORM = false;
 var idObjetivo = 0; // Para scorm...
 
-var rubricaMultiple = false;    //  true: funciona como checkBox; false: funciona como radioButton
-
 var idioma = "ESP";
-var verLongitud = false;  //true:ver longitud del texto ; false:omitir
+var verLongitud = false;  //true: ver longitud del texto ; false: omitir

@@ -5,23 +5,26 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="" src="https://www.google-analytics.com/analytics.js"></script>
 <script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+if (!window.parent.data_crm) { 
 ga("create", "UA-158134453-1", {"cookieDomain":"auto"});
 ga("set", "anonymizeIp", true);
-ga('set', 'dimension1', "CUAED");
+ga('set', 'dimension1', "CUAIEED");
 ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS" );
 ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA" );
-ga('set', 'dimension4', "2019" );
+ga('set', 'dimension4', "2021" );
 ga('set', 'dimension5', "EVALUACIÓN" );
-ga('set', 'dimension6', "RA03-19" );
-ga('set', 'dimension7', "COMPLETAR ARRRASTRANDO ESQUEMA" );
-ga('set', 'dimension8', "VERSIÓN 1" );
+ga('set', 'dimension6', "RA03-21" );
+ga('set', 'dimension7', "COMPLETAR ARRASTRANDO ESQUEMA" );
+ga('set', 'dimension8', "VERSIÓN 2" );
 ga("set", "metric1", 1);ga("set", "metric2", 2);ga("set", "metric3", 3);ga("set", "metric4", 4); ga("set", "metric5", 5);ga("set", "metric6", 6);ga("set", "metric7", 7);ga("set", "metric8", 8);
 ga("send", "pageview");
+}
 </script>
     
-    <title>CA esquema V4.9</title>
+    <title>CA esquema V5.0</title>
     <!--
-    *v4.8: RAAR abr 24,20: se elimina el encimado de retros droppables y palomas en segunda vuelta de movil
+    *v5.0: RAAR sep 24,20: Cambios formato JBecerril primer semestre 2020, carrusel, CUAED->CUAIEED
+    *v4.9: RAAR abr 24,20: se elimina el encimado de retros droppables y palomas en segunda vuelta de movil
     *v4.8: RAAR feb 28,20: flecha arriba, google analytics, flags CRM, librerias locales CUAED
     *v4.7: JLBG,RAAR sep 2,19: tooltips opacos y tamaño de font 'normal'
     *v4.6: RAAR Nov 26,18: En reiniciar() cambio reactivosMostrar por "jq321('.droppable').length", Oculto el botón de proximo intento al finalizar el ejercicio, retro por arroba se pone en listado despues de la imagen.
@@ -57,12 +60,12 @@ ga("send", "pageview");
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Completar Enunciado Arrastrando" />
-    <meta name="keywords" content="UNAM, CUAED" />
-    <meta name="author" content="UNAM CUAED" />
-    <meta name="news_keywords" content="UNAM, CUAED" />
-    <meta name="generator" content="UNAM CUAED" />
+    <meta name="keywords" content="UNAM, CUAIEED" />
+    <meta name="author" content="UNAM CUAIEED" />
+    <meta name="news_keywords" content="UNAM, CUAIEED" />
+    <meta name="generator" content="UNAM CUAIEED" />
     <meta property="og:site_name" content="Completar Enunciado Arrastrando" />
-    <meta itemprop="name" content="UNAM, CUAED" />
+    <meta itemprop="name" content="UNAM, CUAIEED" />
     <meta itemprop="image" content="" />
     <meta itemprop="description" content="Completar Enunciado Arrastrando" />
     <meta property="og:title" content="" />
@@ -73,11 +76,11 @@ ga("send", "pageview");
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<link href="https://lib.cuaed.unam.mx/R019/css/font-awesome-v4.7.0.min.css" />
+	<link href="https://lib.cuaieed.unam.mx/R019/css/font-awesome-v4.7.0.min.css" />
 
     <script type="text/javascript" src="./SCORM/conectividadSCORM.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script> -->
-    <script src="https://lib.cuaed.unam.mx/R019/js/jquery-v3.2.1.js"></script>
+    <script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"></script>
 
     <script>
         var jq321 = jQuery.noConflict();
@@ -92,13 +95,14 @@ ga("send", "pageview");
 <!-- <link rel="stylesheet"  href="https://lib.cuaed.unam.mx/R019/css/all.css" /> -->
 
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
-    <link rel="stylesheet" href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css"/>
+    <link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/bootstrap-v3.3.7.min.css"/>
 
 
     <link rel="stylesheet" href="css/estilos.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <!-- <script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script> -->
+    <script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
 
 
     <script src="./lib/view-bigimg.js"></script>
@@ -137,26 +141,46 @@ ga("send", "pageview");
 
 <body>
     <noscript><br/>Necesitas tener habilitado Javascript para <br/>poder hacer uso de la funcionalidad completa</noscript>
-    <section class=" arrastrando">
+	<div id="prohibido">
+		<!-- <div id="NoMovil" class="ocultar">
+			<i class="fas fa-ban fa-10x"></i>
+			<br/>PROHIBIDO EN MOVIL
+		</div> -->
+		<div id="NoDisponible" class="ocultar">
+			<i class="fas fa-ban fa-10x"></i>
+			<br/>NO DISPONIBLE
+		</div>		
+	</div>    
+    <section class="container">
         <div class="row">
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="encabezado col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="info ocultar">				
                     <i class="fas fa-info tamico "></i>
                 </div>
-
                 <h2 class="headings-int ">Título de la evaluación</h2>
                 <div id="textoInstrucciones" >
-                    <p>Instrucciones (pedagógica y técnica) de la evaluación</p>
+                    <p>Instrucciones (pedagógica y técnica) de la evaluación.</p>
                 </div>
             </div>
-            <div class="ejercicio-arrastrar col-md-10 col-lg-10 col-sm-10 col-xs-12">
-                <div class="reactivos" id="reactivo">
-                    <div class="lista-preguntas">
+            <div class="ejercicio-arrastrar col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div id="cuerpo" class="row">
+                    <div class="reactivos" id="reactivo">
+                        <div class="lista-preguntas">
+                        </div>
                     </div>
-                </div>
-                <div class="respuestas" id="respuesta">
-                    <div class="lista-respuestas">
+                    <div class="respuestas" id="respuesta">
+                        <div class="lista-respuestas">
+                        </div>
                     </div>
+               </div>
+                <div class="slideshow-container row" id="carrusel1" title="Sección respuestas">
+                    <span id="etiquetaRespuesta" data-toggle="tooltip" data-placement="right" data-type="info" title="Recorre para elegir las respuestas disponibles"><i  class="far fa-1x fa-question-circle"></i></span>
+                    <!-- <i id="etiquetaRespuesta" class="far fa-1x fa-question-circle"></i>			 -->
+                    <div id="tmp"></div>
+                    <div class="dot-container">
+                    </div>
+                    <a id="prev" class="prev" onClick="regresar()">&#10094;</a>
+                    <a id="next" class="next" onClick="avanzar()">&#10095;</a>
                 </div>
                 <i class="ir-arriba fas fa-chevron-up fa-2x"></i>
                 <div class="pager col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -169,8 +193,6 @@ ga("send", "pageview");
                 </div>
             </div>
         </div>
-    </section>
- 
+    </section> 
 </body>
-
 </html>

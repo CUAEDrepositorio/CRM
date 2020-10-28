@@ -16,14 +16,22 @@ var totalPreguntas = 0;
 var totalSegmentos = 0;
 var recorreSegmentos =1; // por lo menos existe el primer segmento o sea el unico
 var esMobil = false;
+var elementosPorSegmento =1; // elementos por segmento limita la visiblidad, la idea es que sea menor o igual a reactivosMostrar
 
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
-var palomita = "<img class='palomita blink' style='display:none' src='img/palomita.png' />"; //NO FUNCIONAN EN ESQUEMA...
-var tache = "<img class='tache blink' style='display:none' src='img/tache.png' />";
-var palomita1 = "<i class='ip  far fa-check-circle blink ocultar' ></i>";
-var tache1 = "<i class='it  far fa-times-circle blink ocultar' ></i>";
+ var palomita = "<img class='palomita blink' style='display:none' src='img/palomita.png' />"; 
+ var tache = "<img class='tache blink' style='display:none' src='img/tache.png' />";
+ var palomita1 = "<i class='ip  far fa-check-circle blink ocultar' ></i>";
+ var tache1 = "<i class='it  far fa-times-circle blink ocultar' ></i>";
+
+ var carruselRespuestas = true;
+ var formatoColumnas = false;          // true: muestra preguntas y respuesta en columnas; false muestra preguntas y respuesta apilados
+ var slideIndex = 0;					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+ var mostrarRetroIndividual = false;  // true: muestra retro por pregunta individual; false: NO muestra retro por pregunta individual
+
 
 jq321(document).ready(function() {//RAAR Sep 13,18: Aqui arrancamos, me traigo esto de index.html
+	if (!carruselRespuestas) { jq321("#carrusel1").hide() }	
 	if (window.name=="movil") {
 		esMobil = true;
 		// alert ("indexbis.html window.name: "+window.name);
@@ -37,15 +45,21 @@ jq321(document).ready(function() {//RAAR Sep 13,18: Aqui arrancamos, me traigo e
 		mostrarRetroFinal =  true;
 	}	
 	if (esMobil) {
-		elementosPorSegmento =1;
-		//var texto = jq321("#textoInstrucciones").html();
+		/*elementosPorSegmento =1;
 		jq321("#textoInstrucciones").addClass("estilosinstruccion");
-	jq321(".info").removeClass("ocultar");
-	 jq321("#textoInstrucciones").slideUp(10);
-	 jq321("#textoInstrucciones").addClass("mostrarinfo");
-	}
+		jq321(".info").removeClass("ocultar");
+		jq321("#textoInstrucciones").slideUp(10);
+		 jq321("#textoInstrucciones").addClass("mostrarinfo");*/
+		 jq321("#NoDisponible").removeClass("ocultar");
+		 jq321("section").addClass("ocultar");
+		//  invPregResp = true;
+		//  jq321("hr.separador").show();
+ 
+	} else {
+		 jq321("hr.separador").hide();
+		 jq321("#etiquetaRespuesta").hide();
 
-	
+	}	
 	if (mezclarPreguntas) {	reactivos.sort(function(a, b){return 0.5 - Math.random()}); }
 	creaIndice();
 	divideReactivosQF_A(reactivosMostrar);
@@ -86,6 +100,25 @@ jq321(document).ready(function() {//RAAR Sep 13,18: Aqui arrancamos, me traigo e
 			}		
 });
 
+window.onresize = function(){
+	console.log("cambió tamaño");
+   if (esMobil == false) {
+	   //alert ("if (esMobil == false) {");
+	   //document.body.style.backgroundColor = "yellow";
+	   //alert("window.innerWidth: " + window.innerWidth +" \n document.body.scrollWidth"+ document.body.scrollWidth+" \n document.body.clientWidth"+ document.body.clientWidth+" \n screen.width"+ screen.width+" \n screen.availWidth"+ screen.availWidth+" \n document.body.offsetWidth"+document.body.offsetWidth+" \n documentElement.clientWidth"+document.documentElement.clientWidth);
+	   if ( document.body.scrollWidth < screen.availWidth) { // para que no surta efecto cuando el body sea mayor a la pantalla del equipo
+		   //alert ("document.body.scrollWidth "+ document.body.scrollWidth + " < " +"document.body.clientWidth "+ document.body.clientWidth);		 
+		   if ( document.body.scrollWidth  > document.body.clientWidth ) { //cuando aparezca barra inhibimos...
+			   //alert ("INHIBIR");
+			   jq321("#NoDisponible").removeClass("ocultar");
+			   jq321("section").addClass("ocultar");			
+		   } else{
+			   jq321("#NoDisponible").addClass("ocultar");
+			   jq321("section").removeClass("ocultar");
+		   }
+	   }
+   }
+};
 
 function escribeArreglo(arreglo) {
 	for (i = 0; i < arreglo.length; i++) {
@@ -259,7 +292,10 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 	jq321(".reactivos .lista-preguntas").each(function() { jq321(this).html(''); });
 	jq321(".respuestas .lista-respuestas").each(function() { jq321(this).html(''); });
 	//alert ("crea arrastrar");
-	if (invPregResp) {jq321(".respuestas").prependTo(".ejercicio-arrastrar")}
+	if (invPregResp) {
+		jq321(".respuestas").prependTo(".ejercicio-arrastrar");
+		jq321("#carrusel1").prependTo("#cuerpo");
+	}
 	if (formatoColumnas) {
 		jq321("#reactivo").addClass("col-md-9 col-lg-9");
 		jq321("#respuesta").addClass("col-md-3 col-lg-3");
@@ -278,7 +314,8 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 		var HTMLDroppable ="";
 		//var segmentos = preg.length;
 		var cuantasArrobas = preg.length-1; // Para formar las casillas droppable de respuesta, puede haber respuestas dummy o sea de mas asi evito casillas de mas.
-		var numeralPregunta = (ponerNumeral ? (i + 1) : '') + (ponerNumeroPreguntas? '/'+reactivosMostrar:'') + ((ponerNumeral || ponerNumeroPreguntas)?'.&nbsp;':'');
+		//var numeralPregunta = (ponerNumeral ? (i + 1) : '') + (ponerNumeroPreguntas? '/'+reactivosMostrar:'') + ((ponerNumeral || ponerNumeroPreguntas)?'.&nbsp;':'');
+		var numeralPregunta = (ponerNumeral ? (i + 1) : '') +  ((ponerNumeral)?'.&nbsp;':'');
 		if (cuentaPreguntasSegmento==elementosPorSegmento) {
 			cuentaPreguntasSegmento = 1;
 			cuentaSegmentos++;
@@ -332,7 +369,6 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 			
 			//data="img/blanco.png"
 			elemObjeto = '<object class="draggable clonado" data="" data-respuesta="" ></object>'; // Creo los atributos para el enroque de datos en el drop, blanco.png es un truco para q se active para imagenes, hay que quitarlo luego...
-			//HTMLDroppable +='<span class="droppable cpreg'+preguntas[i].ind+' cas'+idCas+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[j]+'">'+elemObjeto+palomita+tache+'</span>'+retroArrobaCorrecta+retroArrobaIncorrecta + preg[j+1]
 			HTMLDroppable +='<span class=" droppable cpreg'+preguntas[i].ind+' cas'+idCas+' buena" id="cas'+idCas+'"   data-resp="'+preguntas[i].listaResp[j]+'" >'+'<span data-toggle="tooltip" class=" toolsti adaptable" data-placement="auto" data-type="success" title="'+tam(preguntas[i].listaFA[j].correcta,1)+'">' + palomita + '</span><span data-toggle="tooltip" class="toolsti adaptable" data-placement="auto" data-type="danger" title="'+tam(preguntas[i].listaFA[j].incorrecta,1)+'">' + tache + '</span>'+elemObjeto+'</span>' + preg[j+1];			
 		
 			console.log(preguntas[i].listaFA[j].correcta);
@@ -382,116 +418,78 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 					//jq321( elemento ).parents('.pregunta').hasClass('segmento'+j);
 				}
 			});
-
-			//RAAR Jun 22,18: recuerda, fuen cuando se agrego acumulaSegmento que al restringir la elementosPorSegmento se volvio mas pequeña la casilla de una respuesta que correspondia dos preguntas del mismo segmento...no se que fue....
-			HTMLArmado = '<div class="sub-item respuesta ocultar'+acumulaSegmento+'" ><object data-respuesta="'+respuestas[i].txt+ '" data-quedanInicial="'+respuestas[i].incidencia+'" data-quedan="'+respuestas[i].incidencia+'" class="draggable '+quitarAcentos(respuestas[i].txt)+'" data-drag="' + i + '" data="'+respuestas[i].txt+'">'+tam(respuestas[i].txt, 1)+'</object>' +'</div>';	// RAAR Jun 12,18: El despliegue se separa de lo que se considera LA RESPUESTA, 
-			jq321(".respuestas .lista-respuestas").append(HTMLArmado);
-
+			if (carruselRespuestas) {
+				
+				var obj2 =  '<div class="sub-item respuesta ocultar'+acumulaSegmento+'" ><object data-respuesta="'+respuestas[i].txt+ '" data-quedanInicial="'+respuestas[i].incidencia+'" data-quedan="'+respuestas[i].incidencia+'" class="carrusel draggable '+quitarAcentos(respuestas[i].txt)+'" data-drag="' + i + '" data="'+respuestas[i].txt+'">'+tam(respuestas[i].txt, 1)+'</object>' +'</div>';	// RAAR Jun 12,18: El despliegue se separa de lo que se considera LA RESPUESTA, 
+				var HTML_Slide = '<div id="slide' + (i + 0) + '" class="dropup mySlides"><div class="dropup sub-item respuesta">' + obj2 + '</div></div>';					// quito draggable, JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				var punto = '<span id="dot' + (i + 0) + '" class="dot" onclick="currentSlide(' + (i + 0) + ')"></span>';					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				jq321("#tmp").append(HTML_Slide);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				jq321(".dot-container").append(punto);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			
+			} else {
+				HTMLArmado = '<div class="sub-item respuesta ocultar'+acumulaSegmento+'" ><object data-respuesta="'+respuestas[i].txt+ '" data-quedanInicial="'+respuestas[i].incidencia+'" data-quedan="'+respuestas[i].incidencia+'" class="draggable '+quitarAcentos(respuestas[i].txt)+'" data-drag="' + i + '" data="'+respuestas[i].txt+'">'+tam(respuestas[i].txt, 1)+'</object>' +'</div>';	// RAAR Jun 12,18: El despliegue se separa de lo que se considera LA RESPUESTA, 
+				jq321(".respuestas .lista-respuestas").append(HTMLArmado);
+			}
 	}
 	totalSegmentos = cuentaSegmentos;
 	recorreSegmentos = 1; // el primer segmento a desplegar...
 	jq321(".segmento"+recorreSegmentos).removeClass("ocultar").addClass("mostrar");
+
+	if (carruselRespuestas) {
+		jq321(".mySlides").hide();					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		jq321(".mySlides:nth-of-type(" + (slideIndex + 1) + ")").show();					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		jq321(".dot:nth-of-type(" + (slideIndex + 1) + ")").addClass("active");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		jq321(".respuestas .lista-respuestas").hide();
+		jq321("#reactivo").removeClass("col-md-9 col-lg-9").addClass("col-md-12 col-lg-12");
+		jq321("#desplazamiento").appendTo("#reactivo");
+
+	}
+
 }
-/*function creaOrdenar() {
-	preguntas = reactivos;
-	for (i = 0; i < reactivosMostrar; i++) {
-		respOriginales.push(preguntas[i].Q);
-		var tmp = preguntas[i].Q.split(" ");
-		preg = [];
-		for (j = 0; j < tmp.length; j++) {
-			preg.push([tmp[j], j]);
-		}
-		reordenaArreglo(preg);
-		var txt = "";
-		for (j = 0; j < preg.length; j++) {
-			txt += "<li class='ui-state-default ui-sortable-handle' data-orden=" + preg[j][1] + "><span class='ui-icon ui-icon-arrowthick-2-e-w'></span>" + preg[j][0] + "</li>";
-		}
-		jq321("#ordenarEnunciado").append("<div class='lista'><ul class='sortable' id='ulId" + i + "'>" + txt + tam(preguntas[i].Q, 0) + "<div class='retroInd'><div class='retroBien ocultarRetro'>" + tam(preguntas[i].F[0], 1) + "</div><div class='retroMal ocultarRetro'>" + tam(preguntas[i].F[1], 1) + "</div></div>");
-		jq321(".lista:last").after("<hr/>");
-	}
-	jq321(".lista > .sortable").each(function() {
-		$(this).sortable();
-		$(this).disableSelection();
-	});
-}*/
 
-//  ============================================================================================================
-/*function creaTablaVF(numReactivos){
-	jq321('div#contenedor').append('<table class="tabla-reactivos">');
-	jq321('.tabla-reactivos').append('<tbody>');
-	jq321('tbody').append('<tr>');
-	jq321('tr').append('<th>&nbsp;');
-	jq321('tr').append('<th id="tV">Verdadero');
-	jq321('tr').append('<th id="tF">Falso');
-	jq321('tr').append('<th>&nbsp;');
-	for (i = 0; i < numReactivos; i++){
-		jq321('tbody').append('<tr class="reactivo">');
-		jq321('tr:last').append('<td class="preguntaTexto" id="' + i + '">' + tam(reactivos[i].Q, 1) + '<br/><div class="retroBien ocultarRetro">' + tam(reactivos[i].F[0], 1) + '</div><div class="retroMal ocultarRetro">' + tam(reactivos[i].F[1], 1) + '</div></td>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="true">' + espacios + '</label>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="false">' + espacios + '</label>');
-		jq321('tr:last').append('<td>' + palomita + tache);
+function currentSlide(n) {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	var listaSpan = jq321("span.dot:not(.usado)");
+	for (var pos = 0; pos < listaSpan.length; pos++) {
+		var k1 = jq321(listaSpan[pos]);
+		var atributo = k1.attr("id");
+		if (atributo == "dot"+n) {break}
 	}
-}*/
+	// showSlides(slideIndex = n);
+	showSlides(slideIndex = pos);
+}
 
-/*
-//  ============================================================================================================
-function creaElegir(mostrar) {
-	var ind = 1;
-	for (i = 0; i < mostrar; i++) {
-		jq321("#contenedor").append('<hr/>').append('<div id="divId' + i + '">');
-		jq321("div#divId" + i).append('<p id="pId' + i + '">');
-		var componentes = reactivos[i].Q.split("@");
-		var respuestas = reactivos[i].A;
-		for (j = 0; j < respuestas.length; j++) {
-			var opciones = respuestas[j];
-			if (mezclarRespuestas) {reordenaArreglo(opciones)}
-			opciones.unshift({opcion: "-------", correcta: false});
-			jq321("#pId" + i).append(componentes[j]).append('<select id="selId' + ind + '">');
-			for (k = 0; k < opciones.length; k++) {
-				jq321("select:last").append("<option>" + opciones[k].opcion);
-				if (opciones[k].correcta) {
-					jq321("select:last").attr("data-respuesta", opciones[k].opcion);
-				}
-			}
-			ind++;
-		}
-		jq321("#pId" + i).append(componentes[j] + tam(reactivos[i].Q, 0));
-		jq321("#divId" + i).append("<div class='retroBien ocultarRetro'>" + tam(reactivos[i].F[0], 1)).append("<div class='retroMal ocultarRetro'>" + tam(reactivos[i].F[1], 1));
-	}
-	switch (idioma) {
-		case "ENG":
-			jq321("#btnRevisar").text(ic("kcehC"));
-			jq321("#btnReiniciar").text(ic("tpmetta txeN"));
+function showSlides(n) {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	jq321(".usado").hide();
+	jq321(".dot").removeClass("active");
+	jq321(".mySlides:not(.usado)").hide();
+	var slides = jq321(".mySlides:not(.usado)").length;
+	if (n > (slides - 1)) { slideIndex = 0 }
+	if (n < 0) { slideIndex = (slides - 1) }
+	jq321(jq321(".mySlides:not(.usado)")[slideIndex]).fadeToggle();
+	jq321(jq321(".dot:not(.usado)")[slideIndex]).addClass("active");
+}
+
+function avanzar() {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	var listaSpan = jq321("span.dot:not(.usado)");
+	for (var pos = 0; pos < listaSpan.length; pos++) {
+		if (jq321(listaSpan[pos]).hasClass("active")) {
 			break;
-		default:
-			jq321("#btnRevisar").text(ic("rasiveR"));
-			jq321("#btnReiniciar").text(ic("otnetni omixórP"));
-	}
-	jq321('#btnRevisar').show();
-	jq321('#btnReiniciar').hide();
-}*/
-
-/*
-function creaOM(mostrar) {
-	var ind = 1;
-	for (i = 0; i < mostrar; i++) {
-		jq321("#bancoPreguntas").append('<div class="setPregunta" id="sp' + i + '">');
-		jq321(".setPregunta:last").append('<div class="preguntaTexto">' + (i + 1) + '. ' + tam(reactivos[i].Q, 1));
-		jq321(".setPregunta:last").append('<div class="opciones">');
-		jq321(".setPregunta:last").append('<div class="retroIndividual">');
-		if (mezclarRespuestas) {reordenaArreglo(reactivos[i].A);}
-		for (j = 0; j < reactivos[i].A.length; j++) {
-			var res = String.fromCharCode(j + 97) + ') ';
-			jq321(".opciones:last").append('<div class="opcion btn btn-default" data-correcta="' + reactivos[i].A[j].correcta + '">' + res + tam(reactivos[i].A[j].opcion, 1));
-			if (reactivos[i].A[j].correcta) {
-				jq321(".retroIndividual:last").append('<div class="retroBien ocultarRetro bg-success">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			}
-			else {
-				jq321(".retroIndividual:last").append('<div class="retroMal ocultarRetro bg-danger">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			}
 		}
 	}
-}*/
+	slideIndex = pos + 1;
+	showSlides(slideIndex);
+}
+
+function regresar() {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	var listaSpan = jq321("span.dot:not(.usado)");
+	for (var pos = 0; pos < listaSpan.length; pos++) {
+		if (jq321(listaSpan[pos]).hasClass("active")) {
+			break;
+		}
+	}
+	slideIndex = pos - 1;
+	showSlides(slideIndex);
+}
 
 function tam(cad, n) {// 1T, 0ele.esc.ord Es para imprimir la longitud del texto indicado, crm=var global de impresion, n para apagar en caso particular...
 	if (cad == "") {return ""};
@@ -504,62 +502,112 @@ function tam(cad, n) {// 1T, 0ele.esc.ord Es para imprimir la longitud del texto
 	return txt;
 }
 
-
-
-function mostrarMensaje(clase, recurso) {
+function mostrarMensaje(clase, recurso) { //RAAR ago 18,18: Pongo funcion reversa
 	if (!recurso) {recurso = -1}
 	var msgs = [,
-		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")],  // completar arrastrando
-		[ic("otxet ed sopmac sol sodot anell ,rovaf roP"), ic("sdleif txet lla tuo llif ,esaelP")],                  // completar escribiendo
-		[ic("satnugerp sal sadot atsetnoc ,rovaf roP"), ic("snoitseuq lla rewsna ,esaelP")],                         // verdadero-falso
-		[ic("sodaicnune sol sodot anedro ,rovaf roP"), ic("secnetnes lla tros ,esaelP")],                            // ordenar enunciados
-		[ic("ordaucer adac arap atseupser anu egile ,rovaf roP"), ic("tsil hcae rof rewsna na esoohc ,esaelP")],     // completar eligiendo
-		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")],  // arrastrar esquema
-		["", ""]
+		["Arrastra todas las respuestas a los espacios correspondientes.", "Please, drag all answers to appropriate spaces"],  // completar arrastrando
+		["Llena todos los campos de texto.", "Please, fill out all text fields"],                  // completar escribiendo
+		["Contesta todas las preguntas.", "Please, answer all questions"],                         // verdadero-falso, opcion-multiple
+		["Ordena todos los reactivos para conocer tu resultado.", "Please, sort all sentences"],   // ordenar enunciados
+		["Elige una respuesta para cada recuadro.", "Please, choose an answer for each list"],     // completar eligiendo
+		["Contesta todas las preguntas.", "Please, drag all answers to appropriate spaces"]  // lista de verificación, antes CAEsquema
 		];
 	var tipo = "";
 	var tit = "";
 	var msg = "";
 	var btnOK = "";
 	switch (clase) {
-		case 1: // intentos
-			tipo = ic("gninraw");
+		case 1: // intentos;
 			switch (idioma) {
 				case "ENG":
-					tit = ic("gninraW");
-					//msg = ic(maxIntentos + " :stpmetta fo rebmun mumixam dehcaer evah uoY");
-					msg = maxIntentos + " :You have reached maximum number of attempts"; // empiezo a quitar los espejos....abril 26 2018
+					tit = "Warning";
+					msg = "You have reached maximum number of attempts: "+maxIntentos + "."; // empiezo a quitar los espejos....abril 26 2018
 					
-					btnOK = ic("KO");
+					btnOK = "OK";
 					break;
 				default:
-					tit = ic("nóicnetA");
-					msg = ic(maxIntentos + " :sotnetni ed oremún omixám le odaznacla saH");
-					btnOK = ic("ratpecA");
+					tit = "Atención";
+					msg = "Has alcanzado el máximo número de intentos: "+maxIntentos + ".";
+					btnOK = "Aceptar";
 			}
 			break;
 		case 2: // Contestar TODO
-			tipo = ic("gninraw");
+		//	tipo = "warning";
 			switch (idioma) {
 				case "ENG":
-					tit = ic("gninraW");
+					tit = "Warning";
 					msg = msgs[recurso][1]; //recurso,1
-					btnOK = ic("KO");
+					btnOK = "OK";
 					break;
 				default:
-					tit = ic("nóicnetA");
+					tit = "Atención";
 					msg = msgs[recurso][0];  //recurso,0
-					btnOK = ic("ratpecA");
+					btnOK = "Aceptar";
 			}
 			break;
 		default:
-			tipo = ic("rorre");
-			tit = ic("ametsis ed rorrE");
-			msg = ic("adiconocsed nóicidnoC");
-			btnOK = ic("ratpecA");
+		//	tipo = "error";
+			tit = "Error de sistema";
+			msg = "Condición desconocida";
+			btnOK = "Aceptar";
 	}
-	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true,confirmButtonColor: "#0069d9" });
+
+	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
 }
+
+// function mostrarMensaje(clase, recurso) {
+// 	if (!recurso) {recurso = -1}
+// 	var msgs = [,
+// 		["Arrastra todas las respuestas a los espacios correspondientes.", "Please, drag all answers to appropriate spaces"],  // completar arrastrando
+// 		["Llena todos los campos de texto.", "Please, fill out all text fields"],                  // completar escribiendo
+// 		["Contesta todas las preguntas.", "Please, answer all questions"],                         // verdadero-falso, opcion-multiple
+// 		["Ordena todos los reactivos para conocer tu resultado.", "Please, sort all sentences"],   // ordenar enunciados
+// 		["Elige una respuesta para cada recuadro.", "Please, choose an answer for each list"],     // completar eligiendo
+// 		["Contesta todas las preguntas.", "Please, drag all answers to appropriate spaces"]  // lista de verificación, antes CAEsquema
+// 		];
+// 	var tipo = "";
+// 	var tit = "";
+// 	var msg = "";
+// 	var btnOK = "";
+// 	switch (clase) {
+// 		case 1: // intentos
+// 			tipo = ic("gninraw");
+// 			switch (idioma) {
+// 				case "ENG":
+// 					tit = ic("gninraW");
+// 					//msg = ic(maxIntentos + " :stpmetta fo rebmun mumixam dehcaer evah uoY");
+// 					msg = maxIntentos + " :You have reached maximum number of attempts"; // empiezo a quitar los espejos....abril 26 2018
+					
+// 					btnOK = ic("KO");
+// 					break;
+// 				default:
+// 					tit = ic("nóicnetA");
+// 					msg = ic(maxIntentos + " :sotnetni ed oremún omixám le odaznacla saH");
+// 					btnOK = ic("ratpecA");
+// 			}
+// 			break;
+// 		case 2: // Contestar TODO
+// 			tipo = ic("gninraw");
+// 			switch (idioma) {
+// 				case "ENG":
+// 					tit = ic("gninraW");
+// 					msg = msgs[recurso][1]; //recurso,1
+// 					btnOK = ic("KO");
+// 					break;
+// 				default:
+// 					tit = ic("nóicnetA");
+// 					msg = msgs[recurso][0];  //recurso,0
+// 					btnOK = ic("ratpecA");
+// 			}
+// 			break;
+// 		default:
+// 			tipo = ic("rorre");
+// 			tit = ic("ametsis ed rorrE");
+// 			msg = ic("adiconocsed nóicidnoC");
+// 			btnOK = ic("ratpecA");
+// 	}
+// 	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true,confirmButtonColor: "#0069d9" });
+// }
 //function mostrarMensaje(tipo, titulo, cadena) {
 /*
 function mostrarMensaje(clase, recurso) {

@@ -179,7 +179,7 @@ jq321( ".cPaginador" ).click(function() {
 	});
 	
 	jq321(".reactivos .lista-preguntas [data-drop] .droppable").droppable({
-		tolerance: 'pointer',
+		tolerance: 'touch', /* pero por que en los otros basta con poiner? */ 
 		accept: '.draggable',
 		hoverClass: "dragOver",
 		drop: function(event, ui) {	 // esto es solo un evento que se dispara..al ACEPTAR
@@ -200,12 +200,20 @@ function limpiaRespuestas() {
 	var ocupados = jq321(".ocupado").length;
 	if (ocupados == casillasRespuesta) { //en lugar de reactivosMostrar pongo la cantidad de casillas, una respuesta para varias casillas...
 		jq321(".respuestas").css("display", "none");
+		jq321("#carrusel1").hide();
 	/*	if (formatoColumnas) { //Para reacomodar la pantalla al eliminar la columna de respuestas
 			jq321("#reactivo").removeClass("col-md-9 col-lg-9 col-sm-9 col-xs-9").addClass("col-md-12 col-lg-12 col-sm-12 col-xs-12");
 			jq321("#respuesta").removeClass("col-md-3 col-lg-3 col-sm-3 col-xs-3");
 		}*/
 		//alert("if ocupados");
 	}
+	if (carruselRespuestas) {
+		var t1 = jq321("div.usado");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		var t2 = jq321("div#tmp > div");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		if (jq321("div.usado").length == jq321("div#tmp > div").length) {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			jq321("#carrusel1").hide();					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		}					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	}	
 }
 
 function agregaResp(imagen, arrastrable) { // imagen es un apuntador, un receptor de this....del droppable
@@ -223,23 +231,35 @@ function agregaResp(imagen, arrastrable) { // imagen es un apuntador, un recepto
 	var dataArrastrable = arrastrable.attr('data');
 	var textoArrastrable = arrastrable.text();
  if (jq321(arrastrable).hasClass("clonado")){ //permutas en zona de preguntas, varias validaciones
-	jq321(".mostrar .droppable").removeClass("avisaFaltante").addClass("bordeDrop"); // pinta el borde adecuado
-
-	var dataTemp = jq321(imagen).find(".draggable").attr("data");
-	var dataRespuestaTemp = jq321(imagen).find(".draggable").attr("data-respuesta");
-	var textoTemp = jq321(imagen).find(".draggable").text();
-	jq321(imagen).find(".draggable").text(textoArrastrable).attr("data",dataArrastrable).attr("data-respuesta",dataRespuestaArrastrable).removeClass(quitarAcentos(dataRespuestaTemp)).addClass(quitarAcentos(dataRespuestaArrastrable)); 
-	jq321(arrastrable).text(textoTemp).attr("data",dataTemp).attr("data-respuesta",dataRespuestaTemp).removeClass(quitarAcentos(dataRespuestaArrastrable)).addClass(quitarAcentos(dataRespuestaTemp)); //.addClass(quitarAcentos(dataRespuestaArrastrable))
-
-	if (jq321(imagen).hasClass("ocupado") != jq321(arrastrable).parent().hasClass("ocupado")) { // es un XOR
-		var imClass = jq321(imagen).hasClass("ocupado") ? 'ocupado': '';
-		var arrClass = jq321(arrastrable).parent().hasClass("ocupado")? 'ocupado' : '';
-		jq321(imagen).removeClass('ocupado').addClass(arrClass);
-		jq321(arrastrable).parent().removeClass('ocupado').addClass(imClass);
+	if (permutaRespuestas) {
+		jq321(".mostrar .droppable").removeClass("avisaFaltante").addClass("bordeDrop"); // pinta el borde adecuado
+		var dataTemp = jq321(imagen).find(".draggable").attr("data");
+		var dataRespuestaTemp = jq321(imagen).find(".draggable").attr("data-respuesta");
+		var textoTemp = jq321(imagen).find(".draggable").text();
+		jq321(imagen).find(".draggable").text(textoArrastrable).attr("data",dataArrastrable).attr("data-respuesta",dataRespuestaArrastrable).removeClass(quitarAcentos(dataRespuestaTemp)).addClass(quitarAcentos(dataRespuestaArrastrable)); 
+		jq321(arrastrable).text(textoTemp).attr("data",dataTemp).attr("data-respuesta",dataRespuestaTemp).removeClass(quitarAcentos(dataRespuestaArrastrable)).addClass(quitarAcentos(dataRespuestaTemp)); //.addClass(quitarAcentos(dataRespuestaArrastrable))
+		if (jq321(imagen).hasClass("ocupado") != jq321(arrastrable).parent().hasClass("ocupado")) { // es un XOR
+			var imClass = jq321(imagen).hasClass("ocupado") ? 'ocupado': '';
+			var arrClass = jq321(arrastrable).parent().hasClass("ocupado")? 'ocupado' : '';
+			jq321(imagen).removeClass('ocupado').addClass(arrClass);
+			jq321(arrastrable).parent().removeClass('ocupado').addClass(imClass);
+		}
 	}
  } else { // Si el arrastre es desde zona de respuestas...
 
 	if (!(jq321(imagen).hasClass("ocupado"))) {
+		if (carruselRespuestas) { // aqui, antes de que numQuedan sea 0
+			var spanActivo = jq321("span.active");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			var idAttrActivo = jq321("span.active").attr("id");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			var idActivo = idAttrActivo.substring(3);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			var slideActivo = jq321("#slide" + idActivo);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			if ( numQuedan == 1 ) {  //si es uno ya es para quitar...por las respuestas que se usan mas de una vez
+					jq321(spanActivo).addClass("usado");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+					jq321(slideActivo).addClass("usado");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+					showSlides(slideIndex);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				}
+		}
+
 		if (admitirErronea) {
 			jq321(".mostrar .droppable").removeClass("avisaFaltante").addClass("bordeDrop"); // pinta el borde adecuado
 
@@ -258,7 +278,7 @@ function agregaResp(imagen, arrastrable) { // imagen es un apuntador, un recepto
 
 		if (numQuedan<1) {
 			arrastrable.css("display", "none");   // si no los deshabilito pueden seguirse arrastrando...
-		//	arrastrable.parent().css("display", "none");	// RAAR Nov 20,18: Para que?? no parece afectar
+			//arrastrable.parent().css("display", "none");	// RAAR Nov 20,18: Para que?? no parece afectar
 		}
 	}
  }//end if (jq321(imagen).hasClass("clonado"))
@@ -322,7 +342,7 @@ else {
 
 	});
 	totalPreguntas=reactivos[0].A.length;
-correctas=incentivo;
+	correctas=incentivo;
 	revisaBuenas();
 
 	jq321('#btnRevisar').hide();
@@ -334,52 +354,44 @@ incentivo=0;
 
 function revisar() {
 
-	if(esMobil==true){
-		var vacio=0;
-		jq321(".reactivos").find("select").each(function(ind2) {
-			var respElegida = jq321(this).val();
-			console.log(respElegida);
-			if(respElegida=="------"){
-				jq321(this).addClass("vacio");
-				vacio=1;
-			}else{
-				jq321(this).removeClass("vacio");
-			}
+	// if(esMobil==true){
+	// 	var vacio=0;
+	// 	jq321(".reactivos").find("select").each(function(ind2) {
+	// 		var respElegida = jq321(this).val();
+	// 		console.log(respElegida);
+	// 		if(respElegida=="------"){
+	// 			jq321(this).addClass("vacio");
+	// 			vacio=1;
+	// 		}else{
+	// 			jq321(this).removeClass("vacio");
+	// 		}
 	
-		});
+	// 	});
 
-		if(vacio==0){
-			revisatodo();
-		}else{
-			mostrarMensaje(2, 5);
-		}
+	// 	if(vacio==0){
+	// 		revisatodo();
+	// 	}else{
+	// 		mostrarMensaje(2, 5);
+	// 	}
 
-	}else{
-
-
+	// }else{
 		var ocupados = jq321(".ocupado");
 		var casillasPregunta = jq321(".droppable");	
 	//	if (ocupados.length != casillasRespuesta) {//en lugar de reactivosMostrar pongo respuestas.length, es mas de una respuesta por pregunta....
 		if (ocupados.length != casillasPregunta.length) {//en lugar de reactivosMostrar pongo respuestas.length, es mas de una respuesta por pregunta....
 			mostrarMensaje(2, 1); 
+			jq321(".droppable").removeClass("avisaFaltante");
 			jq321(".droppable:not(.ocupado)").addClass("avisaFaltante");
 	
 		}
 		else {
-			jq321(".droppable").removeClass("avisaFaltante");
-	
+			jq321(".droppable").removeClass("avisaFaltante");	
 			calificar();
 			revisaBuenas();
 		}
 	
 
-	}
-
-
-
-
-
-
+	// }
 }
 
 function comparaRespuesta (recibeDrop, recibeColocada) {  // Esta funcion es por que hay puede haber multiples respuestas validas....
@@ -456,11 +468,12 @@ function calificar(){
 	   if (tempCasilla.length == tempCorrecta.length) {
 		   preguntasCorrectas++;
 			casillasCorrectas += tempCorrecta.length;
-		   if (mostrarRetroIndividual) { jq321(this).children (".retroBien").removeClass("ocultarRetro").addClass("mostrarRetro") };
+		// Oct 21, 20 RAAR, deshabilito pero no borro, lo pedirán despues?, no tiene sentido...solo hay un reactivo...
+		  // if (mostrarRetroIndividual) { jq321(this).children (".retroBien").removeClass("ocultarRetro").addClass("mostrarRetro") };
 	   }
 	   else {
 		   if (mostrarRetroIndividual) { jq321(this).children (".retroMal").removeClass("ocultarRetro").addClass("mostrarRetro") };
-			casillasCorrectas += (calificaPregunta===true? 0: tempCorrecta.length);
+		  //	casillasCorrectas += (calificaPregunta===true? 0: tempCorrecta.length);
 	   }
 	});
 	if (calificaPregunta) {
@@ -470,10 +483,6 @@ function calificar(){
 	}
 	
 	intentos++;
-	if (intentos == maxIntentos) {
-		jq321('#btnReiniciar').hide();
-		mostrarMensaje(1); //has alcanzado el numero maximo de intentos...no se ve, lo encima la retro...
-	}
 
 }
 
@@ -485,8 +494,9 @@ function revisaBuenas() {
 			mostrarEval("", "You have gotten ", "" + correctas + " " + txtResp + " of " + totalPreguntas + ".<br/><br/>" + asignarEvaluacion(res));
 			break;
 		default:
-			var txtResp = (correctas == 1) ? "respuesta correcta " : "respuestas correctas ";
-			mostrarEval("", "Obtuviste", "" + correctas + " " + txtResp + " de " + totalPreguntas + ".<br/><br/>" + asignarEvaluacion(res));
+			//var txtResp = (correctas == 1) ? "respuesta correcta " : "respuestas correctas ";
+			//mostrarEval("", "Obtuviste", "" + correctas + " " + txtResp + " de " + totalPreguntas + ".<br/><br/>" + asignarEvaluacion(res));
+			mostrarEval("", "Resultado", "Obtuviste " + correctas + "/" + totalPreguntas + " respuestas correctas." + "<br/><br/>" + asignarEvaluacion(res));
 	}
 	console.log("evaluacion " + correctas + " " + txtResp + " :--: " + totalPreguntas);
 	if (ambSCORM) {
@@ -601,13 +611,22 @@ function reiniciar() {  //se invoca en el boton Next Atempt, quito taches y acti
 				}
 													  
 			});
-			var respInc = jq321(".lista-respuestas .sub-item object"); // eso se pude reducir poniendo una clase RESPUESTA en el object..., s
+			var respInc = jq321("object.draggable"); // eso se pude reducir poniendo una clase RESPUESTA en el object..., s
 			jq321.each(respInc, function(indice) { 
 				var numQuedan = jq321(this).attr('data-quedanInicial'); // Al debuggear Inicial aparece con minuscula inicial, ojo con esto....
 				jq321(this).attr('data-quedan',numQuedan); //RAAR Ago 3,18: reinicio el contador de uso de las casillas respuesta....											
 				jq321(this).attr("style", "position: relative;").css("display", "");
 				jq321(this).parent().css("display", "");
 			});
+			if (carruselRespuestas) {
+				jq321("div.mySlides > div.respuesta").css("display", "");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				jq321("object").css("display", "");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				jq321("#carrusel1").show();					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				jq321(".usado").show();					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				jq321(".usado").removeClass("usado");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				slideIndex = 0;					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+				showSlides(slideIndex);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			}			
 		}
 		else {
 			mostrarMensaje(1);

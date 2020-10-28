@@ -1,16 +1,57 @@
+/*GLOBALES RAAR sep,2020*/
+html{    /*  Usado para trabajar con definición 'em'  */
+    font-size: 16px;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    color: #666666;
+    font-size: 1em;     
+    line-height: 1.8em;
+    text-align: left;
+    color: #000;
+    font-weight: 400;
+    margin: 1em;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	-o-user-select: none;
+    user-select: none;
+    /* background-color: blue; */
+    /* antes alineamiento con CAClasico, RAAR oct 6,20
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.4em;     
     line-height: 2.3em;
-    font-size: 1.2em;
+    text-align: left;
+    color: #666666;
+    font-weight: 300;
     margin:2em;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: -moz-none;
 	-ms-user-select: none;
 	-o-user-select: none;
-	user-select: none;
+    user-select: none;*/
+}
+
+#prohibido{
+    text-align: center;
+     position: absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);  
+    color: red;
+    /* background-color: yellow; */
+    width: fit-content;
+    
+}
+
+/* Borde azul para indicar el foco, con esto se elimina pero no debería ser, es para accesibilidad*/
+input[type="text"]:focus {
+    /* outline: none; */
+    outline-width: 2px;
+    border-radius: 4px;
 }
 
 .ir-arriba {
@@ -39,17 +80,12 @@ select.vacio{
 }
 .lista-preguntas{
    /* display: list-item;*/
-   height: auto;
-   width: auto;
-   
+ /* height: 100%;  */
+    display: grid; /* si lo quito ya no funciona la proporcion de content_todo*/
+    /* align-items: center; */
     
 }
-.content_todo { 
-	float: left;
-	position: relative;
-    width: 70%; /*aqui ajusto el recuadro que contiene la imagen, asi no se pierden las coordenadas*/
-    
-}
+
 
 /*Es la imagen de fondo .png*/
 .perf{
@@ -81,13 +117,29 @@ select.vacio{
     font-size: 23px;
 }
 
+/* .encabezado {
+    width: fit-content;
+} */
+/* .row {
+    margin: 0 auto; 
+
+} */
+.content_todo { 
+    /* align-self: center; */
+	/* float: left; */
+	position: relative;
+    width: 50%; /*aqui ajusto el recuadro que contiene la imagen, asi no se pierden las coordenadas*/
+    /* z-index: 1; */
+     /* align-self: center;  */
+}
 img.img_fondo { 
 	border: 1px dotted #E97500;
-	float: left;
+	/* float: left; */
 	position: relative;
     z-index: 0;
 
     max-width: 100%;
+    min-width: 400px;
     width: 100%; /* ajusto tamaño de imagen, pero no lo recomiendo mejor ajustar el marco en .content_todo*/
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -110,28 +162,28 @@ span#cas0 { /* Para acomodar cada casilla drop, ESTA ES LA 1 y asi incrementalme
     top: 65%; /*183*/
     left: 78%;
     width: 20%;
-    height: 4%;
+    height: 4.5%;
   /*  background-color: yellow; */
 }
 span#cas1 {
     top: 71%; 
     left: 59%; 
     width: 17%;
-    height: 4%;
+    height: 4.5%;
   /*  background-color: yellow; */
 }
 span#cas2 {
     top: 24%;
     left: 33%;
     width: 17%;
-    height: 4%;
+    height: 4.5%;
 
 }
 span#cas3 {
     top: 44.5%;
     left: 13%;
     width: 17%;
-    height: 4%;
+    height: 4.5%;
   /*  background-color: yellow; */
 }
 
@@ -144,7 +196,7 @@ span#cas3 {
 }*/
 
 .mostrar { /*Estas clases son para activar la capacidad de manejar segmentos de visibilidad*/
-	display:initial; /* o ponemos ""? */
+	display:""; /* initial o ponemos ""? */
 }
 
 .ocultar {
@@ -159,8 +211,11 @@ span#cas3 {
     background-color:  #0062cc;
 }
 .reactivos.center{
-	float: none;
-	margin: auto;
+    float: none; /* si apago esto, el carrusel abarca hasta reactivos, pero float no es para esto, revisar, no bastaría con position relative?*/
+    margin: auto;
+    /* height: 100%; */
+    /* background-color: yellow; */
+    
 }
 
 /* formato draggables de pregunta..., MEJOR SE APLICA EN .CLONADO*/
@@ -175,7 +230,7 @@ span#cas3 {
 }/*
 
 /*.respuestas .lista-respuestas .sub-item .draggable {*/
-    .respuestas .lista-respuestas .sub-item .draggable { /*RAAR Ago 14,18: draggables area respuestas*/
+     .respuestas .lista-respuestas .sub-item  .draggable { /*RAAR Ago 14,18: draggables area respuestas*/
         
     min-width: 150px;
     min-height: 30px;
@@ -183,11 +238,13 @@ span#cas3 {
   height: 30px;  
     padding: 5px;
 	max-width: 100%; /* Esto funciona bien en zona de respuestas..*/
-border: 1px solid;
+border: 2px solid;
+border-radius: 4px;
 	cursor:move;
 	background-color: #ffffff;
    /* min-width: 100%;*/	/* Este y el display block para que esten alineadas las casillas de respuesta */
-	 display: block; /*block*/
+     display: block; /*block*/
+     
 }
 
 
@@ -206,7 +263,7 @@ border: 1px solid;
 
 .reactivos .lista-preguntas .sub-item, .respuestas .lista-respuestas .sub-item{
 	padding: 5px;
-	margin: 15px;
+	margin: 0px auto; /* para centrar la imagen, no funciona sin grid*/
 /* display:marker;*/
 
 
@@ -219,25 +276,26 @@ border: 1px solid;
 }*/
 
 .reactivos .lista-preguntas .sub-item .droppable{
-    /* Esto es muy importante para que flote...*/
-	float: left;
+    /* float: left; */
 	position: absolute; 
     z-index: 2;    
+    /* overflow: hidden; */
     /* para que flote*/
 
   /*  height:auto;*/
     background-color: white; /*Esto varia a necesidad*/
 /*	position: relative;*/
 
-    content: ""; 
+    /* content: "";  */
     display: inline-block;
   /*  margin: 5px;*/
  /*   min-width: 150px;
     min-height: 20px;*/
  /*   padding: 1%;*/
     text-align: center;
-    border: 1px solid #AAAAAA;
+    border: 2px solid #AAAAAA;
     border-radius: 4px;
+    /* z-index: 100; */
 }
 /* RAAR Nov 15,18: Asi estaba antes de hacerlo responsivo, conflicto imagen-texto?
 .reactivos .lista-preguntas .sub-item .droppable{
@@ -270,24 +328,27 @@ border: 1px solid;
 	top: 0;
   /*  border:1px solid #0C0; no se ve, queda atras*/
     color:#030;
-    background-color: rgb(144, 241, 144);
+    background-color: #83c635;
 }
 
 .reactivos .lista-preguntas .sub-item .droppable.ocupado.incorrecto{
 	top: 0;
  /*   border:1px solid #C00; no se ve, queda atras*/
     color:#300;
-    background-color: rgb(201, 144, 144);
+    background-color: #f01b18;
+    
 }
 
-.reactivos .lista-preguntas .sub-item .droppable.dragOver{
+ .reactivos .lista-preguntas .sub-item  .droppable.dragOver{
 	border-color: #AAAAAA;
-	background-color: #AAAAAA;
+    background-color: #AAAAAA;
+    z-index: 0; /* temporal */
 }
 
 .reactivos .lista-preguntas .sub-item .droppable.ocupado.dragOver{
 	border-color: #aaaaaa;
-	background-color:transparent;
+    background-color: white; /*temporal, revisar */
+    
 }
 
 .toolsti{
@@ -296,22 +357,27 @@ width: 10%;
 }
 
 .reactivos .lista-preguntas .sub-item .droppable.ocupado.correcto.dragOver{
-    border:1px solid #0C0;
+    /* border: 2px solid #0C0; */
+    /* border: 2px solid #83c635; */
     color:#030;
 }
 
 .reactivos .lista-preguntas .sub-item .droppable .clonado{
   
-    height:100%;
-    background-color: transparent;
+     height:100%;  /*para que <objecto no se salga del droppable*/
+     width:100%; 
+     /*bottom: 10%; /* el objeto es mas grande que el droppable, elevo los textos con esto, pero, y si ponemos fit-content al vertical en el droppable*/
+    font-size: .9em; 
+    /* top: 0px;    */
+    /* background-color: transparent; */
   
    /* background:transparent;*/
-   font-weight: bold;   
+   /*font-weight: bold;   */
    /*-font-size: 80%;*/
    
    /*Esto es importante va a variar segun si es imagen o texto*/
    /*overflow: hidden;*/
-   line-height: 140%; /*centro verticalmente*/
+  /* line-height: 140%; /*centro verticalmente*/
    display: inline-block;   
    /*padding: 1px;*/
    /*webkit­shape­inside: rectangle(0,0,100%,100%,5px,5px);*/
@@ -374,7 +440,7 @@ width: 10%;
 }
 
 .respuestas.center .lista-respuestas .sub-item{
-	display: inline-block;
+    display: inline-block;
 	width:200px;
 	vertical-align:middle;
 }
@@ -427,18 +493,20 @@ width: 10%;
     
 }
 
-.retroArroba{ /*Para acomodar la retro continua y despues de la imagen*/
- /*   color: rgb(131, 0, 0);
+/*
+.retroArroba{ Para acomodar la retro continua y despues de la imagen
+    color: rgb(131, 0, 0);
     background-color: rgba(255, 0, 0, 0.1);
     border: 1px solid rgb(165, 0, 0);
     padding: 6px;
     border-radius: 3px;
 	margin: 0 2px;
-    line-height:30px;*/
-   /* min-width: auto;*/
-   /* clear: both;    */
-    
+    line-height:30px;
+  
 }
+*/
+
+
 .mostrarRetro{
     /*display:inline-block;*/
     display:block;
@@ -480,7 +548,8 @@ width: 10%;
 }
 .avisaFaltante {
     background-color:  #0069d9 !important;
-    opacity: 0.8;
+    /* opacity: 0.8; */
+    opacity: 1;
 }
 
 .preguntas{
@@ -495,7 +564,7 @@ position: absolute;
  height: 100%;
  z-index: 100000;
  left: 0;
- background: #0C0;
+ background: #83c635;
  opacity: 0.5;
   
 }
@@ -506,7 +575,7 @@ position: absolute;
  z-index: 100000;
  left: 0;
  opacity: 0.5;
- background: rgb(246, 79, 50);
+ background: #f01b18;
 }
 .blink {
     animation: blink 2s linear infinite;
@@ -527,7 +596,8 @@ position: absolute;
 
 /*  Clases para retros tooltip JLBG*/
 .tooltip.in {opacity:1!important;}
-.tooltip-inner {font-size: 1.2em; text-align: left;}
+/* .tooltip-inner {font-size: 1.2em; text-align: left;} */
+.tooltip-inner {font-size: 1.2em; text-align: left; min-width: 280px; padding: 10px};
 
 .tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
 .tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }
@@ -541,11 +611,11 @@ position: absolute;
 .tooltip.info.bottom > .tooltip-arrow { border-bottom-color: #31b0d5; }
 .tooltip.info.left > .tooltip-arrow   { border-left-color:   #31b0d5; }
 
-.tooltip.success .tooltip-inner          { background-color:    #449d44; width: 150px }
-.tooltip.success.top > .tooltip-arrow    { border-top-color:    #449d44; }
-.tooltip.success.right > .tooltip-arrow  { border-right-color:  #449d44; }
-.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #449d44; }
-.tooltip.success.left > .tooltip-arrow   { border-left-color:   #449d44; }
+.tooltip.success .tooltip-inner          { background-color:    #83c635; width: 150px }
+.tooltip.success.top > .tooltip-arrow    { border-top-color:    #83c635; }
+.tooltip.success.right > .tooltip-arrow  { border-right-color:  #83c635; }
+.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #83c635; }
+.tooltip.success.left > .tooltip-arrow   { border-left-color:   #83c635; }
 
 .tooltip.warning .tooltip-inner          { background-color:    #ec971f; }
 .tooltip.warning.top > .tooltip-arrow    { border-top-color:    #ec971f; }
@@ -553,11 +623,126 @@ position: absolute;
 .tooltip.warning.bottom > .tooltip-arrow { border-bottom-color: #ec971f; }
 .tooltip.warning.left > .tooltip-arrow   { border-left-color:   #ec971f; }
 
-.tooltip.danger .tooltip-inner          { background-color:    #d9534f; width: 150px;}
-.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #d9534f; }
-.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #d9534f; }
-.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #d9534f; }
-.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #d9534f; }
+.tooltip.danger .tooltip-inner          { background-color:    #f01b18; width: 150px;}
+.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #f01b18; }
+.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #f01b18; }
+.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #f01b18; }
+.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #f01b18; }
+
+/* Slideshow container */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.slideshow-container {
+    position: relative;
+    background: #f1f1f1f1;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Slides */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .mySlides {
+    padding: 30px;
+    text-align: center;
+    margin: 0 50px;
+  }
+  
+  /* Next & previous buttons */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -30px;
+    padding: 16px;
+    color: #888;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  
+  /* Position the "next button" to the right */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .next {
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+  }
+  
+  /* The dot/bullet/indicator container */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .dot-container {
+    text-align: center;
+    padding: 20px;
+    background: #f1f1f1;
+  }
+  
+  /* The dots/bullets/indicators */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  /* Add a background color to the active dot/circle */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+  
+  /* Add an italic font style to all quotes */
+  q {font-style: italic;}
+  
+  /* Add a blue color to the author */
+  .author {color: cornflowerblue;}
+  
+  .ui-draggable-dragging {
+    border: 2px solid #aaaaaa;
+    border-radius: 4px; 
+    cursor: move;
+    background-color: #ffffff;
+    /* display: block; */
+  }
+  
+  object.carrusel {					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores object.carrusel {		 */
+      position: relative; 
+      min-height: 30px;
+      padding: 5px;
+      border: 2px solid #aaaaaa;
+      border-radius: 4px; 
+      cursor: move;
+      background-color: #ffffff;
+      display: inline-block;  
+      
+      overflow: hidden;
+      margin: 0px auto;
+      /* z-index: 10000 !important;   */
+      left: 0px;
+      top: 0px; 
+      /* box-shadow: 5px 10px 10px #383838; */
+       /* border:none; */
+  }
+  
+
+  #etiquetaRespuesta {
+    /* position: absolute;  
+    top: 0px;*/
+    margin-left: 5px;     
+  } 
+  
+  hr.separador {
+    height:2px;
+    border-width:0;
+    color:gray;
+    background-color:gray;
+    margin: 2px 2px !important;
+  }
 
 @media only screen and (max-width: 992px) { /*aplicar hasta 480 px*/
     .respuestasSiempreCentro { /*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/

@@ -1,6 +1,9 @@
 ﻿/*
 -RAAR 03/04/2018, Agrego retro para cada arroba
-FA: {correcta:"respuesta correcta",incorrecta:"respuesta incorrecta"} UNA por arroba....
+   FA: [ 
+		 {correcta:"1. Correct! London is the capital of both England and the United Kingdom.",incorrecta:"1. Incorrect!"}
+		 ,{correcta:"2. Correct! Cardiff is the capital of Wales.",incorrecta:"2. Incorrect!"}
+	  ], 
 A: Para q una casilla permita mas de una respuesta correcta indicarlas dividiendolas con un barra vertical (pipe), |, 
 A: ejem... ["respuesta casilla A","respuesta 1 casilla B|respuesta 2 casilla B","multimedia/img01.png" ],  
 */

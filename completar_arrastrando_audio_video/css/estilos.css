@@ -1,24 +1,105 @@
+
+html{    /*  Usado para trabajar con definición 'em'  */
+  font-size: 16px;
+  padding: 0px 0px 0px 0px;
+}
+
 body{
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    color: #666666;
-    margin:2em;
-font-size: 1em;
-line-height: 1.8em;
-color: #000;
+    font-family: 'Open Sans', sans-serif;    
+    font-size: 1em;
+    line-height: 1.8em;
+    /* color: #666666; */
+    color: #000;    
+    font-weight: 400;
+    margin:1em;
+    user-select: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: -moz-none;
 	-ms-user-select: none;
 	-o-user-select: none;
-	user-select: none;
+	
+}
+ 
+.ui-draggable-dragging { /* .ui-draggable-dragging */
+    /* border: 2px solid #aaaaaa;
+    border-radius: 4px;  */
+    /* background-color: #ffffff; */
+        /* cursor: move; */
+      /* z-index: auto;   */
+}
+
+/*
+:not(.ui-draggable) { 
+
+      z-index: 10 !important;  
+} 
+*/
+
+.debug {
+    /* position: absolute;   */
+/*    bottom: 0px;
+    right: 0px;     
+    width: fit-content; 
+    height: fit-content; */
+    font-size: .9em;
+   /* background-color: white;
+    padding: 0px;*/
+}
+  #etiquetaRespuesta {
+     /* position: absolute;  
+   top: 0px;
+    left: 3px;     */
+    margin-left: 5px;
+  }  
+
+/* .pregunta {
+    display: block;
+} */
+hr.separador {
+    height: 2px;
+    border-width: 0;
+    color: gray;
+    background-color: gray;
+    margin: 2px 2px !important;
+}
+
+#encabezado{
+    padding: 0;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+
+}
+
+#head{
+    float: left;
+
+}
+
+
+.contToolTip {
+    position: absolute;  
+    top: -15px;
+    right: -30px;
+    width: fit-content; 
+    height: fit-content;
+}
+
+
+input[type="text"]:focus {
+    /* outline: none; */
+    outline-width: 2px;
+    border-radius: 4px;
 }
 
 #btnPaginador {
-
-    /* margin-bottom:3px; */
     margin-left: 5px;
     margin-right: 5px;
+    opacity: 1;
+    cursor: default;
 }
 
 .ir-arriba {
@@ -36,37 +117,57 @@ color: #000;
 }
 
 .fas{
-color: rgb(255, 255, 255);
-
-font-size: 10px;
-
-
+    color: rgb(255, 255, 255);
+    /* font-size: 10px; */
 }
-.botonplpa{
+/* .botonplpa{
     margin-right: 4px;
-}
+} */
 
 
 .botonplpaaud{
+    /* margin-right: 4px; */
+    /* margin: 0px auto;    */
+    /* width: fit-content; 
+    height: fit-content; */
+    /* padding-right: 4px; */
     margin-right: 4px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+/* i.play{
+    margin: 0px auto;
+} */
+
+
+
+
+/* .controlitos{
+    background-color: rgb(80, 80, 80);
+    font-size: 10px;
+    font-size: 6px;
+    display: flex;
+    padding: 7px;
+} */
+
+.controlitosaud, .controlitos1{
+    position: relative;
+    background-color: rgb(80, 80, 80);
+    font-size: 10px;
+    font-size: 6px;
+    display: flex;
+    padding: 7px;
+     height: 44px;  
+     /* z-index: 1100; */
+/* 
+    border: 2px solid;
+    border-radius: 4px;     */
 }
 
 
-.botonexp{
-font-size: 18px;
-}
-
-.controlitos{
-background-color: rgb(80, 80, 80);
-font-size: 10px;
-font-size: 6px;
-
-display: flex;
-
-padding: 7px;
-}
-
-.controlitosaud{
+/* .controlitos1{
     background-color: rgb(80, 80, 80);
     font-size: 10px;
     font-size: 6px;
@@ -74,36 +175,50 @@ padding: 7px;
     display: flex;
     
     padding: 7px;
-}
-
-
-.controlitos1{
-    background-color: rgb(80, 80, 80);
-    font-size: 10px;
-    font-size: 6px;
-    
-    display: flex;
-    
-    padding: 7px;
-    }
+    } */
 
 .numeralsi{
+    font-size: 1.5em;
+    color: #fff;
+    /* padding: 7px; */
+    position: absolute;
+    /* bottom: 22px; */
+    bottom: 53%;
+    left: 45%;
+}
+
+.botonExpand{ /*el boton expand se configuraba con la clase numeralsi, esto es para separar....*/
     font-size: 18px;
     color: #fff;
-    padding: 7px;
+    padding: 2px;
 }
+
+/* .botonexp{
+    font-size: 18px;
+    } */
 
 .avisaFaltante {
     border: 2px solid #0069d9 !important;
 }
 
-.mostrar { /*Estas clases son para activar la capacidad de manejar segmentos de visibilidad*/
-	display:initial; /* o ponemos ""? */
+.objetivoSeleccionRapida { /* para click sencillo y doble click*/
+    /*  border: 2px solid paleturquoise; */
+    border: 2px solid paleturquoise;
+    border-radius: 4px;
+  }
+  .bordeDrop { /*es el nomal de inicio*/
+    border: 2px solid #AAAAAA;
+    border-radius: 4px;
+ 
 }
-.info{
+.mostrar { /*Estas clases son para activar la capacidad de manejar segmentos de visibilidad*/
+	display: ""; /* o ponemos ""?, si pongo initial las preguntas las pone pegadas */
+}
+#encabezado .info{
     background-color: #0069d9;
     float: right;
-    padding: 18px 23px;
+    /* padding: 18px 23px; */
+    padding: 20px;
     font-size: 1.3em;
 }
 
@@ -127,18 +242,18 @@ padding: 7px;
 
 
 
-.cPaginador:hover{
+/* .cPaginador:hover{
     background-color: #0062cc;
     color: #fff;
-}
+} */
 
-.botongeneral{
+/* .botongeneral{
     background-color:  #0069d9;
-}
+} */
 
-.botongeneral:hover{
+/* .botongeneral:hover{
     background-color:  #0062cc;
-}
+} */
 .ocultar {
 	display: none;
 }
@@ -148,22 +263,24 @@ padding: 7px;
 	margin: auto;
 }
 
-.respuestas .lista-respuestas .sub-item .draggable {
-    height: 90%;
-	border: 1px solid;
-    width: 100%;
-	max-width: 100%;
-	cursor:move;
+/*.respuestas .lista-respuestas .sub-item .draggable {*/
+.draggable {    
+     /* height: 90%;  */
+    /* border: 2px solid;*/
+    border-radius: 4px; 
+     /* width: 100%; */
+    min-width: 100%;
+    min-height: 100%;
+	/* cursor:move; */
 	background-color: #ffffff;
-    min-width: 100%;	/* Este y el display block para que esten alineadas las casillas de respuesta */
-     display: block;
-
+    /* min-width: 100%;	Este y el display block para que esten alineadas las casillas de respuesta */
+    /* display: block; */
 }
 
 .reactivos .lista-preguntas, .respuestas .lista-respuestas{
 	line-height: 1.5em;
-	background-color:#EAEAEA;
-	background: white;
+	/* background-color:#EAEAEA; */
+	background: transparent;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 
@@ -172,37 +289,51 @@ padding: 7px;
     display: inline;
     margin-right: 6px;
 }
-.reactivos{
-    margin-left: -45px;
-}
-.respuestas{
-    margin-left: -45px;
 
-}
 .reactivos .lista-preguntas .sub-item, .respuestas .lista-respuestas .sub-item{
+	padding: 5px;
+	/* margin: 15px; */
+/* display:marker;*/
+}
+.ejercicio-arrastrar {
+    padding: 0;
+}
+ .reactivos#reactivo{
+    /* margin-left: -45px; */
+    /* padding: 0;
+    margin: 0px 0px; */
+    padding: 0px;
+    /* width: 100%; */
+} 
+.respuestas{
+    /* margin-left: -45px; */
+    text-align:center;
+    /* width: 100%; */
+}
+/* .respuestas{
+    text-align:center;
+
+  } */
+
+/* .reactivos .lista-preguntas .sub-item, .respuestas .lista-respuestas .sub-item{
 
 	margin: 15px;
-/* display:marker;*/
-
-
-}
+} */
 
 .reactivos .lista-preguntas .sub-item .droppable{
-
-    
-
 	position: relative;
 	top: 13px;
     content: "";
     display: inline-block;
     margin: 5px;
-
-    min-height: 40px;
+/*    min-height: 40px;*/
+    min-width: 50px;
+    min-height: 30px;
   
     text-align: center;
-    border: 1px solid #AAAAAA;
-    border-radius: 4px;
-    width: 60px;
+    /* border: 2px solid #AAAAAA;
+    border-radius: 4px; */
+    /* width: 60px; */
 }
 
 .reactivos .lista-preguntas .sub-item .droppable.ocupado{
@@ -211,9 +342,8 @@ padding: 7px;
 
 .reactivos .lista-preguntas .sub-item .droppable.ocupado.correcto{
 	top: 0;
-    border:1px solid #0C0;
-    color:#030;
-   /* height: 100px;*/
+    border:2px solid #83c635 !important;
+    color:#83c635;                  /* JLBG jun 12, 2019; cambié a color original en vez de verde #030*/
 }
 
 .blink {
@@ -227,20 +357,41 @@ padding: 7px;
     50% { opacity: 0.0; }
   }
 
-i.ip {
-    font-size:36px;
+ /* i.ip {
+     font-size:30px; 
     color:green;
 }
 i.it {
-    font-size:36px;
+     font-size:30px; 
     color:red;
-}
+}  */
+
+i.ip {
+    color: #83c635;
+  }
+  i.it {
+    color: #f01b18;
+  } 
+
+  .palomitaReactivo{                 /* JLBG jun 12, 2019; cambié el tamaño de la palomita y el tache*/
+    margin-right:4px;
+      
+  }
+  .tacheReactivo{
+      margin-right:4px;
+  }
+  
+  .palomita{
+      margin-left:4px;
+  }
+    .tache{
+      margin-left:4px;
+  }
 
 .reactivos .lista-preguntas .sub-item .droppable.ocupado.incorrecto{
 	top: 0;
-    border:1px solid #C00;
-    color:#300;
-  /*  height: 100px;*/
+    border:2px solid #f01b18 !important;    
+    color:#f01b18;                  /* color indicado JBecerril*/
 }
 
 .reactivos .lista-preguntas .sub-item .droppable.dragOver{
@@ -248,14 +399,14 @@ i.it {
 	background-color: #AAAAAA;
 }
 
+.reactivos .lista-preguntas .sub-item .droppable.ocupado.correcto.dragOver{
+    border:2px solid #83c635;
+    color:#83c635;                  /* color indicado JBecerril */
+  }
+
 .reactivos .lista-preguntas .sub-item .droppable.ocupado.dragOver{
 	border-color: #aaaaaa;
 	background-color:transparent;
-}
-
-.reactivos .lista-preguntas .sub-item .droppable.ocupado.correcto.dragOver{
-    border:1px solid #0C0;
-    color:#030;
 }
 
 input[type="range"] { 
@@ -264,7 +415,7 @@ input[type="range"] {
     position: relative;
     overflow: hidden;
     height: 17px;
-    width: 90%;
+    width: 85%;
     cursor: pointer;
     border-radius: 0; /* iOS */
 }
@@ -330,20 +481,20 @@ input[type="range"] {
     display: none;
 }
 
-.reactivos .lista-preguntas .sub-item .droppable .clonado{
-    margin: 0px;
-  
-   width: 90%;
-    margin-bottom: -10px;
+.reactivos .lista-preguntas .sub-item .droppable .clonado, .videoDraggable {
+    margin: 0px auto -3px auto;  /* -3 es el espacio entre video y controles */
+    width: 100%;
+    padding: 0px 0px;
+     /*margin-bottom: -10px; */
 }
 
 .reactivos .lista-preguntas .sub-item .droppable .clonado.correcto{
-    color:#600;
+    color:#83c635;
     background-color: transparent;
 }
 
 .reactivos .lista-preguntas .sub-item .droppable .clonado.incorrecto{
-    color:#600;
+    color:#01b180;
     background-color: transparent;
 }
 
@@ -444,14 +595,27 @@ input[type="range"] {
     text-align: left;
     color: #000;
 }
+
 p {
     font-family: 'Open Sans', sans-serif;
-font-size: 1.5em;
+    font-size: 1.1em;
     line-height: 1.8em;
-    font-weight: 300;
-    letter-spacing: .7px;
-    text-align: justify;
+    /* font-weight: 300;
+    letter-spacing: .7px; */
+    text-align: left;
+    /* text-align: justify; */
 }
+
+.pregunta > p{
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-size: 1em;
+    line-height: 1.8em;
+    text-align: left;
+    display: inline; /*the default is block, por la paloma al inicio del reactivo*/
+  
+  }
+
 .actividad {
     max-width: 250px;
     background: #b1b1b1;
@@ -461,19 +625,21 @@ font-size: 1.5em;
     color: #fff!important;
     margin-bottom: 15px !important;
 }
+
 .headings-int {
     font-family: 'Open Sans', sans-serif;
-    color: #6c6b82;
-    letter-spacing: 1px;
-   
-    margin-top: 0;
+    color: #000;
+    font-size: 1.8em;
+    text-align: left;
 }
+
 .under-li {
     border-bottom: solid #dbdbdb;
     border-width: 3px;
     padding-bottom: 9px;
     width: 80%;
 }
+
 .alto{
     margin-bottom: 8px;
 }
@@ -484,30 +650,42 @@ font-size: 1.5em;
 	margin-left:10px
 }
 
-.icono{
+ .dropup .sub-item{ /*inhibo sep 18,20, para que? le pega a preguntas...*/
+    max-width: 200px;    
+} 
+
+/* .icono{
   font-size: 6em;
   float: right;
   color: #b1b1b1;
 }
-
-
 @media (min-width:900px){
-  .icono {
-    display: none;
-}
-}
+    .icono {
+        display: none;
+    }
+} */
+
+
 
 @media only screen and (max-width:992px){ /*mientrs mínimo */  
-  
+    body {
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        margin: 0.5em;
+    }
+    
      .respuestas .lista-respuestas {
         display: -webkit-flex; /* Safari */
         -webkit-flex-wrap: wrap; /* Safari 6.1+ */
         display: flex;   
         flex-wrap: wrap;
    }
-   .sub-item{
+   /* .sub-item{
         width: 25%;
-    }
+    } */
     .respuestasSiempreCentro { /*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/
         margin: 0; /* de aqui al transform es para centrar horizontalmente,RAAR elegante jun 20,18 */
         position: static;
@@ -518,62 +696,60 @@ font-size: 1.5em;
 }
 
 
-@media only screen and (max-width:792px){ /*mientrs mínimo */  
-  
-   
-
-
-   .sub-item{
+/* @media only screen and (max-width:792px){ 
+    .sub-item{
        width: 40%;
-   }
+   } */
    
 }
 
 
 
 @media only screen and (max-width:660px){ /*mientrs mínimo */  
-  
-/*    .respuestas .lista-respuestas {
-    
-    
-    }*/
-
-    .numeralsi{
-        
-        margin-top:15px;
-        font-size: 27px;
-    }
+    /* .numeralsi{        
+         margin-top:15px; 
+         font-size: 27px; 
+    } */
 
     .botonplpa{
         font-size: 8px;
-    margin-right: 11px;
-    margin-top:8px;
+        margin-right: 11px;
+        margin-top:8px;
     }
 
     .respuestas .lista-respuestas .sub-item {
         margin-bottom:70px;
     }
   
-    .controlitos{
+    /* .controlitos{
         height: 80px;
-    }
-    .controlitosaud{
-        flex-direction: row;
+    } */
+    /* .rangos {
+        margin-top: 40px;
+    } */
+
+     .controlitosaud{
+        /* display: grid; 
+        align-content: center; */
+         flex-direction: row;
         display: flex;
         flex-wrap: wrap;
-justify-content: center;
-        height: 110px;
-        margin-bottom: -40px;
+        justify-content: center;
+        align-content: center; 
+        height: 120px;
+    } 
 
-    }
-    .botonplpaaud{
-        font-size: 11px;
+     .botonplpaaud{
+        font-size: 7px; 
+        margin-bottom: 10px;
+        /* z-index: 1000; */
+        /* font-size: 11px;
     margin-right: 11px;
-    margin-top:8px;
-    }
-    .sub-item {
+    margin-top:8px; */
+    } 
+    .dropup.sub-item {
         width: 70%;
-        margin-bottom: 40px;
+        /* margin-bottom: 40px; */
  
     }
     .barraInferior{
@@ -583,40 +759,36 @@ justify-content: center;
  }
 
 
-@media only screen and (max-width: 480px) {
+/* @media only screen and (max-width: 480px) {
 	body{
 		font-family: Gotham,"Helvetica Neue",Helvetica,Arial,sans-serif;	
 		color: #777;
 
     
 	}
-	.respuestas .lista-respuestas .sub-item .draggable {
-		max-width: 200px;
-    }
-
-}
+} */
 
 /*  Clases para retros tooltip JLBG*/
 .tooltip.in {opacity:1!important;}
-.tooltip-inner {font-size: 1.2em; text-align: left;}
+.tooltip-inner {font-size: 1.2em; text-align: left; min-width: 280px; padding: 10px}					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
 
-.tooltip.primary .tooltip-inner          { background-color:    #337ab7; width: 150px; }
+.tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
 .tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }
 .tooltip.primary.right > .tooltip-arrow  { border-right-color:  #337ab7; }
 .tooltip.primary.bottom > .tooltip-arrow { border-bottom-color: #337ab7; }
 .tooltip.primary.left > .tooltip-arrow   { border-left-color:   #337ab7; }
 
-.tooltip.info .tooltip-inner          { background-color:    #31b0d5;  width: 150px;}
+.tooltip.info .tooltip-inner          { background-color:    #31b0d5; }
 .tooltip.info.top > .tooltip-arrow    { border-top-color:    #31b0d5; }
 .tooltip.info.right > .tooltip-arrow  { border-right-color:  #31b0d5; }
 .tooltip.info.bottom > .tooltip-arrow { border-bottom-color: #31b0d5; }
 .tooltip.info.left > .tooltip-arrow   { border-left-color:   #31b0d5; }
 
-.tooltip.success .tooltip-inner          { background-color:    #449d44; width: 150px;}
-.tooltip.success.top > .tooltip-arrow    { border-top-color:    #449d44; }
-.tooltip.success.right > .tooltip-arrow  { border-right-color:  #449d44; }
-.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #449d44; }
-.tooltip.success.left > .tooltip-arrow   { border-left-color:   #449d44; }
+.tooltip.success .tooltip-inner          { background-color:    #83c635; }
+.tooltip.success.top > .tooltip-arrow    { border-top-color:    #83c635; }
+.tooltip.success.right > .tooltip-arrow  { border-right-color:  #83c635; }
+.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #83c635; }
+.tooltip.success.left > .tooltip-arrow   { border-left-color:   #83c635; }
 
 .tooltip.warning .tooltip-inner          { background-color:    #ec971f; }
 .tooltip.warning.top > .tooltip-arrow    { border-top-color:    #ec971f; }
@@ -624,10 +796,129 @@ justify-content: center;
 .tooltip.warning.bottom > .tooltip-arrow { border-bottom-color: #ec971f; }
 .tooltip.warning.left > .tooltip-arrow   { border-left-color:   #ec971f; }
 
-.tooltip.danger .tooltip-inner          { background-color:    #d9534f;width: 150px; }
-.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #d9534f; }
-.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #d9534f; }
-.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #d9534f; }
-.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #d9534f; }
+.tooltip.danger .tooltip-inner          { background-color:    #f01b18; }
+.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #f01b18; }
+.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #f01b18; }
+.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #f01b18; }
+.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #f01b18; }
 
 
+
+
+/* Slideshow container */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.slideshow-container {
+    position: relative;
+    background: #f1f1f1f1;
+    /* min-width: 100% */
+     max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Slides */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .mySlides {
+    padding: 30px;
+    text-align: center;
+    /* margin: 0 50px; */
+    /* margin: 0px auto;     */
+    display: grid; /* en los demas CA no uso grid, pero no funcionaba nada para centrar*/
+    justify-items: center;
+  }
+  
+  /* Next & previous buttons */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -30px;
+    padding: 16px;
+    color: #888;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  
+  /* Position the "next button" to the right */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .next {
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+  }
+  
+  /* The dot/bullet/indicator container */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .dot-container {
+    text-align: center;
+    padding: 20px;
+    background: #f1f1f1;
+  }
+  
+  /* The dots/bullets/indicators */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  /* Add a background color to the active dot/circle */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+  
+  /* Add an italic font style to all quotes */
+  q {font-style: italic;}
+  
+  /* Add a blue color to the author */
+  .author {color: cornflowerblue;}
+
+.carrusel {					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+    position: relative; 
+    min-height: 30px;
+    /* padding: 5px; */
+    border: 2px solid #aaaaaa;
+    border-radius: 4px; 
+    cursor: move;
+    background-color: #ffffff;
+    display: inline-block;  
+    width: 100%;
+    overflow: hidden;
+    margin: 0px auto !important;
+    /* z-index: 10000 !important;   */
+    left: 0px;
+    top: 0px; 
+    /* box-shadow: 5px 10px 10px #383838; */
+     /* border:none; */     
+     /* z-index: 1000; */
+}
+
+@media only screen and (max-width: 992px) {
+    /* .carrusel {
+      background-color: initial;
+      border:none;
+  
+    }  */
+    /* .dropup.sub-item.respuesta { */
+      /* border: 1px solid; */
+      /* background-color: #ffffff; */
+      /* box-shadow: 5px 10px 10px #383838; */
+    /* } */
+    #reactivo{
+      background-color: #ecebeb;
+    }
+  }
+
+  #desplazamiento{
+    text-align: center;
+  }
+  

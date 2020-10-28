@@ -2,24 +2,30 @@
 <html lang="es-MX">
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
+ 
 <script async="" src="https://www.google-analytics.com/analytics.js"></script>
 <script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+if (!window.parent.data_crm) { 
 ga("create", "UA-158134453-1", {"cookieDomain":"auto"});
 ga("set", "anonymizeIp", true);
-ga('set', 'dimension1', "CUAED");
+ga('set', 'dimension1', "CUAIEED");
 ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS" );
 ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA" );
-ga('set', 'dimension4', "2019" );
+ga('set', 'dimension4', "2021" );
 ga('set', 'dimension5', "EVALUACIÓN" );
-ga('set', 'dimension6', "RA04-19" );
-ga('set', 'dimension7', "COMPLETAR ARRRASTRANDO AUDIO-VIDEO" );
-ga('set', 'dimension8', "VERSIÓN 1" );
+ga('set', 'dimension6', "RA04-21" );
+ga('set', 'dimension7', "COMPLETAR ARRASTRANDO AUDIO-VIDEO" );
+ga('set', 'dimension8', "VERSIÓN 2" );
 ga("set", "metric1", 1);ga("set", "metric2", 2);ga("set", "metric3", 3);ga("set", "metric4", 4); ga("set", "metric5", 5);ga("set", "metric6", 6);ga("set", "metric7", 7);ga("set", "metric8", 8);
-ga("send", "pageview");
+ga("send", "pageview"); 
+}
 </script>
 
-<title>CA audio-video V4.2</title>
+
+
+<title>CA audio-video V5.0</title>
 <!--
+	*v5.0: RAAR Sep 24, 2020: Cambios formato JBecerril primer semestre 2020, carrusel, CUAED->CUAIEED, Alineación con CAClasico + carrusel respuestas.
 	*v4.2: RAAR Abr 23, 2020: Incrporo manejo de distractores
 	*v4.1: RAAR Mar 2, 2020: Librerias locales .js y .css, google analitics, flecha arriba, debug funcional, implemento verLongitud, Lorem Ipsum, flag respuestasSiempreCentro, var elementosPorSegmentoMovil, condicionales CRM
 	*v4.0: RAAR oct 10,19: Incorporo libreria conectividadSCORM 2.3, y funciones 'iniciaAmbienteScorm' y 'guardaCalificacionScorm'
@@ -41,12 +47,12 @@ ga("send", "pageview");
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Completar Enunciado Arrastrando"  />
-<meta name="keywords" content="UNAM, CUAED"  />
-<meta name="author" content="UNAM CUAED" />
-<meta name="news_keywords" content="UNAM, CUAED" />
-<meta name="generator" content="UNAM CUAED" />
+<meta name="keywords" content="UNAM, CUAIEED"  />
+<meta name="author" content="UNAM CUAIEED" />
+<meta name="news_keywords" content="UNAM, CUAIEED" />
+<meta name="generator" content="UNAM CUAIEED" />
 <meta property="og:site_name" content="Completar Enunciado Arrastrando" />
-<meta itemprop="name" content="UNAM, CUAED" />
+<meta itemprop="name" content="UNAM, CUAIEED" />
 <meta itemprop="image" content="" />
 <meta itemprop="description" content="Completar Enunciado Arrastrando" />
 <meta property="og:title" content="" />
@@ -56,11 +62,22 @@ ga("send", "pageview");
 <meta property="og:image" content="" />
 <link rel="icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<!-- <script src="css/font-awesome-v4.7.0.min.css"></script> -->
+<link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/font-awesome-v4.7.0.min.css">
 
 <script type="text/javascript" src="./SCORM/conectividadSCORM.js"></script>
+
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script> -->
-<script src="https://lib.cuaed.unam.mx/R019/js/jquery-v3.2.1.js"></script>
+<!-- <script src="https://lib.cuaed.unam.mx/R019/js/jquery-v3.2.1.js"></script> -->
+<!-- <script src="js/jquery-v3.2.1.js"></script> -->
+<script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"></script>
+
+
+<!-- <script src="css/font-awesome-v4.7.0.min.css"></script> -->
+
+
 <!-- JQuery UI -->
 
 
@@ -70,14 +87,23 @@ ga("send", "pageview");
 </script>
 
 <script type="text/javascript" src="js/jqueryui-v1.10.4.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
+
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" /> -->
+<!-- <script src="css/jquery-ui-v1.12.0.css"></script> -->
+<link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/jquery-ui-v1.12.0.css"/>
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css"/>
+<!-- <link rel="stylesheet" href="https://lib.cuaed.unam.mx/R019/css/bootstrap-v3.3.7.min.css"/> NO FUNCIONA-->
+<link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/bootstrap-v3.3.7.min.css"/>
+
 <link rel="stylesheet" href="css/estilos.css" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
+
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+<!-- <script src="https://lib.cuaed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script> -->
+<!-- <script src="js/bootstrap-v3.3.7.min.js"></script> -->
+<script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+
 
 <script type="text/javascript" src="js/reactivos.js"></script>
 <script type="text/javascript" src="js/listaReactivos.js"></script>
@@ -85,7 +111,7 @@ ga("send", "pageview");
 <script type="text/javascript" src="js/completaArrastrando.js"></script>
 <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<!-- <link rel="stylesheet"  href="https://lib.cuaed.unam.mx/R019/css/all.css" /> -->
+<!-- <link rel="stylesheet"  href="https://lib.cuaed.unam.mx/R019/css/all.css" /> NO FUNCIONA-->
 
 <!-- Código para ajustar el tamaño de este contenido en el iframe de la página 2 -->
 <!-- <script src="../../js/frame_resize/jquery.min.js"></script>
@@ -120,43 +146,58 @@ ga("send", "pageview");
 <body onMouseMove="coordenadas(event);" >
 <noscript><br/>Necesitas tener habilitado Javascript para <br/>poder hacer uso de la funcionalidad completa</noscript>
     <section class="container arrastrando">
-		<div class="row">
-			<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+		<!-- <div class="row"> -->
+			<!-- <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"> -->
+			<div id="encabezado" class="row">
 				<div class="info ocultar">				
 					<i class="fas fa-info tamico "></i>
 				</div>
-
-				<h2 class="headings-int ">Título de la evaluación</h2>
-		
+				<h2 class="headings-int">Título de la evaluación</h2>		
 				<div id="textoInstrucciones" class=" informacion">
-					<p>Instrucciones (pedagógica y técnica) de la evaluación</p>		
+					<p>Instrucciones (pedagógica y técnica) de la evaluación.</p>		
 				</div>
 			</div>
-			<div class="ejercicio-arrastrar col-md-12 col-lg-12 col-sm-12 col-xs-12">
-				<div class="reactivos" id="reactivo">
-					<div class="lista-preguntas">
+			<!-- </div> -->
+			<div id="cuerpo" class="row">
+				<hr class="separador" style="display: none">
+				<div class="ejercicio-arrastrar col-md-12 col-lg-12 col-sm-12 col-xs-12">
+					<div class="reactivos" id="reactivo">
+						<div class="lista-preguntas">
+						</div>  <!-- lista preguntas -->
 					</div>
-				</div>
-				<div class="respuestas" id="respuesta">
-					<div class="lista-respuestas">
+					<div class="respuestas" id="respuesta">
+						<div class="lista-respuestas">
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="slideshow-container row" id="carrusel1" title="Sección respuestas">
+				<span id="etiquetaRespuesta" data-toggle="tooltip" data-placement="right" data-type="info" title="Recorre para elegir las respuestas disponibles"><i  class="far fa-1x fa-question-circle"></i></span>
+				<!-- <i id="etiquetaRespuesta" class="far fa-1x fa-question-circle"></i>			 -->
+				<div id="tmp"></div>
+				<div class="dot-container">
+				</div>
+				<a id="prev" class="prev" onClick="regresar()">&#10094;</a>
+				<a id="next" class="next" onClick="avanzar()">&#10095;</a>
+			</div>
+
 			<i class="ir-arriba fas fa-chevron-up fa-2x"></i>
 			<div class="pager col-md-12 col-lg-12 col-sm-12 col-xs-12">
 				<div class="barraInferior">
-			
-					<button id="btnPrevio"  class="btn btn-primary invisible cPrevio cPaginador" onClick="">&lt;</button>			
-						<button id="btnPaginador" class="btn  ocultar"></button> <!--  para poner paginado -->
-					<button id="btnProximo" class="btn btn-primary invisible cProximo cPaginador" onClick="">&gt;</button>	
-			
-				<br><br>
-					<button id="btnRevisar" class="btn botongeneral btn-primary" onClick="revisar()">Revisar</button>
-					<button id="btnReiniciar" class="btn botongeneral btn-primary" onClick="reiniciar()">Siguiente intento</button>
+					<!-- <div id="desplazamiento"> -->
+						<button id="btnPrevio" class="btn btn-primary invisible cPrevio cPaginador"
+						onClick="anterior()">&#10094;</button>
+						<button id="btnPaginador" class="btn btn-primary disabled ocultar"></button> <!--  para poner paginado -->					
+						<button id="btnProximo" class="btn btn-primary invisible cProximo cPaginador"
+						onClick="siguiente()">&#10095;</button><br><br>
+					<!-- </div> -->
+				<!-- <br><br> -->
+					<button id="btnRevisar" class="btn btn-primary" onClick="revisar()">Revisar</button>
+					<button id="btnReiniciar" class="btn btn-primary" onClick="reiniciar()">Siguiente intento</button>
 				</div>
 			</div>
 
-		</div>
+		<!-- </div> row-->
 	</section>
 </body>
 </html>

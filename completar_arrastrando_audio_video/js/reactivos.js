@@ -10,47 +10,67 @@ var numeralpro=1;
 var respOriginales = [];
 var respDesordenadas1 = [];
 var respDesordenadas2 = [];
-var incremento;
+var incremento; // revisar, para contar drags solamente? 
+var cuentaVideos = 0;
+var cuentaAudios = 0;
 // RAAR Estas las migre de configRecurso.js
 var intentos = 0;
 var correctas = 0;
 //var contestadas = 0;
 var totalPreguntas = 0;
 var totalSegmentos = 0;
-var recorreSegmentos =1; // por lo menos existe el primer segmento o sea el unico
-
+var recorreSegmentos = 1; // por lo menos existe el primer segmento o sea el unico
+var esMobil = false;
+var slideIndex = 0;
 
 var espacios = "&nbsp;&nbsp;&nbsp;&nbsp;";
-var palomita = "<i class='ip  far fa-check-circle blink' style='display:none'></i>";
-var tache = "<i class='it  far fa-times-circle blink' style='display:none'></i>";
+var palomita = "<i class='ip palomita far fa-2x fa-check-circle blink' style='display:none'></i>";
+var tache = "<i class='it tache far fa-2x fa-times-circle blink' style='display:none'></i>";
+var palomitaReactivo = "<i class='ip palomitaReactivo far fa-2x fa-check-circle blink' style='display:none'></i>"; //no imagen...es libreria...
+var tacheReactivo = "<i class='it tacheReactivo far fa-2x fa-times-circle blink' style='display:none'></i>";
+
+var carruselRespuestas = true;
+var formatoColumnas = true;          // true: muestra preguntas y respuesta en columnas; false muestra preguntas y respuesta apiliados
+
 var video;
 var seekslider;
 //funciones para inicializar la linea seek, de cada video 
 
 //ESTA FUNCION CONTROLA EL SEEKER DEL REPRODUCTOR EN RESPUESTAS 
-function intializePlayer(ind){
-//	console.log("holiporoli");
-	video= document.getElementById("resp"+ind);
-	seekslider= document.getElementById("seekslider"+ind);
-	 seekslider.addEventListener("change",vidSeek, false);
- video.addEventListener("timeupdate",seektimeupdate,false);
+function intializePlayer(self) {
+	//	console.log("holiporoli");
+	padreSelf = self.parentElement;
+	seekslider = padreSelf.querySelector(".rangos");
+	//video = document.getElementById("resp" + ind);
+	//seekslider = document.getElementById("seekslider" + ind);
+	seekslider.addEventListener("change", vidSeek, false); // para dar click en la barra y adelantar o atrasar...
+	video = self.parentElement.parentElement.querySelector("video");
+	video.addEventListener("timeupdate", seektimeupdate, false);
+}
+/*
+function intializePlayer(ind) {
+	//	console.log("holiporoli");
+	video = document.getElementById("resp" + ind);
+	seekslider = document.getElementById("seekslider" + ind);
+	seekslider.addEventListener("change", vidSeek, false);
+	video.addEventListener("timeupdate", seektimeupdate, false);
 }
 //ESTA FUNCION CONTROLA EL SEEKER DEL REPRODUCTOR EN PREGUNTAS 
-function intializePlayer1(ind){
-//	console.log("holiporoli");
-	video= document.getElementById("cloncas"+ind);
-	seekslider= document.getElementById("seekslidercas"+ind);
-	 seekslider.addEventListener("change",vidSeek, false);
- video.addEventListener("timeupdate",seektimeupdate,false);
+function intializePlayer1(ind) {
+	//	console.log("holiporoli");
+	video = document.getElementById("cloncas" + ind);
+	seekslider = document.getElementById("seekslidercas" + ind);
+	seekslider.addEventListener("change", vidSeek, false);
+	video.addEventListener("timeupdate", seektimeupdate, false);
 }
-
+*/
 //inicia la linea seek en su punto inicial
-function estandarizar(){
-var todostotal=document.getElementsByClassName("rangos");
+function estandarizar() {
+	var todostotal = document.getElementsByClassName("rangos");
 
-for(var i=0; i<todostotal.length;i++){
-	todostotal[i].value=0;
-}
+	for (var i = 0; i < todostotal.length; i++) {
+		todostotal[i].value = 0;
+	}
 
 }
 //FUNCIONES PARA QUE EL SEEKER TENGA RANGO 
@@ -66,6 +86,7 @@ function seektimeupdate(){
 }
 
 jq321(document).ready(function() {
+	if (!carruselRespuestas) { jq321("#carrusel1").hide() }
 	if (window.name=="movil") {
 		esMobil = true;
 		// alert ("indexbis.html window.name: "+window.name);
@@ -93,6 +114,11 @@ jq321(document).ready(function() {
 		jq321(".info").removeClass("ocultar").addClass("mostrar");
 		 jq321("#textoInstrucciones").slideUp(10);
 		 jq321("#textoInstrucciones").addClass("mostrarinfo"); 
+		 invPregResp = true;
+		 jq321("hr.separador").show();
+	} else {
+		jq321("#etiquetaRespuesta").hide();
+		jq321("hr.separador").hide();
 	}
 	if (flechaArriba) {
 		jq321('.ir-arriba').click(function () {
@@ -253,7 +279,10 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 	jq321(".reactivos .lista-preguntas").each(function() { jq321(this).html(''); });
 	jq321(".respuestas .lista-respuestas").each(function() { jq321(this).html(''); });
 	//alert ("crea arrastrar");
-	if (invPregResp) {jq321(".respuestas").prependTo(".ejercicio-arrastrar")}
+	if (invPregResp) {
+		jq321(".respuestas").prependTo(".ejercicio-arrastrar")
+		jq321("#carrusel1").prependTo("#cuerpo");
+	}
 	if (formatoColumnas) {
 		jq321("#reactivo").addClass("col-md-9 col-lg-9");
 		jq321("#respuesta").addClass("col-md-3 col-lg-3");
@@ -290,140 +319,174 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 		enlaza += "|";
 		var pClases = "sub-item pregunta ocultar segmento"+cuentaSegmentos;
 		var h1 ='<div class="'+pClases+'" id="preg' + preguntas[i].ind + '" data-drop=' + preguntas[i].ind + ' data-listaResp="'+enlaza+'">';
-		var h2 = '<p>' + numeralPregunta + '&nbsp;&nbsp;' + tam(preg[0], 1);
+		var h2 = '<p>' + numeralPregunta + '&nbsp;&nbsp;' + tam(preg[0], 1); // div para que sea block
 		var h10 = '</p>';
 		var h11 ='</div>';
         //HTMLArmadoNew = h1+h2+h10+h11;
 		//console.log("HTMLArmadoNew: "+HTMLArmadoNew);
 		for (var j=0;j<cuantasArrobas;j++){ //preguntas[i].listaResp.length, da casillas de mas por las respuetas dummy
-			//alert (preg[i]);																				
-			//HTMLDroppable +='<span class="droppable" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[j]+'" data-idu="pd'+preguntas[i].ind+'"></span>' + preg[j+1];
+			var textValidaCorr = (preguntas[i].listaFA[j] == undefined ? '' : preguntas[i].listaFA[j].correcta);
+			var textValidaInc = (preguntas[i].listaFA[j] == undefined ? '' : preguntas[i].listaFA[j].incorrecta);
+			var rArrCorrecta = '<span class="contToolTip" data-toggle="tooltip" data-placement="auto" data-type="success" title="' + tam(textValidaCorr, 1) + '">' + palomita + '</span>';
+			var rArrIncorrecta = '<span class="contToolTip" data-toggle="tooltip" data-placement="auto" data-type="danger" title="' + tam(textValidaInc, 1) + '">' + tache + '</span>';
+
 			var debugRespuesta = (debug?'<sup>'+preguntas[i].listaResp[j]+'</sup>':"");
-			HTMLDroppable +='<span class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[j]+'"></span>'+ debugRespuesta + preg[j+1];
+			//sept 20:tiene que ser SPAN, ya que usar div hace el <p> corte en cada segmento entre arrobas y se descuadra el formato....
+			//oct 8,20: pero si se pone span falla el drag que contiene video y controles, no hace el tolerance del drop correctamente
+			//HTMLDroppable +='<div class="droppable cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[j]+'"><div class="draggable"></div>'+ rArrCorrecta + rArrIncorrecta + '</div>'+ debugRespuesta + preg[j+1];
+			HTMLDroppable +='<div class="droppable bordeDrop cpreg'+preguntas[i].ind+'" id="cas'+idCas+'" data-resp="'+preguntas[i].listaResp[j]+'"><div class="draggable"></div>'+ rArrCorrecta + rArrIncorrecta + '</div>'+ debugRespuesta + preg[j+1];
 			idCas++;
 			//console.log ("HTMLDroppable: "+HTMLDroppable);
 		}
-		HTMLArmadoNew = h1+h2+HTMLDroppable+h10+h11;
-		//console.log("HTMLArmadoNew: "+HTMLArmadoNew);
+		textoRetroReactivoCorrecta = preguntas[i].txt2[0]; //RAAR Ago 16,18: uso clase retroBien para desplegar retro por arroba, puede colisionar
+		textoRetroReactivoIncorrecta = preguntas[i].txt2[1];
+		var rCorrecta = '<span data-toggle="tooltip" data-placement="auto" data-type="success" title="' + tam(textoRetroReactivoCorrecta, 1) + '">' + palomitaReactivo + '</span>'; // Esto así por que si no es tooltip, el funcionamiento cambia y solo se inserta la imagen...
+		var rIncorrecta = '<span data-toggle="tooltip" data-placement="auto" data-type="danger" title="' + tam(textoRetroReactivoIncorrecta, 1) + '">' + tacheReactivo + '</span>';
+		HTMLArmadoNew = h1 + rCorrecta + rIncorrecta + h2 + HTMLDroppable + h10 + h11;
 		jq321("#reactivo .lista-preguntas").append(HTMLArmadoNew);
 
-	jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroArroba ocultarRetro" id="retro' + preguntas[i].ind + '0">' + preguntas[i].listaFA ); //RETRO ARROBA
+		//jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroArroba ocultarRetro" id="retro' + preguntas[i].ind + '0">' + preguntas[i].listaFA ); //RETRO ARROBA
+		//jq321('#preg' + preguntas[i].ind).append('<div class="retroArroba ocultarRetro" id="retro' + preguntas[i].ind + '0">' + preguntas[i].listaFA +'</div'); //RETRO ARROBA
 
-		textoRetro = tam(preguntas[i].txt2[0], 1);
-		jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroBien ocultarRetro" id="retro' + preguntas[i].ind + '0">' + textoRetro );
-		textoRetro = tam(preguntas[i].txt2[1], 1);
-		jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroMal ocultarRetro" id="retro' + preguntas[i].ind + '1">' + textoRetro );
-	//	jq321('#preg' + preguntas[i].ind).after('<hr/>'); RAAR jun 13,18: inhabilito no detecto para que....
+		// textoRetro = tam(preguntas[i].txt2[0], 1);
+		// jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroBien ocultarRetro" id="retro' + preguntas[i].ind + '0">' + textoRetro +'</div');
+		// textoRetro = tam(preguntas[i].txt2[1], 1);
+		// jq321('#preg' + preguntas[i].ind).append('<BR><div class="retroMal ocultarRetro" id="retro' + preguntas[i].ind + '1">' + textoRetro +'</div');
+	
 	}
 	//jq321('div.sub-item:last + hr').remove(); //RAAR jun 13,18: inhabilito no detecto para que....
 var arr=[];
-	for (var i = 0; i < respuestas.length; i++ ) { //armo respuestas....
-		var HTMLArmado ="";
-			//var listaDroppables = jq321('[data-resp="'+respuestas[i].txt+'"]');		//ojo que una respuesta puede pertenecer a mas de una pregunta/casilla
-			// RAAR Ago 13,18: El pipe es un truco para que me de el texto exacto y no encuentre una parte...
-			// listaResp esta en la PREGUNTA no en las casillas, es para obtener el segmento....
-			var listaDroppables = jq321('[data-listaResp*="|'+respuestas[i].txt+'|"]');		//ojo que una respuesta puede pertenecer a mas de una pregunta/casilla,* que contenga... por los casos de doble casilla de respuesta
-			var acumulaSegmento='';
-			listaDroppables.each( function( index, elemento ) {
-			   // jq321( el ).attr('class');				
-				//console.log(respuestas[i].txt+' - '+jq321( el ).parents('.pregunta').attr('class'));				
-				//var clasesPregunta = respuestas[i].txt+' - '+jq321( el ).parents('.pregunta').attr('class');
-				var guardaSegmento='';	
-				var totalseg= elementosPorSegmento;
-				if(i==0){
+	for (var i = 0; i < respuestas.length; i++) { //armo respuestas....
+		var HTMLArmado = "";
+		//var listaDroppables = jq321('[data-resp="'+respuestas[i].txt+'"]');		//ojo que una respuesta puede pertenecer a mas de una pregunta/casilla
+		// RAAR Ago 13,18: El pipe es un truco para que me de el texto exacto y no encuentre una parte...
+		// listaResp esta en la PREGUNTA no en las casillas, es para obtener el segmento....
+		var listaDroppables = jq321('[data-listaResp*="|' + respuestas[i].txt + '|"]');		//ojo que una respuesta puede pertenecer a mas de una pregunta/casilla,* que contenga... por los casos de doble casilla de respuesta
+		var acumulaSegmento = '';
+		listaDroppables.each(function (index, elemento) {
+			// jq321( el ).attr('class');				
+			//console.log(respuestas[i].txt+' - '+jq321( el ).parents('.pregunta').attr('class'));				
+			//var clasesPregunta = respuestas[i].txt+' - '+jq321( el ).parents('.pregunta').attr('class');
+			var guardaSegmento = '';
+			var totalseg = elementosPorSegmento;
+			if (i == 0) {
 
-					for(var m=0;m<cuentaSegmentos;m++){
-						arr.push(0);
-					}
+				for (var m = 0; m < cuentaSegmentos; m++) {
+					arr.push(0);
 				}
+			}
 
-				for (var j=1; j<=cuentaSegmentos ;j++) {
-					guardaSegmento = 'segmento'+j;
-					//console.log("holi "+cuentaSegmentos);
-					//console.log(respuestas[i].txt+' - '+'segmento'+j+' '+ jq321( elemento ).parents('.pregunta').hasClass(guardaSegmento));
-					//if (jq321( elemento ).parents('.pregunta').hasClass(guardaSegmento)) {
-					if (jq321( elemento ).hasClass(guardaSegmento)) {
-						acumulaSegmento += ' '+guardaSegmento; //por ahora dejo que se dupliquen si es que estan en el mismo segmento....
-						conteo++;
-						var posis=acumulaSegmento.indexOf("o");
-						var novo=acumulaSegmento.substring(posis+1,acumulaSegmento.length);
-						var nom= parseInt(novo,10);
-						
-						var posarr=nom-1;
-						var aux= arr[posarr];
-						aux++;
-						arr[posarr]=aux;
+			for (var j = 1; j <= cuentaSegmentos; j++) {
+				guardaSegmento = 'segmento' + j;
+				//console.log("holi "+cuentaSegmentos);
+				//console.log(respuestas[i].txt+' - '+'segmento'+j+' '+ jq321( elemento ).parents('.pregunta').hasClass(guardaSegmento));
+				//if (jq321( elemento ).parents('.pregunta').hasClass(guardaSegmento)) {
+				if (jq321(elemento).hasClass(guardaSegmento)) {
+					acumulaSegmento += ' ' + guardaSegmento; //por ahora dejo que se dupliquen si es que estan en el mismo segmento....
+					conteo++;
+					var posis = acumulaSegmento.indexOf("o");
+					var novo = acumulaSegmento.substring(posis + 1, acumulaSegmento.length);
+					var nom = parseInt(novo, 10);
 
-						var formula=(nom-1)*elementosPorSegmento;
+					var posarr = nom - 1;
+					var aux = arr[posarr];
+					aux++;
+					arr[posarr] = aux;
 
-						incremento=formula+aux;
+					var formula = (nom - 1) * elementosPorSegmento;
 
-					}
-					//jq321( elemento ).parents('.pregunta').hasClass('segmento'+j);
+					incremento = formula + aux;
+
 				}
-			});
-			// Firefox 1.0+
-			var controlsText='';
-			var isFirefox = typeof InstallTrigger !== 'undefined';
-			if (!isFirefox) {
-				//alert ('firefox');
-				controlsText='controls';
-			}			
-
-////INCIO DE LA CONSTRUCCION DEL REPRODUCTOR
-///LA VARIABLE ENTORNO NOS DICE SI ES AUDIO O VIDEO DESDE LA RUTA
-			var entorno=respuestas[i].txt;
-			var posm=entorno.indexOf("/");
-			entorno=entorno.substring(0,posm);
-	var muestra="";
-	var playau="";
-	var controlclass="";
-			var siaudio="";
-			var posteraud="";
-var audioimagen="";
-var altovid="";
-//LA VARIABLE POSTERAUD GUARDA LA IMAGEN MOSTRADA EN AUDIOS, LE DAMOS OTRA CLASE A LOS ADIOS YA QUE TIENEN OTRA FORMA EN MOVIL
-
-			if(entorno=="audio"){
-				posteraud="poster='img/sonido.png'"
-				altovid="height='0px'";
-				muestra= 'style="display:none"';
-				controlclass="controlitosaud";
-				playau="botonplpaaud";
-
-
-			}else{
-				siaudio='<div class="numeralsi" id="exp'+i+'" onclick=" getFullscreen('+i+')" ><i class="fas fa-expand botonexp"></i></div> <div style="display:none" class="numeralsi" id="comp'+i+'" onclick=" getFullscreenOn('+i+')" >	<i class="fas fa-compress botonexp"></i></div>';
-				altovid="height='95%'";
-				controlclass="controlitos";
-				playau="botonplpa";
+				//jq321( elemento ).parents('.pregunta').hasClass('segmento'+j);
 			}
-		
-///CREAMOS EL VIDEO TANTO EN AUDIOS COMO EN VIDEOS
-			var iconoToca = '<video '+altovid+'  id="resp'+i+'" preload="auto" '+muestra+' data-respuesta="'+respuestas[i].txt+ '" data-quedan="'+respuestas[i].incidencia+'" data-pro="'+i+'" class="draggable"  data="'+respuestas[i].txt+'">'; //aqui requiere CONTROLS  style="color:red;" style="background-color:powderblue;"
-			iconoToca += '<source src="'+respuestas[i].txt+'" type="audio/mp3" style="background-color:powderblue;"> ';
-			iconoToca += 'Your browser does not support the audio element. ';
-			iconoToca += '</video> ';
+		});
+		// Firefox 1.0+
+		var controlsText = '';
+		var isFirefox = typeof InstallTrigger !== 'undefined';
+		if (!isFirefox) {
+			//alert ('firefox');
+			controlsText = 'controls';
+		}
 
-			var numeralito;
-			if (numeral==true){
-numeralito=numeralpro;
-numeralpro++;
-			}
-			//CREAMOS LOS CONTROLES PARA EL PLAY O EL STOP, SON DOS DIV CON ICONOS
-			//LA LINEA ES UN INPUT TIPO SEEKER 
-			//EL DE AMPLIAR ES UN DIV IGUAL CON ICONO
-			var botonplay='<div class="'+controlclass+'" id="controles'+i+'"><div class="numeralsi">'+incremento+'</div><div  class="'+playau+'" id="play'+(i+1)+'" onclick="playAudio('+i+')"><i class="play fas fa-play-circle fa-5x"></i></div><div class="'+playau+'" id="pause'+(i+1)+'" style="display:none" onclick="pauseAudio('+i+')"><i class="pause fas fa-pause-circle fa-5x"></i></div><input class="rangos" id="seekslider'+i+'" type="range" min="0" max="100" step="1">'+siaudio+'</div>';
+		////INCIO DE LA CONSTRUCCION DEL REPRODUCTOR
+		///LA VARIABLE ENTORNO NOS DICE SI ES AUDIO O VIDEO DESDE LA RUTA
+		var entorno = respuestas[i].txt;
+		var posm = entorno.indexOf("/");
+		entorno = entorno.substring(0, posm);
+		var muestra = "";
+		var playau = "";
+		var controlclass = "";
+		var siaudio = "";
+		var posteraud = "";
+		var audioimagen = "";
+		var altovid = "";
+		//LA VARIABLE POSTERAUD GUARDA LA IMAGEN MOSTRADA EN AUDIOS, LE DAMOS OTRA CLASE A LOS ADIOS YA QUE TIENEN OTRA FORMA EN MOVIL
+		var textoNumeralSi = "";
+		var numeroCaja = 0;
+		if (entorno == "audio") {
+			posteraud = "poster='img/sonido.png'"
+			altovid = "height='0px'";
+			muestra = 'style="display:none"';
+			controlclass = "controlitosaud";
+			playau = "botonplpaaud";
+			textoNumeralSi = "Audio ";
+			cuentaAudios++;
+			numeroCaja = cuentaAudios;
 
-			var values=jq321("resp"+i);
-		
+		} else { //video
+			//siaudio = '<div class="botonExpand botonExpandAbre" id="exp' + i + '" onclick=" getFullscreen(' + i + ')" ><i class="fas fa-expand botonexp"></i></div> <div style="display:none" class="botonExpand botonExpandCierra" id="comp' + i + '" onclick=" getFullscreenOn(' + i + ')" ><i class="fas fa-compress botonexp"></i></div>';
+			siaudio = '<div class="botonExpand botonExpandAbre" id="exp' + i + '" onclick=" getFullscreen(this)" ><i class="fas fa-expand botonexp"></i></div> <div style="display:none" class="botonExpand botonExpandCierra" id="comp' + i + '" onclick=" getFullscreenOn(this)" ><i class="fas fa-compress botonexp"></i></div>';
+			altovid = "width='100%'";
+			//controlclass = "controlitos";
+			controlclass = "controlitosaud";
+			//playau = "botonplpa";
+			playau = "botonplpaaud";
+			textoNumeralSi = "Video ";
+			cuentaVideos++;
+			numeroCaja = cuentaVideos;
+		}
 
-			HTMLArmado = '<div id="contenedor'+i+'" data-respuesta="'+respuestas[i].txt+ '" data-quedan="'+respuestas[i].incidencia+'"  data-drag="' + i + '" data="'+respuestas[i].txt+'"   class="sub-item draggable respuesta ocultar'+acumulaSegmento+'" >'+audioimagen+ iconoToca +botonplay+'</div>';
-			
-			//RAAR Jun 22,18: recuerda, fuen cuando se agrego acumulaSegmento que al restringir la elementosPorSegmento se volvio mas pequeña la casilla de una respuesta que correspondia dos preguntas del mismo segmento...no se que fue....
-//			HTMLArmado = '<div class="sub-item respuesta ocultar'+acumulaSegmento+'" ><object data-respuesta="'+respuestas[i].txt+ '" data-quedan="'+respuestas[i].incidencia+'" class="draggable" data-drag="' + i + '" data="'+respuestas[i].txt+'">'+tam(respuestas[i].txt, 1)+'</object>' +'</div>';	// RAAR Jun 12,18: El despliegue se separa de lo que se considera LA RESPUESTA, 
+		///CREAMOS EL VIDEO TANTO EN AUDIOS COMO EN VIDEOS, implementeo videDraggable para poder contar cuantos respuestas hay, draggable se duplica y al usar "respuestas" como en el original es impreciso
+		//var iconoToca = '<video ' + altovid + '  id="resp' + i + '" preload="auto" ' + muestra + ' data-respuesta="' + respuestas[i].txt + '" data-quedan="' + respuestas[i].incidencia + '" data-pro="' + i + '" class="draggable videoDraggable"  data="' + respuestas[i].txt + '">'; //aqui requiere CONTROLS  style="color:red;" style="background-color:powderblue;"
+		var iconoToca = '<video ' + altovid + '  id="resp' + i + '" preload="auto" ' + muestra + ' data-respuesta="' + respuestas[i].txt + '" data-quedan="' + respuestas[i].incidencia + '" data-pro="' + i + '" class="videoDraggable"  data="' + respuestas[i].txt + '">'; //aqui requiere CONTROLS  style="color:red;" style="background-color:powderblue;"		
+		iconoToca += '<source src="' + respuestas[i].txt + '" type="audio/mp3" style="background-color:powderblue;"> ';
+		iconoToca += 'Your browser does not support the audio element. ';
+		iconoToca += '</video> ';
+
+		// var numeralito;
+		// var numeral = false; // para borrar despues...
+		//  if (numeral == true) {
+		//  	numeralito = numeralpro;
+		//  	numeralpro++;
+		//  }
+		//CREAMOS LOS CONTROLES PARA EL PLAY O EL STOP, SON DOS DIV CON ICONOS
+		//LA LINEA ES UN INPUT TIPO SEEKER 
+		//EL DE AMPLIAR ES UN DIV IGUAL CON ICONO
+		//var botonplay = '<div class="' + controlclass + '" id="controles' + i + '"><div class="numeralsi">' + incremento + '</div><div  class="' + playau + '" id="play' + (i + 1) + '" onclick="playAudio(' + i + ')"><i class="play fas fa-play-circle fa-5x"></i></div><div class="' + playau + '" id="pause' + (i + 1) + '" style="display:none" onclick="pauseAudio(' + i + ')"><i class="pause fas fa-pause-circle fa-5x"></i></div><input class="rangos" id="seekslider' + i + '" type="range" min="0" max="100" step="1">' + siaudio + '</div>';
+		//var botonplay = '<div class="' + controlclass + '" id="controles' + i + '"><div class="numeralsi">' + incremento + '</div><div  class="bPlay ' + playau + '" id="play' + (i + 1) + '" onclick="playAudio(this)"><i class="play fas fa-play-circle fa-5x"></i></div><div class="bPause ' + playau + '" id="pause' + (i + 1) + '" style="display:none" onclick="pauseAudio(this)"><i class="pause fas fa-pause-circle fa-5x"></i></div><input class="rangos" id="seekslider' + i + '" type="range" min="0" max="100" step="1">' + siaudio + '</div>';
+		var botonplay = '<div class="' + controlclass + '" id="controles' + i + '"><div class="numeralsi">' + textoNumeralSi + numeroCaja + '</div><div  class="bPlay ' + playau + '" id="play' + (i + 1) + '" onclick="playAudio(this)"><i class="play fas fa-play-circle fa-5x"></i></div><div class="bPause ' + playau + '" id="pause' + (i + 1) + '" style="display:none" onclick="pauseAudio(this)"><i class="pause fas fa-pause-circle fa-5x"></i></div><input class="rangos" id="seekslider' + i + '" type="range" min="0" max="100" step="1">' + siaudio + '</div>';		
+
+		var values = jq321("resp" + i);
+		var debugRespuesta = (debug ? '<div class="debug">' + respuestas[i].txt + '</div>' : "");
+		var incidenciaRespuestas = (forzarRespuestaA > 0 ? forzarRespuestaA : respuestas[i].incidencia);
+
+		//var obj1 = '<div id="contenedor' + i + '" data-respuesta="' + respuestas[i].txt + '" data-quedan="' + respuestas[i].incidencia + '"  data-drag="' + i + '" data="' + respuestas[i].txt + '"   class="sub-item draggable respuesta ocultar' + acumulaSegmento + '" >' + audioimagen + iconoToca + botonplay + '</div>';
+		//var obj2 = '<div id="contenedor' + i + '" data-respuesta="' + respuestas[i].txt + '" data-quedan="' + respuestas[i].incidencia + '"  data-drag="' + i + '" data="' + respuestas[i].txt + '"   class="draggable carrusel" >' + audioimagen + iconoToca + botonplay + '<sup>' + debugRespuesta + '</sup>' + '</div>' ;
+
+		if (!carruselRespuestas) {
+			var obj1 = '<div id="contenedor' + i + '" data-respuesta="' + respuestas[i].txt + '" data-quedanInicial="' + incidenciaRespuestas + '" data-quedan="' + respuestas[i].incidencia + '"  data-drag="' + i + '" data="' + respuestas[i].txt + '"   class="sub-item draggable respuesta ocultar' + acumulaSegmento + '" >' + audioimagen + iconoToca + botonplay + '</div>';
+			HTMLArmado = obj1;  //esta estructura es por que la estoy importando de CAClasico
 			jq321(".respuestas .lista-respuestas").append(HTMLArmado);
-			console.log(HTMLArmado+" respuesta "+respuestas[i].txt);
+		}
+		if (carruselRespuestas) {
+			var obj2 = '<div id="contenedor' + i + '" data-respuesta="' + respuestas[i].txt + '" data-quedanInicial="' + incidenciaRespuestas + '" data-quedan="' + respuestas[i].incidencia + '"  data-drag="' + i + '" data="' + respuestas[i].txt + '"   class="draggable carrusel" >' + audioimagen + iconoToca + botonplay +  debugRespuesta  + '</div>' ;
+			var HTML_Slide = '<div id="slide' + (i + 0) + '" class="dropup mySlides"><div class="dropup sub-item respuesta">' + obj2 + '</div></div>';					// quito draggable, JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			var punto = '<span id="dot' + (i + 0) + '" class="dot" onclick="currentSlide(' + (i + 0) + ')"></span>';					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	
+			jq321("#tmp").append(HTML_Slide);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+			jq321(".dot-container").append(punto);					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		}
 	}
 	totalSegmentos = cuentaSegmentos;
 
@@ -433,108 +496,60 @@ numeralpro++;
 		jq321("#btnPaginador").text(""+recorreSegmentos+" / "+totalSegmentos);
 		jq321("#btnPaginador").removeClass("ocultar").addClass("mostrar");
 	}
+	if (carruselRespuestas) {
+		jq321(".mySlides").hide();					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		jq321(".mySlides:nth-of-type(" + (slideIndex + 1) + ")").show();					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		jq321(".dot:nth-of-type(" + (slideIndex + 1) + ")").addClass("active");					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+		jq321(".respuestas .lista-respuestas").hide();
+		jq321("#reactivo").removeClass("col-md-9 col-lg-9").addClass("col-md-12 col-lg-12");
+		jq321("#desplazamiento").appendTo("#reactivo");
 
+	}
 }
-/*function creaOrdenar() {
-	preguntas = reactivos;
-	for (i = 0; i < reactivosMostrar; i++) {
-		respOriginales.push(preguntas[i].Q);
-		var tmp = preguntas[i].Q.split(" ");
-		preg = [];
-		for (j = 0; j < tmp.length; j++) {
-			preg.push([tmp[j], j]);
-		}
-		reordenaArreglo(preg);
-		var txt = "";
-		for (j = 0; j < preg.length; j++) {
-			txt += "<li class='ui-state-default ui-sortable-handle' data-orden=" + preg[j][1] + "><span class='ui-icon ui-icon-arrowthick-2-e-w'></span>" + preg[j][0] + "</li>";
-		}
-		jq321("#ordenarEnunciado").append("<div class='lista'><ul class='sortable' id='ulId" + i + "'>" + txt + tam(preguntas[i].Q, 0) + "<div class='retroInd'><div class='retroBien ocultarRetro'>" + tam(preguntas[i].F[0], 1) + "</div><div class='retroMal ocultarRetro'>" + tam(preguntas[i].F[1], 1) + "</div></div>");
-		jq321(".lista:last").after("<hr/>");
-	}
-	jq321(".lista > .sortable").each(function() {
-		$(this).sortable();
-		$(this).disableSelection();
-	});
-}*/
 
-//  ============================================================================================================
-/*function creaTablaVF(numReactivos){
-	jq321('div#contenedor').append('<table class="tabla-reactivos">');
-	jq321('.tabla-reactivos').append('<tbody>');
-	jq321('tbody').append('<tr>');
-	jq321('tr').append('<th>&nbsp;');
-	jq321('tr').append('<th id="tV">Verdadero');
-	jq321('tr').append('<th id="tF">Falso');
-	jq321('tr').append('<th>&nbsp;');
-	for (i = 0; i < numReactivos; i++){
-		jq321('tbody').append('<tr class="reactivo">');
-		jq321('tr:last').append('<td class="preguntaTexto" id="' + i + '">' + tam(reactivos[i].Q, 1) + '<br/><div class="retroBien ocultarRetro">' + tam(reactivos[i].F[0], 1) + '</div><div class="retroMal ocultarRetro">' + tam(reactivos[i].F[1], 1) + '</div></td>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="true">' + espacios + '</label>');
-		jq321('tr:last').append('<td class="preguntaOpciones"><label>' + espacios + '<input type="radio" name="pregunta' + i + '" value="false">' + espacios + '</label>');
-		jq321('tr:last').append('<td>' + palomita + tache);
+function currentSlide(n) {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	var listaSpan = jq321("span.dot:not(.usado)");
+	for (var pos = 0; pos < listaSpan.length; pos++) {
+		var k1 = jq321(listaSpan[pos]);
+		var atributo = k1.attr("id");
+		if (atributo == "dot"+n) {break}
 	}
-}*/
+	// showSlides(slideIndex = n);
+	showSlides(slideIndex = pos);
+}
 
-/*
-//  ============================================================================================================
-function creaElegir(mostrar) {
-	var ind = 1;
-	for (i = 0; i < mostrar; i++) {
-		jq321("#contenedor").append('<hr/>').append('<div id="divId' + i + '">');
-		jq321("div#divId" + i).append('<p id="pId' + i + '">');
-		var componentes = reactivos[i].Q.split("@");
-		var respuestas = reactivos[i].A;
-		for (j = 0; j < respuestas.length; j++) {
-			var opciones = respuestas[j];
-			if (mezclarRespuestas) {reordenaArreglo(opciones)}
-			opciones.unshift({opcion: "-------", correcta: false});
-			jq321("#pId" + i).append(componentes[j]).append('<select id="selId' + ind + '">');
-			for (k = 0; k < opciones.length; k++) {
-				jq321("select:last").append("<option>" + opciones[k].opcion);
-				if (opciones[k].correcta) {
-					jq321("select:last").attr("data-respuesta", opciones[k].opcion);
-				}
-			}
-			ind++;
-		}
-		jq321("#pId" + i).append(componentes[j] + tam(reactivos[i].Q, 0));
-		jq321("#divId" + i).append("<div class='retroBien ocultarRetro'>" + tam(reactivos[i].F[0], 1)).append("<div class='retroMal ocultarRetro'>" + tam(reactivos[i].F[1], 1));
-	}
-	switch (idioma) {
-		case "ENG":
-			jq321("#btnRevisar").text(ic("kcehC"));
-			jq321("#btnReiniciar").text(ic("tpmetta txeN"));
+function showSlides(n) {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	jq321(".usado").hide();
+	jq321(".dot").removeClass("active");
+	jq321(".mySlides:not(.usado)").hide();
+	var slides = jq321(".mySlides:not(.usado)").length;
+	if (n > (slides - 1)) { slideIndex = 0 }
+	if (n < 0) { slideIndex = (slides - 1) }
+	jq321(jq321(".mySlides:not(.usado)")[slideIndex]).fadeToggle();
+	jq321(jq321(".dot:not(.usado)")[slideIndex]).addClass("active");
+}
+
+function avanzar() {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	var listaSpan = jq321("span.dot:not(.usado)");
+	for (var pos = 0; pos < listaSpan.length; pos++) {
+		if (jq321(listaSpan[pos]).hasClass("active")) {
 			break;
-		default:
-			jq321("#btnRevisar").text(ic("rasiveR"));
-			jq321("#btnReiniciar").text(ic("otnetni omixórP"));
-	}
-	jq321('#btnRevisar').show();
-	jq321('#btnReiniciar').hide();
-}*/
-
-/*
-function creaOM(mostrar) {
-	var ind = 1;
-	for (i = 0; i < mostrar; i++) {
-		jq321("#bancoPreguntas").append('<div class="setPregunta" id="sp' + i + '">');
-		jq321(".setPregunta:last").append('<div class="preguntaTexto">' + (i + 1) + '. ' + tam(reactivos[i].Q, 1));
-		jq321(".setPregunta:last").append('<div class="opciones">');
-		jq321(".setPregunta:last").append('<div class="retroIndividual">');
-		if (mezclarRespuestas) {reordenaArreglo(reactivos[i].A);}
-		for (j = 0; j < reactivos[i].A.length; j++) {
-			var res = String.fromCharCode(j + 97) + ') ';
-			jq321(".opciones:last").append('<div class="opcion btn btn-default" data-correcta="' + reactivos[i].A[j].correcta + '">' + res + tam(reactivos[i].A[j].opcion, 1));
-			if (reactivos[i].A[j].correcta) {
-				jq321(".retroIndividual:last").append('<div class="retroBien ocultarRetro bg-success">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			}
-			else {
-				jq321(".retroIndividual:last").append('<div class="retroMal ocultarRetro bg-danger">' + tam(reactivos[i].A[j].retro, 1) + '</div>');
-			}
 		}
 	}
-}*/
+	slideIndex = pos + 1;
+	showSlides(slideIndex);
+}
+
+function regresar() {					// JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores
+	var listaSpan = jq321("span.dot:not(.usado)");
+	for (var pos = 0; pos < listaSpan.length; pos++) {
+		if (jq321(listaSpan[pos]).hasClass("active")) {
+			break;
+		}
+	}
+	slideIndex = pos - 1;
+	showSlides(slideIndex);
+}
 
 function tam(cad, n) {// 1T, 0ele.esc.ord Es para imprimir la longitud del texto indicado, crm=var global de impresion, n para apagar en caso particular...
 	var txt = "";
@@ -545,8 +560,62 @@ function tam(cad, n) {// 1T, 0ele.esc.ord Es para imprimir la longitud del texto
 	}
 	return txt;
 }
+
+
+function mostrarMensaje(clase, recurso) { //RAAR ago 18,18: Pongo funcion reversa
+	if (!recurso) {recurso = -1}
+	var msgs = [,
+		["Arrastra todas las respuestas a los espacios correspondientes.", "Please, drag all answers to appropriate spaces"],  // completar arrastrando
+		["Llena todos los campos de texto.", "Please, fill out all text fields"],                  // completar escribiendo
+		["Contesta todas las preguntas.", "Please, answer all questions"],                         // verdadero-falso, opcion-multiple
+		["Ordena todos los reactivos para conocer tu resultado.", "Please, sort all sentences"],   // ordenar enunciados
+		["Elige una respuesta para cada recuadro.", "Please, choose an answer for each list"],     // completar eligiendo
+		["Contesta todas las preguntas.", "Please, drag all answers to appropriate spaces"]  // lista de verificación, antes CAEsquema
+		];
+	var tipo = "";
+	var tit = "";
+	var msg = "";
+	var btnOK = "";
+	switch (clase) {
+		case 1: // intentos;
+			switch (idioma) {
+				case "ENG":
+					tit = "Warning";
+					msg = "You have reached maximum number of attempts: "+maxIntentos + "."; // empiezo a quitar los espejos....abril 26 2018
+					
+					btnOK = "OK";
+					break;
+				default:
+					tit = "Atención";
+					msg = "Has alcanzado el máximo número de intentos: "+maxIntentos + ".";
+					btnOK = "Aceptar";
+			}
+			break;
+		case 2: // Contestar TODO
+			//tipo = "warning";
+			switch (idioma) {
+				case "ENG":
+					tit = "Warning";
+					msg = msgs[recurso][1]; //recurso,1
+					btnOK = "OK";
+					break;
+				default:
+					tit = "Atención";
+					msg = msgs[recurso][0];  //recurso,0
+					btnOK = "Aceptar";
+			}
+			break;
+		default:
+			//tipo = "error";
+			tit = "Error de sistema";
+			msg = "Condición desconocida";
+			btnOK = "Aceptar";
+	}
+
+	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
+}
 //function mostrarMensaje(tipo, titulo, cadena) {
-function mostrarMensaje(clase, recurso) {
+/*function mostrarMensaje(clase, recurso) {
 	if (!recurso) {recurso = -1}
 	var msgs = [,
 		[ic("setneidnopserroc soicapse sol a satseupser sal sadot artsarra ,rovaf roP"), ic("secaps etairporppa ot srewsna lla gard ,esaelP")],  // completar arrastrando
@@ -599,7 +668,7 @@ function mostrarMensaje(clase, recurso) {
 			btnOK = ic("ratpecA");
 	}
 	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true,confirmButtonColor: "#0069d9" });
-}
+}*/
 
 function asignarEvaluacion(calificacion) {
 	var mensaje = "";
@@ -642,59 +711,126 @@ function esPortable() {
 	}
 }
 
+function siguiente() {   // JLBG Abr.30 2020, arreglé recurso
+	jq321(".segmento" + recorreSegmentos).removeClass("mostrar").addClass("ocultar");
+	jq321(".segmento" + recorreSegmentos).hide();
+	if (carruselContinuo) {
+		recorreSegmentos = (recorreSegmentos < totalSegmentos ? ++recorreSegmentos : 1);
+	} else {
+		recorreSegmentos = (recorreSegmentos < totalSegmentos ? ++recorreSegmentos : recorreSegmentos);
+		if (recorreSegmentos < totalSegmentos) {
+			jq321(".cPaginador.cPrevio").removeClass("invisible").addClass("visible");
+		} else {
+			jq321(".cProximo").removeClass("visible").addClass("invisible");
+			jq321(".cPrevio").removeClass("invisible").addClass("visible");
+		}
+	}
+	jq321(".segmento" + recorreSegmentos).removeClass("ocultar").addClass("mostrar");
+	jq321(".segmento" + recorreSegmentos).show();
+	jq321("#btnPaginador").text("" + recorreSegmentos + " / " + totalSegmentos);
+}
 
+function anterior() {   // JLBG Abr.30 2020, arreglé recurso
+	jq321(".segmento" + recorreSegmentos).removeClass("mostrar").addClass("ocultar");
+	jq321(".segmento" + recorreSegmentos).hide();
+	if (carruselContinuo) {
+		recorreSegmentos = (recorreSegmentos > 1 ? --recorreSegmentos : totalSegmentos);
+	} else {
+		recorreSegmentos = (recorreSegmentos > 1 ? --recorreSegmentos : 1);
+		if (recorreSegmentos > 1) {
+			jq321(".cPaginador.cProximo").removeClass("invisible").addClass("visible");
+		} else {
+			jq321(".cPrevio").removeClass("visible").addClass("invisible");
+			jq321(".cProximo").removeClass("invisible").addClass("visible");
+		}
+	}
+	jq321(".segmento" + recorreSegmentos).removeClass("ocultar").addClass("mostrar");
+	jq321(".segmento" + recorreSegmentos).show();
+	jq321("#btnPaginador").text("" + recorreSegmentos + " / " + totalSegmentos);
+}
 //funcion play para los audios y audios de respuesta
-function playAudio(ind) {
+//function playAudio(ind) {
+	function playAudio(self) {
 	/* TODAS LAS PLAY SE MUESTRAN Y SE DETIENEN */
 	/* TODAS LAS PAUSE SE OCULTAN */
-intializePlayer(ind);
-var total=document.getElementsByClassName("respuesta");
+	//alert ("playAudio");
+	intializePlayer(self); //seeker
+	//var total = document.getElementsByClassName("respuesta");
+	var total = document.getElementsByClassName("videoDraggable");
 
-for(var i=0;i<total.length;i++){
-	var elemnt=jq321("#resp" + i).get(0);
-		var audioovideo=jq321(elemnt).attr("data");
-		var possi=audioovideo.indexOf("/");
-		audioovideo= audioovideo.substring(0,possi);
-		
-		if(audioovideo=="audio"){
-			jq321("#resp" + i).get(0).pause();	
-		}else if(audioovideo=="multimedia"){
+	for (var i = 0; i < total.length; i++) {
+
+		jq321("#resp" + i).get(0).pause();
+/*		var elemnt = jq321("#resp" + i).get(0); PARA QUE?
+		var audioovideo = jq321(elemnt).attr("data");	
+		var possi = audioovideo.indexOf("/");
+		audioovideo = audioovideo.substring(0, possi);
+
+		if (audioovideo == "audio") { // esto para que?
 			jq321("#resp" + i).get(0).pause();
-		}
+		} else if (audioovideo == "multimedia") {
+			jq321("#resp" + i).get(0).pause();
+		}*/
 
-}
-var total1=document.getElementsByClassName("clonado");
+	}
+	var total1 = document.getElementsByClassName("clonado");
 
-for(var k=0;k<total1.length;k++){
-	
-	var audioovideo1=jq321(total1[k]).attr("data");
-	var possi1=audioovideo1.indexOf("/");
-	audioovideo1= audioovideo1.substring(0,possi1);
-	console.log(audioovideo1);
-
-	if(audioovideo1=="audio"){
-		jq321(total1[k]).get(0).pause();	
-	}else if(audioovideo1=="multimedia"){
+	for (var k = 0; k < total1.length; k++) {
 		jq321(total1[k]).get(0).pause();
+/*		var audioovideo1 = jq321(total1[k]).attr("data");
+		var possi1 = audioovideo1.indexOf("/");
+		audioovideo1 = audioovideo1.substring(0, possi1);
+		console.log(audioovideo1);
+
+		if (audioovideo1 == "audio") {
+			jq321(total1[k]).get(0).pause();
+		} else if (audioovideo1 == "multimedia") {
+			jq321(total1[k]).get(0).pause();
+		}*/
+
+	}
+/*	var apaga2 = document.getElementsByClassName("botonplpaclon");
+	apagatodas();
+	var apaga = document.getElementsByClassName("botonplpa");
+	for (var j = 0; j < apaga.length; j++) {
+		jq321("#play" + (j + 1)).css("display", "");
+		jq321("#pause" + (j + 1)).css("display", "none");
+
+	}
+*/	
+	playing = jq321(".playingNow"); //cualquiera que este tocando lo pauso le quito la bandera
+	if (playing.length > 0) {
+		pauseAudio (jq321(".playingNow").parent().find(".bPause"));
 	}
 
-}
-var apaga2=document.getElementsByClassName("botonplpaclon");
-apagatodas();
-var apaga=document.getElementsByClassName("botonplpa");
-for(var j=0; j<apaga.length;j++){
-	jq321("#play" + (j+1)).css("display", "");
-	jq321("#pause" + (j+1)).css("display", "none");
-
-}	
+	jq321(self).parent().parent().find("video").get(0).play();
+	jq321(self).parent().parent().find("video").addClass("playingNow");
+	jq321(self).hide();
+	jq321(self).parent().find(".bPause").show();
+/*
 	jq321('#resp' + ind).get(0).play();
-	jq321("#play" + (ind+1)).css("display", "none");
-	jq321("#pause" + (ind+1)).css("display", "");
-	}
+	jq321("#play" + (ind + 1)).css("display", "none");
+	jq321("#pause" + (ind + 1)).css("display", "");
+*/
+}
 
 
+function pauseAudio(self) {
+	jq321(self).parent().parent().find("video").get(0).pause();
+	jq321(self).parent().parent().find("video").removeClass("playingNow");
+	jq321(self).hide();
+	jq321(self).parent().find(".bPlay").show();	
+}
+/*
+function pauseAudio(ind) {
+	var esteAudio = document.getElementById('resp' + ind);
+	esteAudio.pause();
+	document.getElementById('pause' + (ind + 1)).style.display = "none";
+	document.getElementById('play' + (ind + 1)).style.display = "block";
+}
+*/
 	//FUNCION PARA APAGAR TODOS LOS ADUOS Y VIDEOS
-
+/*
 function apagatodas(){
 for(var n=0;n<9;n++){
 	jq321("#playclon"+0+""+n).css("display", "");
@@ -708,96 +844,95 @@ for(var n=0;n<9;n++){
 	jq321("#pauseclon" +m).css("display", "none");
 }
 }	
-
+*/
 
 //ESTA FUNCION FUNCIONA PARA AGRANDAR EL VIDEO
-function getFullscreen(ele){
-var element= document.getElementById("contenedor"+ele);
-
-	if(element.requestFullscreen) {
-		element.requestFullscreen();
-	  } else if(element.mozRequestFullScreen) {
-		element.mozRequestFullScreen();
-	  } else if(element.webkitRequestFullscreen) {
-		element.webkitRequestFullscreen();
-	  } else if(element.msRequestFullscreen) {
-		element.msRequestFullscreen();
-	  }
-
-	  document.getElementById("exp"+ele).style.display="none";
-	  document.getElementById("comp"+ele).style.display="";
-  }
-
-  //ESTA FUNCION ES PARA AGRANDAR EL ELEMENTO EN EL SPAN DE PREGUNTAS
-  function getFullscreen1(element,numdi){
-	if(element.requestFullscreen) {
-		element.requestFullscreen();
-	  } else if(element.mozRequestFullScreen) {
-		element.mozRequestFullScreen();
-	  } else if(element.webkitRequestFullscreen) {
-		element.webkitRequestFullscreen();
-	  } else if(element.msRequestFullscreen) {
-		element.msRequestFullscreen();
-	  }
-
-	  document.getElementById("expclon"+numdi).style.display="none";
-	  document.getElementById("compclon"+numdi).style.display="";
-	  }
-
-///FUNCION PARA QUITAR EL AMPLIADO DE PANTALLA LO IMPROTANTE ESTA EN EL DISPLAY DE ELEMENTOS
-	  function getFullscreenOn1(ele,numd){
-		var elemente= document.getElementById("contenedor"+ele);
-	
-	
+	//function getFullscreen(ele) {
+	//	var element = document.getElementById("contenedor" + ele);
+	function getFullscreen(self) {
+		//var element = document.getElementById("contenedor" + ele);		
+		var element = jq321(self).parents(".draggable")[0];
+		if (element.requestFullscreen) {
+			element.requestFullscreen();
+		} else if (element.mozRequestFullScreen) {
+			element.mozRequestFullScreen();
+		} else if (element.webkitRequestFullscreen) {
+			element.webkitRequestFullscreen();
+		} else if (element.msRequestFullscreen) {
+			element.msRequestFullscreen();
+		}
+		jq321(element).find(".botonExpandAbre").hide();
+		jq321(element).find(".botonExpandCierra").show();
+		//document.getElementById("exp" + ele).style.display = "none";
+		//document.getElementById("comp" + ele).style.display = "";
+	}
+	//function getFullscreenOn(ele) {
+	//var elemente = document.getElementById("contenedor" + ele);
+	function getFullscreenOn(self) {
+		//var elemente = document.getElementById("contenedor" + ele);
+		var element = jq321(self).parents(".draggable")[0];
 		if (document.exitFullscreen) {
 			document.exitFullscreen();
-		  } else if (document.mozCancelFullScreen) { /* Firefox */
+		} else if (document.mozCancelFullScreen) { /* Firefox */
 			document.mozCancelFullScreen();
-		  } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+		} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
 			document.webkitExitFullscreen();
-		  } else if (document.msExitFullscreen) { /* IE/Edge */
+		} else if (document.msExitFullscreen) { /* IE/Edge */
 			document.msExitFullscreen();
-		  }	
+		}
+		jq321(element).find(".botonExpandAbre").show();
+		jq321(element).find(".botonExpandCierra").hide();
+		//document.getElementById("comp" + ele).style.display = "none";
+		//document.getElementById("exp" + ele).style.display = "";
+	} 
+  //ESTA FUNCION ES PARA AGRANDAR EL ELEMENTO EN EL SPAN DE PREGUNTAS, no se usa
+//   function getFullscreen1(element,numdi){
+// 	if(element.requestFullscreen) {
+// 		element.requestFullscreen();
+// 	  } else if(element.mozRequestFullScreen) {
+// 		element.mozRequestFullScreen();
+// 	  } else if(element.webkitRequestFullscreen) {
+// 		element.webkitRequestFullscreen();
+// 	  } else if(element.msRequestFullscreen) {
+// 		element.msRequestFullscreen();
+// 	  }
+
+// 	  document.getElementById("expclon"+numdi).style.display="none";
+// 	  document.getElementById("compclon"+numdi).style.display="";
+// 	  }
+
+///FUNCION PARA QUITAR EL AMPLIADO DE PANTALLA LO IMPROTANTE ESTA EN EL DISPLAY DE ELEMENTOS, no se usa
+	//   function getFullscreenOn1(ele,numd){
+	// 	var elemente= document.getElementById("contenedor"+ele);
 	
 	
-			  document.getElementById("compclon"+numd).style.display="none";
-			  document.getElementById("expclon"+numd).style.display="";
-			}   
-
-  function getFullscreenOn(ele){
-	var elemente= document.getElementById("contenedor"+ele);
-
-
-	if (document.exitFullscreen) {
-		document.exitFullscreen();
-	  } else if (document.mozCancelFullScreen) { /* Firefox */
-		document.mozCancelFullScreen();
-	  } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-		document.webkitExitFullscreen();
-	  } else if (document.msExitFullscreen) { /* IE/Edge */
-		document.msExitFullscreen();
-	  }	
-
-
-		  document.getElementById("comp"+ele).style.display="none";
-		  document.getElementById("exp"+ele).style.display="";
-		} 
+	// 	if (document.exitFullscreen) {
+	// 		document.exitFullscreen();
+	// 	  } else if (document.mozCancelFullScreen) { /* Firefox */
+	// 		document.mozCancelFullScreen();
+	// 	  } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+	// 		document.webkitExitFullscreen();
+	// 	  } else if (document.msExitFullscreen) { /* IE/Edge */
+	// 		document.msExitFullscreen();
+	// 	  }	
+	
+	
+	// 		  document.getElementById("compclon"+numd).style.display="none";
+	// 		  document.getElementById("expclon"+numd).style.display="";
+	// 		}   
 
 
 
 
-		//ESTA FUNCION PONE PAUSA A TODOS LOS ELEMENTOS DE RESPUESTAS
-function pauseAudio(ind) {
-	var esteAudio = document.getElementById('resp' + ind);
-	esteAudio.pause();
-	document.getElementById('pause' + (ind+1)).style.display = "none";
-	document.getElementById('play' + (ind+1)).style.display = "block";
-	}
+
+
+
 //funcion play para los audios y videos dentro del span
-
+// ESTO ASI ESTABA, LE FALTA EL CIERRE ALA FUNCION PLAYAUDIO1
+/*
 	function playAudio1(ind) {
-		/* TODAS LAS PLAY SE MUESTRAN Y SE DETIENEN */
-		/* TODAS LAS PAUSE SE OCULTAN */
+		// TODAS LAS PLAY SE MUESTRAN Y SE DETIENEN 
+		// TODAS LAS PAUSE SE OCULTAN 
 
 		console.log(ind);
 	var total=document.getElementsByClassName("clonado");
@@ -884,3 +1019,4 @@ for(var j=0; j<apaga.length;j++){
 		document.getElementById('playclon' + prefijo).style.display = "block";
 		}
 	
+*/

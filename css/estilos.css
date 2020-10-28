@@ -1,0 +1,902 @@
+/* INDICACIONES
+    .respuesta { la primera palabra de una casilla draggable se usa como clase para poder darle formato css
+        font-style: italic;
+    }
+
+*/
+
+
+
+/*GLOBALES RAAR sep,2020*/
+html{    /*  Usado para trabajar con definición 'em'  */
+  font-size: 16px;
+}
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  line-height: 1.8em;
+  text-align: left;
+  color: #000;
+  font-weight: 400;
+  margin: 1em;
+  user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -o-user-select: none;
+/*background-color: var(--color1); prueba de variables*/
+}
+
+ #etiquetaRespuesta {
+  /* position: absolute;  
+  top: 0px;*/
+  margin-left: 5px;     
+} 
+
+hr.separador {
+  height:2px;
+  border-width:0;
+  color:gray;
+  background-color:gray;
+  margin: 2px 2px !important;
+}
+/* Iniciamos uso de variables en css Marzo 1,20*/
+:root {
+  --color1: green;
+  --fuente1: italic 15px Tahoma;
+}
+
+input[type="text"]:focus {
+  /* outline: none; */
+  outline-width: 2px;
+  border-radius: 4px;
+}
+
+#head{
+  float: left;
+  /* width: 80%; */
+}
+
+#btnPaginador {
+  margin-left: 5px;
+  margin-right: 5px;
+  opacity: 1;
+  cursor: default;
+}
+
+.ir-arriba {
+  display:none;
+  padding:15px;
+  background:#63c9e0;
+  font-size:20px;
+  color:#fff;
+  cursor:pointer;
+  position: fixed;
+  bottom:20px;
+  right:20px;
+  border-radius: 50%;
+  z-index: 10000;
+  }
+
+
+#encabezado .info{
+  background-color: #0069d9;
+  float: right;
+  color: #fff;
+  text-align: right; 
+  padding: 20px;
+  margin: 0 0 0 auto;
+}
+
+.estilosinstruccion{
+  background-color: #0069d9;
+  color: #fff;
+  padding: 5px 10px;
+  margin-top: 3px;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+ /* right: 0%;
+  position: relative;*/
+ /* width: 70%;*/
+ /* background: yellow;*/
+}
+
+.tamico{
+  font-size: 23px;
+}
+
+
+.modal {
+width:100%;
+height: 100%;
+background-color: #000;
+opacity: 1;
+z-index: 10000;
+
+/*left:50%;*/
+/*height: auto;*/
+/*position:fixed;*/
+/*left:50%;  */
+/*background-color: yellow;*/
+}
+
+/*.modal .wrapper{
+  position:relative; 
+  left:-50%;
+  background-color: blue;
+}  */
+
+.modal .modal-content{
+  position: absolute;
+  left: 50%;
+  top: 50%; /*Con estas centro el borde superior o izquierdo al centro de la pantalla*/
+  transform: translate(-50%, -50%); /* Con esto me regreso el 50% de la 'imagen' y se centra*/
+  max-height: 95%;
+  max-width: 50%;
+  /* width: 50%; con estos porcentajes evito que se superponga al tache de cierre y controlo que no se salga de pantalla */
+  
+}
+
+.iconoLupa{
+    /*  margin-left:10px;*/
+   /* margin-left:4px;  
+      color: green;*/
+      font-size: 1.2em;  
+       width: 0em;   /*con esto no pone fondo...orale RAAR Ago 8,119*/          
+  }
+/*
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }*/
+.dropup {
+    position: relative;
+   /* display: inline-block;*/
+   
+  }
+  
+  /* Dropup content (Hidden by Default) */
+  .dropup-content {
+/*    display: none;*/ /*para el efecto de aparecer, pero no funciona en mobiles*/
+    
+    position: absolute;
+  /*  bottom: 50px;*/
+    top: 6px;
+    left: 6px;
+    background-color: #f1f1f1;
+  /*  min-width: 160px;*/
+    min-width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 100; /* lo puse en asi para que quede al frente...RAAR*/
+   top: 40%;    /* <<<<<<<<<<<============== JLBG Oct 16, 2019, centrar lupa dentro de imagen */
+   left: 46%;    /* <<<<<<<<<<<============== JLBG Oct 16, 2019, centrar lupa dentro de imagen */
+
+  }
+  
+  /* Links inside the dropup */
+  /*.dropup-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    
+  }*/
+  
+  /* Change color of dropup links on hover */
+  .dropup-content i:hover {
+   background-color: #ddd;
+
+   border-radius: 5px;
+  }
+  
+  /* Show the dropup menu on hover */
+  .dropup:hover .dropup-content {
+
+    display: block; 
+ 
+  }
+
+#ImgZoom {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #closeZoom{
+    font-size: 3em;
+    opacity: initial;
+    color: #fff;
+    padding-right: 1%;
+    text-shadow: none;
+  }
+/*.autoconocimiento {
+    height: 100px;
+    width: 100px;
+}*/
+
+
+
+.ui-state-disabled {
+    opacity: .65 !important;
+    
+
+}
+.mostrar { /* Hay que eliminar*/
+	 display:""; /*estaba initial, RAAR mar 4,19: al usar initial provocaba que no diera salto de linea el div clase sub-item, pregunta */
+}
+.ocultar {
+	display: none !important; /*RAAR mar 23,19: algo esta provocando colision de css, sospecho de .addClass("col-md-3 col-lg-3");*/
+}
+
+.visible { /*Para hacer visibles o no elementos SIN QUITARLOS...*/
+    visibility: visible;    
+  }  
+.invisible {
+    visibility: hidden;
+}
+
+.blink {
+    animation: blink 2s linear infinite;
+    -webkit-animation: blink 2s linear infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0.0; }
+  }
+  @-webkit-keyframes blink {
+    50% { opacity: 0.0; }
+  }
+
+.avisaFaltante {
+    border: 2px solid #0069d9 !important;
+}
+
+.objetivoSeleccionRapida { /* para click sencillo y doble click*/
+  /*  border: 2px solid paleturquoise; */
+  border: 2px solid paleturquoise;
+  border-radius: 4px;
+}
+
+.bordeDrop { /*es el nomal de inicio*/
+    border: 2px solid #AAAAAA;
+    border-radius: 4px;
+ 
+}
+
+.mostrarRetro{
+    display:inline-block;
+}
+
+.ocultarRetro{
+    display:none;
+}
+
+.reactivos.center{
+	float: none;
+    margin: auto;
+    /*column-count:4; // para que sean columnas los reactivos con sus casillas...*/
+}
+
+.respuestas .lista-respuestas .sub-item .draggable { /*RAAR Ago 14,18: draggables area respuestas*/
+
+
+    min-height: 30px;
+    /* max-height: 90px; */
+    padding: 5px;
+/*	max-width: 100%; /* Esto funciona bien en zona de respuestas..*/
+    border: 2px solid #AAA;
+border-radius: 4px;    
+	  cursor:move;
+	  background-color: #ffffff;
+   /* min-width: 100%;*/	/* Este y el display block para que esten alineadas las casillas de respuesta */
+   display: block; /*block*/
+   overflow: hidden;
+   margin: 0 auto;    /* <<<<<<<<<<<============== JLBG Oct 16, 2019, centrar div interno dentro de externo */
+}
+
+/* .draggable {
+  background-color: #ffffff !important;
+} */
+
+.reactivos .lista-preguntas, .respuestas .lista-respuestas{
+    line-height: 1.5em;
+    background-color:#EAEAEA;
+    background: transparent; 
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    /* z-index: 1; */
+    /* padding: 10px; */
+}
+.sub-item > p {
+   /* display: inline;*/ /*,RAAR Nov 21,18: quito esto para que sea block y no necesite <br> */
+    margin-right: 6px;
+}
+
+.reactivos .lista-preguntas .sub-item, .respuestas .lista-respuestas .sub-item{
+	padding: 5px;
+	/* margin: 15px; */
+/* display:marker;*/
+}
+
+.reactivos .lista-preguntas .sub-item .droppable{
+  /*  display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #AAAAAA;
+    border-radius: 4px;
+    min-width: 150px;
+    height: 42px;
+	position: relative;
+    top: 0px; */ /*13 RAAR Ago 16,18: disminuyendo dejo se encimarse al drop */
+    height:auto;
+   
+ /*   width: auto;
+    width: 230px;*/
+
+	position: relative;
+	/*top: 0px;*/
+    content: ""; 
+    display: inline-block;
+    margin: 5px;
+    min-width: 50px;
+    min-height: 30px;
+    padding: 0 5px;
+    text-align: centers;
+/*    background-color: white;  ahora se colorea la zona de reactivos...*/
+ /*  border: 1px solid #AAAAAA;
+    border-radius: 4px;*/
+
+    /* width: 40px;
+    height: 30px; */
+   
+}
+
+.reactivos .lista-preguntas .sub-item .droppable.ocupado{
+    top: 0;
+}
+
+.reactivos#reactivo{
+    padding: 0px 0px 0px 0px; 
+}
+#encabezado{
+    padding: 0;
+}
+.reactivos .lista-preguntas .sub-item .droppable.ocupado.correcto{
+	top: 0;
+    border:2px solid #83c635 !important;
+    color:#83c635;                  /* JLBG jun 12, 2019; cambié a color original en vez de verde #030*/
+}
+
+.reactivos .lista-preguntas .sub-item .droppable.ocupado.incorrecto{
+	top: 0;
+    border:2px solid #f01b18 !important;    
+    color:#f01b18;                  /* JLBG jun 12, 2019; cambié a color original en vez de rojo #300*/
+}
+
+.reactivos .lista-preguntas .sub-item .droppable.dragOver{
+	border-color: #AAAAAA;
+  background-color: #AAAAAA;
+  /* background-color: white; */
+}
+
+.reactivos .lista-preguntas .sub-item .droppable.ocupado.correcto.dragOver{
+  border:2px solid #83c635;
+  color: #83c635;                  /* color indicado por JBecerril*/
+}
+
+.reactivos .lista-preguntas .sub-item .droppable.ocupado.dragOver{
+	border-color: #aaaaaa;
+	background-color:transparent;
+}
+
+.reactivos .lista-preguntas .sub-item .droppable .clonado{
+   /* display: inline-block;    */
+   max-height: 90px;
+   margin: 0px;
+
+}
+
+object[data="img/blanco.png"] {
+  /* color:  yellow; */
+  height: 0px; /* no queremos que se vea img/blanco es un truco para inicializar el object*/
+}
+
+/*.reactivos .lista-preguntas .sub-item .droppable .clonado.correcto{*/
+.ocupado.correcto >.clonado   { /* para marcar textos al calificar*/
+    color:initial;        /* JLBG jun 12, 2019; cambié a color original en vez de rojo #600*/
+    background-color: transparent;
+    /*font-weight: bold;*/
+    
+}
+/*.reactivos .lista-preguntas .sub-item .droppable .clonado.incorrecto{*/
+.ocupado.incorrecto >.clonado{
+    color:initial;    /* JLBG jun 12, 2019; cambié a color original en vez de rojo #600*/
+    background-color: transparent;
+    /*font-weight: bold;*/
+}
+
+.respuestas{
+  text-align:center;
+/*  background-color: red;*/
+}
+
+
+
+/*.respuestas.col-md-3{ /*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/
+.respuestasSiempreCentro { /*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/
+    margin: 0; /* de aqui al transform es para centrar horizontalmente,RAAR elegante jun 20,18 */
+    position: fixed;    /*Para permitir que se queden fijas las respuestas*/
+    top: 10%;    
+  /*  right: 0%;*/
+    /*transform: translate(200%, -50%);	*/
+       /*right: 50%;*/
+ /*	 height: 100%; RAAR elegante jun 20,18 lo apago mientas por que si son pocos se amontonan arriba*/
+}
+
+.derechaPantalla{
+  right: 0%;
+}
+
+.derechaPantallaPos{
+  left: 30%;
+  position: relative;
+}
+/*izquierdaPantalla{
+  left: 0%;
+}*/
+
+.respuestas.center{
+	float: none;
+/*	margin: auto;*/
+	
+}
+
+.respuestas.center .lista-respuestas .sub-item{
+	display: inline-block;
+	/* width:200px; */
+/*	vertical-align:middle;*/
+}
+.ejercicio:after{
+	clear: both;
+	content: "";
+	display: block;
+}
+
+.ejercicio-arrastrar{
+    padding: 0;
+}
+
+.revisa {
+    width: 300px;
+    margin: auto;
+}
+
+.revisa button{
+	display: block;
+	width: 150px;
+	margin: 10px auto;
+}
+.revisa:before{
+	content: "";
+	display: block;
+	clear: both;
+}
+.retroalimentacion{
+	text-align:center
+}
+.barraInferior{
+    text-align: center;
+    clear: both;
+}
+.retroBien{
+    color: rgb(0, 131, 0);
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid rgb(0, 165, 0);
+    padding: 6px;
+    border-radius: 3px;
+	line-height:30px;
+}
+
+.retroMal{
+    color: rgb(131, 0, 0);
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgb(165, 0, 0);
+    padding: 6px;
+    border-radius: 3px;
+	margin: 0 2px;
+	line-height:30px;
+}
+
+#txt_controles  {
+    text-align: left;
+    background-color: red;
+    float: center;
+    height: 100px;
+}
+
+#incrementar_txt {
+    float: right;
+    width: 42px;
+    height: 42px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: #333333 0px solid;
+    cursor: pointer;
+    vertical-align: middle;
+    background-image: url(../img/aalto.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+
+#decrementar_txt {
+    float: right;
+    margin-right: 5px;
+    width: 42px;
+    height: 42px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: #333333 0px solid;
+    cursor: pointer;
+    vertical-align: middle;
+    background-image: url(../img/abajo.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+#print {
+    float: right;
+    margin-right: 5px;
+    width: 42px;
+    height: 42px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: #333333 0px solid;
+    cursor: pointer;
+    vertical-align: middle;
+    background-image: url(../img/imprimir.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+.contraste_normal{ 
+    float: right;
+    margin-right: 5px;
+    width: 42px;
+    height: 42px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: #333333 0px solid;
+    cursor: pointer;
+    vertical-align: middle;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-image: url(../img/altocontraste.svg);
+  }
+  .contraste_b_n{
+    float: right;
+    margin-right: 5px;
+    width: 42px;
+    height: 42px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: #333333 0px solid;
+    cursor: pointer;
+    vertical-align: middle;
+    background-image: url(../img/contraste.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+.headings { /*nm*/
+	font-family: 'Open Sans', sans-serif;
+    color: #b1b1b1;
+    letter-spacing: 1px;
+    font-size: 1em;
+    margin: 0;
+}
+p {
+    font-family: 'Open Sans', sans-serif;
+   font-size: 1.1em;
+    line-height: 1.8em;
+    text-align: left;
+    display: inline; /*the default is block, por la paloma al inicio del reactivo*/
+}
+.pregunta > p{
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  font-size: 1em;
+  line-height: 1.8em;
+  text-align: left;
+  display: inline; /*the default is block, por la paloma al inicio del reactivo*/
+
+}
+.actividad {
+    max-width: 250px;
+    background: #b1b1b1;
+    padding: 5px;
+    border-radius: 20px;
+    text-align: center;
+    color: #fff!important;
+    margin-bottom: 15px !important;
+}
+.headings-int {
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+  font-size: 1.8em;
+  text-align: left;
+}
+
+.under-li {
+    border-bottom: solid #dbdbdb;
+    border-width: 3px;
+    padding-bottom: 9px;
+    width: 80%;
+}
+
+i.ip {
+  color: #83c635;
+}
+i.it {
+  color: #f01b18;
+} 
+
+.palomitaReactivo{                 /* JLBG jun 12, 2019; cambié el tamaño de la palomita y el tache*/
+  margin-right:4px;
+    
+}
+.tacheReactivo{
+    margin-right:4px;
+}
+
+.palomita{
+    margin-left:4px;
+}
+  .tache{
+    margin-left:4px;
+}
+
+.icono{
+  font-size: 6em;
+  float: right;
+  color: #b1b1b1;
+}
+
+
+@media (min-width:900px){ /*mientrs mínimo */  
+    .icono {
+       display: none;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+  .respuestasSiempreCentro { /*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/
+    /*   margin: 0; 
+       position: static;      
+       top: 10%;    */
+       position: static; 
+   }
+}
+@media only screen and (max-width: 992px) { 
+  body{
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    margin:0.5em;
+  }
+  .info,   .estilosinstruccion p {
+    color: #fff;
+  }
+	.respuestas .lista-respuestas .sub-item .draggable {
+    max-width: 200px;
+    
+  }
+  .respuestas .lista-respuestas .sub-item{ /*Para que las respuestas queden horizontales al disminuir largo de pantalla*/
+    display: inline-block;
+    /* width:200px; */
+  /*	vertical-align:middle;*/
+  }
+    .modal .modal-content{
+      /* position: absolute; */
+      /* left: 50%; */
+      /* top: 50%; Con estas centro el borde superior o izquierdo al centro de la pantalla */
+      /* transform: translate(-50%, -50%); Con esto me regreso el 50% de la 'imagen' y se centra */
+      /* max-height: 95%; */
+      max-width: 95%;
+      /* width: 95%; con estos porcentajes evito que se superponga al tache de cierre y controlo que no se salga de pantalla */
+      
+    }
+    .respuestasSiempreCentro { /*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/
+   /*   margin: 0; 
+      position: static;      
+      top: 10%;    */
+      position: static; 
+  }
+  /* #instr{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } */
+  
+  }
+
+/*  Clases para retros tooltip JLBG*/
+.tooltip.in {opacity:1!important;}
+.tooltip-inner {font-size: 1.2em; text-align: left; min-width: 280px; padding: 10px}					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+
+.tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
+.tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }
+.tooltip.primary.right > .tooltip-arrow  { border-right-color:  #337ab7; }
+.tooltip.primary.bottom > .tooltip-arrow { border-bottom-color: #337ab7; }
+.tooltip.primary.left > .tooltip-arrow   { border-left-color:   #337ab7; }
+
+.tooltip.info .tooltip-inner          { background-color:    #31b0d5; }
+.tooltip.info.top > .tooltip-arrow    { border-top-color:    #31b0d5; }
+.tooltip.info.right > .tooltip-arrow  { border-right-color:  #31b0d5; }
+.tooltip.info.bottom > .tooltip-arrow { border-bottom-color: #31b0d5; }
+.tooltip.info.left > .tooltip-arrow   { border-left-color:   #31b0d5; }
+
+.tooltip.success .tooltip-inner          { background-color:    #83c635; }
+.tooltip.success.top > .tooltip-arrow    { border-top-color:    #83c635; }
+.tooltip.success.right > .tooltip-arrow  { border-right-color:  #83c635; }
+.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #83c635; }
+.tooltip.success.left > .tooltip-arrow   { border-left-color:   #83c635; }
+
+.tooltip.warning .tooltip-inner          { background-color:    #ec971f; }
+.tooltip.warning.top > .tooltip-arrow    { border-top-color:    #ec971f; }
+.tooltip.warning.right > .tooltip-arrow  { border-right-color:  #ec971f; }
+.tooltip.warning.bottom > .tooltip-arrow { border-bottom-color: #ec971f; }
+.tooltip.warning.left > .tooltip-arrow   { border-left-color:   #ec971f; }
+
+.tooltip.danger .tooltip-inner          { background-color:    #f01b18; }
+.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #f01b18; }
+.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #f01b18; }
+.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #f01b18; }
+.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #f01b18; }
+
+
+
+
+
+/* Slideshow container */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.slideshow-container {
+  position: relative;
+  background: #f1f1f1f1;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Slides */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.mySlides {
+  padding: 30px;
+  text-align: center;
+  margin: 0 50px;
+}
+
+/* Next & previous buttons */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -30px;
+  padding: 16px;
+  color: #888;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.next {
+  position: absolute;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+}
+
+/* The dot/bullet/indicator container */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.dot-container {
+  text-align: center;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+/* The dots/bullets/indicators */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* Add a background color to the active dot/circle */					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores */
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Add an italic font style to all quotes */
+q {font-style: italic;}
+
+/* Add a blue color to the author */
+.author {color: cornflowerblue;}
+
+.ui-draggable-dragging {
+  border: 2px solid #aaaaaa;
+  border-radius: 4px; 
+  cursor: move;
+  background-color: #ffffff;
+  /* display: block; */
+}
+
+object.carrusel {					/* JLBG Mayo 22, 2020; ajuste para colocar respuesta desde slides inferiores object.carrusel {		 */
+    position: relative; 
+    min-height: 30px;
+    padding: 5px;
+    border: 2px solid #aaaaaa;
+    border-radius: 4px; 
+    cursor: move;
+    background-color: #ffffff;
+    display: inline-block;  
+    
+    overflow: hidden;
+    margin: 0px auto;
+    /* z-index: 10000 !important;   */
+    left: 0px;
+    top: 0px; 
+    /* box-shadow: 5px 10px 10px #383838; */
+     /* border:none; */
+}
+
+/* .droppable .object {
+  background-color: #ffffff;
+} */
+
+ @media only screen and (max-width: 992px) {
+  /* .carrusel {
+    background-color: initial;
+    border:none;
+
+  }  */
+  .dropup.sub-item.respuesta {
+    /* border: 1px solid; */
+    /* background-color: #ffffff; */
+    /* box-shadow: 5px 10px 10px #383838; */
+  }
+  #reactivo{
+    background-color: #ecebeb;
+  }
+}
+
+#desplazamiento{
+  text-align: center;
+}
+
+#testPadre {
+width: 100%;
+text-align: center;
+}
+
+.test {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 0 10px;
+  border: 1px solid black;
+}

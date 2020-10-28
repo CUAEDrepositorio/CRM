@@ -97,7 +97,8 @@ function identificaPlataforma() {
 
 function detectaSeleccion() { // esto es por que es derivado de un completar arrastrando...
 
-	jq321("input.casillaRespuesta").click(function () {
+	//jq321("input.casillaRespuesta").click(function () {
+		jq321("button.casillaRespuesta").click(function () {
 		self = this; //practica para asegurar que estoy en el que dio click....
 		var reactivo = jq321(self).attr("data-reactivo");
 		var idCasilla = jq321(self).attr("id");
@@ -114,8 +115,8 @@ function detectaSeleccion() { // esto es por que es derivado de un completar arr
 			
 			jq321("#" + reactivo).addClass("correcta");
 			if (calificarEnTiempoReal) {
-				jq321("." + idCasilla).find(".ip").removeClass("ocultar").addClass("mostrar");
-				jq321("." + reactivo).find(".ip").removeClass("ocultar").addClass("mostrar");
+				jq321("." + idCasilla).find(".ip").removeClass("ocultar");
+				jq321("." + reactivo).find(".ip").removeClass("ocultar");
 				jq321(".casillaRespuesta"+"." + reactivo).prop("disabled", true);
 			}
 
@@ -125,8 +126,8 @@ function detectaSeleccion() { // esto es por que es derivado de un completar arr
 
 			jq321("#" + reactivo).addClass("incorrecta");
 			if (calificarEnTiempoReal) {
-				jq321("." + idCasilla).parent().find(".it").removeClass("ocultar").addClass("mostrar");
-				jq321("." + reactivo).find(".it").removeClass("ocultar").addClass("mostrar");
+				jq321("." + idCasilla).parent().find(".it").removeClass("ocultar");
+				jq321("." + reactivo).find(".it").removeClass("ocultar");
 				jq321(".casillaRespuesta"+"." + reactivo).prop("disabled", true);
 			}
 
@@ -239,7 +240,8 @@ function calificar(){
 
 	jq321('#btnRevisar').hide();
 	jq321('#btnReiniciar').show();
-	var listaContestadas = jq321 ("input.casillaRespuesta.elegida"); 
+	//var listaContestadas = jq321 ("input.casillaRespuesta.elegida"); 
+	var listaContestadas = jq321 ("button.casillaRespuesta.elegida"); 
 	jq321.each(listaContestadas,function (indice){ 
 		self = this; //practica para asegurar que estoy en el que dio click....
 		var reactivo = jq321(self).attr("data-reactivo");
@@ -247,32 +249,25 @@ function calificar(){
 		var leeResp = jq321(self).attr("data-es-respuesta");
 		var esRespuesta = (leeResp == "true" ? true : false);
 		if (esRespuesta) { //correcta
-			//jq321(self).parent().find(".ip").removeClass("ocultar").addClass("mostrar");
-			
-			jq321("." + idCasilla).find(".ip").removeClass("ocultar").addClass("mostrar");
-			jq321("." + reactivo).find(".ip").removeClass("ocultar").addClass("mostrar");
-		//	jq321(self).addClass("elegida");
-		//	jq321("#" + reactivo).addClass("correcta");
+			if (mostrarRetroOpcionRespuesta) {
+				jq321("." + idCasilla).find(".ip").removeClass("ocultar");
+			}
+			if (mostrarRetroIndividual) {
+				jq321("#" + reactivo).find(".ipReactivo").removeClass("ocultar");
+			}
 		} else { //incorrecta
-
-			jq321("." + idCasilla).parent().find(".it").removeClass("ocultar").addClass("mostrar");
-			jq321("." + reactivo).find(".it").removeClass("ocultar").addClass("mostrar");
-		//	jq321(self).addClass("elegida");
-		//	jq321("#" + reactivo).addClass("incorrecta");
-			
-
+			if (mostrarRetroOpcionRespuesta) {
+				jq321("." + idCasilla).find(".it").removeClass("ocultar");
+			}
+			if (mostrarRetroIndividual) {
+				jq321("#" + reactivo).find(".itReactivo").removeClass("ocultar");
+			}
 		}
-		//jq321("#" + reactivo).removeClass("incontestada").addClass("contestada");
-		//q321('[data-listaResp*="|'+respuestas[i].txt+'|"]');		
-	/*	var tSearch = '[data-reactivo="' + reactivo + '"]';
-		jq321(tSearch).prop("disabled", true);*/
-	//	jq321(tSearch).css("background-color", "yellow");
-
 		console.log(reactivo);
 		console.log(esRespuesta);
-
 	});	
-	jq321("input.casillaRespuesta").prop("disabled", true);
+	//jq321("input.casillaRespuesta").prop("disabled", true);
+	jq321("button.casillaRespuesta").prop("disabled", true);
 
 	
 	intentos++;
@@ -287,8 +282,10 @@ function revisaBuenas() {
 			mostrarEval((esMobil?"":"info"), "Result", "You have gotten " + correctas + " " + txtResp + " of " + totalPreguntas + ".<br/><br/>" + asignarEvaluacion(correctas));
 			break;
 		default:
-			var txtResp = (correctas == 1) ? "respuesta correcta " : "respuestas correctas ";
-			mostrarEval((esMobil?"":"info"), "Resultado", "Obtuviste " + correctas + " " + txtResp + " de " + totalPreguntas + ".<br/><br/>" + asignarEvaluacion(correctas));
+			//var txtResp = (correctas == 1) ? "respuesta correcta " : "respuestas correctas ";
+			//mostrarEval((esMobil?"":"info"), "Resultado", "Obtuviste " + correctas + " " + txtResp + " de " + totalPreguntas + ".<br/><br/>" + asignarEvaluacion(correctas));
+			mostrarEval("", "Resultado", "Obtuviste " + correctas + "/" + totalPreguntas + " respuestas correctas." + "<br/><br/>" + asignarEvaluacion(res));
+
 	}
 	console.log("evaluacion " + correctas + " " + txtResp + " :--: " + totalPreguntas);
 	if (ambSCORM) {
@@ -359,30 +356,47 @@ function reiniciar() {  //se invoca en el boton Next Atempt, quito taches y acti
 	if (intentos < maxIntentos) {
 		//jq321(".incorrecta").find(".it").removeClass("mostrar").addClass("ocultar");
 		//var idCasilla = jq321(".incorrecta").attr("id");
-	//	jq321("."+idCasilla).find(".it").removeClass("mostrar").addClass("ocultar");
-	jq321(".it.mostrar").removeClass("mostrar").addClass("ocultar");
-	jq321(".ip.mostrar").removeClass("mostrar").addClass("ocultar");
-	var listadoIncorrectas = jq321(".incorrecta");
-	jq321.each(listadoIncorrectas, function(indice) {
-		var idIncorrecta = jq321(this).attr("id");
-		jq321("."+idIncorrecta).prop("disabled", false);
-	});
-	var listadoCorrectas = jq321(".pregunta.correcta");
-	jq321.each(listadoCorrectas, function(indice) {
-		var idCorrecta = jq321(this).attr("id");
-		jq321("."+idCorrecta+".elegida").addClass("opcionCorrecta");
-	});
+		//	jq321("."+idCasilla).find(".it").removeClass("mostrar").addClass("ocultar");
+		if (mostrarRetroOpcionRespuesta) {
+			jq321(".it").addClass("ocultar");
+			jq321(".ip").addClass("ocultar");
+		}
+		if (mostrarRetroIndividual) {
+			jq321(".itReactivo").addClass("ocultar");
+			jq321(".ipReactivo").addClass("ocultar");
+		}
 
-	jq321(".incorrecta").find(".casillaRespuesta").removeClass("elegida")
-	jq321(".incorrecta").removeClass("contestada").addClass("incontestada").removeClass("incorrecta");
+		var listadoIncorrectas = jq321(".incorrecta");
+		jq321.each(listadoIncorrectas, function (indice) {
+			var idIncorrecta = jq321(this).attr("id");
+			jq321("." + idIncorrecta).prop("disabled", false);
+		});
+
+		if (!siguienteIntentoBlanco) {
+			var listadoCorrectas = jq321(".pregunta.correcta");
+			jq321.each(listadoCorrectas, function (indice) {
+				var idCorrecta = jq321(this).attr("id");
+				jq321("." + idCorrecta + ".elegida").addClass("opcionCorrecta");
+			});
+		}
+
+		jq321(".incorrecta").find(".casillaRespuesta").removeClass("elegida")
+		jq321(".incorrecta").removeClass("contestada").addClass("incontestada").removeClass("incorrecta");
+		if (siguienteIntentoBlanco) {
+			var listadoCorrectas = jq321(".correcta");
+			jq321.each(listadoCorrectas, function (indice) {
+				var idCorrecta = jq321(this).attr("id");
+				jq321("." + idCorrecta).prop("disabled", false);
+			});
+			jq321(".correcta").find(".casillaRespuesta").removeClass("elegida")
+			jq321(".correcta").removeClass("contestada").addClass("incontestada").removeClass("correcta");
 	
-	
-		
+		}
 
 	} else {  //if (intentos < maxIntentos)
 		mostrarMensaje(1);
 	} //if (intentos < maxIntentos)
-	
+
 }
 
 function quitarAcentos(str) {

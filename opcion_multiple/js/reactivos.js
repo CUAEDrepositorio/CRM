@@ -222,15 +222,12 @@ function creaEscribir(reactivosMostrar){
 function creaArrastrar() { // Se arman las textos con sus correspondientes cajas...
 	var idCas = 0; //para cololar un ID unica a cada casilla droppable....
 	//var textoRetro = '';
-//	var palomita = "<img class='palomita' style='display:' src='img/palomita.png' />"; //pendiente quitar el display y usar .mostrar
-//	var tache = "<img class='tache' style='display:' src='img/tache.png' />";
-	var palomita = "<i class='ip far fa-check-circle blink ocultar'></i>"; //no imagen...es libreria...
-	var tache = "<i class='it far fa-times-circle blink ocultar'></i>";
 
-	//var palomitaReactivo = "<img class='palomitaReactivo' style='display:none' src='img/palomita.png' />";
-	//var tacheReactivo = "<img class='tacheReactivo' style='display:none' src='img/tache.png' />";
-	var palomitaReactivo = '';//"<i class='ipReactivo far fa-check-circle blink ocultar'></i>"; //no imagen...es libreria...
-	var tacheReactivo = ''; //"<i class='itReactivo far fa-times-circle blink ocultar'></i>";
+	var palomita = "<i class='ip far fa-2x fa-check-circle blink ocultar'></i>"; //no imagen...es libreria...
+	var tache = "<i class='it far fa-2x fa-times-circle blink ocultar'></i>";
+
+	var palomitaReactivo = "<i class='ipReactivo far fa-2x fa-check-circle blink ocultar'></i>";
+	var tacheReactivo = "<i class='itReactivo far fa-2x fa-times-circle blink ocultar'></i>";
 
 
 
@@ -262,9 +259,9 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 		//var res = (ponerNumeralResp ? String.fromCharCode(j + 97) + ') ':'');
 		var numeralPregunta;
 		if (numeralAlfabetico) {
-			numeralPregunta = (ponerNumeral ? String.fromCharCode(i + 65) : '') + ((ponerNumeral || ponerNumeroPreguntas)?'.&nbsp;&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
+			numeralPregunta = (ponerNumeral ? String.fromCharCode(i + 65) : '') + ((ponerNumeral)?')&nbsp;&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
 		} else {
-			numeralPregunta = (ponerNumeral ? (i + 1) : '') + (ponerNumeroPreguntas? '/'+reactivosMostrar:'') + ((ponerNumeral || ponerNumeroPreguntas)?'.&nbsp;&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
+			numeralPregunta = (ponerNumeral ? (i + 1) : '') + (ponerNumeroPreguntas? '/'+reactivosMostrar:'') + ((ponerNumeral)?')&nbsp;&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
 		}
 		if (cuentaPreguntasSegmento==elementosPorSegmento) {
 			cuentaPreguntasSegmento = 1;
@@ -281,10 +278,8 @@ function creaArrastrar() { // Se arman las textos con sus correspondientes cajas
 			enlaza += textoTemp;
 		}
 		enlaza += "|";
-		var test = i % 2;
-		var fondoAlternadoColor = ((i % 2) == 0?"fondoAlternado ":"");
-		var pClases = fondoAlternadoColor+"sub-item pregunta ocultar segmento"+cuentaSegmentos;
-var h1 ='<div class="incontestada '+pClases+'" id="preg' + preguntas[i].ind + '" data-listaResp="'+enlaza+'">';
+		 var pClases = "sub-item pregunta ocultar segmento"+cuentaSegmentos;
+		var h1 ='<div class="incontestada '+pClases+'" id="preg' + preguntas[i].ind + '" data-listaResp="'+enlaza+'">';
 		var h2 = '<p>' + numeralPregunta + preg[0];
 		//var h2 = '<span>' + numeralPregunta + preg[0];           // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true
 		if (verLongitud==false){
@@ -295,11 +290,11 @@ var h1 ='<div class="incontestada '+pClases+'" id="preg' + preguntas[i].ind + '"
 		}		
 		var h11 ='</div>';
 
-		textoRetroReactivoCorrecta = preguntas[i].txt2[0]; //RAAR Ago 16,18: uso clase retroBien para desplegar retro por arroba, puede colisionar
+		textoRetroReactivoCorrecta = preguntas[i].txt2[0]; 
 		textoRetroReactivoIncorrecta = preguntas[i].txt2[1];
-		var rCorrecta = '<span class="ttRetroReactivo preg'+preguntas[i].ind+'" data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(textoRetroReactivoCorrecta, 1) + '">' + palomitaReactivo + '</span>'; // Esto así por que si no es tooltip, el funcionamiento cambia y solo se inserta la imagen...
-		var rIncorrecta = '<span class="ttRetroReactivo preg'+preguntas[i].ind+'" data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(textoRetroReactivoIncorrecta, 1) + '">' + tacheReactivo + '</span>';
-		HTMLArmadoNew = h1+rCorrecta+rIncorrecta+h2+HTMLDroppable+h10+h11;
+		var rCorrecta = '<span class="ttRetroReactivo preg'+preguntas[i].ind+'" data-toggle="tooltip" data-placement="auto" data-type="success" title="' + tam(textoRetroReactivoCorrecta, 1) + '">' + palomitaReactivo + '</span>'; // Esto así por que si no es tooltip, el funcionamiento cambia y solo se inserta la imagen...
+		var rIncorrecta = '<span class="ttRetroReactivo preg'+preguntas[i].ind+'" data-toggle="tooltip" data-placement="auto" data-type="danger" title="' + tam(textoRetroReactivoIncorrecta, 1) + '">' + tacheReactivo + '</span>';
+		HTMLArmadoNew = h1 + "<div>" + rCorrecta+rIncorrecta+h2 + HTMLDroppable+h10 + "</div>" + h11; // div para encerrar al <p>
 		jq321("#reactivo .lista-preguntas").append(HTMLArmadoNew);
 
 	/*	jq321("#reactivo .lista-preguntas").append("<div class='respuestas ocultar segmento"+cuentaSegmentos+"'>RESPUESTAS</div>");*/
@@ -309,19 +304,19 @@ var h1 ='<div class="incontestada '+pClases+'" id="preg' + preguntas[i].ind + '"
 		for (var j=0;j<cuentaResp;j++){ // ahora aqui pongo las RESPUESTAS...
 			//	console.log("genero resp en ciclo j :"+preguntas[i].listaResp[j]);
 			if (numeralRespuestaAlfabetico) {
-				numeralRespuesta = (ponerNumeralRespuesta ? String.fromCharCode(j + 97) : '') + ((ponerNumeralRespuesta )?'.&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
+				numeralRespuesta = (ponerNumeralRespuesta ? String.fromCharCode(j + 97) : '') + ((ponerNumeralRespuesta )?')&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
 			} else {
-				numeralRespuesta = (ponerNumeralRespuesta ? (j + 1) : '') + ((ponerNumeralRespuesta)?'.&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
+				numeralRespuesta = (ponerNumeralRespuesta ? (j + 1) : '') + ((ponerNumeralRespuesta)?')&nbsp;':'');  // JLBG, 2019, feb 21: ajusté espacios separadores cuando ponerNumeral es true		
 			}
 			if (longRespuesta<preguntas[i].listaResp[j].opcion.length) {
 				longRespuesta=preguntas[i].listaResp[j].opcion.length;
 			}
 			var textValidaRetro = (preguntas[i].listaResp[j] == undefined?'':preguntas[i].listaResp[j].retro);	
-			var retroCasilla = '<span class="preg'+preguntas[i].ind+'-'+j+'" data-toggle="tooltip" data-placement="auto left" data-type="success" title="' + tam(textValidaRetro, 1) + '">' + palomita + '</span>'+'<span class="preg'+preguntas[i].ind+'-'+j+'" data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(textValidaRetro, 1) + '">' + tache + '</span>';
-			//var rArrIncorrecta = (esMobil?'<span data-toggle="tooltip" data-placement="auto left" data-type="danger" title="' + tam(textValidaInc, 1) + '">' + tache + '</span>':tache);
+			var retroCasilla = '<span class="preg'+preguntas[i].ind+'-'+j+'" data-toggle="tooltip" data-placement="auto" data-type="success" title="' + tam(textValidaRetro, 1) + '">' + palomita + '</span>'+'<span class="preg'+preguntas[i].ind+'-'+j+'" data-toggle="tooltip" data-placement="auto" data-type="danger" title="' + tam(textValidaRetro, 1) + '">' + tache + '</span>';
 			var debugRespuesta = (debug?'<sup>'+preguntas[i].listaResp[j].correcta+'</sup>':"");
 			var claseRespuestas='';
-			var tagInterno = '<input class="casillaRespuesta preg'+preguntas[i].ind+'" id="preg'+preguntas[i].ind+'-'+j+'" type="button" data-es-respuesta="'+preguntas[i].listaResp[j].correcta+ '" data-respuesta="'+preguntas[i].listaResp[j].opcion+ '"  data-reactivo="preg' + preguntas[i].ind+'" value="'+numeralRespuesta+tamInputValue(preguntas[i].listaResp[j].opcion,1)+'">';
+			//var tagInterno = '<input class="casillaRespuesta preg'+preguntas[i].ind+'" id="preg'+preguntas[i].ind+'-'+j+'" type="button" data-es-respuesta="'+preguntas[i].listaResp[j].correcta+ '" data-respuesta="'+preguntas[i].listaResp[j].opcion+ '"  data-reactivo="preg' + preguntas[i].ind+'" value="'+'test'+numeralRespuesta+tamInputValue(preguntas[i].listaResp[j].opcion,1)+'">';
+			var tagInterno = '<button class="casillaRespuesta preg'+preguntas[i].ind+'" id="preg'+preguntas[i].ind+'-'+j+'" type="button" data-es-respuesta="'+preguntas[i].listaResp[j].correcta+ '" data-respuesta="'+preguntas[i].listaResp[j].opcion+ '"  data-reactivo="preg' + preguntas[i].ind+'" value="'+numeralRespuesta+tamInputValue(preguntas[i].listaResp[j].opcion,1)+'">'+numeralRespuesta+tamInputValue(preguntas[i].listaResp[j].opcion,1)+'</button>';
 			
 			/* intento para incluir HTML,
 			<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
@@ -340,7 +335,7 @@ var h1 ='<div class="incontestada '+pClases+'" id="preg' + preguntas[i].ind + '"
 		//jq321("#reactivo .lista-preguntas").append(HTMLArmado);		
 		jq321('#preg' + preguntas[i].ind).append(HTMLArmado);		
 		//alert(longRespuesta);
-		jq321("."+"preg"+preguntas[i].ind).parents(".itemRespuesta").css("width",((longRespuesta+10)*8.5)+'px'); //le agrego el 6 por el numeral y el tooltip
+		//jq321("."+"preg"+preguntas[i].ind).parents(".itemRespuesta").css("max-width",((longRespuesta+10)*8.5)+'px'); //le agrego el 6 por el numeral y el tooltip
 	//jq321("."+"preg"+preguntas[i].ind).parents(".itemRespuesta").css("backgroundColor","red");
 		//jq321("."+"preg"+preguntas[i].ind).css("width",'100%');
 		//jq321(".claseRespuestas").css("width",(longRespuesta*8.5)+'px');
@@ -391,7 +386,60 @@ function tamInputValue(cad, n) {// 1T, 0ele.esc.ord Es para imprimir la longitud
 	return txt;
 }
 
-function mostrarMensaje(clase, recurso) { //RAAR ago 18,18: quito funcion reversa
+function mostrarMensaje(clase, recurso) { //RAAR ago 18,18: Pongo funcion reversa
+	//alert ("nueva version");
+	if (!recurso) {recurso = -1}
+	var msgs = [,
+		["Arrastra todas las respuestas a los espacios correspondientes.", "Please, drag all answers to appropriate spaces"],  // completar arrastrando
+		["Llena todos los campos de texto.", "Please, fill out all text fields"],                  // completar escribiendo
+		["Contesta todas las preguntas.", "Please, answer all questions"],                         // verdadero-falso, opcion-multiple
+		["Ordena todos los reactivos para conocer tu resultado.", "Please, sort all sentences"],   // ordenar enunciados
+		["Elige una respuesta para cada recuadro.", "Please, choose an answer for each list"],     // completar eligiendo
+		["Contesta todas las preguntas.", "Please, drag all answers to appropriate spaces"]  // lista de verificación, antes CAEsquema
+		];
+	var tipo = "";
+	var tit = "";
+	var msg = "";
+	var btnOK = "";
+	switch (clase) {
+		case 1: // intentos;
+			switch (idioma) {
+				case "ENG":
+					tit = "Warning";
+					msg = "You have reached maximum number of attempts: "+maxIntentos + "."; // empiezo a quitar los espejos....abril 26 2018
+					
+					btnOK = "OK";
+					break;
+				default:
+					tit = "Atención";
+					msg = "Has alcanzado el máximo número de intentos: "+maxIntentos + ".";
+					btnOK = "Aceptar";
+			}
+			break;
+		case 2: // Contestar TODO
+			//tipo = "warning";
+			switch (idioma) {
+				case "ENG":
+					tit = "Warning";
+					msg = msgs[recurso][1]; //recurso,1
+					btnOK = "OK";
+					break;
+				default:
+					tit = "Atención";
+					msg = msgs[recurso][0];  //recurso,0
+					btnOK = "Aceptar";
+			}
+			break;
+		default:
+			//tipo = "error";
+			tit = "Error de sistema";
+			msg = "Condición desconocida";
+			btnOK = "Aceptar";
+	}
+
+	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
+}
+/*function mostrarMensaje(clase, recurso) { //RAAR ago 18,18: quito funcion reversa
 	if (!recurso) {recurso = -1}
 	var msgs = [,
 		["Por favor, arrastra todas las respuestas a los espacios correspondientes", "Please, drag all answers to appropriate spaces"],  // completar arrastrando
@@ -443,7 +491,7 @@ function mostrarMensaje(clase, recurso) { //RAAR ago 18,18: quito funcion revers
 	}
 
 	swal({title: tit, text: msg, type: tipo, confirmButtonText: btnOK, closeOnConfirm: true, html: true });
-}
+}*/
 //function mostrarMensaje(tipo, titulo, cadena) {
 /*
 function mostrarMensaje(clase, recurso) {

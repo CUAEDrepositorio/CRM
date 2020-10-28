@@ -2,6 +2,11 @@
 
 
 */
+/*GLOBALES RAAR sep,2020*/
+html{    /*  Usado para trabajar con definición 'em'  */
+    font-size: 16px;
+}
+
 
 body{
     font-family: 'Open Sans', sans-serif;
@@ -56,12 +61,6 @@ body{
     font-size: 23px;
 }
 
-.nombreRecurso {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 2em;
-    text-align: left;
-    color: #000;
-}
 
 /*.textoInstruccion{
     font-family: 'Open Sans', sans-serif;
@@ -82,25 +81,25 @@ i.it {
 .ipReactivo{
     /*  margin-left:10px;*/
     margin-right:4px;
-      color: green;
+      color: #83c635;
       font-size: 2em;                  /* JLBG jun 12, 2019; cambié el tamaño de la palomita y el tache*/
   }
   .itReactivo{
       margin-right:4px;
-      color: red;
+      color: #f01b18;
       font-size: 2em;
   }
   
 .ip {
       /*  margin-left:10px;*/
       margin-left:4px;
-        color: green !important;
+        color: #83c635 !important;
         font-size: 2em;                  /* JLBG jun 12, 2019; cambié el tamaño de la palomita y el tache*/
     }
     
 .it {
       margin-left:4px;
-        color: red !important;
+        color: #f01b18 !important;
         font-size: 2em;
     }
 
@@ -134,7 +133,7 @@ i.it {
 }
 
 .avisaFaltante {
-    border: 2px solid #0069d9; !important;
+    border: 2px solid #0069d9 !important;
 }
 
 .objetivoSeleccionRapida { /* para click sencillo y doble click*/
@@ -148,10 +147,10 @@ i.it {
 }
 
 #btnPaginador {
-
-    /* margin-bottom:3px; */
     margin-left: 5px;
     margin-right: 5px;
+    opacity: 1;
+    cursor: default;
 }
 
 .mostrarRetro{
@@ -175,16 +174,20 @@ i.it {
     font-size: 1em;
     color: #000;
     background-color:transparent; /*ojo con esto, por que es un botón y forzo el color de fondo*/
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
+
+    border: 2px solid;
+    border-radius: 4px;
     padding: 5px; /*vista grafica recursos FIN Faby*/
 
-
-       /* min-width: 100%;  */
+    min-width: 90%; /* para dar espacio a palomita/tache*/
+    max-width: 90%;
+       /* min-width: 90%;  */
   /*  background-color: transparent;*/
    /* border-radius: 5px;*/
-text-align: left;
+    text-align: left;
 
-    width: 80%;
+    /* max-width: 80%; */
   /*padding: 1px;
   padding-left: 10px;*/
   white-space: pre-wrap; /*para que haga salto delinea*/
@@ -192,14 +195,19 @@ text-align: left;
 }
 
 .casillaRespuesta:hover { 
-    background-color: #f4edd9;
-    font-size: 1.02em !important;
+    background-color: #f4edd9 !important; 
+    font-size: 1em !important;  
+    color: black; /* la pongo por que en blanco no se ve....*/
     
 }
 
-.fondoAlternado {
+ /* .fondoAlternado {
     background-color: #f0efef;
-}
+}  */
+
+div.pregunta:nth-child(odd){
+    background-color: #f0efef;
+} 
 
 .elegida {
     background-color: #0069d9;
@@ -226,11 +234,13 @@ text-align: left;
    }
 
    .opcionIncorrecta {
-      border-color: red;
+      /*border-color: red;*/
+      border:2px solid #f01b18;
     }
    
    .opcionCorrecta {
-      border-color: green;
+     /* border-color: 83c635;*/
+     border:2px solid #83c635;
     }
 
 /*
@@ -253,12 +263,10 @@ text-align: left;
 
 .itemRespuesta {
     display: block; 
-    margin-top: 6px;
-    width:auto;    
-  /*  background-color: blue;*/
- /*   height: 200px;*/
-  /*  height: auto;*/
-   /*  margin-right: 6px;*/
+    margin-top: 6px;    
+    margin-right: 6px;   
+    min-width: 100%;  
+
  }
 
  .itemRespuestaMobil {
@@ -345,14 +353,16 @@ text-align: left;
 	text-align:center;
 }
 
-.respuestas.col-md-3{ /*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/
+
+/*RAAR elegante jun 20,18  Para que quede centrado a la derecha cuando respuestas este como columna... jun 28 lo inhabilito, da lata no pone las respuestas abajo, hay que revisar...es buena idea...*/
   /*  margin: 0; /* de aqui al transform es para centrar horizontalmente,RAAR elegante jun 20,18  elegante */
- /*   position: fixed;
+/*.respuestas.col-md-3{ 
+ /  position: fixed;
     top: 50%;
-    right: 50%;*/
- /*	 height: 100%; RAAR elegante jun 20,18 lo apago mientas por que si son pocos se amontonan arriba*/
-/*	 transform: translate(200%, -50%);	*/
-}
+    right: 50%;
+ 	 height: 100%; RAAR elegante jun 20,18 lo apago mientas por que si son pocos se amontonan arriba
+	 transform: translate(200%, -50%);	
+}*/
 
 .respuestas.center{
 	float: none;
@@ -532,13 +542,13 @@ p {
     color: #fff!important;
     margin-bottom: 15px !important;
 }
+
 .headings-int {
     font-family: 'Open Sans', sans-serif;
-    color: #6c6b82;
-    letter-spacing: 1px;
-    font-size: 2em;
-    margin-top: 0;
-}
+    color: #000;
+    font-size: 1.8em;
+    text-align: left;
+  }
 .under-li {
     border-bottom: solid #dbdbdb;
     border-width: 3px;
@@ -584,7 +594,8 @@ p {
 
 /*  Clases para retros tooltip JLBG*/
 .tooltip.in {opacity:1!important;}
-.tooltip-inner {font-size: 1.2em; text-align: left;}
+/* .tooltip-inner {font-size: 1.2em; text-align: left;} */
+.tooltip-inner {font-size: 1.2em; text-align: left; min-width: 280px; padding: 10px};
 
 .tooltip.primary .tooltip-inner          { background-color:    #337ab7; }
 .tooltip.primary.top > .tooltip-arrow    { border-top-color:    #337ab7; }
@@ -598,11 +609,11 @@ p {
 .tooltip.info.bottom > .tooltip-arrow { border-bottom-color: #31b0d5; }
 .tooltip.info.left > .tooltip-arrow   { border-left-color:   #31b0d5; }
 
-.tooltip.success .tooltip-inner          { background-color:    #449d44; }
-.tooltip.success.top > .tooltip-arrow    { border-top-color:    #449d44; }
-.tooltip.success.right > .tooltip-arrow  { border-right-color:  #449d44; }
-.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #449d44; }
-.tooltip.success.left > .tooltip-arrow   { border-left-color:   #449d44; }
+.tooltip.success .tooltip-inner          { background-color:    #83c635; }
+.tooltip.success.top > .tooltip-arrow    { border-top-color:    #83c635; }
+.tooltip.success.right > .tooltip-arrow  { border-right-color:  #83c635; }
+.tooltip.success.bottom > .tooltip-arrow { border-bottom-color: #83c635; }
+.tooltip.success.left > .tooltip-arrow   { border-left-color:   #83c635; }
 
 .tooltip.warning .tooltip-inner          { background-color:    #ec971f; }
 .tooltip.warning.top > .tooltip-arrow    { border-top-color:    #ec971f; }
@@ -610,8 +621,8 @@ p {
 .tooltip.warning.bottom > .tooltip-arrow { border-bottom-color: #ec971f; }
 .tooltip.warning.left > .tooltip-arrow   { border-left-color:   #ec971f; }
 
-.tooltip.danger .tooltip-inner          { background-color:    red; }
-.tooltip.danger.top > .tooltip-arrow    { border-top-color:    red; }
-.tooltip.danger.right > .tooltip-arrow  { border-right-color:  red; }
-.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: red; }
-.tooltip.danger.left > .tooltip-arrow   { border-left-color:   red; }
+.tooltip.danger .tooltip-inner          { background-color:    #f01b18; }
+.tooltip.danger.top > .tooltip-arrow    { border-top-color:    #f01b18; }
+.tooltip.danger.right > .tooltip-arrow  { border-right-color:  #f01b18; }
+.tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #f01b18; }
+.tooltip.danger.left > .tooltip-arrow   { border-left-color:   #f01b18; }

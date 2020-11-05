@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script>
+        if (!window.parent.data_crm) {
+            (function (i, s, o, g, r, a, m) {
+                i["GoogleAnalyticsObject"] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+            ga("create", "UA-158134453-1", {
+                "cookieDomain": "auto"
+            });
+            ga("set", "anonymizeIp", true);
+            ga('set', 'dimension1', "CUAIEED");
+            ga('set', 'dimension2', "RECURSOS EDUCATIVOS ABIERTOS");
+            ga('set', 'dimension3', "RECURSOS EDUCATIVOS MULTIMEDIA");
+            ga('set', 'dimension4', "2021");
+            ga('set', 'dimension5', "EVALUACIÓN");
+            ga('set', 'dimension6', "RA06-21");
+            ga('set', 'dimension7', "COMPLETAR ESCRIBIENDO");
+            ga('set', 'dimension8', "VERSIÓN 2");
+            ga("set", "metric1", 1);
+            ga("set", "metric2", 2);
+            ga("set", "metric3", 3);
+            ga("set", "metric4", 4);
+            ga("set", "metric5", 5);
+            ga("set", "metric6", 6);
+            ga("set", "metric7", 7);
+            ga("set", "metric8", 8);
+            ga("send", "pageview");
+        }
+    </script>
+    <!--
+        3.0 KDMR Sep 25, 2020: Se agrego siguiente intento en blanco, parámetro de revisión estricta 
+        3.0 KDMR Sep 25, 2020: Retroalimentaciones por arroba, reactivo o general.
+        3.0 KDMR Sep 25, 2020: Mezcla de reactivos, además de poner numeral o alfabetico
+		3.0 KDMR Sep 25, 2020: Se cuenta con máximo de intentos y con esto se tiene el guardado de calificación SCORM de acuerdo a ciertos valores,
+		3.0 KDMR Sep 25, 2020: var guardarCalificacion (-1 calificación más alta, 0 último intento, n número de intento)
+		3.0 KDMR Sep 25, 2020: Se añadio ambiente SCORM y cambio del archivo conectividadSCORM.js creado por RAAR, y código Analytics por JLBG
+        2.2 JLBG Sep 13, 2019: se agregó paginación paramétrica
+    -->
+    <title>Completar Escribiendo V3.0</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Completar Escribiendo" />
+    <meta name="keywords" content="UNAM, CUAIEED" />
+    <meta name="author" content="UNAM CUAIEED" />
+    <meta name="news_keywords" content="UNAM, CUAIEED" />
+    <meta name="generator" content="UNAM CUAIEED" />
+    <meta property="og:site_name" content="Completar Escribiendo" />
+    <meta itemprop="name" content="UNAM, CUAIEED" />
+    <meta itemprop="image" content="" />
+    <meta itemprop="description" content="Completar Escribiendo" />
+    <meta property="og:title" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="activity" />
+    <meta property="og:description" content="Completar Escribiendo" />
+    <meta property="og:image" content="" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script> -->
+    <script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"> </script>
+    <script>
+        var jq321 = jQuery.noConflict();
+    </script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/bootstrap-v3.3.7.min.css" />
+    <script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
+    <script src="js/reactivos.js"></script>
+    <script src="js/listaReactivos.js"></script>
+    <script src="js/configRecurso.js"></script>
+
+    <script src="SCORM/conectividadSCORM.js"></script>
+    <script src="js/general.js"></script>
+
+    <script src="js/completarEscribiendo.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> NO-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://lib.cuaieed.unam.mx/R019/css/font-awesome-v5.0.13.min.css" />
+    <!-- <link href="css/font.css" rel="stylesheet" /> -->
+    <script src="js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css" />
+
+    <!-- Librerias responsivas para bugs en navegadores //-->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+        jq321(document).ready(function () {
+            iniciaAmbienteScorm(ambSCORM, barraSCORM, idObjetivo);
+            jq321('[data-toggle="tooltip"]').each(function () {
+                var options = {
+                    html: true
+                };
+
+                if (jq321(this)[0].hasAttribute('data-type')) {
+                    options['template'] =
+                        '<div class="tooltip ' + jq321(this).attr('data-type') + '" role="tooltip">' +
+                        '	<div class="tooltip-arrow"></div>' +
+                        '	<div class="tooltip-inner"></div>' +
+                        '</div>';
+                }
+                jq321(this).tooltip(options);
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <noscript>Necesitas tener habilitado Javascript para poder continuar</noscript>
+    <section class="container escribiendo">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <!-- <i class="icon-horizontal-icon icono"></i> -->
+                <div class="info ocultar">
+                    <i class="fas fa-info fa-2x"></i>
+                </div>
+                <h2 class="headings-int">Título de la evaluación</h2>
+                <span id="toolTipInstrucciones" class="ocultar" data-toggle="tooltip" data-placement="auto left"
+                    data-type="info" title="instrucciones">
+                    <i class="fa fa-info-circle fa-3x icono_info blink"></i>
+                </span>
+                <div id="textoInstrucciones">
+                    <p id="instr">Instrucciones (pedagógica y técnica) de la evaluación.</p>
+                </div>
+                <span id="mododebug"> - MODO DEBUG ACTIVADO - </span>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div id="completable">
+                </div>
+            </div>
+            <i class="ir-arriba fas fa-chevron-up fa-2x"></i>
+            <div class="pager col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="barraInferior">
+                    <button id="btnPrevio" class="btn btn-primary invisible cPrevio cPaginador" onClick=""><i
+                            class="fas fa-chevron-left"></i></button>
+                    <button id="btnPaginador" class="btn ocultar"></button> <!--  para poner paginado -->
+                    <button id="btnProximo" class="btn btn-primary invisible cProximo cPaginador" onClick=""><i
+                            class="fas fa-chevron-right"></i></button><br>
+                    <button id="btnRevisar" name="calificar" class="btn btn-primary">Revisar</button>
+                    <button id="btnReiniciar" name="resetear" class="btn btn-primary">Próximo intento</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

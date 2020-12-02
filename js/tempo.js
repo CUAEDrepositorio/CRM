@@ -1,19 +1,8 @@
 var remainingSeconds = 0;
 var seconds = 0;
 var temporal;
+var a, countdownTimer;
 
-seconds = ((minutes * 60)) + (seg % 60)
-temporal = seconds;
-console.log("TEMPORAL: " + temporal);
-
-if (seg > 59) {
-  seg = 0;
-  seconds = minutes * 60 + seg;
-}
-if (minutes < 0) {
-  minutes = 0;
-  seconds = minutes * 60 + seg;
-}
 
 function inicial() {
   $("#countdown").hide();
@@ -28,32 +17,52 @@ function inicial() {
 }
 
 function iniciarTempo() {
-  console.log("iniciarTempo");
   inicial();
-
   $("#btnIniciar").click(function () {
     $(".row").show();
+    $("#countdown").show();
     $(".contrespuestasv").show();
     $(".contrespuestash").show();
     $("#btnIniciar").hide();
     $("#btnPlay").show();
     $("#btnRevisar").show();
-    $("#btnCreate").show();
+    if (intentos == (maxIntentos - 1)) {
+      $("#btnCreate").show();
+    } else {
+      $("#btnCreate").hide();
+    }
+    seconds = ((minutes * 60)) + (seg % 60);
+    temporal = seconds;
+    console.log("A");
+    console.log("B");
+    console.log("seconds: "+seconds);
+    if (seg > 59) {
+      seg = 0;
+      seconds = minutes * 60 + seg;
+    }
+    if (minutes < 0) {
+      minutes = 0;
+      seconds = minutes * 60 + seg;
+    }
     temporizador();
+    
   }); //btnIniciar
 
   $("#btnCreate").click(function () {
-    $("#countdown").remove();
-    // clearInterval(countdownTimer);
-    $("#countdown").empty();
     $("#btnPlay").hide();
+    $("#btnIntento").show();
     $("#btnRevisar").hide();
   });
 } //iniciarTempo
+
+
 function temporizador() {
-  function secondPassed() {
-    var a = Math.round((seconds - 30) / 60); //calcula el número de minutos
-    remainingSeconds = seconds % 60; //calcula los segundos
+  function secondPassed(intent) {
+    //calcula el número de minutos
+    a = Math.round((seconds - 30) / 60);
+    //calcula los segundos
+    remainingSeconds = seconds % 60;
+
     if (remainingSeconds < 10) {
       remainingSeconds = "0" + remainingSeconds;
     }
@@ -67,17 +76,17 @@ function temporizador() {
         button: "Aceptar",
       });
       clearInterval(countdownTimer);
-      $("input").attr('disabled','disabled');
+      intentos++;
+      $("input").attr('disabled', 'disabled');
       $("#btnPlay").hide();
       $("#btnRevisar").hide();
-      $("#btnReinicio").hide();
-      $("#btnCreate").show();
-
+      $("#btnCreate").hide();
+      $("#btnIntento").show();
+      $("#countdown").hide();
     } else {
-      seconds --;
+      seconds--;
     }
-
   } //secondPassed
-  countdownTimer = setInterval(secondPassed, 1000);
+  countdownTimer = setInterval(() => {secondPassed(intentos)}, 1000);
   return;
 } //temporizador

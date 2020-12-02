@@ -52,8 +52,8 @@ var retroB;
 var retroM;
 var retroBL;
 var retroML;
-// retroB = palabraspro[j][2];
-// retroM = palabraspro[j][3];
+var intentos = 0;
+var countdownTimer;
 var Bounds = {
   top: 0,
   right: 0,
@@ -712,13 +712,15 @@ function obtenerlongitus(d) {
   return dato;
 }
 
-function Reinicio() {
-  location.reload();
+// function Reinicio() {
+//   location.reload();
 
-}
+// }
+
 
 
 function Revisar() {
+  aciertos = 0; //reinicia para el número de intentos
   arregloincisosh = document.getElementsByClassName("proh");
   arregloincisosv = document.getElementsByClassName("prov");
   posh = arregloincisosh.length;
@@ -788,21 +790,21 @@ function Revisar() {
       }
       castidadv = castidadv.toUpperCase();
       // for (var m = 0; m < palabrasmagicas.length; m++) {
-        if (palabrasmagicas.indexOf(castidadv) != -1) {
-          correctasT.push(castidadv);
-          aciertos++;
-          for (var r = 1; r <= numeralprov; r++) {
-            var clasessv = "V" + numeralpro1v + "_" + r;
-            var superidbv = document.getElementsByClassName(clasessv);
-            superidbv[0].style.backgroundColor = "#c0fda7";
-          }
-        } else {
-          incorrectasT.push(castidadv);
+      if (palabrasmagicas.indexOf(castidadv) != -1) {
+        correctasT.push(castidadv);
+        aciertos++;
+        for (var r = 1; r <= numeralprov; r++) {
+          var clasessv = "V" + numeralpro1v + "_" + r;
+          var superidbv = document.getElementsByClassName(clasessv);
+          superidbv[0].style.backgroundColor = "#c0fda7";
         }
+      } else {
+        incorrectasT.push(castidadv);
+      }
       //}//
       arrh.push(castidadv);
 
-    }//posv
+    } //posv
     conteo = arregloincisosh.length;
     conteo2 = arregloincisosv.length;
     final = conteo + conteo2;
@@ -819,11 +821,16 @@ function Revisar() {
     document.getElementById("btnPlay").style.display = "none";
     document.getElementById("btnCreate").style.display = "none";
     document.getElementById("btnRevisar").style.display = "none";
-    document.getElementById("btnReinicio").style.display = "";
-    var totalpalabras = document.getElementsByClassName("respuestacorr");
-    for (var pl = 0; pl < totalpalabras.length; pl++) {
-      totalpalabras[pl].style.display = "";
+
+    if (intentos == (maxIntentos - 1)) {
+      var totalpalabras = document.getElementsByClassName("respuestacorr");
+      for (var pl = 0; pl < totalpalabras.length; pl++) {
+        totalpalabras[pl].style.display = "";
+      }
+    } else {
+      $(".respuestacorr").hide();
     }
+
 
     mensaje = "";
     for (var j = 0; j < retroCal.length; j++) {
@@ -839,7 +846,7 @@ function Revisar() {
     } catch (e) {}
     //boton revisar
     if (tempo) {
-      
+
       d = Number(temporal - seconds);
 
       var m = Math.floor(d % 3600 / 60);
@@ -849,7 +856,7 @@ function Revisar() {
       if (tiempo >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
         swal({
           title: "Resultado",
-          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas. "+"\n Empleaste " + mDisplay + (sDisplay) + ".\n"+mensaje,
+          text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas. " + "\n Empleaste " + mDisplay + (sDisplay) + ".\n" + mensaje,
           confirmButtonText: "Aceptar",
           button: "Aceptar",
         });
@@ -857,21 +864,25 @@ function Revisar() {
       } else {
         swal({
           title: "Resultado",
-          text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas."+"\n Empleaste " + sDisplay + " segundos.\n "+mensaje,
+          text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas." + "\n Empleaste " + sDisplay + " segundos.\n " + mensaje,
           confirmButtonText: "Aceptar",
           button: "Aceptar",
         });
       } //else tiempo
+      $("#btnIntento").show();
+      intentos++;
+      console.log("Aciertos: " + aciertos)
       clearInterval(countdownTimer);
     } else { //tiempo
+      $("#btnIntento").show();
       swal({
         title: "Resultado",
-        text: "Obtuviste "+ aciertos + "/" + final + " respuestas correctas.\n"+mensaje,
+        text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n" + mensaje,
         confirmButtonText: "Aceptar",
         button: "Aceptar",
       });
-      $("input").attr('disabled','disabled');
-      // clearInterval(countdownTimer);
+      intentos++;
+      $("input").attr('disabled', 'disabled');
     }
 
   } else {
@@ -1068,7 +1079,7 @@ function AddWordToBoard() {
       // console.log(wordsActive[pushIndex]);
       board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
       ori2[xIndex][yIndex] = "V";
-      console.log(ori2[xIndex][yIndex] + "_" + palabra2[xIndex][yIndex] + "_" + cont2[xIndex][yIndex]);
+      // console.log(ori2[xIndex][yIndex] + "_" + palabra2[xIndex][yIndex] + "_" + cont2[xIndex][yIndex]);
       arreglolongitudes.push(xIndex);
     }
     Bounds.Update(xIndex, yIndex);
@@ -1209,10 +1220,10 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
           try {
             retroB = palabraspro[i][2]
             retroM = palabraspro[i][3]
-            retroBL = "<sup>"+retroB.length+"</sup>"              
-            retroML = "<sup>"+retroM.length+"</sup>"
+            retroBL = "<sup>" + retroB.length + "</sup>"
+            retroML = "<sup>" + retroM.length + "</sup>"
           } catch (error) {
-            
+
           }
           if (defineme == 0) {
             for (var u = 0; u < total.length; u++) {
@@ -1228,19 +1239,18 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
               minus3 = torus3 + "" + minus3;
 
               if (stringloco3 == minus3) {
-                if(verLongitud){
-                  crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0,retroB+retroBL,retroM+retroML);
-                }else{
-                  crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0,retroB,retroM);
+                if (verLongitud) {
+                  crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0, retroB + retroBL, retroM + retroML);
+                } else {
+                  crearespuesta(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car4, 0, retroB, retroM);
                 }
               }
 
               if (stringloco3 == minus5) {
-                if(verLongitud){
-                  crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,retroB+retroBL,retroM+retroML);
-                }else{
-                  crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0,retroB,retroM);
-                  // crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0);
+                if (verLongitud) {
+                  crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0, retroB + retroBL, retroM + retroML);
+                } else {
+                  crearespuesta2(stringloco3, arreglocoincidencias[indicecoincidencias], descript3, car5, 0, retroB, retroM);
                 }
               }
             }
@@ -1262,20 +1272,18 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
               var descript = total[i].value + ""
               var retroB = palabraspro[i][2]
               var retroM = palabraspro[i][3]
-              retroBL = "<sup>"+retroB.length+"</sup>"              
-              retroML = "<sup>"+retroM.length+"</sup>"
-              // console.log("00001 "+retroB+"0001 "+retroM)
+              retroBL = "<sup>" + retroB.length + "</sup>"
+              retroML = "<sup>" + retroM.length + "</sup>"
               var torus = cad1.substring(0, 1);
               var minus = cad1.substring(1, cad1.length);
               minus = minus.toLowerCase();
               minus = torus + "" + minus;
 
               if (stringloco == minus) {
-                if(verLongitud){
-                  crearespuesta(stringloco, posi, descript, car, 1,retroB+retroBL,retroM+retroML);
-                }else{
-                  crearespuesta(stringloco, posi, descript, car, 1,retroB,retroM);
-                  // crearespuesta(stringloco, posi, descript, car, 1);
+                if (verLongitud) {
+                  crearespuesta(stringloco, posi, descript, car, 1, retroB + retroBL, retroM + retroML);
+                } else {
+                  crearespuesta(stringloco, posi, descript, car, 1, retroB, retroM);
                 }
               }
             }
@@ -1298,14 +1306,13 @@ function EleStr(e, c, h, o, p, w, o1, p1, w1, l, k1, k2, cad1, cad2) {
               minus = torus + "" + minus;
               retroB = palabraspro[j][2];
               retroM = palabraspro[j][3];
-              retroBL = "<sup>"+retroB.length+"</sup>"              
-              retroML = "<sup>"+retroM.length+"</sup>"
+              retroBL = "<sup>" + retroB.length + "</sup>"
+              retroML = "<sup>" + retroM.length + "</sup>"
               if (stringloco == minus) {
-                if(verLongitud){
-                  crearespuesta2(stringloco, posi1, descript, car1, 1,retroB+retroBL,retroM+retroBL);
-                }else{
-                  crearespuesta2(stringloco, posi1, descript, car1, 1,retroB,retroM);
-                  // crearespuesta2(stringloco, posi1, descript, car1, 1);
+                if (verLongitud) {
+                  crearespuesta2(stringloco, posi1, descript, car1, 1, retroB + retroBL, retroM + retroBL);
+                } else {
+                  crearespuesta2(stringloco, posi1, descript, car1, 1, retroB, retroM);
                 }
               }
             }
@@ -1331,8 +1338,8 @@ function ArrayToString(a, s) {
 }
 
 
-function crearespuesta(a, b, c, k, g,rb,rm) {
-  
+function crearespuesta(a, b, c, k, g, rb, rm) {
+
   if (g == 0) {
     var controlatodo = document.getElementById("primeroh");
   } else {
@@ -1351,7 +1358,7 @@ function crearespuesta(a, b, c, k, g,rb,rm) {
   retroBien.setAttribute('title', rb);
   retroBien.setAttribute('style', "display: none;");
   retroBien.appendChild(palomita);
-  
+
   var retroMal = document.createElement("span");
   retroMal.setAttribute('data-toggle', 'tooltip');
   retroMal.setAttribute('data-placement', 'auto left');
@@ -1380,14 +1387,14 @@ function crearespuesta(a, b, c, k, g,rb,rm) {
 
 }
 
-function crearespuesta2(a, b, c, k, g,rb,rm) {
-  
+function crearespuesta2(a, b, c, k, g, rb, rm) {
+
   if (g == 0) {
     var controlatodo = document.getElementById("primerov");
   } else {
     var controlatodo = document.getElementById("resp1");
   }
-  
+
   var palomita = document.createElement('i')
   palomita.setAttribute('class', 'ip far fa-2x fa-check-circle blink')
   var tache = document.createElement('i')
@@ -1400,7 +1407,7 @@ function crearespuesta2(a, b, c, k, g,rb,rm) {
   retroBien.setAttribute('title', rb);
   retroBien.setAttribute('style', "display: none;");
   retroBien.appendChild(palomita);
-  
+
   var retroMal = document.createElement("span");
   retroMal.setAttribute('data-toggle', 'tooltip');
   retroMal.setAttribute('data-placement', 'auto left');
@@ -1455,59 +1462,115 @@ function RegisterEvents() {
   document.getElementById("btnCreate").addEventListener('click', Create, false);
   document.getElementById("btnPlay").addEventListener('click', Play, false);
   document.getElementById("btnRevisar").addEventListener('click', Revisar, false);
-  document.getElementById("btnReinicio").addEventListener('click', Reinicio, false);
+  // document.getElementById("btnReinicio").addEventListener('click', Reinicio, false);
+}
+
+
+
+function continuar() {
+  console.log("intentos: ", intentos);
+  $("#btnCreate").hide();
+  if (intentos < maxIntentos) {
+
+    console.log("intentos: ", intentos);
+    Play();
+    if (intentos == (maxIntentos - 1)) {
+      $("#btnCreate").show();
+    } else {
+      $("#btnCreate").hide();
+    }
+    $('.proh').siblings("span").hide();
+    $('.prov').siblings("span").hide();
+    $(".respuestacorr").hide();
+    if (tempo) {
+      inicial();
+      clearInterval(countdownTimer);
+      document.getElementById('countdown').innerHTML = "";
+    }
+  } else {
+    swal({
+      title: "Atención",
+      text: "Has alcanzado el máximo número de intentos: " + maxIntentos + ".",
+      confirmButtonText: "Aceptar",
+      button: "Aceptar",
+    });
+    $("input").attr('disabled', 'disabled');
   }
+}
 //---------------------------------//
 //   INITIAL LOAD                  //
 //---------------------------------//
 $(document).ready(function () {
 
-$("#btnRecargar").hide();
-$("#prohibido").hide();
-$("#btnIniciar").hide();
-$("#countdown").hide();
-$("#mododebug").hide();
+  $("#prohibido").hide();
+  $("#btnIniciar").hide();
+  $("#countdown").hide();
+  $("#mododebug").hide();
+  $("#btnIntento").hide();
+  $("#btnCreate").hide();
+  window.onresize = function () {
+    //alert("body.scrollWidth "+document.body.scrollWidth + "screen.availWidth " +screen.availWidth + "document.body.clientWidth "+document.body.clientWidth );
+    if (document.body.scrollWidth > 675) {
+      $(".container").show();
+      $("#prohibido").hide();
+    } else {
+      $(".container").hide();
+      $("#prohibido").show();
+      clearInterval(countdownTimer);
+    }
+  }
 
-window.onresize = function(){
-//alert("body.scrollWidth "+document.body.scrollWidth + "screen.availWidth " +screen.availWidth + "document.body.clientWidth "+document.body.clientWidth );
-  if(document.body.scrollWidth > 675){
-    $(".container").show();
-    $("#prohibido").hide();
-  } else{
+  if (window.parent.data_crm) {
+    debug = true;
+    tempo = true;
+    verLongitud = true;
+  }
+  if (window.name == "movil") {
+    esMobil = true;
+  } else {
+    esMobil = isMobile();
+  }
+  $("#btnIniciar").hide();
+
+  if (esMobil) {
     $(".container").hide();
     $("#prohibido").show();
-    // clearInterval(countdownTimer);
+  } else {
+    Create();
+    Play();
   }
-}
 
-if (window.parent.data_crm) {
-  debug = true;
-  tempo = true;
-  verLongitud = true;
-}
-if (window.name == "movil") {
-  esMobil = true;
-} else {
-  esMobil = isMobile();
-}
-$("#btnIniciar").hide();
-if (esMobil) {
-  $(".container").hide();
-  $("#prohibido").show();
-} else {
-  Create();
-  Play();
-}
+  $("#btnCreate").click(function () {
+    $("#btnPlay").hide();
+    $("#btnRevisar").hide();
+    $("#btnIntento").show();
 
-$("#btnCreate").click(function () {
-  $("#btnPlay").hide();
-  $("#btnRevisar").hide();
-  $("#btnRecargar").show();
-  $("#btnReinicio").show();
-  
-  clearInterval(countdownTimer);
-}); //btnCreate
+    intentos++;
+
+    if (tempo) {
+      clearInterval(countdownTimer);
+    }
+  }); //btnCreate
+
+
+  $("#btnIntento").click(function () {
+    $("#btnRevisar").show();
+    $("#btnIntento").hide();
+    $("#btnPlay").hide();
+    if (intentos < maxIntentos) {
+      $("#btnPlay").show();
+    } else {
+      $("#btnPlay").hide();
+    }
+    if (tempo) {
+      $("#btnIntento").hide();
+      $("#btnPlay").hide();
+      if (intentos < maxIntentos) {
+        $("#btnRevisar").hide();
+      }
+    }
+  }); //btnIntento
+
 
 
 });
-

@@ -327,7 +327,9 @@ function WordObj(stringValue) {
 //---------------------------------//
 
 function RegisterEvents() {
-  document.getElementById("crossword").onfocus = function () {return false;}
+  document.getElementById("crossword").onfocus = function () {
+    return false;
+  }
   document.getElementById("btnCreate").addEventListener('click', Create, false);
   document.getElementById("btnPlay").addEventListener('click', Play, false);
 }

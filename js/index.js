@@ -727,15 +727,16 @@ function Revisar() {
   posv = arregloincisosv.length;
   elementospalabra = document.getElementsByClassName("char");
   var pato = 0;
+
   for (var g = 0; g < elementospalabra.length; g++) {
     if (elementospalabra[g].value == "") {
-      pato = 1;
+      pato = 1; //Si pato es igual a 1; existen casillas vacías
     }
   }
   var arrh = [];
   correctasT = [];
   incorrectasT = [];
-  if (pato == 0) {
+  if ((pato === 0) || (tempo === true && seconds === 0 && pato === 1)) {
     for (var i = 0; i < posh; i++) {
       var id = arregloincisosh[i].id + "";
       var posid = id.indexOf("L");
@@ -749,8 +750,9 @@ function Revisar() {
       for (var j = 1; j <= numeralpro; j++) {
         var clasess = "H" + numeralpro1 + "_" + j;
         var superid = document.getElementsByClassName(clasess);
-        castidad = castidad + superid[0].value;
-        // console.log(superid[0]);
+        try {
+          castidad = castidad + superid[0].value;
+        } catch (error) {}
       }
       castidad = castidad.toUpperCase();
 
@@ -785,7 +787,9 @@ function Revisar() {
       for (var h = 1; h <= numeralprov; h++) {
         var clasessv = "V" + numeralpro1v + "_" + h;
         var superidv = document.getElementsByClassName(clasessv);
-        castidadv = castidadv + superidv[0].value;
+        try {
+          castidadv = castidadv + superidv[0].value;
+        } catch (error) {}
 
       }
       castidadv = castidadv.toUpperCase();
@@ -822,7 +826,7 @@ function Revisar() {
     document.getElementById("btnCreate").style.display = "none";
     document.getElementById("btnRevisar").style.display = "none";
 
-    if (intentos == (maxIntentos - 1)) {
+    if (intentos >= (maxIntentos - 1)) {
       var totalpalabras = document.getElementsByClassName("respuestacorr");
       for (var pl = 0; pl < totalpalabras.length; pl++) {
         totalpalabras[pl].style.display = "";
@@ -834,7 +838,7 @@ function Revisar() {
 
     mensaje = "";
     for (var j = 0; j < retroCal.length; j++) {
-      console.log(aciertos);
+      console.log("Aciertos: " + aciertos);
       if (aciertos >= retroCal[j].LimInf && aciertos <= retroCal[j].LimSup) {
         mensaje = retroCal[j].Mensaje;
       }
@@ -845,33 +849,57 @@ function Revisar() {
       console.log("TIEMPO: " + tiempo);
     } catch (e) {}
     //boton revisar
+
     if (tempo) {
 
       d = Number(temporal - seconds);
-
       var m = Math.floor(d % 3600 / 60);
       var s = Math.floor((d % 3600 % 60) - 1);
       var mDisplay = m > 0 ? m + (m == 1 ? " minutos " : " minutos, ") : "";
       var sDisplay = s > 0 ? s + (s == 1 ? " segundos" : " segundos") : "";
-      if (tiempo >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
+      if((d>0) && (seconds == 0)){
+        swal({
+          title: "¡Se acabó el tiempo!\n",
+          confirmButtonText: "Aceptar",
+          button: "Aceptar",
+        });   
+        
+        swal({
+          title: "Resultado",
+          text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas.\n" + mensaje,
+          confirmButtonText: "Aceptar",
+          button: "Aceptar",
+        });
+        if (intentos >= (maxIntentos)) {
+          $(".respuestacorr").show();
+        }else{
+          $(".respuestacorr").hide();
+        }
+        
+        guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
+      }
+      else if((tiempo < 60)){
+        swal({
+          title: "Resultado",
+          text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas." + "\n Empleaste " + sDisplay + ".\n" + mensaje,
+          confirmButtonText: "Aceptar",
+          button: "Aceptar",
+        });
+        intentos++;
+        guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
+      }else if (tiempo >= 60) { //Cuando el tiempo es mayor a un minuto se ocupa el siguiente formato de salida
         swal({
           title: "Resultado",
           text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas. " + "\n Empleaste " + mDisplay + (sDisplay) + ".\n" + mensaje,
           confirmButtonText: "Aceptar",
           button: "Aceptar",
         });
+        guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
         clearInterval(countdownTimer);
-      } else {
-        swal({
-          title: "Resultado",
-          text: "Obtuviste " + aciertos + "/" + final + " respuestas correctas." + "\n Empleaste " + sDisplay + " segundos.\n " + mensaje,
-          confirmButtonText: "Aceptar",
-          button: "Aceptar",
-        });
-      } //else tiempo
+        intentos++;
+        console.log("Intentos tiempo > 60: " + intentos);
+      }
       $("#btnIntento").show();
-      intentos++;
-      console.log("Aciertos: " + aciertos)
       clearInterval(countdownTimer);
     } else { //tiempo
       $("#btnIntento").show();
@@ -881,21 +909,22 @@ function Revisar() {
         confirmButtonText: "Aceptar",
         button: "Aceptar",
       });
+      guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
       intentos++;
       $("input").attr('disabled', 'disabled');
-    }
+    } //tiempo
 
   } else {
-    //REVISAR Falta respuestas
     swal({
       title: "Atención",
       text: "Llena todos los campos.",
       confirmButtonText: "Aceptar",
       button: "Aceptar",
     });
-
   }
-  guardaCalificacionScorm(ambSCORM, barraSCORM, idObjetivo, aciertos, final);
+
+
+
 }
 
 // TODO: Clean this guy up
@@ -1468,7 +1497,6 @@ function RegisterEvents() {
 
 
 function continuar() {
-  console.log("intentos: ", intentos);
   $("#btnCreate").hide();
   if (intentos < maxIntentos) {
 
@@ -1495,6 +1523,7 @@ function continuar() {
       button: "Aceptar",
     });
     $("input").attr('disabled', 'disabled');
+
   }
 }
 //---------------------------------//
@@ -1551,7 +1580,6 @@ $(document).ready(function () {
       clearInterval(countdownTimer);
     }
   }); //btnCreate
-
 
   $("#btnIntento").click(function () {
     $("#btnRevisar").show();

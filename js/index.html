@@ -1,0 +1,375 @@
+var actualOpcion = "";
+var puntaje;
+var total = 0;
+var buenas = 0;
+var incorrectas = 0;
+var categoria = 0;
+var opcion = 0;
+var intento = 0;
+var caja;
+var categorias = encabezados.length;
+var totalPuntaje = 0;
+
+$(document).ready(function () {
+    if (window.name == "movil") {
+        esMobil = true;
+    } else {
+        esMobil = isMobile();
+    }
+    if (esMobil) {
+        $(".encabezado").hide();
+
+        $("#mododebug").hide();
+        $("#prohibido").show();
+    } else {
+        $("#prohibido").hide();
+        $("#mododebug").hide();
+        create_board();
+        if (debug) {
+            $("#mododebug").show();
+        }
+    }
+    //para cada clic de los elementos del tipo catOpcion
+    $(".catOpcion").click(function () {
+        caja = $(this); // obtener el objeto
+        actualOpcion = caja.attr("id"); //obtener el id de donde se obtiene la posicion
+        var datos = actualOpcion.split("_");
+        categoria = datos[1]; // obtener valor categoria
+        opcion = datos[2]; // obtener valor opcion
+        console.log("categoria:  " + datos[1]);
+        console.log("opcion:  " + datos[2]);
+        var seleccionado = buscarPregunta(categoria, opcion);
+        //obtenemos el elemento que alamcena temporalmente  las preguntas
+        try {
+            var elementoPregunta = document.getElementById("preguntas");
+            elementoPregunta.innerHTML = "";
+            var clase = this.getAttribute("class"); // obtenemos la clase del elemento
+            //si no se ha deshabilitado
+            if (clase.indexOf("disabled") == -1) {
+                //creamos la pregunta
+                crearPregunta(seleccionado, elementoPregunta);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    });
+
+    actualOpcion = "";
+    puntaje = 0;
+    total = reactivos.length;
+    buenas = 0;
+    incorrectas = 0;
+    intento = 0;
+});
+
+
+// buscamos la pregunta en el arrreglo de preguntas
+function buscarPregunta(categoria, opcion) {
+    var seleccionado;
+    //recorremos el arreglo de preguntas
+    for (var i = 0; i < total; i++) {
+        var actual = reactivos[i];
+        //si los datos coinciden con los de la pregunta a buscar
+        if (reactivos[i].categoria == categoria && reactivos[i].opcion == opcion) {
+            seleccionado = actual;
+        } //fin if
+    } //fin for
+    return seleccionado;
+} //fin function buscarPregunta
+
+
+function crearPregunta(actual, destino) {
+    var opcion;
+    var panel_heading;
+    var panel_collapse;
+    var panel_body = "";
+    var modal_body = $(".modal-body");
+    var panel_default = "";
+    var panel_group = $("#accordion");
+    panel_group.html("")
+
+    $("#preguntas").html('<span class="textoPregunta">' + actual.texto + " </span>");
+
+    actual.respuestas.forEach(function (elemento, indice) {
+
+        panel_default = document.createElement("div");
+        panel_default.setAttribute("class", "panel panel-default");
+        panel_heading = document.createElement("div");
+        panel_heading.setAttribute("class", "panel-heading btn collapsed");
+        panel_heading.setAttribute("data-toggle", "collapse");
+        panel_heading.setAttribute("data-target", "#collapse"+indice);
+        panel_heading.setAttribute("data-parent", "#accordion");
+        panel_heading.setAttribute("aria-expanded", "true");
+        
+        panel_default.appendChild(panel_heading);
+
+        panel_collapse = document.createElement("div");
+        panel_collapse.setAttribute("class", "panel-collapse collapse");
+        panel_collapse.setAttribute("id", "collapse"+indice);
+
+        panel_body =document.createElement("div");
+        panel_body.setAttribute("class", "panel-body");
+        panel_collapse.append(panel_body);
+
+        opcion = document.createElement("a");
+        opcion.className = "respuesta";
+        opcion.id = "op" + indice;
+        opcion.setAttribute("data-correcto", elemento.correcta);
+        opcion.setAttribute("data-retro", elemento.retro);
+        opcion.innerHTML = elemento.respuesta;
+        
+
+        if (debug) {
+            var debugtxt = document.createElement('p');
+            debugtxt.innerHTML = elemento.correcta;
+            opcion.appendChild(debugtxt);
+        }
+
+        var palomita = document.createElement('i')
+        palomita.setAttribute('class', 'ip far fa-2x fa-check-circle blink')
+        var retroBien = document.createElement("span");
+        retroBien.setAttribute('data-toggle', 'tooltip');
+        retroBien.setAttribute('data-placement', 'left');
+        retroBien.setAttribute('data-type', 'success');
+        retroBien.setAttribute('data-title', '');
+        retroBien.setAttribute('style', "display: none;");
+        retroBien.appendChild(palomita);
+
+        var tache = document.createElement('i')
+        tache.setAttribute('class', 'it far fa-2x fa-times-circle blink')
+        var retroMal = document.createElement("span");
+        retroMal.setAttribute('data-toggle', 'tooltip');
+        retroMal.setAttribute('data-placement', 'left');
+        retroMal.setAttribute('data-type', 'danger');
+        retroMal.setAttribute('data-title', '');
+        retroMal.setAttribute('style', "display: none;");
+        retroMal.appendChild(tache);
+        
+        destino.appendChild(opcion);
+        opcion.appendChild(retroBien);
+        opcion.appendChild(retroMal);
+        
+        modal_body.append(destino);//coloca las preguntas
+        $("#modalReactivos").modal();
+        panel_group.append(panel_default);
+        panel_default.append(panel_collapse);
+        panel_body.append(opcion);
+
+
+    });
+    
+    setClicBotones();
+}
+
+function setClicBotones() {
+    var oList = document.getElementById("preguntas").getElementsByTagName("a");
+    Array.prototype.forEach.call(oList, function (objeto) {
+        if (objeto.className.indexOf("respuesta") == 0) {
+            hacerRespuesta(objeto);
+        }
+    });
+}
+
+function hacerRespuesta(boton) {
+    boton.onclick = function () {
+        if (this.getAttribute("data-correcto") == "true") {
+            buenas++;
+            var elemento = document.getElementById("op_" + categoria + "_" + opcion);
+            elemento.childNodes[0].style.color = '#54900e';
+            elemento.onclick = null;
+            elemento.className = "catOpcion";
+            elemento.className = "catOpcion disabled";
+            puntaje += parseInt(elemento.getAttribute("data-puntaje"), 10);
+            document.getElementById("puntaje").innerHTML = "Total:&nbsp;" + puntaje
+            this.className = "respuesta bien disabled";
+            this.onclick = null; //deshabilitamos esta opcion para que no vuelva a contestar
+            var nodo_op = this.getAttribute("id").charAt(this.getAttribute("id").length - 1)
+            if (nodo_op == "0") {
+                this.nextSibling.onclick = null;
+                this.nextSibling.nextSibling.onclick = null;
+            } else if (nodo_op == "1") {
+                this.nextSibling.onclick = null;
+                this.previousSibling.onclick = null;
+            } else {
+                this.previousSibling.previousSibling.onclick = null;
+                this.previousSibling.onclick = null;
+            }
+
+            this.childNodes[this.childNodes.length - 2].firstElementChild.classList.remove("ocultar");
+            //this.childNodes[this.childNodes.length - 2].firstElementChild.classList.add("mostrar");
+            this.childNodes[this.childNodes.length - 2].style.display = ""
+            this.childNodes[this.childNodes.length - 2].setAttribute("data-title", this.getAttribute("data-retro"));
+
+        } else {
+            var elemento = document.getElementById("op_" + categoria + "_" + opcion);
+            elemento.childNodes[0].style.color = '#911a19';
+            elemento.onclick = null;
+            elemento.className = "catOpcion disabled";
+            puntaje -= parseInt(elemento.getAttribute("data-puntaje"), 10);
+            document.getElementById("puntaje").innerHTML = "Total:&nbsp;" + puntaje
+            this.className = "respuesta mal disabled";
+
+            this.onclick = null;
+            var nodo_op = this.getAttribute("id").charAt(this.getAttribute("id").length - 1)
+            if (nodo_op == "0") {
+                this.nextSibling.onclick = null;
+                this.nextSibling.nextSibling.onclick = null;
+            } else if (nodo_op == "1") {
+                this.nextSibling.onclick = null;
+                this.previousSibling.onclick = null;
+            } else {
+                this.previousSibling.previousSibling.onclick = null;
+                this.previousSibling.onclick = null;
+            }
+
+            this.childNodes[this.childNodes.length - 1].firstElementChild.classList.remove("ocultar");
+            // this.childNodes[this.childNodes.length - 1].classList.add("mostrar");
+            this.childNodes[this.childNodes.length - 1].style.display = ""
+            this.childNodes[this.childNodes.length - 1].setAttribute("data-title", this.getAttribute("data-retro"));
+            intento++;
+            desactivarBotones();
+
+        }
+        revisar();
+
+    };
+
+    boton.className = 'respuesta';
+}
+
+function deshacerOpcion(boton) {
+    boton.onclick = null;
+    boton.className = 'respuesta disabled';
+}
+
+function desactivarBotones() {
+    var oList = document.getElementById("preguntas").getElementsByTagName("a");
+    Array.prototype.forEach.call(oList, function (objeto) {
+        if (objeto.className.indexOf("respuestas") == 0) {
+            deshacerOpcion(objeto);
+        }
+    });
+}
+
+function revisar() {
+
+    if (puntaje >= puntajeExito) {
+        //retroalimentar("¡Felicidades, lograste más de " + puntajeExito + " puntos!");
+        $(".catOpcion").attr("class", "catOpcion disabled");
+    }
+
+}
+
+// function retroalimentar(cadena) {
+//     $('.textoRetroalimentar').html(cadena);
+// }
+
+function create_board() {
+
+    document.getElementById("txtPaneles").innerHTML = reactivos.length
+
+    if (puntajeExito == 0) {
+        for (let i = 0; i < puntajes.length; i++) {
+            totalPuntaje += encabezados.length * puntajes[i]
+        }
+        document.getElementById("txtPuntos").innerHTML = totalPuntaje * .40
+        puntajeExito = totalPuntaje * .40
+    } else {
+        document.getElementById("txtPuntos").innerHTML = puntajeExito
+    }
+
+
+    var tablero = document.createElement("div")
+    tablero.className = "tablero";
+    document.body.appendChild(tablero);
+
+    if (encabezados.length == 5) {
+        tablero.setAttribute("style", "width: 770px");
+    } else if (encabezados.length == 6) {
+        tablero.setAttribute("style", "width: 910px");
+    } else if (encabezados.length == 7) {
+        tablero.setAttribute("style", "width: 1060px");
+    } else {
+        tablero.setAttribute("style", "width: 1210px");
+    }
+
+    if (encabezados.length < 5 || encabezados.length > 8) {
+        $(".tablero").hide();
+        var tablero_val = document.createElement("p");
+        tablero_val.innerHTML = "Debe haber entre 5 y 8 categorias.";
+        tablero_val.setAttribute("style", "font-size: 50px;margin: 200px;line-height:40px;margin-left: 600px;font-weight: 700;");
+        document.body.appendChild(tablero_val);
+
+    }
+
+
+    var listaCategorias = document.createElement("div")
+    listaCategorias.className = "listaCategorias";
+    tablero.appendChild(listaCategorias);
+
+    var listaOpciones = document.createElement("div");
+    listaOpciones.className = "listaOpciones";
+    listaOpciones.setAttribute("id", "listaOp")
+    tablero.appendChild(listaOpciones);
+
+    var divbarra = document.createElement("div");
+    divbarra.className = "barraTareas";
+
+    var divretro = document.createElement("div");
+    divretro.className = "textoRetroalimentar";
+    divretro.innerHTML = "&nbsp;";
+
+    var divpuntaje = document.createElement("div");
+    divpuntaje.className = "puntaje";
+    divpuntaje.setAttribute("id", "puntaje");
+    divpuntaje.innerHTML = "Total:&nbsp;&nbsp;0"
+    divbarra.appendChild(divretro);
+    divbarra.appendChild(divpuntaje);
+
+    var divpregunta = document.createElement("div");
+    divpregunta.setAttribute("id", "preguntas");
+    divpregunta.innerHTML = "&nbsp;";
+
+    tablero.appendChild(divbarra);
+    tablero.appendChild(divpregunta);
+
+    encabezados.forEach(function (elemento, indice) {
+        var txt = document.createElement("div");
+        txt.setAttribute("class", "categoria")
+        txt.innerHTML = elemento;
+        listaCategorias.appendChild(txt);
+    });
+
+
+    if(!(puntajes.length * encabezados.length == reactivos.length)){
+        //alert("Faltan reactivos")
+    }
+    for (let i = 0; i < reactivos.length; i++) {
+        var tarjetas = document.createElement("div");
+        const columna = (i % categorias);
+        const renglon = Math.trunc(i / categorias);
+        listaOpciones.appendChild(tarjetas);
+        tarjetas.setAttribute("id", 'op_' + (columna + 1) + '_' + (renglon + 1))
+        tarjetas.setAttribute("class", "catOpcion");
+        tarjetas.setAttribute("data-texto", columna + 1);
+        tarjetas.setAttribute("data-puntaje", puntajes[renglon]);
+        var spanPuntaje = document.createElement("span");
+        spanPuntaje.setAttribute("class", "textoOpcion");
+
+        if (renglon == puntajes.length) {
+            spanPuntaje.innerHTML = "0";
+        } else {
+            spanPuntaje.innerHTML = (puntajes[renglon]);
+        }
+
+        tarjetas.appendChild(spanPuntaje);
+        // spanPuntaje.innerHTML = (puntajes[columna * reactivosXCategoria + renglon]);
+    }  
+}
+
+function isMobile() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        console.log('Esto es un dispositivo móvil');
+        return true;
+    }
+}

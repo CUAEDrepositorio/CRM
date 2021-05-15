@@ -5,7 +5,7 @@ var buenas = 0;
 var incorrectas = 0;
 var categoria = 0;
 var opcion = 0;
-var intento = 0;
+var intentos = 0;
 var caja;
 var categorias = encabezados.length;
 var totalPuntaje = 0;
@@ -18,17 +18,40 @@ $(document).ready(function () {
     }
     if (esMobil) {
         $(".encabezado").hide();
-
+        $("#btnProximo").hide();
         $("#mododebug").hide();
         $("#prohibido").show();
     } else {
         $("#prohibido").hide();
         $("#mododebug").hide();
-        create_board();
+        $("#btnProximo").hide();
+        $(".encabezado").show();
+        $(".instrucccion_texto").show();
         if (debug) {
             $("#mododebug").show();
         }
+        create_board();
     }
+
+    window.onresize = function () {
+        //alert("body.scrollWidth "+document.body.scrollWidth + "screen.availWidth " +screen.availWidth + "document.body.clientWidth "+document.body.clientWidth );
+        if (document.body.clientWidth > 768) {
+            $("#prohibido").hide();
+            $("#mododebug").hide();
+            $("#btnProximo").hide();
+            $(".encabezado").show();
+            $(".instrucccion_texto").show();
+            $(".tablero").show();
+        } else {
+            $("#prohibido").show();
+            $("#mododebug").hide();
+            $("#btnProximo").hide();
+            $(".encabezado").hide();
+            $(".instrucccion_texto").hide();
+            $(".tablero").hide();
+        }
+    }
+
     //para cada clic de los elementos del tipo catOpcion
     $(".catOpcion").click(function () {
         caja = $(this); // obtener el objeto
@@ -59,7 +82,8 @@ $(document).ready(function () {
     total = reactivos.length;
     buenas = 0;
     incorrectas = 0;
-    intento = 0;
+    intentos = 0;
+
 });
 
 
@@ -99,7 +123,8 @@ function crearPregunta(actual, destino) {
         panel_heading.setAttribute("data-toggle", "collapse");
         panel_heading.setAttribute("data-target", "#collapse" + indice);
         panel_heading.setAttribute("data-parent", "#accordion");
-        panel_heading.setAttribute("aria-expanded", "true");
+        panel_heading.setAttribute("aria-expanded", "false");
+        panel_heading.innerHTML = "<p id=txt_panel>" + elemento.respuesta + "</p>";
 
         panel_default.appendChild(panel_heading);
 
@@ -161,6 +186,7 @@ function crearPregunta(actual, destino) {
     });
 
     setClicBotones();
+    setClicHeading();
 }
 
 function setClicBotones() {
@@ -169,100 +195,129 @@ function setClicBotones() {
         var oList = document.getElementsByClassName("preguntas")[i].getElementsByTagName("a")[0];
         if (oList.className.indexOf("respuesta") == 0) {
             hacerRespuesta(oList);
-            
+
         }
     }
 }
 
+function setClicHeading() {
+    for (let i = 0; i < document.getElementsByClassName("preguntas").length; i++) {
+        var oList = document.getElementsByClassName("panel-heading btn collapsed")[i]
+        setClicAria(oList)
+    }
 
-function hacerRespuesta(boton) {    
+}
+
+
+function setClicAria(boton) {
     boton.onclick = function () {
-    
-        if (this.getAttribute("data-correcto") == "true") {
-            
+        var c_heading = this.getAttribute("class");
+        var d_target = this.getAttribute("data-target");
+        if (d_target == "#collapse0") {
+            if (this.getAttribute("class") == "panel-heading btn collapsed") {
+                this.firstChild.setAttribute("style", "display: none;");
+                if ((this.getAttribute("class") == "panel-heading btn collapsed") ||
+                    (document.getElementsByClassName("panel-heading btn")[1].getAttribute("class") == "panel-heading btn")) {
+                    this.parentElement.nextElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
+                    this.parentElement.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
+                }
+            } else {
+                this.firstChild.setAttribute("style", "display: '';");
+            }
+        } else if (d_target == "#collapse1") {
+            if (this.getAttribute("class") == "panel-heading btn collapsed") {
+                this.firstChild.setAttribute("style", "display: none;");
+                if ((this.getAttribute("class") == "panel-heading btn collapsed") ||
+                    (document.getElementsByClassName("panel-heading btn")[0].getAttribute("class") == "panel-heading btn")) {
+                    this.parentElement.previousElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
+                    this.parentElement.nextElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
+                }
+            } else {
+                this.firstChild.setAttribute("style", "display: '';");
+            }
+        } else if (d_target == "#collapse2") {
+            if (this.getAttribute("class") == "panel-heading btn collapsed") {
+                this.firstChild.setAttribute("style", "display: none;");
+                if (document.getElementsByClassName("panel-heading btn")[2].getAttribute("class") == "panel-heading btn"
+                    || (this.getAttribute("class") == "panel-heading btn collapsed")) {
+                    this.parentElement.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
+                    this.parentElement.previousElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
+                }
+            } else {
+                this.firstChild.setAttribute("style", "display: '';");
+            }
+
+        }
+
+    }
+}
+
+function hacerRespuesta(boton) {
+    boton.onclick = function () {
+
+        if (this.getAttribute("data-correcto")) {
+            var n4 = ((document.getElementsByClassName((document.getElementsByClassName(this.parentElement.getAttribute("class"))[0].parentNode).getAttribute("class"))[0].parentNode).getAttribute("class"));
+            n4 = n4.substr(0, 14);
             buenas++;
             var elemento = document.getElementById("op_" + categoria + "_" + opcion);
             elemento.childNodes[0].style.color = '#54900e';
             elemento.onclick = null;
             elemento.className = "catOpcion";
             elemento.className = "catOpcion disabled";
-                puntaje += parseInt(elemento.getAttribute("data-puntaje"), 10);
-                document.getElementById("puntaje").innerHTML = "Total:&nbsp;" + puntaje
-
+            elemento.className = "catOpcion complete disabled";
+            puntaje += parseInt(elemento.getAttribute("data-puntaje"), 10);
+            document.getElementById("puntaje").innerHTML = "Total:&nbsp;" + puntaje
             this.className = "respuesta bien disabled";
             this.onclick = null; //deshabilitamos esta opcion para que no vuelva a contestar
             var nodo_op = this.getAttribute("id").charAt(this.getAttribute("id").length - 1);
-            var n4 = ((document.getElementsByClassName((document.getElementsByClassName(this.parentElement.getAttribute("class"))[0].parentNode).getAttribute("class"))[0].parentNode).getAttribute("class"));
-            n4 = n4.substr(0,14);
-            if (nodo_op == "0") {
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.lastChild.removeAttribute("id");
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");            
-            } else if (nodo_op == "1") {
-                
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");            
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].lastChild.removeAttribute("id");
-            } else {                
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.lastChild.removeAttribute("id");                            
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.previousSibling.lastChild.removeAttribute("id");
-            }
 
-            // if (nodo_op == "0") {
-            //     this.nextSibling.onclick = null;
-            //     this.nextSibling.nextSibling.onclick = null;
-            // } else if (nodo_op == "1") {
-            //     this.nextSibling.onclick = null;
-            //     this.previousSibling.onclick = null;
-            // } else {
-            //     this.previousSibling.previousSibling.onclick = null;
-            //     this.previousSibling.onclick = null;
-            // }
+
+            if (nodo_op == "0") {
+
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.lastChild.removeAttribute("id");
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");
+            } else if (nodo_op == "1") {
+
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].lastChild.removeAttribute("id");
+            } else {
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.lastChild.removeAttribute("id");
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.previousSibling.lastChild.removeAttribute("id");
+            }
 
             this.childNodes[this.childNodes.length - 2].firstElementChild.classList.remove("ocultar");
             this.childNodes[this.childNodes.length - 2].style.display = ""
             this.childNodes[this.childNodes.length - 2].setAttribute("data-title", this.getAttribute("data-retro"));
 
         } else {
-            
+
             var elemento = document.getElementById("op_" + categoria + "_" + opcion);
             elemento.childNodes[0].style.color = '#911a19';
             elemento.onclick = null;
-            elemento.className = "catOpcion disabled";
-                puntaje -= parseInt(elemento.getAttribute("data-puntaje"), 10);
-                document.getElementById("puntaje").innerHTML = "Total:&nbsp;" + puntaje
+            elemento.className = "catOpcion complete disabled";
+            puntaje -= parseInt(elemento.getAttribute("data-puntaje"), 10);
+            document.getElementById("puntaje").innerHTML = "Total:&nbsp;" + puntaje
             this.className = "respuesta mal disabled";
-
             this.onclick = null;
             var nodo_op = this.getAttribute("id").charAt(this.getAttribute("id").length - 1);
             var n4 = ((document.getElementsByClassName((document.getElementsByClassName(this.parentElement.getAttribute("class"))[0].parentNode).getAttribute("class"))[0].parentNode).getAttribute("class"));
-            n4 = n4.substr(0,14);
+            n4 = n4.substr(0, 14);
             if (nodo_op == "0") {
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.lastChild.removeAttribute("id");
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");            
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.lastChild.removeAttribute("id");
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");
             } else if (nodo_op == "1") {
-                
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");            
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].lastChild.removeAttribute("id");
-            } else {                
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.lastChild.removeAttribute("id");                            
-                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6,13))[0].nextSibling.previousSibling.lastChild.removeAttribute("id");
-            }
 
-            // if (nodo_op == "0") {
-            //     this.nextSibling.onclick = null;
-            //     this.nextSibling.nextSibling.onclick = null;
-            // } else if (nodo_op == "1") {
-            //     this.nextSibling.onclick = null;
-            //     this.previousSibling.onclick = null;
-            // } else {
-            //     this.previousSibling.previousSibling.onclick = null;
-            //     this.previousSibling.onclick = null;
-            // }
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.nextSibling.lastChild.removeAttribute("id");
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].lastChild.removeAttribute("id");
+            } else {
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.lastChild.removeAttribute("id");
+                document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0].nextSibling.previousSibling.lastChild.removeAttribute("id");
+            }
 
             this.childNodes[this.childNodes.length - 1].firstElementChild.classList.remove("ocultar");
             // this.childNodes[this.childNodes.length - 1].classList.add("mostrar");
             this.childNodes[this.childNodes.length - 1].style.display = ""
             this.childNodes[this.childNodes.length - 1].setAttribute("data-title", this.getAttribute("data-retro"));
-            intento++;
             desactivarBotones();
 
         }
@@ -279,7 +334,7 @@ function deshacerOpcion(boton) {
 }
 
 function desactivarBotones() {
-    
+
     for (let i = 0; i < document.getElementsByClassName("preguntas").length; i++) {
         var objeto = document.getElementsByClassName("preguntas")[i].getElementsByTagName("a")[0];
         if (objeto.className.indexOf("respuestas") == 0) {
@@ -293,15 +348,45 @@ function desactivarBotones() {
 function revisar() {
 
     if (puntaje >= puntajeExito) {
-        //retroalimentar("¡Felicidades, lograste más de " + puntajeExito + " puntos!");
-        $(".catOpcion").attr("class", "catOpcion disabled");
+        $(".catOpcion").addClass("disabled")
+        intentos++;
+        swal({
+            title: "Resultado",
+            text: "Obtuviste " + puntaje + " puntos.<br>" + textoRetroGeneral,
+            confirmButtonText: "Aceptar",
+            closeOnConfirm: true,
+            html: true
+        });
+        $("#btnProximo").show();
+        $("#btnProximo").click(siguiente);
     }
 
 }
 
-// function retroalimentar(cadena) {
-//     $('.textoRetroalimentar').html(cadena);
-// }
+function siguiente() {
+    if (intentos < maxIntentos) {
+        $("#btnProximo").hide();
+        puntaje = 0;
+        $("#puntaje").html("Total:&nbsp;&nbsp;0")
+        if (siguienteIntentoBlanco) {
+            $(".catOpcion").attr("class", "catOpcion");
+            $(".textoOpcion").attr("style", "color:#385461;");
+        } else {
+            $(".catOpcion").removeClass("disabled");
+            $(".complete").addClass("disabled");
+
+        }
+
+    } else {
+        swal({
+            title: "Atención",
+            text: "Has alcanzado el máximo número de intentos:  " + maxIntentos + ".",
+            confirmButtonText: "Aceptar",
+            closeOnConfirm: true,
+            html: true
+        });
+    }
+}
 
 function create_board() {
 
@@ -321,6 +406,14 @@ function create_board() {
     var tablero = document.createElement("div")
     tablero.className = "tablero";
     document.body.appendChild(tablero);
+
+    var espacio = document.createElement("br");
+    document.body.appendChild(espacio);
+    var btnIntentos = document.createElement("button");
+
+    btnIntentos.setAttribute("id", "btnProximo");
+    btnIntentos.innerHTML = "Siguiente intento";
+    document.body.appendChild(btnIntentos);
 
     if (encabezados.length == 5) {
         tablero.setAttribute("style", "width: 770px");
@@ -379,10 +472,6 @@ function create_board() {
         listaCategorias.appendChild(txt);
     });
 
-
-    if (!(puntajes.length * encabezados.length == reactivos.length)) {
-        //alert("Faltan reactivos")
-    }
     for (let i = 0; i < reactivos.length; i++) {
         var tarjetas = document.createElement("div");
         const columna = (i % categorias);

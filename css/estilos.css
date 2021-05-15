@@ -23,6 +23,12 @@ body{
     display: "";
 }
 
+#txt_panel{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .ocultar{
     display: none;
 }
@@ -31,6 +37,7 @@ a:hover{
     text-decoration:none; 
     color:#588cbd; 
 }
+
 .headings-int {
     font-family: 'Open Sans', sans-serif;
     color: #000;
@@ -149,7 +156,9 @@ p{
     text-decoration: none;
     cursor:pointer;
 }
-
+.panel-default>.panel-heading {
+    padding: 19px;
+}
 .barraTareas{
     display:table;
     width: 100%;
@@ -190,6 +199,18 @@ p{
     /*padding-top: 30px;*/
 }
 
+#btnProximo{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    padding: 10px 20px;
+}
 
 .respuesta{
     font-family: 'Open Sans', sans-serif;
@@ -198,10 +219,10 @@ p{
     text-align: justify;
     color: #000;
     background-color: transparent;
-    border: 2px solid;
+    /* border: 2px solid; */
     cursor: pointer;
-    margin: 7px;
-    padding:5px;
+    /* margin: 7px;
+    padding:5px; */
     min-width: 90%;
     text-align: left;
     white-space: pre-wrap;
@@ -519,10 +540,10 @@ i.it {
   }
 
   .btn:after {
-      /* font-family: "Glyphicons Halflings"; */
+      font-family: "Glyphicons Halflings";
       content: "\e113";
       float: right;
-      margin-left: 15px;
+      margin-top: -10px;
       transition: .3s all;
       transform: rotate(0deg);
   }
@@ -606,4 +627,7 @@ i.it {
 .tooltip.danger.right > .tooltip-arrow  { border-right-color:  #f01b18; }
 .tooltip.danger.bottom > .tooltip-arrow { border-bottom-color: #f01b18; }
 .tooltip.danger.left > .tooltip-arrow   { border-left-color:   #f01b18; }
+
+
+
 

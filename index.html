@@ -21,38 +21,37 @@
   <meta property="og:image" content="" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-
+  <!--
+        
+        1.0 KDMR May 03, 2021: Detalle de CSS en las respuestas
+        1.0 KDMR May 03, 2021: Se añadio número de intentos
+        1.0 KDMR May 03, 2021: Las respuestas se modificaron para que se visualizaran en modo "acordeón" además de que se visualizara en un modal
+        1.0 KDMR May 03, 2021: Se añadio modo debug, siguienteIntentoBlanco y retroGeneral
+        1.0 KDMR May 03, 2021: Retroalimentación en tooltip (palomita, tache) en cada reactivo, modificando el archivo de listaReactivos.js
+        1.0 KDMR May 03, 2021: Se ajustaron dimensiones para visualización, en móvil es NO DISPONIBLE en desktop cuando (scrollWidth < 675) se deja de visualizar.
+        1.0 KDMR May 03, 2021: Modificación en el apartado de instrucciones para que de manera automatica se obtivera el número de paneles y de encabezados
+        1.0 KDMR May 03, 2021: Creación del tablero y cartas automaticamente, además de establecerlimites de número de encabezados de (6-8) y de cartas (4-6)
+        1.0 KDMR May 03, 2021: Creación de archivos de listaReactivos.js, configRecursos
+        1.0 KDMR May 03, 2021: Cambio de librerías de jquery y bootstrap
+    -->
   <title>Jeopardy</title>
-  <link rel="stylesheet" href="js/font-awesome-v4.7.0.min.css" />
 
-  <script src="js/jquery-v3.2.1.js"></script>
-  <!-- <link rel="stylesheet" href="js/bootstrap-v3.3.7.min.css" /> -->
-  <!-- <script src="js/bootstrap-v3.3.7.min.js"></script>  -->
-
-  <link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/bootstrap-v3.3.7.min.css" />
-  <script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
-
-  <link rel="stylesheet" href="js/font-awesome-v5.0.13.css" />
-  <!-- <link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/font-awesome-v4.7.0.min.css" /> -->
-  <!-- <script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"> </script> -->
-
+  <script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.2.1.js"> </script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
-
-  <!-- <script src="js/jquery-2.2.4.min.js"></script> -->
-  <!-- JQuery UI -->
-  <script src="js/jquery-ui.min.js"></script>
-  <script src="js/bootstrap-dialog.min.js"></script>
-  <!--script src="js/jquery.mobile-1.4.5.min.js"></script //-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://lib.cuaieed.unam.mx/R019/js/jquery-v3.3.1.min.js"></script>
+	<script src="https://lib.cuaieed.unam.mx/R019/js/bootstrap-v3.3.7.min.js"></script>
   <link href="css/estilos.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/jquery-ui.css">
-
+  <link rel="stylesheet" href="https://lib.cuaieed.unam.mx/R019/css/font-awesome-v4.7.0.min.css" />
+  
 
   <script src="/SCORM/conectividadSCORM.js"></script>
   <script src="/SCORM/barraDeInfo.js"></script>
   <script src="js/configRecurso.js"></script>
   <script src="js/listaReactivos.js"></script>
   <script src="js/codigo.js"></script>
-
+  <script src="js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/sweetalert.css" />
   <script>
     $(document).ready(function () {
       $('[data-toggle="tooltip"]').each(function () { //JLBG para activar los tooltips, el title de retro...
@@ -85,41 +84,38 @@
   <span id="mododebug"> -MODO DEBUG ACTIVADO -</span>
   <section class="encabezado">
     <h1 class="headings-int"> Título de la actividad</h1>
-    <p class="intrucccion_texto">Instrucciones (pedagógica y técnica) de la evaluación.<br>
+    <p class="instrucccion_texto">Instrucciones (pedagógica y técnica) de la evaluación.<br>
       Elige cualquiera de los paneles del tablero del juego, verás que se revelará una pista (respuesta) y tú deberás
       elegir la pregunta que concuerde con dicha respuesta.<br>
       Si eliges la opción correcta, se te acumularán los puntos del panel que hayas elegido; por el contrario, si
       fallas, perderás los puntos que hayas acumulado hasta ese momento.<br>
-      Debes repetir el mismo procedimiento hasta que hayas elegido los <span id="txtPaneles"></span> paneles. 
-      Si obtienes menos de <span id="txtPuntos"></span> puntos, deberás repasar nuevamente la unidad y repetir la actividad, 
+      Debes repetir el mismo procedimiento hasta que hayas elegido los <span id="txtPaneles"></span> paneles.
+      Si obtienes menos de <span id="txtPuntos"></span> puntos, deberás repasar nuevamente la unidad y repetir la
+      actividad,
       ya que no es el aprendizaje que se espera de ti.</p>
   </section>
-
-
-
   <div class="modal fade" id="modalReactivos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body"> 
+        <div class="modal-body">
           <div class="panel-group" id="accordion">
 
           </div>
         </div>
-        
+
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-        
+          <button type="button" class="" data-dismiss="modal">Cerrar</button>
+
+        </div>
       </div>
     </div>
-  </div>
-
+    </div>
+    
 </body>
 
 </html>

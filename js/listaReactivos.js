@@ -3,14 +3,14 @@ var encabezados = [
     "Desarrollo de políticas",
     "Procedimientos al interior del sistema",
     "Normas, estándares, criterios y requisitos",
-    "Selección e instrumentación de un sistema",
-    "Procedimientos al interior del sistema-1",
-    "Normas, estándares, criterios y requisitos-1",
-    "Selección e instrumentación de un sistema-11"
+    "Selección e instrumentación de un sistema"
+    // "Procedimientos al interior del sistema-1",
+    // "Normas, estándares, criterios y requisitos-1",
+    // "Selección e instrumentación de un sistema-11"
 ];
 
 var puntajes = [
-    250,400,500,800,1000,11200
+    250,400,500,800,1000,1200
 ]
 var reactivos = [
     //Categoria 1
@@ -28,12 +28,7 @@ var reactivos = [
                 respuesta: "b)  ¿Es una medida que se debe tener en cuenta si se quiere automatizar algún proceso o servicio?",
                 correcta: false,
                 retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)   ¿Son todos aquellos recursos, herramientas y programas que se utilizan para procesar, administrar y compartir la información?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
+            }         
         ]
     },
     {
@@ -50,12 +45,7 @@ var reactivos = [
                 respuesta: "b)  ¿Ventaja de un sistema de gestión documental?",
                 correcta: true,
                 retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Beneficio de un sistema informático?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
+            }
         ]
     },
     {
@@ -65,19 +55,14 @@ var reactivos = [
         texto: "Planeación de un sistema de gestión documental.",
         respuestas: [{
                 respuesta: "a)  ¿Es el primer proceso que debe hacerse en conjunto, formando un grupo que sea el responsable del manejo de los archivos, el responsable de los procesos administrativos internos los responsables de los sistemas de información?",
-                correcta: true,
+                correcta: false,
                 retro: "Retroalimentación correcta"
             },
             {
                 respuesta: "b)  ¿Es el proceso que prepara los archivos para su inclusión y almacenamiento en el sistema de información?",
-                correcta: false,
+                correcta: true,
                 retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Es el proceso que sirve para asegurarse de que los archivos que serán introducidos al sistema de información y no suponen un riesgo de seguridad para el sistema?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
+            }
         ]
     },
     {
@@ -87,19 +72,14 @@ var reactivos = [
         texto: "Archivista.",
         respuestas: [{
                 respuesta: "a)  ¿Ayuda a tener claros los objetivos de la institución, su estructura organizacional y define cuáles son los departamentos que se encuentran en la institución, así como el trabajo que realizan y el tipo de documentos con los que trabajan?",
-                correcta: false,
+                correcta: true,
                 retro: "Retroalimentación incorrecta"
             },
             {
                 respuesta: "b)  ¿Se encarga del diseño y la programación de los módulos que participan en el sistema de gestión documental, así como de definir los requerimientos tanto de <em>software</em> como de <em>hardware</em> necesarios para que el sistema funcione correctamente, participa en los procesos de preservación de los documentos electrónicos y colabora en el desarrollo de políticas con el fin de que se logre mantener la información íntegra y accesible cuando el usuario la solicite?",
                 correcta: false,
                 retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Debe organizar los documentos mediante los procesos de gestión documental, definir los ciclos de vida de los documentos que se integrarán en el sistema y revisar las normas que involucran los documentos electrónicos para que éstas sean aplicadas correctamente al sistema de gestión?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
+            }
         ]
     },
     {
@@ -680,408 +660,408 @@ var reactivos = [
         ]
     },
     //Categoria 6
-    {
-        categoria: 6,
-        opcion: 1,
-        //puntaje: 175,
-        texto: "Sistema de gestión documental.",
-        respuestas: [{
-                respuesta: "a)  ¿Es utilizado para la creación, búsqueda y almacenamiento de documentos electrónicos?",
-                correcta: true,
-                retro: "Retroalimentación correcta Retroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correcta"
-            },
-            {
-                respuesta: "b)  ¿Es una medida que se debe tener en cuenta si se quiere automatizar algún proceso o servicio?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)   ¿Son todos aquellos recursos, herramientas y programas que se utilizan para procesar, administrar y compartir la información?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 6,
-        opcion: 2,
-        //puntaje: 400,
-        texto: "Facilita la valoración de los documentos previniendo la acumulación innecesaria de archivos.",
-        respuestas: [{
-                respuesta: "a)  ¿Desventaja de un sistema de gestión documental?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Ventaja de un sistema de gestión documental?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Beneficio de un sistema informático?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 6,
-        opcion: 3,
-        //puntaje: 600,
-        texto: "Planeación de un sistema de gestión documental.",
-        respuestas: [{
-                respuesta: "a)  ¿Es el primer proceso que debe hacerse en conjunto, formando un grupo que sea el responsable del manejo de los archivos, el responsable de los procesos administrativos internos los responsables de los sistemas de información?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "b)  ¿Es el proceso que prepara los archivos para su inclusión y almacenamiento en el sistema de información?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Es el proceso que sirve para asegurarse de que los archivos que serán introducidos al sistema de información y no suponen un riesgo de seguridad para el sistema?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 6,
-        opcion: 4,
-        //puntaje: 800,
-        texto: "Archivista.",
-        respuestas: [{
-                respuesta: "a)  ¿Ayuda a tener claros los objetivos de la institución, su estructura organizacional y define cuáles son los departamentos que se encuentran en la institución, así como el trabajo que realizan y el tipo de documentos con los que trabajan?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Se encarga del diseño y la programación de los módulos que participan en el sistema de gestión documental, así como de definir los requerimientos tanto de <em>software</em> como de <em>hardware</em> necesarios para que el sistema funcione correctamente, participa en los procesos de preservación de los documentos electrónicos y colabora en el desarrollo de políticas con el fin de que se logre mantener la información íntegra y accesible cuando el usuario la solicite?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Debe organizar los documentos mediante los procesos de gestión documental, definir los ciclos de vida de los documentos que se integrarán en el sistema y revisar las normas que involucran los documentos electrónicos para que éstas sean aplicadas correctamente al sistema de gestión?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-        ]
-    },
-    {
-        categoria: 6,
-        opcion: 5,
-        //puntaje: 1000,
-        texto: "Norma ISO 15489.",
-        respuestas: [{
-                respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 6,
-        opcion: 6,
-        //puntaje: 1000,
-        texto: "Norma ISO 15489.",
-        respuestas: [{
-                respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
+    // {
+    //     categoria: 6,
+    //     opcion: 1,
+    //     //puntaje: 175,
+    //     texto: "Sistema de gestión documental.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Es utilizado para la creación, búsqueda y almacenamiento de documentos electrónicos?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta Retroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Es una medida que se debe tener en cuenta si se quiere automatizar algún proceso o servicio?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)   ¿Son todos aquellos recursos, herramientas y programas que se utilizan para procesar, administrar y compartir la información?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 6,
+    //     opcion: 2,
+    //     //puntaje: 400,
+    //     texto: "Facilita la valoración de los documentos previniendo la acumulación innecesaria de archivos.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Desventaja de un sistema de gestión documental?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Ventaja de un sistema de gestión documental?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Beneficio de un sistema informático?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 6,
+    //     opcion: 3,
+    //     //puntaje: 600,
+    //     texto: "Planeación de un sistema de gestión documental.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Es el primer proceso que debe hacerse en conjunto, formando un grupo que sea el responsable del manejo de los archivos, el responsable de los procesos administrativos internos los responsables de los sistemas de información?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Es el proceso que prepara los archivos para su inclusión y almacenamiento en el sistema de información?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Es el proceso que sirve para asegurarse de que los archivos que serán introducidos al sistema de información y no suponen un riesgo de seguridad para el sistema?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 6,
+    //     opcion: 4,
+    //     //puntaje: 800,
+    //     texto: "Archivista.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Ayuda a tener claros los objetivos de la institución, su estructura organizacional y define cuáles son los departamentos que se encuentran en la institución, así como el trabajo que realizan y el tipo de documentos con los que trabajan?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Se encarga del diseño y la programación de los módulos que participan en el sistema de gestión documental, así como de definir los requerimientos tanto de <em>software</em> como de <em>hardware</em> necesarios para que el sistema funcione correctamente, participa en los procesos de preservación de los documentos electrónicos y colabora en el desarrollo de políticas con el fin de que se logre mantener la información íntegra y accesible cuando el usuario la solicite?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Debe organizar los documentos mediante los procesos de gestión documental, definir los ciclos de vida de los documentos que se integrarán en el sistema y revisar las normas que involucran los documentos electrónicos para que éstas sean aplicadas correctamente al sistema de gestión?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 6,
+    //     opcion: 5,
+    //     //puntaje: 1000,
+    //     texto: "Norma ISO 15489.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 6,
+    //     opcion: 6,
+    //     //puntaje: 1000,
+    //     texto: "Norma ISO 15489.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
 
-    // //Categoria 7
-    {
-        categoria: 7,
-        opcion: 1,
-        //puntaje: 175,
-        texto: "Sistema de gestión documental.",
-        respuestas: [{
-                respuesta: "a)  ¿Es utilizado para la creación, búsqueda y almacenamiento de documentos electrónicos?",
-                correcta: true,
-                retro: "Retroalimentación correcta Retroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correcta"
-            },
-            {
-                respuesta: "b)  ¿Es una medida que se debe tener en cuenta si se quiere automatizar algún proceso o servicio?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)   ¿Son todos aquellos recursos, herramientas y programas que se utilizan para procesar, administrar y compartir la información?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 7,
-        opcion: 2,
-        //puntaje: 400,
-        texto: "Facilita la valoración de los documentos previniendo la acumulación innecesaria de archivos.",
-        respuestas: [{
-                respuesta: "a)  ¿Desventaja de un sistema de gestión documental?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Ventaja de un sistema de gestión documental?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Beneficio de un sistema informático?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 7,
-        opcion: 3,
-        //puntaje: 600,
-        texto: "Planeación de un sistema de gestión documental.",
-        respuestas: [{
-                respuesta: "a)  ¿Es el primer proceso que debe hacerse en conjunto, formando un grupo que sea el responsable del manejo de los archivos, el responsable de los procesos administrativos internos los responsables de los sistemas de información?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "b)  ¿Es el proceso que prepara los archivos para su inclusión y almacenamiento en el sistema de información?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Es el proceso que sirve para asegurarse de que los archivos que serán introducidos al sistema de información y no suponen un riesgo de seguridad para el sistema?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 7,
-        opcion: 4,
-        //puntaje: 800,
-        texto: "Archivista.",
-        respuestas: [{
-                respuesta: "a)  ¿Ayuda a tener claros los objetivos de la institución, su estructura organizacional y define cuáles son los departamentos que se encuentran en la institución, así como el trabajo que realizan y el tipo de documentos con los que trabajan?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Se encarga del diseño y la programación de los módulos que participan en el sistema de gestión documental, así como de definir los requerimientos tanto de <em>software</em> como de <em>hardware</em> necesarios para que el sistema funcione correctamente, participa en los procesos de preservación de los documentos electrónicos y colabora en el desarrollo de políticas con el fin de que se logre mantener la información íntegra y accesible cuando el usuario la solicite?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Debe organizar los documentos mediante los procesos de gestión documental, definir los ciclos de vida de los documentos que se integrarán en el sistema y revisar las normas que involucran los documentos electrónicos para que éstas sean aplicadas correctamente al sistema de gestión?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-        ]
-    },
-    {
-        categoria: 7,
-        opcion: 5,
-        //puntaje: 1000,
-        texto: "Norma ISO 15489.",
-        respuestas: [{
-                respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 7,
-        opcion: 6,
-        //puntaje: 1000,
-        texto: "Norma ISO 15489.",
-        respuestas: [{
-                respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },   
+    // // //Categoria 7
+    // {
+    //     categoria: 7,
+    //     opcion: 1,
+    //     //puntaje: 175,
+    //     texto: "Sistema de gestión documental.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Es utilizado para la creación, búsqueda y almacenamiento de documentos electrónicos?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta Retroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Es una medida que se debe tener en cuenta si se quiere automatizar algún proceso o servicio?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)   ¿Son todos aquellos recursos, herramientas y programas que se utilizan para procesar, administrar y compartir la información?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 7,
+    //     opcion: 2,
+    //     //puntaje: 400,
+    //     texto: "Facilita la valoración de los documentos previniendo la acumulación innecesaria de archivos.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Desventaja de un sistema de gestión documental?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Ventaja de un sistema de gestión documental?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Beneficio de un sistema informático?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 7,
+    //     opcion: 3,
+    //     //puntaje: 600,
+    //     texto: "Planeación de un sistema de gestión documental.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Es el primer proceso que debe hacerse en conjunto, formando un grupo que sea el responsable del manejo de los archivos, el responsable de los procesos administrativos internos los responsables de los sistemas de información?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Es el proceso que prepara los archivos para su inclusión y almacenamiento en el sistema de información?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Es el proceso que sirve para asegurarse de que los archivos que serán introducidos al sistema de información y no suponen un riesgo de seguridad para el sistema?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 7,
+    //     opcion: 4,
+    //     //puntaje: 800,
+    //     texto: "Archivista.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Ayuda a tener claros los objetivos de la institución, su estructura organizacional y define cuáles son los departamentos que se encuentran en la institución, así como el trabajo que realizan y el tipo de documentos con los que trabajan?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Se encarga del diseño y la programación de los módulos que participan en el sistema de gestión documental, así como de definir los requerimientos tanto de <em>software</em> como de <em>hardware</em> necesarios para que el sistema funcione correctamente, participa en los procesos de preservación de los documentos electrónicos y colabora en el desarrollo de políticas con el fin de que se logre mantener la información íntegra y accesible cuando el usuario la solicite?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Debe organizar los documentos mediante los procesos de gestión documental, definir los ciclos de vida de los documentos que se integrarán en el sistema y revisar las normas que involucran los documentos electrónicos para que éstas sean aplicadas correctamente al sistema de gestión?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 7,
+    //     opcion: 5,
+    //     //puntaje: 1000,
+    //     texto: "Norma ISO 15489.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 7,
+    //     opcion: 6,
+    //     //puntaje: 1000,
+    //     texto: "Norma ISO 15489.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },   
     
     
 
-    //Categoria 8
-    {
-        categoria: 8,
-        opcion: 1,
-        //puntaje: 175,
-        texto: "Sistema de gestión documental.",
-        respuestas: [{
-                respuesta: "a)  ¿Es utilizado para la creación, búsqueda y almacenamiento de documentos electrónicos?",
-                correcta: true,
-                retro: "Retroalimentación correcta Retroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correcta"
-            },
-            {
-                respuesta: "b)  ¿Es una medida que se debe tener en cuenta si se quiere automatizar algún proceso o servicio?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)   ¿Son todos aquellos recursos, herramientas y programas que se utilizan para procesar, administrar y compartir la información?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 8,
-        opcion: 2,
-        //puntaje: 400,
-        texto: "Facilita la valoración de los documentos previniendo la acumulación innecesaria de archivos.",
-        respuestas: [{
-                respuesta: "a)  ¿Desventaja de un sistema de gestión documental?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Ventaja de un sistema de gestión documental?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Beneficio de un sistema informático?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 8,
-        opcion: 3,
-        //puntaje: 600,
-        texto: "Planeación de un sistema de gestión documental.",
-        respuestas: [{
-                respuesta: "a)  ¿Es el primer proceso que debe hacerse en conjunto, formando un grupo que sea el responsable del manejo de los archivos, el responsable de los procesos administrativos internos los responsables de los sistemas de información?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "b)  ¿Es el proceso que prepara los archivos para su inclusión y almacenamiento en el sistema de información?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Es el proceso que sirve para asegurarse de que los archivos que serán introducidos al sistema de información y no suponen un riesgo de seguridad para el sistema?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 8,
-        opcion: 4,
-        //puntaje: 800,
-        texto: "Archivista.",
-        respuestas: [{
-                respuesta: "a)  ¿Ayuda a tener claros los objetivos de la institución, su estructura organizacional y define cuáles son los departamentos que se encuentran en la institución, así como el trabajo que realizan y el tipo de documentos con los que trabajan?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Se encarga del diseño y la programación de los módulos que participan en el sistema de gestión documental, así como de definir los requerimientos tanto de <em>software</em> como de <em>hardware</em> necesarios para que el sistema funcione correctamente, participa en los procesos de preservación de los documentos electrónicos y colabora en el desarrollo de políticas con el fin de que se logre mantener la información íntegra y accesible cuando el usuario la solicite?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "c)  ¿Debe organizar los documentos mediante los procesos de gestión documental, definir los ciclos de vida de los documentos que se integrarán en el sistema y revisar las normas que involucran los documentos electrónicos para que éstas sean aplicadas correctamente al sistema de gestión?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-        ]
-    },
-    {
-        categoria: 8,
-        opcion: 5,
-        //puntaje: 1000,
-        texto: "Norma ISO 15489.",
-        respuestas: [{
-                respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    },
-    {
-        categoria: 8,
-        opcion: 6,
-        //puntaje: 1000,
-        texto: "Norma ISO 15489.",
-        respuestas: [{
-                respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-            {
-                respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
-                correcta: true,
-                retro: "Retroalimentación correcta"
-            },
-            {
-                respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
-                correcta: false,
-                retro: "Retroalimentación incorrecta"
-            },
-        ]
-    }    
+    // //Categoria 8
+    // {
+    //     categoria: 8,
+    //     opcion: 1,
+    //     //puntaje: 175,
+    //     texto: "Sistema de gestión documental.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Es utilizado para la creación, búsqueda y almacenamiento de documentos electrónicos?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta Retroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correctaRetroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Es una medida que se debe tener en cuenta si se quiere automatizar algún proceso o servicio?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)   ¿Son todos aquellos recursos, herramientas y programas que se utilizan para procesar, administrar y compartir la información?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 8,
+    //     opcion: 2,
+    //     //puntaje: 400,
+    //     texto: "Facilita la valoración de los documentos previniendo la acumulación innecesaria de archivos.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Desventaja de un sistema de gestión documental?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Ventaja de un sistema de gestión documental?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Beneficio de un sistema informático?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 8,
+    //     opcion: 3,
+    //     //puntaje: 600,
+    //     texto: "Planeación de un sistema de gestión documental.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Es el primer proceso que debe hacerse en conjunto, formando un grupo que sea el responsable del manejo de los archivos, el responsable de los procesos administrativos internos los responsables de los sistemas de información?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Es el proceso que prepara los archivos para su inclusión y almacenamiento en el sistema de información?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Es el proceso que sirve para asegurarse de que los archivos que serán introducidos al sistema de información y no suponen un riesgo de seguridad para el sistema?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 8,
+    //     opcion: 4,
+    //     //puntaje: 800,
+    //     texto: "Archivista.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Ayuda a tener claros los objetivos de la institución, su estructura organizacional y define cuáles son los departamentos que se encuentran en la institución, así como el trabajo que realizan y el tipo de documentos con los que trabajan?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Se encarga del diseño y la programación de los módulos que participan en el sistema de gestión documental, así como de definir los requerimientos tanto de <em>software</em> como de <em>hardware</em> necesarios para que el sistema funcione correctamente, participa en los procesos de preservación de los documentos electrónicos y colabora en el desarrollo de políticas con el fin de que se logre mantener la información íntegra y accesible cuando el usuario la solicite?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Debe organizar los documentos mediante los procesos de gestión documental, definir los ciclos de vida de los documentos que se integrarán en el sistema y revisar las normas que involucran los documentos electrónicos para que éstas sean aplicadas correctamente al sistema de gestión?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 8,
+    //     opcion: 5,
+    //     //puntaje: 1000,
+    //     texto: "Norma ISO 15489.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // },
+    // {
+    //     categoria: 8,
+    //     opcion: 6,
+    //     //puntaje: 1000,
+    //     texto: "Norma ISO 15489.",
+    //     respuestas: [{
+    //             respuesta: "a)  ¿Propone la gestión de la calidad y del medio ambiente, obligando a definir adecuadamente los procedimientos que garanticen un control eficaz de los documentos?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //         {
+    //             respuesta: "b)  ¿Propone la metodología DIRKS (<em>Designing and Implementing Recordkeeping Systems</em>), de origen australiano, para el diseño e implementación de un sistema de gestión de documentos y consta de ocho etapas?",
+    //             correcta: true,
+    //             retro: "Retroalimentación correcta"
+    //         },
+    //         {
+    //             respuesta: "c)  ¿Especifica la utilización del formato PDF/A para la conservación a largo plazo de los documentos electrónicos, es un proyecto de norma española (PNE)?",
+    //             correcta: false,
+    //             retro: "Retroalimentación incorrecta"
+    //         },
+    //     ]
+    // }    
 ];
 
 

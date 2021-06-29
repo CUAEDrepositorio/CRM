@@ -73,7 +73,7 @@ $(document).ready(function () {
                 crearPregunta(seleccionado, elementoPregunta);
             }
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     });
 
@@ -212,7 +212,7 @@ function setClicHeading() {
 function setClicAria(boton) {
     boton.onclick = function () {
         var d_target = this.getAttribute("data-target");
-        if($(".panel-group").children().length == 3){
+        if ($(".panel-group").children().length == 3) {
             if (d_target == "#collapse0") {
                 if (this.getAttribute("class") == "panel-heading btn collapsed") {
                     this.firstChild.setAttribute("style", "display: none;");
@@ -229,13 +229,12 @@ function setClicAria(boton) {
                     if ((this.getAttribute("class") == "panel-heading btn collapsed") ||
                         (document.getElementsByClassName("panel-heading btn")[0].getAttribute("class") == "panel-heading btn")) {
                         this.parentElement.previousElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
-                        this.parentElement.nextElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
                     }
                 } else {
                     this.firstChild.setAttribute("style", "display: '';");
                 }
             }
-        }else if($(".panel-group").children().length == 4){
+        } else if ($(".panel-group").children().length == 4) {
             if (d_target == "#collapse0") {
                 if (this.getAttribute("class") == "panel-heading btn collapsed") {
                     this.firstChild.setAttribute("style", "display: none;");
@@ -261,23 +260,22 @@ function setClicAria(boton) {
             } else if (d_target == "#collapse2") {
                 if (this.getAttribute("class") == "panel-heading btn collapsed") {
                     this.firstChild.setAttribute("style", "display: none;");
-                    if (document.getElementsByClassName("panel-heading btn")[2].getAttribute("class") == "panel-heading btn"
-                        || (this.getAttribute("class") == "panel-heading btn collapsed")) {
+                    if (document.getElementsByClassName("panel-heading btn")[2].getAttribute("class") == "panel-heading btn" ||
+                        (this.getAttribute("class") == "panel-heading btn collapsed")) {
                         this.parentElement.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
                         this.parentElement.previousElementSibling.firstElementChild.firstElementChild.setAttribute("style", "display: ;");
                     }
                 } else {
                     this.firstChild.setAttribute("style", "display: '';");
                 }
-    
+
             }
         }
-
-
     }
 }
 
 function hacerRespuesta(boton) {
+
     boton.onclick = function () {
 
         if (this.getAttribute("data-correcto").length == 4) {
@@ -293,48 +291,48 @@ function hacerRespuesta(boton) {
             document.getElementById("puntaje").innerHTML = "Total:&nbsp;" + puntaje
             this.className = "respuesta bien disabled";
             this.onclick = null; //deshabilitamos esta opcion para que no vuelva a contestar
-            
+
             var n4 = ((document.getElementsByClassName((document.getElementsByClassName(this.parentElement.getAttribute("class"))[0].parentNode).getAttribute("class"))[0].parentNode).getAttribute("class"));
             n4 = n4.substr(0, 14);
             var nodo_op = this.getAttribute("id").charAt(this.getAttribute("id").length - 1);
             var base = document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0]
-            if($(".panel-group").children().length == 4){
+            if ($(".panel-group").children().length == 4) {
                 if (nodo_op == "0") {
-                    base.firstChild.setAttribute("data-target","#collapse01");
+                    base.firstChild.setAttribute("data-target", "#collapse01");
                     base.nextSibling.lastChild.removeAttribute("id");
                     base.nextSibling.nextSibling.lastChild.removeAttribute("id");
-                    var bloqueo01 = base.nextSibling.lastChild.previousSibling.getAttribute("class").substr(0,13);
-                    $("."+bloqueo01).addClass("disabled");
-                    var bloqueo02 = base.nextSibling.nextSibling.lastChild.getAttribute("class").substr(0,13);
-                    $("."+bloqueo02).addClass("disabled");
-    
+                    var bloqueo01 = base.nextSibling.lastChild.previousSibling.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo01).addClass("disabled");
+                    var bloqueo02 = base.nextSibling.nextSibling.lastChild.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo02).addClass("disabled");
+
                 } else if (nodo_op == "1") {
                     base.nextSibling.nextSibling.lastChild.removeAttribute("id");
                     base.lastChild.removeAttribute("id");
-                    var bloqueo11 = base.nextSibling.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0,14);
-                    $("."+bloqueo11).addClass("disabled");
-                    var bloqueo12 = base.lastChild.previousElementSibling.getAttribute("class").substr(0,14);
-                    $("."+bloqueo12).addClass("disabled");
+                    var bloqueo11 = base.nextSibling.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0, 14);
+                    $("." + bloqueo11).addClass("disabled");
+                    var bloqueo12 = base.lastChild.previousElementSibling.getAttribute("class").substr(0, 14);
+                    $("." + bloqueo12).addClass("disabled");
                 } else {
-                    base.nextElementSibling.nextElementSibling.firstChild.setAttribute("data-target","#collapse21");
+                    base.nextElementSibling.nextElementSibling.firstChild.setAttribute("data-target", "#collapse21");
                     base.nextSibling.lastChild.removeAttribute("id");
                     base.nextSibling.previousSibling.lastChild.removeAttribute("id");
-                    var bloqueo20 = base.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0,13);
-                    $("."+bloqueo20).addClass("disabled");
-                    var bloqueo21 = base.nextSibling.previousSibling.lastChild.previousElementSibling.getAttribute("class").substr(0,13);
-                    $("."+bloqueo21).addClass("disabled");
-    
+                    var bloqueo20 = base.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo20).addClass("disabled");
+                    var bloqueo21 = base.nextSibling.previousSibling.lastChild.previousElementSibling.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo21).addClass("disabled");
+
                 }
                 this.childNodes[this.childNodes.length - 2].firstElementChild.classList.remove("ocultar");
                 this.childNodes[this.childNodes.length - 2].style.display = ""
                 this.childNodes[this.childNodes.length - 2].setAttribute("data-title", this.getAttribute("data-retro"));
-    
+
                 if (nodo_op == "1") {
-                    base.nextElementSibling.firstElementChild.setAttribute("data-target","#collapse100");
-                }                
-            } else if($(".panel-group").children().length == 3){
+                    base.nextElementSibling.firstElementChild.setAttribute("data-target", "#collapse100");
+                }
+            } else if ($(".panel-group").children().length == 3) {
                 if (nodo_op == "0") {
-                    base.firstChild.setAttribute("data-target","#collapse01");
+                    base.firstChild.setAttribute("data-target", "#collapse01");
                     base.nextSibling.lastChild.removeAttribute("id");
                 } else if (nodo_op == "1") {
                     base.lastChild.removeAttribute("id");
@@ -342,15 +340,15 @@ function hacerRespuesta(boton) {
                 this.childNodes[this.childNodes.length - 2].firstElementChild.classList.remove("ocultar");
                 this.childNodes[this.childNodes.length - 2].style.display = ""
                 this.childNodes[this.childNodes.length - 2].setAttribute("data-title", this.getAttribute("data-retro"));
-    
+
                 if (nodo_op == "1") {
-                    base.nextElementSibling.firstElementChild.setAttribute("data-target","#collapse100");
-                    base.firstElementChild.setAttribute("data-target","#collapse110");
-                } else{
-                    base.nextElementSibling.firstElementChild.setAttribute("data-target","#collapse100");
-                    base.firstElementChild.setAttribute("data-target","#collapse110");
-                }            
-            }//3
+                    base.nextElementSibling.firstElementChild.setAttribute("data-target", "#collapse100");
+                    base.firstElementChild.setAttribute("data-target", "#collapse110");
+                } else {
+                    base.nextElementSibling.firstElementChild.setAttribute("data-target", "#collapse100");
+                    base.firstElementChild.setAttribute("data-target", "#collapse110");
+                }
+            } //3
 
         } else {
 
@@ -366,41 +364,41 @@ function hacerRespuesta(boton) {
             var n4 = ((document.getElementsByClassName((document.getElementsByClassName(this.parentElement.getAttribute("class"))[0].parentNode).getAttribute("class"))[0].parentNode).getAttribute("class"));
             n4 = n4.substr(0, 14);
             var base = document.getElementsByClassName(document.getElementsByClassName(n4)[0].parentNode.getAttribute("class").substr(6, 13))[0]
-            if($(".panel-group").children().length == 4){
+            if ($(".panel-group").children().length == 4) {
                 if (nodo_op == "0") {
-                    base.firstChild.setAttribute("data-target","#collapse01");
+                    base.firstChild.setAttribute("data-target", "#collapse01");
                     base.nextSibling.lastChild.removeAttribute("id");
                     base.nextSibling.nextSibling.lastChild.removeAttribute("id");
-                    var bloqueo01 = base.nextSibling.lastChild.previousSibling.getAttribute("class").substr(0,13);
-                    $("."+bloqueo01).addClass("disabled");
-                    var bloqueo02 = base.nextSibling.nextSibling.lastChild.getAttribute("class").substr(0,13);
-                    $("."+bloqueo02).addClass("disabled");                
+                    var bloqueo01 = base.nextSibling.lastChild.previousSibling.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo01).addClass("disabled");
+                    var bloqueo02 = base.nextSibling.nextSibling.lastChild.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo02).addClass("disabled");
                 } else if (nodo_op == "1") {
                     base.nextSibling.nextSibling.lastChild.removeAttribute("id");
                     base.lastChild.removeAttribute("id");
-                    var bloqueo11 = base.nextSibling.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0,14);
-                    $("."+bloqueo11).addClass("disabled");
-                    var bloqueo12 = base.lastChild.previousElementSibling.getAttribute("class").substr(0,14);
-                    $("."+bloqueo12).addClass("disabled");                
+                    var bloqueo11 = base.nextSibling.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0, 14);
+                    $("." + bloqueo11).addClass("disabled");
+                    var bloqueo12 = base.lastChild.previousElementSibling.getAttribute("class").substr(0, 14);
+                    $("." + bloqueo12).addClass("disabled");
                 } else {
-                    base.nextElementSibling.nextElementSibling.firstChild.setAttribute("data-target","#collapse21");
+                    base.nextElementSibling.nextElementSibling.firstChild.setAttribute("data-target", "#collapse21");
                     base.nextSibling.lastChild.removeAttribute("id");
                     base.nextSibling.previousSibling.lastChild.removeAttribute("id");
-                    var bloqueo20 = base.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0,13);
-                    $("."+bloqueo20).addClass("disabled");
-                    var bloqueo21 = base.nextSibling.previousSibling.lastChild.previousElementSibling.getAttribute("class").substr(0,13);
-                    $("."+bloqueo21).addClass("disabled");
+                    var bloqueo20 = base.nextSibling.lastChild.previousElementSibling.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo20).addClass("disabled");
+                    var bloqueo21 = base.nextSibling.previousSibling.lastChild.previousElementSibling.getAttribute("class").substr(0, 13);
+                    $("." + bloqueo21).addClass("disabled");
                 }
                 this.childNodes[this.childNodes.length - 1].firstElementChild.classList.remove("ocultar");
                 // this.childNodes[this.childNodes.length - 1].classList.add("mostrar");
                 this.childNodes[this.childNodes.length - 1].style.display = ""
                 this.childNodes[this.childNodes.length - 1].setAttribute("data-title", this.getAttribute("data-retro"));
                 if (nodo_op == "1") {
-                    base.nextElementSibling.firstElementChild.setAttribute("data-target","#collapse100");
+                    base.nextElementSibling.firstElementChild.setAttribute("data-target", "#collapse100");
                 }
-            }else if($(".panel-group").children().length == 3){
+            } else if ($(".panel-group").children().length == 3) {
                 if (nodo_op == "0") {
-                    base.firstChild.setAttribute("data-target","#collapse01");
+                    base.firstChild.setAttribute("data-target", "#collapse01");
                     base.nextSibling.lastChild.removeAttribute("id");
                 } else if (nodo_op == "1") {
                     base.lastChild.removeAttribute("id");
@@ -408,14 +406,14 @@ function hacerRespuesta(boton) {
                 this.childNodes[this.childNodes.length - 1].firstElementChild.classList.remove("ocultar");
                 this.childNodes[this.childNodes.length - 1].style.display = ""
                 this.childNodes[this.childNodes.length - 1].setAttribute("data-title", this.getAttribute("data-retro"));
-    
+
                 if (nodo_op == "1") {
-                    base.nextElementSibling.firstElementChild.setAttribute("data-target","#collapse100");
-                    base.firstElementChild.setAttribute("data-target","#collapse110");
-                }else{
-                    base.nextElementSibling.firstElementChild.setAttribute("data-target","#collapse100");
-                    base.firstElementChild.setAttribute("data-target","#collapse110");
-                }                 
+                    base.nextElementSibling.firstElementChild.setAttribute("data-target", "#collapse100");
+                    base.firstElementChild.setAttribute("data-target", "#collapse110");
+                } else {
+                    base.nextElementSibling.firstElementChild.setAttribute("data-target", "#collapse100");
+                    base.firstElementChild.setAttribute("data-target", "#collapse110");
+                }
             }
             desactivarBotones();
         }
